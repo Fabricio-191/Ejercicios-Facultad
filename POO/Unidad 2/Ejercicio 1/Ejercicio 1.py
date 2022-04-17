@@ -32,7 +32,7 @@ class Email:
 		self.idCuenta = idCuenta
 		self.dominio = dominio
 		self.tipoDominio = tipoDominio
-		self.contraseña = contraseña
+		self.__contraseña = contraseña
 
 	def retornaEmail(self):
 		return self.idCuenta + "@" + self.dominio + "." + self.tipoDominio
@@ -41,8 +41,8 @@ class Email:
 		return self.dominio
 
 	def modificarContraseña(self, contraseñaActual, nuevaContraseña):
-		if self.contraseña == contraseñaActual:
-			self.contraseña = nuevaContraseña
+		if self.__contraseña == contraseñaActual:
+			self.__contraseña = nuevaContraseña
 			print("La contraseña ha sido modificada")
 		else:
 			print("La contraseña actual no es correcta")
@@ -60,7 +60,7 @@ def leerArchivo(file):
 	with open(file, "r") as f:
 		direccionesMail = f.readline().split(',')
 	
-	return map(lambda email: Email.fromStr(email), direccionesMail)
+		return map(lambda email: Email.fromStr(email), direccionesMail)
 
 if __name__ == "__main__":
 	"""

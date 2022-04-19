@@ -39,10 +39,32 @@ def menu():
 
 # 3.1. Mostrar para cada variable el día y hora de menor y mayor valor.
 def obtenerValores(lista: list[list[Registro]], variable: str):
+	menor = 100
+	mayor = -100
 
+	for dia in range(0, 30):
+		for hora in range(0, 23):
+			valor = getattr(lista[dia][hora], variable)
+
+			if valor < menor:
+				menor = valor
+				diaMenor = dia
+				horaMenor = hora
+
+			if valor > mayor:
+				mayor = valor
+				diaMayor = dia
+				horaMayor = hora
+
+	return (diaMenor, horaMenor, diaMayor, horaMayor)		
 
 def inciso1(lista: list[list[Registro]]) -> None:
-
+	print("Menor temperatura: %d, %d" % obtenerValores(lista, "getTemperatura"))
+	print("Mayor temperatura: %d, %d" % obtenerValores(lista, "getTemperatura"))
+	print("Menor humedad: %d, %d" % obtenerValores(lista, "getHumedad"))
+	print("Mayor humedad: %d, %d" % obtenerValores(lista, "getHumedad"))
+	print("Menor presion: %d, %d" % obtenerValores(lista, "getPresion"))
+	print("Mayor presion: %d, %d" % obtenerValores(lista, "getPresion"))
 	
 # 3.2. Indicar la temperatura promedio por cada hora.
 def inciso2(lista: list[list[Registro]]) -> None:

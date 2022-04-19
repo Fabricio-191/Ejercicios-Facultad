@@ -17,7 +17,7 @@ from csv import reader
 from Registro import Registro
 
 def leerArchivo(path: str) -> list[list[Registro]]:
-	lista: list[list[Registro]] = [[] * 24 for _ in range(30)] 
+	lista: list[list[Registro]] = []
 
 	with open(path, "r") as file:
 		for line in reader(file, delimiter=','):
@@ -39,12 +39,12 @@ def menu():
 
 # 3.1. Mostrar para cada variable el día y hora de menor y mayor valor.
 def obtenerValores(lista: list[list[Registro]], variable: str):
-	menor = 100
-	mayor = -100
+	menor = mayor = getattr(lista[0][0], variable)()
+	diaMenor = horaMenor = diaMayor = horaMayor = 0
 
 	for dia in range(0, 30):
 		for hora in range(0, 23):
-			valor = getattr(lista[dia][hora], variable)
+			valor = getattr(lista[dia][hora], variable)()
 
 			if valor < menor:
 				menor = valor
@@ -58,13 +58,18 @@ def obtenerValores(lista: list[list[Registro]], variable: str):
 
 	return (diaMenor, horaMenor, diaMayor, horaMayor)		
 
+# 3.1. Mostrar para cada variable el día y hora de menor y mayor valor.
 def inciso1(lista: list[list[Registro]]) -> None:
-	print("Menor temperatura: %d, %d" % obtenerValores(lista, "getTemperatura"))
-	print("Mayor temperatura: %d, %d" % obtenerValores(lista, "getTemperatura"))
-	print("Menor humedad: %d, %d" % obtenerValores(lista, "getHumedad"))
-	print("Mayor humedad: %d, %d" % obtenerValores(lista, "getHumedad"))
-	print("Menor presion: %d, %d" % obtenerValores(lista, "getPresion"))
-	print("Mayor presion: %d, %d" % obtenerValores(lista, "getPresion"))
+	temperaturas = obtenerValores(lista, "getTemperatura")
+	humedades = obtenerValores(lista, "getHumedad")
+	presiones = obtenerValores(lista, "getPresion")
+
+	print(f"Menor temperatura, dia: {temperaturas[0]} hora: {temperaturas[1]}")
+	print(f"Mayor temperatura, dia: {temperaturas[2]} hora: {temperaturas[3]}")
+	print(f"Menor humedad, dia: {humedades[0]} hora: {humedades[1]}")
+	print(f"Mayor humedad, dia: {humedades[2]} hora: {humedades[3]}")
+	print(f"Menor presion, dia: {presiones[0]} hora: {presiones[1]}")
+	print(f"Mayor presion, dia: {presiones[2]} hora: {presiones[3]}")
 	
 # 3.2. Indicar la temperatura promedio por cada hora.
 def inciso2(lista: list[list[Registro]]) -> None:

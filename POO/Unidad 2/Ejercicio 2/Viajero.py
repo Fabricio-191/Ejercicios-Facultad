@@ -24,24 +24,28 @@ Implemente un programa que:
 
 3- Represente el almacenamiento en memoria para la lista cargada con 4 viajeros.
 """
-from os import path
-
 class Viajero:
-	def __init__(self, numero, dni, nombre, apellido, millas): 
-		self.numero = numero
-		self.dni = dni
-		self.nombre = nombre
-		self.apellido = apellido
+	__numero: int
+	__dni: str
+	__nombre: str
+	__apellido: str
+	__millas: float
+
+	def __init__(self, numero: int, dni: str, nombre: str, apellido: str, millas: float): 
+		self.__numero = numero
+		self.__dni = dni
+		self.__nombre = nombre
+		self.__apellido = apellido
 		self.__millas = millas
 
-	def cantidadTotaldeMillas(self):
+	def cantidadTotaldeMillas(self) -> float:
 		return self.__millas
 	
-	def acumularMillas(self, millas):
+	def acumularMillas(self, millas: float) -> float:
 		self.__millas += millas
 		return self.__millas
 	
-	def canjearMillas(self, millas):
+	def canjearMillas(self, millas: float) -> float:
 		if self.__millas >= millas:
 			self.__millas -= millas
 		else:
@@ -49,32 +53,5 @@ class Viajero:
 		
 		return self.__millas
 
-def leerArchivo(path):
-	with open(path, "r") as file:
-		lista = []
-		for line in file:
-			line = line.strip().split(",")
-			lista.append(Viajero(*line))
-		
-		return lista
-
-if __name__ == "__main__":
-	viajeros = leerArchivo(path.join(path.dirname(__file__), "/viajeros.txt"))
-
-	num = int(input("Ingrese el numero de viajero: "))
-	print("1- Consultar Cantidad de Millas")
-	print("2- Acumular Millas")
-	print("3- Canjear Millas")
-	print("0- Salir")
-	
-	opcion = int(input("Ingrese la opcion: "))
-	if opcion == 1:
-		print(f"La cantidad de millas es: {viajeros[num-1].cantidadTotaldeMillas()}")
-	elif opcion == 2:
-		millas = int(input("Ingrese la cantidad de millas: "))
-		print(f"La cantidad de millas es: {viajeros[num-1].acumularMillas(millas)}")
-	elif opcion == 3:
-		millas = int(input("Ingrese la cantidad de millas: "))
-		print(f"La cantidad de millas es: {viajeros[num-1].canjearMillas(millas)}")
-	else:
-		print("Opcion incorrecta")
+	def obtenerNumero(self) -> int:
+		return self.__numero

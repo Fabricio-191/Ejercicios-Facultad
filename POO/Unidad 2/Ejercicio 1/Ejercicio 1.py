@@ -26,41 +26,55 @@ Estimado <nombre> te enviaremos tus mensajes a la dirección <dirección de corr
 """
 import re
 from os import path
+import csv
 
 class Email:
-	def __init__(self, idCuenta, dominio, tipoDominio, contraseña = None):
-		self.idCuenta = idCuenta
-		self.dominio = dominio
-		self.tipoDominio = tipoDominio
+	__idCuenta: str
+	__dominio: str
+	__tipoDominio: str
+	__contraseña: str | None
+
+	def __init__(self, idCuenta: str, dominio: str, tipoDominio: str, contraseña: str | None = None):
+		self.__idCuenta = idCuenta
+		self.__dominio = dominio
+		self.__tipoDominio = tipoDominio
 		self.__contraseña = contraseña
 
-	def retornaEmail(self):
-		return self.idCuenta + "@" + self.dominio + "." + self.tipoDominio
+	def retornaEmail(self) -> str:
+		return self.__idCuenta + "@" + self.__dominio + "." + self.__tipoDominio
 
-	def getDominio(self):
-		return self.dominio
+	def getDominio(self) -> str:
+		return self.__dominio
 
-	def modificarContraseña(self, contraseñaActual, nuevaContraseña):
+	def getIDCuenta(self) -> str:
+		return self.__idCuenta
+
+	def modificarContraseña(self, contraseñaActual: str, nuevaContraseña: str) -> None:
 		if self.__contraseña == contraseñaActual:
 			self.__contraseña = nuevaContraseña
 			print("La contraseña ha sido modificada")
 		else:
 			print("La contraseña actual no es correcta")
 	
-	def __str__(self):
-		return self.idCuenta + "@" + self.dominio + "." + self.tipoDominio
+	def __str__(self) -> str:
+		return self.retornaEmail()
 
-	@staticmethod
-	def fromStr(string):
-		matches = re.search(r"(.+)@(.+)\.(.+)", string)
+def EmailfromStr(string: str) -> Email:
+	matches = re.search(r"(.+)@(.+)\.(.+)", string)
+	if(matches == None):
+		raise Exception("Emails file is not valid")
+		
+	return Email(matches.group(1), matches.group(2), matches.group(3))
 
-		return Email(matches.group(1), matches.group(2), matches.group(3))
+def leerArchivo(file) -> list[Email]:
+	with open(file, "r") as file:
+		spamreader = csv.reader(file,delimiter=',')
+		emails: list[Email] = []
 
-def leerArchivo(file):
-	with open(file, "r") as f:
-		direccionesMail = f.readline().split(',')
-	
-		return map(lambda email: Email.fromStr(email), direccionesMail)
+		for line in spamreader:
+			emails.append(EmailfromStr(line[0]))
+
+		return emails
 
 if __name__ == "__main__":
 	"""
@@ -92,7 +106,7 @@ if __name__ == "__main__":
 	3- Crear un objeto de clase Email, a partir de una dirección de correo, por ejemplo: informatica.fcefn@gmail.com, juanLiendro1957@yahoo.com, etc.
 	"""
 
-	Email.fromStr(input("email: "))
+	EmailfromStr(input("email: "))
 	
 	print()
 
@@ -100,12 +114,12 @@ if __name__ == "__main__":
 	4- Leer de un archivo separado por comas 10 direcciones de e-mail, crear instancias de la clase Email; luego ingresar un identificador de cuenta e indicar si está repetido o no.
 	"""
 
-	emailsDelArchivo = leerArchivo(path.dirname(__file__) + "/emails.txt")
+	emailsDelArchivo = leerArchivo(path.dirname(__file__) + "/emails.csv")
 	identificador = input("Ingresar identificador de cuenta: ")
 	contador = 0
 
 	for email in emailsDelArchivo:
-		if email.idCuenta == identificador:
+		if email.getIDCuenta() == identificador:
 			contador += 1
 	
 	if contador == 0:
@@ -127,4 +141,3 @@ Fabricio@gmail.com
 Fabricio1
 
 """
-	

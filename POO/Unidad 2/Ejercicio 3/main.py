@@ -17,15 +17,21 @@ from csv import reader
 from Registro import Registro
 
 def leerArchivo(path: str) -> list[list[Registro]]:
-	lista: list[list[Registro]] = []
+	lista = []
+	for dia in range(0, 30):
+		horas = []
+
+		for hora in range(0, 24):
+			horas.append(None)
+
+		lista.append(horas)
 
 	with open(path, "r") as file:
 		for line in reader(file, delimiter=','):
-			lista[
-				int(line[0]) - 1
-			][
-				int(line[1]) - 1
-			] = Registro(float(line[2]), float(line[3]), int(line[4]))
+			dia = int(line[0]) - 1
+			hora = int(line[1]) - 1
+
+			lista[dia][hora] = Registro(float(line[2]), float(line[3]), int(line[4]))
 		
 		return lista
 

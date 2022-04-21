@@ -4,9 +4,29 @@ from Viajero import Viajero
 
 def leerArchivo(path: str) -> list[Viajero]:
 	with open(path, "r") as file:
+		"""
+		return list(
+			map(lambda line: Viajero(
+				int(line[0]),
+				line[1],
+				line[2],
+				line[3],
+				float(line[4])
+			), reader(file, delimiter=','))
+		)
+		"""
+
 		lista = []
 		for line in reader(file, delimiter=','):
-			lista.append(Viajero(int(line[0]), line[1], line[2], line[3], float(line[4])))
+			lista.append(
+				Viajero(
+					int(line[0]),
+					line[1],
+					line[2],
+					line[3],
+					float(line[4])
+				)
+			)
 		
 		return lista
 

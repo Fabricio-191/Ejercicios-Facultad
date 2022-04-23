@@ -2,8 +2,8 @@ from os import path
 from csv import reader
 from Viajero import Viajero
 
-def leerArchivo(path: str) -> list[Viajero]:
-	with open(path, "r") as file:
+def leerArchivo(filePath: str) -> list[Viajero]:
+	with open(path.dirname(__file__) + filePath, "r") as file:
 		"""
 		return list(
 			map(lambda line: Viajero(
@@ -41,15 +41,15 @@ def obtenerViajero(viajeros: list[Viajero]) -> Viajero:
 	return obtenerViajero(viajeros)
 
 if __name__ == "__main__":
-	viajeros = leerArchivo(path.dirname(__file__) + "/viajeros.csv")
+	viajeros = leerArchivo("/viajeros.csv")
 	viajero = obtenerViajero(viajeros)
 
-	print()
-	print("1- Consultar Cantidad de Millas")
-	print("2- Acumular Millas")
-	print("3- Canjear Millas")
-	print("0- Salir")
-	print()
+	print("""
+	1- Consultar Cantidad de Millas
+	2- Acumular Millas
+	3- Canjear Millas
+	0- Salir
+	""")
 
 	opcion = int(input("Ingrese la opcion: "))
 	while opcion != 0:

@@ -103,7 +103,7 @@ class Ventana:
 	def getTitulo(self):
 		return self.__titulo
 	
-	def alto(self):
+	def alto(self) -> int:
 		return self.__y2 - self.__y1
 
 	def ancho(self):
@@ -111,6 +111,14 @@ class Ventana:
 
 	def mostrar(self):
 		print('Ventana: {} Alto: {} Ancho: {}'.format(self.getTitulo(), self.alto(), self.ancho()))
+
+	def subir(self, desplazamiento: int = 1):
+		self.__y1 += desplazamiento
+		self.__y2 += desplazamiento
+
+	def bajar(self, desplazamiento: int = 1):
+		self.__y1 -= desplazamiento
+		self.__y2 -= desplazamiento
 	
 	def moverDerecha(self, desplazamiento: int):
 		self.__x1 += desplazamiento
@@ -119,15 +127,3 @@ class Ventana:
 	def moverIzquierda(self, desplazamiento: int):
 		self.__x1 -= desplazamiento
 		self.__x2 -= desplazamiento
-
-	def bajar(self, desplazamiento: int = 1):
-		self.__y1 += desplazamiento
-		self.__y2 += desplazamiento
-
-	def subir(self, desplazamiento: int = 1):
-		self.__y1 -= desplazamiento
-		self.__y2 -= desplazamiento
-
-	
-
-	

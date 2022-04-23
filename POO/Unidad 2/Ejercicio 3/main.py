@@ -17,7 +17,8 @@ from csv import reader
 from Registro import Registro
 
 def leerArchivo(path: str) -> list[list[Registro]]:
-	lista = []
+	lista: list[list[Registro]] = []
+
 	for dia in range(0, 30):
 		horas = []
 
@@ -43,8 +44,13 @@ def menu():
 		4. Salir
 	""")
 
+from typing import Literal
+
 # 3.1. Mostrar para cada variable el día y hora de menor y mayor valor.
-def obtenerValores(lista: list[list[Registro]], variable: str):
+def obtenerValores(
+	lista: list[list[Registro]],
+	variable: Literal["getTemperatura", "getHumedad", "getPresion"]
+) -> tuple[int, int, int, int]:
 	menor = mayor = getattr(lista[0][0], variable)()
 	diaMenor = horaMenor = diaMayor = horaMayor = 0
 

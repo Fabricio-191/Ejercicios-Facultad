@@ -28,6 +28,9 @@ def leerArchivo(path: str) -> list[list[Registro]]:
 		lista.append(horas)
 
 	with open(path, "r") as file:
+		fileReader = reader(file, delimiter=",")
+		next(fileReader, None)
+
 		for line in reader(file, delimiter=','):
 			dia = int(line[0]) - 1
 			hora = int(line[1]) - 1

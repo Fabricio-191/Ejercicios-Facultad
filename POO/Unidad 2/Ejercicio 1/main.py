@@ -12,7 +12,8 @@ def EmailfromStr(string: str) -> Email:
 
 def leerArchivo(file) -> list[Email]:
 	with open(file, "r") as file:
-		reader = csv.reader(file,delimiter=',')
+		reader = csv.reader(file, delimiter=',')
+		next(reader, None)
 		emails: list[Email] = []
 
 		for line in reader:

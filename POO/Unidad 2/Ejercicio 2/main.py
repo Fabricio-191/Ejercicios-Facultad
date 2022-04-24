@@ -15,9 +15,11 @@ def leerArchivo(filePath: str) -> list[Viajero]:
 			), reader(file, delimiter=','))
 		)
 		"""
+		fileReader = reader(file, delimiter=',')
+		next(fileReader, None)
 
 		lista = []
-		for line in reader(file, delimiter=','):
+		for line in fileReader:
 			lista.append(
 				Viajero(
 					int(line[0]),

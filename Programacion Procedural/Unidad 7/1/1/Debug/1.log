@@ -1,0 +1,8 @@
+﻿  Modulo 1.cpp
+E:\Programacion\Ejercicios\Unidad 7\1\1\Modulo 1.cpp(13,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+  Modulo 3.cpp
+  Modulo 2.cpp
+E:\Programacion\Ejercicios\Unidad 7\1\1\Modulo 2.cpp(13,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+  Principal.cpp
+  Generando código...
+  1.vcxproj -> E:\Programacion\Ejercicios\Unidad 7\1\Debug\1.exe

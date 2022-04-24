@@ -1,0 +1,52 @@
+# Project: Integrador Final
+# Makefile created by Embarcadero Dev-C++ 6.3
+
+CPP      = g++.exe -D__DEBUG__
+CC       = gcc.exe -D__DEBUG__
+WINDRES  = windres.exe
+OBJ      = iniciosistema.o moduloppal.o Agregarnuevopedido.o Eliminarpedido.o informes.o respaldodedatos.o cierresistema.o datosempleado.o Listaclientes.o
+LINKOBJ  = iniciosistema.o moduloppal.o Agregarnuevopedido.o Eliminarpedido.o informes.o respaldodedatos.o cierresistema.o datosempleado.o Listaclientes.o
+LIBS     = -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib" -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/lib" -static-libgcc -g3
+INCS     = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include"
+CXXINCS  = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++"
+BIN      = "Integrador Final.exe"
+CXXFLAGS = $(CXXINCS) -g3
+CFLAGS   = $(INCS) -g3
+DEL      = C:\Program Files (x86)\Embarcadero\Dev-Cpp\devcpp.exe INTERNAL_DEL
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${DEL} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+iniciosistema.o: iniciosistema.cpp
+	$(CPP) -c iniciosistema.cpp -o iniciosistema.o $(CXXFLAGS)
+
+moduloppal.o: moduloppal.cpp
+	$(CPP) -c moduloppal.cpp -o moduloppal.o $(CXXFLAGS)
+
+Agregarnuevopedido.o: Agregarnuevopedido.cpp
+	$(CPP) -c Agregarnuevopedido.cpp -o Agregarnuevopedido.o $(CXXFLAGS)
+
+Eliminarpedido.o: Eliminarpedido.cpp
+	$(CPP) -c Eliminarpedido.cpp -o Eliminarpedido.o $(CXXFLAGS)
+
+informes.o: informes.cpp
+	$(CPP) -c informes.cpp -o informes.o $(CXXFLAGS)
+
+respaldodedatos.o: respaldodedatos.cpp
+	$(CPP) -c respaldodedatos.cpp -o respaldodedatos.o $(CXXFLAGS)
+
+cierresistema.o: cierresistema.cpp
+	$(CPP) -c cierresistema.cpp -o cierresistema.o $(CXXFLAGS)
+
+datosempleado.o: datosempleado.cpp
+	$(CPP) -c datosempleado.cpp -o datosempleado.o $(CXXFLAGS)
+
+Listaclientes.o: Listaclientes.cpp
+	$(CPP) -c Listaclientes.cpp -o Listaclientes.o $(CXXFLAGS)

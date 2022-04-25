@@ -1,36 +1,5 @@
 from os import path
-from csv import reader
 from Viajero import Viajero
-
-def leerArchivo(filePath: str) -> list[Viajero]:
-	with open(path.dirname(__file__) + filePath, "r") as file:
-		"""
-		return list(
-			map(lambda line: Viajero(
-				int(line[0]),
-				line[1],
-				line[2],
-				line[3],
-				float(line[4])
-			), reader(file, delimiter=','))
-		)
-		"""
-		fileReader = reader(file, delimiter=',')
-		next(fileReader, None)
-
-		lista = []
-		for line in fileReader:
-			lista.append(
-				Viajero(
-					int(line[0]),
-					line[1],
-					line[2],
-					line[3],
-					float(line[4])
-				)
-			)
-		
-		return lista
 
 def obtenerViajero(viajeros: list[Viajero]) -> Viajero:
 	num = int(input("Ingrese el numero de viajero: "))
@@ -43,7 +12,7 @@ def obtenerViajero(viajeros: list[Viajero]) -> Viajero:
 	return obtenerViajero(viajeros)
 
 if __name__ == "__main__":
-	viajeros = leerArchivo("/viajeros.csv")
+	viajeros = Viajero.leerArchivo(path.dirname(__file__) + "/viajeros.csv")
 	viajero = obtenerViajero(viajeros)
 
 	print("""

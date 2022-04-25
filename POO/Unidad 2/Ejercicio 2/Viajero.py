@@ -1,3 +1,6 @@
+from __future__ import annotations
+from csv import reader
+
 """
 Listas
 
@@ -55,3 +58,23 @@ class Viajero:
 
 	def obtenerNumero(self) -> int:
 		return self.__numero
+
+	@staticmethod
+	def leerArchivo(filePath: str) -> list[Viajero]:
+		with open(filePath, "r") as file:
+			fileReader = reader(file, delimiter=',')
+			next(fileReader, None)
+
+			lista = []
+			for line in fileReader:
+				lista.append(
+					Viajero(
+						int(line[0]),
+						line[1],
+						line[2],
+						line[3],
+						float(line[4])
+					)
+				)
+			
+			return lista

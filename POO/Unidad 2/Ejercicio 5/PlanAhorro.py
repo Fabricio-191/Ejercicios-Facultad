@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """
 Ejercicio 5
 Datos miembro estáticos y Funciones miembro estáticas 
@@ -55,7 +57,7 @@ class PlanAhorro:
 		print(f'Código: {self.__codigo} Modelo: {self.__modelo} Versión: {self.__version} Valor: {self.__valor} Cantidad de cuotas: {self.__cuotas} Cantidad de cuotas para licitar: {self.__cuotasParaLicitar} Valor cuota: {self.__valorCuota}')
 
 	@staticmethod
-	def leerPlan(line: list[str]):
+	def leerPlan(line: list[str]) -> PlanAhorro:
 		cuotas = int(line[4])
 		cuotasParaLicitar = int(line[5])
 

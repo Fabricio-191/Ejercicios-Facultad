@@ -19,29 +19,49 @@ b.      Dado un valor, mostrar código del plan, modelo y versión del vehículo
 c.       Mostrar el monto que se debe haber pagado para licitar el vehículo (cantidad de cuotas para licitar * importe de la cuota).
 d.      Dado el código de un plan, modificar la cantidad cuotas que debe tener pagas para licitar.
 """
-from csv import reader
 
 class PlanAhorro:
-	codigo: int
-	modelo: str
-	version: str
-	valor: float
-	valorCuota: float
-	cantidadCuotas: int = 0
-	cantidadCuotasParaLicitar: int = 0
+	__codigo: int
+	__modelo: str
+	__version: str
+	__valor: float
+	__valorCuota: float
+	__cuotas: int = 0
+	__cuotasParaLicitar: int = 0
 
-	def __init__(self, codigo: int, modelo: str, version: str, valor: float, cantidadCuotas: int, cantidadCuotasParaLicitar: int):
-		self.codigo = codigo
-		self.modelo = modelo
-		self.version = version
-		self.valor = valor
-		self.cantidadCuotas = cantidadCuotas
-		self.cantidadCuotasParaLicitar = cantidadCuotasParaLicitar
-		self.valorCuota = (self.valor / self.cantidadCuotas) + self.valor * 0.10
+	def __init__(self, codigo: int, modelo: str, version: str, valor: float):
+		self.__codigo = codigo
+		self.__modelo = modelo
+		self.__version = version
+		self.actualizarValor(valor)
+
+	def valorCuota(self) -> float:
+		return self.__valorCuota
 	
 	def actualizarValor(self, valor):
-		self.valor = valor
-		self.valorCuota = (self.valor / self.cantidadCuotas) + self.valor * 0.10
+		self.__valor = valor
+		self.__valorCuota = (self.__valor / self.__cuotas) + self.__valor * 0.10
+
+	def codigo(self) -> int:
+		return self.__codigo
+
+	def montoParaLicitar(self) -> float:
+		return self.__cuotasParaLicitar * self.__valorCuota
+
+	def modificarCuotasParaLicitar(self, cuotas: int):
+		self.__cuotasParaLicitar = cuotas
 	
 	def mostrar(self):
-		print('Código: {} Modelo: {} Versión: {} Valor: {} Cantidad de cuotas: {} Cantidad de cuotas para licitar: {} Valor cuota: {}'.format(self.codigo, self.modelo, self.version, self.valor, self.cantidadCuotas, self.cantidadCuotasParaLicitar, self.valorCuota))
+		print(f'Código: {self.__codigo} Modelo: {self.__modelo} Versión: {self.__version} Valor: {self.__valor} Cantidad de cuotas: {self.__cuotas} Cantidad de cuotas para licitar: {self.__cuotasParaLicitar} Valor cuota: {self.__valorCuota}')
+
+	@staticmethod
+	def leerPlan(line: list[str]):
+		cuotas = int(line[4])
+		cuotasParaLicitar = int(line[5])
+
+		if cuotas != PlanAhorro.__cuotas:
+			PlanAhorro.__cuotas = cuotas
+		if cuotasParaLicitar != PlanAhorro.__cuotasParaLicitar:
+			PlanAhorro.__cuotasParaLicitar = cuotasParaLicitar
+
+		return PlanAhorro(int(line[0]), line[1], line[2], float(line[3]))

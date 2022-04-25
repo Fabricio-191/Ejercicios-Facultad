@@ -14,8 +14,8 @@ Implemente un programa que:
 """
 from os import path
 from csv import reader
-from Registro import Registro
 from typing import Literal
+from Registro import Registro
 from Menu import Menu
 
 def leerArchivo(path: str) -> list[list[Registro]]:
@@ -95,13 +95,6 @@ def inciso3(lista: list[list[Registro]]) -> None:
 
 	for hora in range(24):
 		print("%2d: %3.2f - %3.2f - %5d" % (hora + 1, horas[hora].getTemperatura(), horas[hora].getHumedad(), horas[hora].getPresion()))
-
-"""
-		1. Mostrar para cada variable el día y hora de menor y mayor valor.
-		2. Indicar la temperatura promedio mensual por cada hora.
-		3. Dado un número de día listar los valores de las tres variables para cada hora del día dado.
-		4. Salir
-"""
 
 if __name__ == "__main__":
 	lista = leerArchivo(path.join(path.dirname(__file__) + "/mes.csv"))

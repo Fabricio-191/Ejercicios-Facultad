@@ -1,5 +1,4 @@
 """
-de el 4
 Métodos y Constructores con valores por defecto
 
 Defina una clase Ventana con los siguientes atributos: título, valor de las coordenadas x e y del vértice superior izquierdo y valor de las coordenadas x e y del vértice inferior derecho. Implemente los métodos necesarios, para que pueda ejecutarse el programa dado.
@@ -49,7 +48,8 @@ class Ventana:
 		return self.__x2 - self.__x1
 
 	def mostrar(self):
-		print('Ventana: {} Alto: {} Ancho: {}'.format(self.getTitulo(), self.alto(), self.ancho()))
+		print(f'Punto1: ({self.__x1}, {self.__y1})')
+		print(f'Punto2: ({self.__x2}, {self.__y2})')
 
 	def subir(self, desplazamiento: int = 1):
 		self.__y1 += desplazamiento

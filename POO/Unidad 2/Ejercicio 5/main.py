@@ -22,26 +22,3 @@ b.      Dado un valor, mostrar código del plan, modelo y versión del vehículo
 c.       Mostrar el monto que se debe haber pagado para licitar el vehículo (cantidad de cuotas para licitar * importe de la cuota).
 d.      Dado el código de un plan, modificar la cantidad cuotas que debe tener pagas para licitar.
 """
-
-def crearCuenta(email):
-	a = email.split("@")
-
-	if len(a) != 2: raise Exception("Email invalido")
-
-	b = a[1].split(".")
-
-	if len(a) != 2: raise Exception("Email invalido")
-
-	return Email(a[0], b[0], b[1])
-
-import re
-
-def crearCuenta(email):
-	matches = re.search(r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$", email)
-
-	if matches == None:
-		raise Exception("Email invalido")
-
-	return Email(matches.group(1), matches.group(2), matches.group(3))
-
-crearCuenta("abc@gmail.com")

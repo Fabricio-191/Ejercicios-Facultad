@@ -15,14 +15,16 @@ Implemente un programa que:
 from os import path
 from csv import reader
 from Registro import Registro
+from typing import Literal
+from Menu import Menu
 
 def leerArchivo(path: str) -> list[list[Registro]]:
 	lista: list[list[Registro]] = []
 
-	for dia in range(0, 30):
+	for dia in range(30):
 		horas = []
 
-		for hora in range(0, 24):
+		for hora in range(24):
 			horas.append(None)
 
 		lista.append(horas)
@@ -39,16 +41,6 @@ def leerArchivo(path: str) -> list[list[Registro]]:
 		
 		return lista
 
-def menu():
-	print("""
-		1. Mostrar para cada variable el día y hora de menor y mayor valor.
-		2. Indicar la temperatura promedio mensual por cada hora.
-		3. Dado un número de día listar los valores de las tres variables para cada hora del día dado.
-		4. Salir
-	""")
-
-from typing import Literal
-
 # 3.1. Mostrar para cada variable el día y hora de menor y mayor valor.
 def obtenerValores(
 	lista: list[list[Registro]],
@@ -57,8 +49,8 @@ def obtenerValores(
 	menor = mayor = getattr(lista[0][0], variable)()
 	diaMenor = horaMenor = diaMayor = horaMayor = 0
 
-	for dia in range(0, 30):
-		for hora in range(0, 23):
+	for dia in range(30):
+		for hora in range(24):
 			valor = getattr(lista[dia][hora], variable)()
 
 			if valor < menor:
@@ -71,7 +63,7 @@ def obtenerValores(
 				diaMayor = dia
 				horaMayor = hora
 
-	return (diaMenor, horaMenor, diaMayor, horaMayor)		
+	return (diaMenor + 1, horaMenor + 1, diaMayor + 1, horaMayor + 1)
 
 # 3.1. Mostrar para cada variable el día y hora de menor y mayor valor.
 def inciso1(lista: list[list[Registro]]) -> None:
@@ -88,36 +80,34 @@ def inciso1(lista: list[list[Registro]]) -> None:
 	
 # 3.2. Indicar la temperatura promedio por cada hora.
 def inciso2(lista: list[list[Registro]]) -> None:
-	for hora in range(0, 23):
+	for hora in range(24):
 		acum = 0
 
-		for dia in range(0, 30):
+		for dia in range(30):
 			acum +=	lista[dia][hora].getTemperatura()
 		
-		print("%2d: %.2f" % (hora, acum / 30))
+		print("%2d: %.2f" % (hora + 1, acum / 30))
 
 # 3.3. Dado un número de día listar los valores de las tres variables para cada hora del día dado. El listado debe tener el siguiente 
 def inciso3(lista: list[list[Registro]]) -> None:
 	dia = int(input("Ingrese el día: "))
 	horas = lista[dia]
 
-	for hora in range(0, 23):
-		print("%2d: %.2f, %.2f, %d" % (hora, horas[hora].getTemperatura(), horas[hora].getHumedad(), horas[hora].getPresion()))
+	for hora in range(24):
+		print("%2d: %3.2f - %3.2f - %5d" % (hora + 1, horas[hora].getTemperatura(), horas[hora].getHumedad(), horas[hora].getPresion()))
+
+"""
+		1. Mostrar para cada variable el día y hora de menor y mayor valor.
+		2. Indicar la temperatura promedio mensual por cada hora.
+		3. Dado un número de día listar los valores de las tres variables para cada hora del día dado.
+		4. Salir
+"""
 
 if __name__ == "__main__":
 	lista = leerArchivo(path.join(path.dirname(__file__) + "/mes.csv"))
 
-	menu()
-	opcion = int(input("Ingrese una opción: "))
-	while opcion != 0:
-		if(opcion == 1):
-			inciso1(lista)
-		elif(opcion == 2):
-			inciso2(lista)
-		elif(opcion == 3):
-			inciso3(lista)
-		else:
-			print("Opción inválida")
-
-		menu()
-		opcion = int(input("Ingrese una opción: "))
+	menu = Menu()
+	menu.registrarOpcion("1", "Mostrar para cada variable el día y hora de menor y mayor valor.", inciso1, lista)
+	menu.registrarOpcion("2", "Indicar la temperatura promedio mensual por cada hora.", inciso2, lista)
+	menu.registrarOpcion("3", "Dado un número de día listar los valores de las tres variables para cada hora del día dado.", inciso3, lista)
+	menu.iniciar()

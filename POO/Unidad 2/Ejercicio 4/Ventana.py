@@ -1,4 +1,5 @@
 """
+de el 4
 Métodos y Constructores con valores por defecto
 
 Defina una clase Ventana con los siguientes atributos: título, valor de las coordenadas x e y del vértice superior izquierdo y valor de las coordenadas x e y del vértice inferior derecho. Implemente los métodos necesarios, para que pueda ejecutarse el programa dado.
@@ -11,68 +12,6 @@ Reglas de negocio:
 
     El valor de x del vértice superior izquierdo siempre debe ser menor al valor de x del vértice inferior derecho.
     El valor de y del vértice superior izquierdo siempre debe ser menor al valor de y del vértice inferior derecho.
-
-ventana
-
- Programa a ejecutar
-
-if __name__ ==  '__main__':
-
-    print('==== Ventana Inicio ====')
-
-    ventanaInicio= Ventana('Inicio')
-
-    ventanaInicio.mostrar()
-
-    print('Ventana: {} Alto: {} Ancho: {}'.format(ventanaInicio.getTitulo(),ventanaInicio.alto(),ventanaInicio.ancho()))
-
-    print('==== Ventana Cargar ====')
-
-    ventanaCargar= Ventana('Cargar',10,20)
-
-    ventanaCargar.mostrar()
-
-    print('*** Mueve a la derecha ***')
-
-    ventanaCargar.moverDerecha(10)
-
-    ventanaCargar.mostrar()
-
-    print('*** Mueve a la izquierda ***')
-
-    ventanaCargar.moverIzquierda(10)
-
-    ventanaCargar.mostrar()
-
-    print('*** Bajar ***')
-
-    ventanaCargar.bajar(10)
-
-    ventanaCargar.mostrar()
-
-    print('==== Ventana Borrar ====')
-
-    ventanaBorrar = Ventana('Borrar', 10,20,100,200)
-
-    ventanaBorrar.mostrar()
-
-    print('*** Subir ***')
-
-    ventanaBorrar.subir(5)   
-
-    ventanaBorrar.mostrar()
-
-    print('*** Subir ***')
-
-    ventanaBorrar.subir()
-
-    ventanaBorrar.mostrar()
-
-    print('*** Bajar ***')
-
-    ventanaBorrar.bajar()
-
-    ventanaBorrar.mostrar()
 """
 
 
@@ -86,10 +25,10 @@ class Ventana:
 	def __init__(
 		self,
 		titulo: str,
-		x1: int = 0, # el punto 1 es el vertice superior izquierdo
-		y1: int = 0,
 		x2: int = 0, # el punto 2 es el vertice inferior derecho
 		y2: int = 0,
+		x1: int = 0, # el punto 1 es el vertice superior izquierdo
+		y1: int = 0,
 	):
 		self.__titulo = titulo
 		self.__x1 = x1
@@ -97,7 +36,7 @@ class Ventana:
 		self.__x2 = x2
 		self.__y2 = y2
 
-		if x1 < 0 or y1 < 0 or x2 > 500 or y2 > 500 or x1 >= x2 or y1 >= y2:
+		if x1 < 0 or y1 < 0 or x2 > 500 or y2 > 500 or x1 > x2 or y1 > y2:
 			raise ValueError('Las cordenadas de los puntos son incorrectas')
 
 	def getTitulo(self):

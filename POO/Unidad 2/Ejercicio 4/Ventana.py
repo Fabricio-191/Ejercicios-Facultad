@@ -58,15 +58,13 @@ class Ventana:
 		print(f'Punto1: ({self.__x1}, {self.__y1})')
 		print(f'Punto2: ({self.__x2}, {self.__y2})')
 
-	def subir(self, desplazamiento: int = 1):
+	def bajar(self, desplazamiento: int = 1):
 		self.__y1 += desplazamiento
 		self.__y2 += desplazamiento
 		self.__validarPuntos()
 
-	def bajar(self, desplazamiento: int = 1):
-		self.__y1 -= desplazamiento
-		self.__y2 -= desplazamiento
-		self.__validarPuntos()
+	def subir(self, desplazamiento: int = 1):
+		self.bajar(-desplazamiento)
 	
 	def moverDerecha(self, desplazamiento: int):
 		self.__x1 += desplazamiento
@@ -74,6 +72,4 @@ class Ventana:
 		self.__validarPuntos()
 	
 	def moverIzquierda(self, desplazamiento: int):
-		self.__x1 -= desplazamiento
-		self.__x2 -= desplazamiento
-		self.__validarPuntos()
+		self.moverDerecha(-desplazamiento)

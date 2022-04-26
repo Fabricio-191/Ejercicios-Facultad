@@ -24,26 +24,17 @@ d. Dado el código de un plan, modificar la cantidad cuotas que debe tener pagas
 """
 from os import path
 from PlanAhorro import PlanAhorro
-from Menu import Menu
+from ...Menu import Menu
 from csv import reader
 
 def leerArchivo(path: str) -> list[PlanAhorro]:
 	with open(path, 'r') as file:
 		fileReader = reader(file, delimiter=';')
 
-		return list(
-			map(
-				lambda line: PlanAhorro.leerPlan(line),
-				fileReader
-			)
-		)
-
-"""
-a.       Actualizar el valor del vehículo de cada plan. Para esto se muestra el código del plan, el modelo y versión del vehículo, luego se ingresa el valor actual del vehículo y se modifica el atributo correspondiente.
-b.      Dado un valor, mostrar código del plan, modelo y versión del vehículo cuyo valor de la cuota sea inferior al valor dado.
-c.       Mostrar el monto que se debe haber pagado para licitar el vehículo (cantidad de cuotas para licitar * importe de la cuota).
-d.      Dado el código de un plan, modificar la cantidad cuotas que debe tener pagas para licitar.
-"""
+		return list(map(
+			lambda line: PlanAhorro.leerPlan(line),
+			fileReader
+		))
 
 def opcion1(lista: list[PlanAhorro]):
 	for plan in lista:

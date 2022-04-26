@@ -45,7 +45,7 @@ class Ventana:
 		):
 			raise ValueError('Las cordenadas de los puntos son incorrectas')
 
-	def getTitulo(self):
+	def getTitulo(self) -> str:
 		return self.__titulo
 	
 	def alto(self) -> int:

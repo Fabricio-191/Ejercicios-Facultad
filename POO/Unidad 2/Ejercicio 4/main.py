@@ -1,6 +1,6 @@
 from Ventana import Ventana
 
-if __name__ ==  '__main__':
+if __name__ == '__main__':
     print('==== Ventana Inicio ====')
     ventanaInicio= Ventana('Inicio')
     ventanaInicio.mostrar()

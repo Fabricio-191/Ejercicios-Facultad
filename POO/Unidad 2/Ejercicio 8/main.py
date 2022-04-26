@@ -16,6 +16,6 @@ if __name__ == '__main__':
 
 	print("Conjunto A:", conjuntoA)
 	print("Conjunto B:", conjuntoB)
-	print("A + B:", conjuntoA + conjuntoB)
-	print("A - B:", conjuntoA - conjuntoB)
+	print("A + B:",  conjuntoA +  conjuntoB)
+	print("A - B:",  conjuntoA -  conjuntoB)
 	print("A == B:", conjuntoA == conjuntoB)

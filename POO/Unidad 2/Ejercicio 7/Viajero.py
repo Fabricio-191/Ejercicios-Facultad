@@ -65,7 +65,7 @@ class Viajero:
 
 		return self.__add__(-millas)
 
-	def __eq__(self, otro: Viajero | int) -> bool:
+	def __eq__(self, otro: Viajero | object | int) -> bool:
 		if(type(otro) == Viajero):
 			return self.__millas == otro.__millas  # type: ignore
 		elif(type(otro) == int):
@@ -85,7 +85,7 @@ class Viajero:
 			fileReader = reader(file, delimiter=',')
 			next(fileReader, None)
 
-			lista = []
+			lista: list[Viajero] = []
 			for line in fileReader:
 				lista.append(
 					Viajero(

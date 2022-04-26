@@ -10,8 +10,8 @@ def EmailfromStr(string: str) -> Email:
 		
 	return Email(matches.group(1), matches.group(2), matches.group(3))
 
-def leerArchivo(file) -> list[Email]:
-	with open(file, "r") as file:
+def leerArchivo(filePath: str) -> list[Email]:
+	with open(filePath, "r") as file:
 		reader = csv.reader(file, delimiter=',')
 		next(reader, None)
 		emails: list[Email] = []

@@ -9,7 +9,6 @@ Dada la clase ViajeroFrecuente definida en el ejercicio 2, resolver lo siguiente
 3-    Canjear millas usando la sobrecarga del operador binario resta(-),obteniendo como resultado de la resta una instancia de la clase ViajeroFrecuente. Por ejemplo, sea v una instancia de la clase ViajeroFrecuente, la función de canjear millas se resuelve de la siguiente forma v = v - 100.
 """
 
-
 class Viajero:
 	__numero: int
 	__dni: str
@@ -62,7 +61,7 @@ class Viajero:
 			fileReader = reader(file, delimiter=',')
 			next(fileReader, None)
 
-			lista = []
+			lista: list[Viajero] = []
 			for line in fileReader:
 				lista.append(
 					Viajero(

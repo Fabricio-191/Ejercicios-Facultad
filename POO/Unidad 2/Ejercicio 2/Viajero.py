@@ -65,7 +65,7 @@ class Viajero:
 			fileReader = reader(file, delimiter=',')
 			next(fileReader, None)
 
-			lista = []
+			lista: list[Viajero] = []
 			for line in fileReader:
 				lista.append(
 					Viajero(

@@ -24,12 +24,13 @@ d. Dado el código de un plan, modificar la cantidad cuotas que debe tener pagas
 """
 from os import path
 from PlanAhorro import PlanAhorro
-from ...Menu import Menu
+from Menu import Menu
 from csv import reader
 
 def leerArchivo(path: str) -> list[PlanAhorro]:
 	with open(path, 'r') as file:
 		fileReader = reader(file, delimiter=';')
+		next(fileReader, None)
 
 		return list(map(
 			lambda line: PlanAhorro.leerPlan(line),

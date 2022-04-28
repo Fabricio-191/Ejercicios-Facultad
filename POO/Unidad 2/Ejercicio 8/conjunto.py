@@ -39,7 +39,7 @@ class Conjunto:
 
 		return Conjunto(resultado)
 
-	def __eq__(self, other: Conjunto | object) -> bool:
+	def __eq__(self, other: Conjunto) -> bool:
 		if(type(other) != Conjunto):
 			raise TypeError("El objeto no es un conjunto")
 

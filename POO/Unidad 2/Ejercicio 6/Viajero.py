@@ -47,13 +47,13 @@ class Viajero:
 	def __gt__(self, otro: Viajero) -> bool:
 		return self.__millas > otro.__millas
 
-	def __add__(self, millas: int) -> Viajero:
-		self.acumularMillas(millas)
+	def __add__(self, millas: float) -> Viajero:
+		self.__millas += millas
 
 		return self
 
-	def __sub__(self, millas: int) -> Viajero:
-		return self.__add__(-millas)
+	def __sub__(self, millas: float) -> Viajero:
+		return self + (-millas)
 
 	@staticmethod
 	def leerArchivo(filePath: str) -> list[Viajero]:

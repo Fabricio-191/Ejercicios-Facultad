@@ -1,5 +1,5 @@
 from typing import Callable, Any
-import os
+from os import system
 
 class Menu:
 	# dict[str, tuple[Literal['Salir del menu'], () -> None, tuple[()]]]
@@ -30,7 +30,7 @@ class Menu:
 		while True:
 			self.__menu()
 			opcion = input('Ingrese una opcion: ')
-			if self.__clear: os.system('cls')
+			if self.__clear: system('cls') 
 			if opcion == '0': break
 			if opcion in self.__functions:
 				entry = self.__functions[opcion]

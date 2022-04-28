@@ -17,11 +17,12 @@ if __name__ == '__main__':
 	for viajero in viajeros:
 		if viajero.cantidadTotaldeMillas() == masMillas:
 			viajero.mostrar()
-	
-	viajero = viajeros[0]
 
+	print('sobrecargas')
+
+	viajero = viajeros[0]
+	viajero.mostrar()
 	viajero += 100
 	viajero.mostrar()
-
 	viajero -= 100
 	viajero.mostrar()

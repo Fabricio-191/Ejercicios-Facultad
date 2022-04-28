@@ -67,17 +67,20 @@ class Viajero:
 
 	def __eq__(self, otro: Viajero | object | int) -> bool:
 		if(type(otro) == Viajero):
-			return self.__millas == otro.__millas  # type: ignore
+			return self.__millas == otro.cantidadTotaldeMillas()  # type: ignore
 		elif(type(otro) == int):
 			return self.__millas == otro
 		else:
 			raise TypeError("No se puede comparar un viajero con un valor que no sea un entero u otro viajero")
 
+	def __req__(self, otro: Viajero | object | int) -> bool:
+		return self == otro
+
 	def __radd__(self, millas: int) -> Viajero:
-		return self.__add__(millas)
+		return self + millas
 	
 	def __rsub__(self, millas: int) -> Viajero:
-		return self.__sub__(millas)
+		return self - millas
 
 	@staticmethod
 	def leerArchivo(filePath: str) -> list[Viajero]:
@@ -98,6 +101,3 @@ class Viajero:
 				)
 			
 			return lista
-
-
-	

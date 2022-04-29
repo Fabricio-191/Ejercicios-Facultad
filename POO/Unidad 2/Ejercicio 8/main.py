@@ -13,9 +13,12 @@ Implemente un programa que presente un menú de opciones que permita lo siguient
 if __name__ == '__main__':
 	conjuntoA = Conjunto([1, 2, 3, 4])
 	conjuntoB = Conjunto([3, 6, 9])
+	conjuntoC = Conjunto([1, 2, 3, 4])
 
 	print("Conjunto A:", conjuntoA)
 	print("Conjunto B:", conjuntoB)
+	print("Conjunto C:", conjuntoC)
 	print("A + B:",  conjuntoA +  conjuntoB)
 	print("A - B:",  conjuntoA -  conjuntoB)
 	print("A == B:", conjuntoA == conjuntoB)
+	print("A == C:", conjuntoA == conjuntoC)

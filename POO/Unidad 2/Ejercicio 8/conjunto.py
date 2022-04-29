@@ -13,16 +13,10 @@ Implemente un programa que presente un menú de opciones que permita lo siguient
 class Conjunto:
 	__conjunto: list[int]
 	def __init__(self, conjunto: list[int] = []):
-		self.__conjunto = conjunto
-
-	def __str__(self) -> str:
-		return str(self.__conjunto)
+		self.__conjunto = conjunto.copy()
 
 	def __add__(self, other: Conjunto) -> Conjunto:
-		resultado: list[int] = []
-
-		for elemento in self.__conjunto:
-			resultado.append(elemento)
+		resultado: list[int] = self.__conjunto.copy()
 	
 		for elemento in other.__conjunto:
 			if elemento not in resultado:
@@ -51,3 +45,9 @@ class Conjunto:
 				return False
 
 		return True
+
+	def __str__(self) -> str:
+		return '{ ' + str(self.__conjunto)[1:-1] + ' }'
+
+	def __repr__(self) -> str:
+		return self.__str__()

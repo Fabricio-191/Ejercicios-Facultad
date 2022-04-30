@@ -37,11 +37,11 @@ class Conjunto:
 		if(type(other) != Conjunto):
 			raise TypeError("El objeto no es un conjunto")
 
-		if len(self.__conjunto) != len(other.__conjunto):  # type: ignore
+		if len(self.__conjunto) != len(other.__conjunto):
 			return False
 
 		for elemento in self.__conjunto:
-			if elemento not in other.__conjunto:  # type: ignore
+			if elemento not in other.__conjunto:
 				return False
 
 		return True

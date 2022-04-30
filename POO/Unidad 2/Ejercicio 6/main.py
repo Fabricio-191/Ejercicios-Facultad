@@ -11,7 +11,7 @@ from Viajero import Viajero
 from os import path
 
 if __name__ == '__main__':
-	viajeros = Viajero.leerArchivo(path.dirname(__file__) + "/viajeros.csv")
+	viajeros: list[Viajero] = Viajero.leerArchivo(path.dirname(__file__) + "/viajeros.csv")
 
 	masMillas = max(viajeros).cantidadTotaldeMillas()
 	for viajero in viajeros:

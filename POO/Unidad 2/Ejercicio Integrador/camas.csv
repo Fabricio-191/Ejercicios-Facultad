@@ -1,0 +1,4 @@
+"idCama; habitacion; estado; apellidoNombre; diagnostico; observaciones; fechaInternacion; fechaAlta ";;;;;;
+1;101;True;Perez, Luis; Apendicitis;1/4/2021;None
+2;102;True;Alamino, Carmen; Neumonitis;2/4/2021;None
+3;105;True;Venerdini, Analia; Hepatitis C;1/4/2021;None

@@ -32,10 +32,7 @@ def leerArchivo(path: str) -> list[PlanAhorro]:
 		fileReader = reader(file, delimiter=';')
 		next(fileReader, None)
 
-		return list(map(
-			lambda line: PlanAhorro.leerPlan(line),
-			fileReader
-		))
+		return list(map(lambda line: PlanAhorro.leerPlan(line), fileReader))
 
 def opcion1(lista: list[PlanAhorro]):
 	for plan in lista:

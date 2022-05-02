@@ -22,7 +22,10 @@ def leerArchivo(filePath: str) -> list[Email]:
 		return emails
 
 def test():
-	Email("alumnopoo", "gmail", "com")
+	email = Email("alumnopoo", "gmail", "com")
+
+	assert email.getDominio() == "gmail"
+	assert email.getIDCuenta() == "alumnopoo"
 
 if __name__ == "__main__":
 	test()

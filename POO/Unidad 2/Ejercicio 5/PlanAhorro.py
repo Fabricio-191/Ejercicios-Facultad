@@ -28,8 +28,8 @@ class PlanAhorro:
 	__version: str
 	__valor: float
 	__valorCuota: float
-	__cuotas: int = 0
-	__cuotasParaLicitar: int = 0
+	__cuotas: int = 1
+	__cuotasParaLicitar: int = 1
 
 	def __init__(self, codigo: int, modelo: str, version: str, valor: float):
 		self.__codigo = codigo

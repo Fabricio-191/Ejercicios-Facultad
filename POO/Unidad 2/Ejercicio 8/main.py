@@ -10,7 +10,12 @@ Implemente un programa que presente un menú de opciones que permita lo siguient
 3- Verificar si dos conjuntos son iguales, para ello sobrecargue el operador “==” teniendo en cuenta que dos conjuntos se consideran iguales si tienen la misma cantidad de elementos y sus valores son iguales (sin importar el orden de los elementos).
 """
 
+def test():
+	Conjunto([1,2,3,4])
+
 if __name__ == '__main__':
+	test()
+	
 	conjuntoA = Conjunto([1, 2, 3, 4])
 	conjuntoB = Conjunto([3, 6, 9])
 	conjuntoC = Conjunto([1, 2, 3, 4])

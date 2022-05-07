@@ -12,7 +12,11 @@ Dada la clase ViajeroFrecuente definida en el ejercicio 2 con las sobrecargas de
 from Viajero import Viajero
 from os import path
 
+def test():
+	Viajero(1, "0", "Juan", "Lendro", 23)
+
 if __name__ == '__main__':
+	test()
 	viajeros = Viajero.leerArchivo(path.dirname(__file__) + "/viajeros.csv")
 	
 	viajero = viajeros[0]

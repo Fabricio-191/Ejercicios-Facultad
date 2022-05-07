@@ -60,7 +60,11 @@ def opcion4(lista: list[PlanAhorro]):
 		if plan.codigo() == codigo:
 			plan.modificarCuotasParaLicitar(cuotas)
 
+def test():
+	PlanAhorro(1, 'Ford', 'Fiesta', 20000)
+
 if __name__ == '__main__':
+	test()
 	listaPlanes = leerArchivo(path.dirname(__file__) + '/planes.csv')
 
 	menu = Menu()

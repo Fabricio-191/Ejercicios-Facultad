@@ -10,7 +10,11 @@ Dada la clase ViajeroFrecuente definida en el ejercicio 2, resolver lo siguiente
 from Viajero import Viajero
 from os import path
 
+def test():
+	Viajero(1, "0", "Juan", "Lendro", 23)
+
 if __name__ == '__main__':
+	test()
 	viajeros: list[Viajero] = Viajero.leerArchivo(path.dirname(__file__) + "/viajeros.csv")
 
 	masMillas = max(viajeros).cantidadTotaldeMillas()

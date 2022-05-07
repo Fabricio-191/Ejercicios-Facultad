@@ -11,7 +11,12 @@ def obtenerViajero(viajeros: list[Viajero]) -> Viajero:
 	print("ese viajero no existe")
 	return obtenerViajero(viajeros)
 
+def test():
+	Viajero(1, "0", "Juan", "Lendro", 23)
+
 if __name__ == "__main__":
+	test()
+
 	viajeros = Viajero.leerArchivo(path.dirname(__file__) + "/viajeros.csv")
 	viajero = obtenerViajero(viajeros)
 

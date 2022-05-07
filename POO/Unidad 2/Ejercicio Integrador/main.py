@@ -22,10 +22,21 @@ Total adeudado: xxxx.xx
 4) Listar  los  datos  de  pacientes  internados  (cama  ocupada),  que  tienen  un  diagnóstico leído desde teclado.
 """
 
+from Cama import Cama
+from Medicamento import Medicamento
+from GestorMedicamentos import GestorMedicamentos
+
 from GestorCamas import GestorCamas
 from os import path
 
+def test():
+	Cama(4, 1, True, "Juan Leando", "Cancer", "01/01/2020", "01/01/2020")
+	Medicamento(1, 10, "a", "Paracetamol", "Tableta", 10, 10)
+	GestorCamas(path.dirname(__file__) + "/camas.csv", path.dirname(__file__) + "/medicamentos.csv")
+	GestorMedicamentos(path.dirname(__file__) + "/medicamentos.csv")
+
 if __name__ == "__main__":
+	test()
 	gestor = GestorCamas(path.dirname(__file__) + "/camas.csv", path.dirname(__file__) + "/medicamentos.csv")
 	
 	gestor.listarDatosYMedicamentos(input('NyA del paciente: '))

@@ -96,7 +96,11 @@ def inciso3(lista: list[list[Registro]]) -> None:
 	for hora in range(24):
 		print("%2d: %3.2f - %3.2f - %5d" % (hora + 1, horas[hora].getTemperatura(), horas[hora].getHumedad(), horas[hora].getPresion()))
 
+def test():
+	Registro(1, 2, 3)
+
 if __name__ == "__main__":
+	test()
 	lista = leerArchivo(path.join(path.dirname(__file__) + "/mes.csv"))
 
 	menu = Menu()

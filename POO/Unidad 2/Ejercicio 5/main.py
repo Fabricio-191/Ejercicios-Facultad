@@ -61,7 +61,12 @@ def opcion4(lista: list[PlanAhorro]):
 			plan.modificarCuotasParaLicitar(cuotas)
 
 def test():
-	PlanAhorro(1, 'Ford', 'Fiesta', 20000)
+	plan = PlanAhorro(1, 'Ford', 'Fiesta', 20000)
+
+	assert plan.codigo() == 1
+	valorCuota = plan.valorCuota()
+	assert valorCuota == 22000.0
+	assert plan.montoParaLicitar() == 22000.0
 
 if __name__ == '__main__':
 	test()

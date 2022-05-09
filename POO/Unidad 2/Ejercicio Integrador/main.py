@@ -30,9 +30,27 @@ from GestorCamas import GestorCamas
 from os import path
 
 def test():
-	Cama(4, 1, True, "Juan Leando", "Cancer", "01/01/2020", "01/01/2020")
-	Medicamento(1, 10, "a", "Paracetamol", "Tableta", 10, 10)
-	GestorCamas(path.dirname(__file__) + "/camas.csv", path.dirname(__file__) + "/medicamentos.csv")
+	cama = Cama(4, 1, True, "Juan Leandro", "Cancer", "01/01/2020", "03/03/2020")
+
+	assert cama.obtenerDiagnostico() == "Cancer"
+	assert cama.obtenerFechaInternacion() == "01/01/2020"
+	assert cama.obtenerHabitacion() == 1
+	assert cama.obtenerID() == 4
+	assert cama.obtenerNyA() == "Juan Leandro"
+
+	medicamento = Medicamento(1, 10, "a", "Paracetamol", "Tableta", 12, 155)
+
+	assert medicamento.getCantidadAplicada() == 12
+	assert medicamento.getIdCama() == 1
+	assert medicamento.getMonodroga() == "Paracetamol"
+	assert medicamento.getPrecio() == 155
+	assert medicamento.getPresentacion() == "Tableta"
+	assert medicamento.getNombreComercial() == "a"
+
+	camas = GestorCamas(path.dirname(__file__) + "/camas.csv", path.dirname(__file__) + "/medicamentos.csv")
+
+	assert camas.obtenerPaciente("Perez, Luis").obtenerNyA() == "Perez, Luis" # type: ignore
+
 	GestorMedicamentos(path.dirname(__file__) + "/medicamentos.csv")
 
 if __name__ == "__main__":

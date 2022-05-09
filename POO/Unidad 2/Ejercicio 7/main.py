@@ -13,7 +13,21 @@ from Viajero import Viajero
 from os import path
 
 def test():
-	Viajero(1, "0", "Juan", "Lendro", 23)
+	viajero = Viajero(1, "0", "Juan", "Lendro", 23)
+
+	assert viajero.cantidadTotaldeMillas() == 23
+	assert viajero.obtenerNumero() == 1
+
+	assert viajero > Viajero(0, "", "", "", 22)
+	assert (viajero + 100).cantidadTotaldeMillas() == 123
+	assert (viajero - 50).cantidadTotaldeMillas() == 73
+
+	assert viajero == 73
+	assert (100 + viajero).cantidadTotaldeMillas() == 173
+	assert (50 - viajero).cantidadTotaldeMillas() == 123
+	assert viajero == Viajero(1, "0", "Juan", "Lendro", 123)
+
+
 
 if __name__ == '__main__':
 	test()

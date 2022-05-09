@@ -97,7 +97,11 @@ def inciso3(lista: list[list[Registro]]) -> None:
 		print("%2d: %3.2f - %3.2f - %5d" % (hora + 1, horas[hora].getTemperatura(), horas[hora].getHumedad(), horas[hora].getPresion()))
 
 def test():
-	Registro(1, 2, 3)
+	registro = Registro(1, 2, 3)
+
+	assert registro.getTemperatura() == 1
+	assert registro.getHumedad() == 2
+	assert registro.getPresion() == 3
 
 if __name__ == "__main__":
 	test()

@@ -2,6 +2,16 @@ from Ventana import Ventana
 
 def test():
 	Ventana('test')
+	Ventana('test', 1)
+	Ventana('test', 1, 2)
+	Ventana('test', 1, 2, 3)
+	Ventana('test', 1, 2, 3, 4)
+	ventana = Ventana('test', 100, 200, 300, 300)
+
+	assert ventana.getTitulo() == 'test'
+	assert ventana.alto() == 100
+	assert ventana.ancho() == 200
+
 
 if __name__ == '__main__':
     test()

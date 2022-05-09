@@ -22,7 +22,8 @@ def leerArchivo(filePath: str) -> list[Email]:
 		return emails
 
 def test():
-	email = Email("alumnopoo", "gmail", "com")
+	email = Email("alumnopoo", "gmail", "com", "123")
+	Email("alumnopoo", "gmail", "com")
 
 	assert email.getDominio() == "gmail"
 	assert email.getIDCuenta() == "alumnopoo"
@@ -30,11 +31,6 @@ def test():
 if __name__ == "__main__":
 	test()
 
-	"""
-	1- Ingresar el nombre de una persona y de su cuenta de correo, el identificador de cuenta, dominio y tipo de dominio (crear una instancia de la clase Email) y luego imprima el siguiente mensaje:
-	
-	Estimado <nombre> te enviaremos tus mensajes a la dirección <dirección de correo>.
-	"""
 
 	nombre = input("Nombre: ")
 	email = Email(
@@ -44,28 +40,20 @@ if __name__ == "__main__":
 		input("Contraseña: ")
 	)
 
-	"""
-	2- Para la instancia creada en el ítem anterior, modificar la contraseña, teniendo en cuenta que se debe ingresar la contraseña actual, y ésta debe ser igual a la registrada en la instancia. Luego se debe ingresar la nueva contraseña y realizar la modificación correspondiente.
-	"""
 
 	print()
 	print("Estimado " + nombre + " te enviaremos tus mensajes a la dirección " + email.retornaEmail())
+
 
 	print()
 	email.modificarContraseña(input("Contraseña vieja: "), input("Contraseña nueva: "))
 	print()
 
-	"""
-	3- Crear un objeto de clase Email, a partir de una dirección de correo, por ejemplo: informatica.fcefn@gmail.com, juanLiendro1957@yahoo.com, etc.
-	"""
 
 	EmailfromStr(input("email: "))
-	
 	print()
 
-	"""
-	4- Leer de un archivo separado por comas 10 direcciones de e-mail, crear instancias de la clase Email; luego ingresar un identificador de cuenta e indicar si está repetido o no.
-	"""
+
 	emailsDelArchivo = leerArchivo(path.dirname(__file__) + "/emails.csv")
 	identificador = input("Ingresar identificador de cuenta: ")
 	contador = 0

@@ -12,7 +12,11 @@ def obtenerViajero(viajeros: list[Viajero]) -> Viajero:
 	return obtenerViajero(viajeros)
 
 def test():
-	Viajero(1, "0", "Juan", "Lendro", 23)
+	viajero = Viajero(1, "0", "Juan", "Lendro", 23)
+
+	assert viajero.cantidadTotaldeMillas() == 23
+	assert viajero.obtenerNumero() == 1
+
 
 if __name__ == "__main__":
 	test()

@@ -11,7 +11,15 @@ Implemente un programa que presente un menú de opciones que permita lo siguient
 """
 
 def test():
-	Conjunto([1,2,3,4])
+	conjuntoA = Conjunto([1, 2, 3, 4])
+	conjuntoB = Conjunto([3, 6, 9])
+	conjuntoC = Conjunto([1, 2, 3, 4])
+
+	assert conjuntoA == conjuntoC
+	assert conjuntoA != conjuntoB
+	assert conjuntoA + conjuntoB == Conjunto([1, 2, 3, 4, 6, 9])
+	assert conjuntoA - conjuntoB == Conjunto([1, 2, 4])
+
 
 if __name__ == '__main__':
 	test()

@@ -47,7 +47,10 @@ def test():
 	assert medicamento.getPresentacion() == "Tableta"
 	assert medicamento.getNombreComercial() == "a"
 
-	camas = GestorCamas(path.dirname(__file__) + "/camas.csv", path.dirname(__file__) + "/medicamentos.csv")
+	camas = GestorCamas(
+		path.dirname(__file__) + "/camas.csv",
+		path.dirname(__file__) + "/medicamentos.csv"
+	)
 
 	assert camas.obtenerPaciente("Perez, Luis").obtenerNyA() == "Perez, Luis" # type: ignore
 

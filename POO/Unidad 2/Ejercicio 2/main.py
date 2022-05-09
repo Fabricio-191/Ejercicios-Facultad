@@ -17,6 +17,12 @@ def test():
 	assert viajero.cantidadTotaldeMillas() == 23
 	assert viajero.obtenerNumero() == 1
 
+	viajero.acumularMillas(7)
+	assert viajero.cantidadTotaldeMillas() == 30
+
+	viajero.canjearMillas(10)
+	assert viajero.cantidadTotaldeMillas() == 20
+
 
 if __name__ == "__main__":
 	test()

@@ -1,6 +1,7 @@
 from os import path
 from Viajero import Viajero
 
+"""
 def obtenerViajero(viajeros: list[Viajero]) -> Viajero:
 	num = int(input("Ingrese el numero de viajero: "))
 
@@ -10,6 +11,19 @@ def obtenerViajero(viajeros: list[Viajero]) -> Viajero:
 
 	print("ese viajero no existe")
 	return obtenerViajero(viajeros)
+"""
+
+def obtenerViajero(viajeros: list[Viajero]) -> Viajero:
+	num = int(input("Ingrese el numero de viajero: "))
+
+	i = 0
+	while(i < len(viajeros) and viajeros[i].obtenerNumero() != num):
+		i += 1
+
+	if(i == len(viajeros)):
+		raise ValueError("ese viajero no existe")
+		
+	return viajeros[i]
 
 def test():
 	viajero = Viajero(1, "0", "Juan", "Lendro", 23)

@@ -36,7 +36,7 @@ if __name__ == '__main__':
 		if viajero.cantidadTotaldeMillas() == masMillas:
 			viajero.mostrar()
 
-	print('sobrecargas')
+	print('\nSobrecargas')
 
 	viajero = viajeros[0]
 	viajero.mostrar()

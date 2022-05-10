@@ -32,10 +32,7 @@ class Cama:
 		self.__fechaAlta = fechaAlta
 
 	def obtenerNyA(self) -> str:
-		if(self.__paciente is None):
-			return "Sin paciente"
-
-		return self.__paciente 
+		return self.__paciente or "Sin paciente"
 
 	def obtenerID(self) -> int:
 		return self.__id

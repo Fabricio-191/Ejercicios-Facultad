@@ -65,7 +65,7 @@ class Viajero:
 
 		return self.__add__(-millas)
 
-	def __eq__(self, otro: Viajero | object | int) -> bool:
+	def __eq__(self, otro: Viajero | int) -> bool:
 		if(type(otro) == Viajero):
 			return self.__millas == otro.cantidadTotaldeMillas()  # type: ignore
 		elif(type(otro) == int):
@@ -73,7 +73,7 @@ class Viajero:
 		else:
 			raise TypeError("No se puede comparar un viajero con un valor que no sea un entero u otro viajero")
 
-	def __req__(self, otro: Viajero | object | int) -> bool:
+	def __req__(self, otro: Viajero | int) -> bool:
 		return self == otro
 
 	def __radd__(self, millas: int) -> Viajero:

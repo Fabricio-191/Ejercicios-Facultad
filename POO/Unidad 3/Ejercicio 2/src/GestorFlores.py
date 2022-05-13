@@ -1,5 +1,5 @@
 from typing import Any
-from Flor import Flor
+from .Flor import Flor
 from csv import reader
 import numpy as np
 
@@ -12,9 +12,11 @@ class GestorFlores:
 	def listaFlores(self) -> list[str]:
 		return list(map(lambda flor: flor.getNumero(), self.__flores))
 
-	def obtenerFlor(self, num: int) -> Flor | None:
-		return self.__flores[num] or None
+	def obtenerFlor(self, nombre: str) -> Flor | None:
+		for flor in self.__flores:
+			if flor.getNombre() == nombre:
+				return flor
 
 	def __leerArchivo(self, archivo: str) -> list[Flor]:
-		with open(archivo) as file:
+		with open(archivo, encoding='utf8') as file:
 			return list(map(Flor, reader(file, delimiter=';')))

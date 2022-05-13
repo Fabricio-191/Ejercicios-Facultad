@@ -12,3 +12,6 @@ class Flor:
 
 	def getNumero(self) -> int:
 		return self.__numero
+
+	def getNombre(self) -> str:
+		return self.__nombre

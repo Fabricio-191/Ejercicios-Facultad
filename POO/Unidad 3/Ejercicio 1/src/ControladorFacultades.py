@@ -1,6 +1,23 @@
-from Facultad import Facultad
-from Carrera import Carrera
+from .Facultad import Facultad
+from .Carrera import Carrera
 from csv import reader
+
+def find(iter, fn):
+	elements = list(iter)
+	band = True
+	i = 0
+
+	while(i < len(elements) and band):
+		if(fn(elements[i])):
+			band = True
+	
+		i += 1
+
+	if(len(elements) == i):
+		i = -1
+
+	return i
+
 
 class ControladorFacultades:
 	__facultades: dict[str, Facultad]
@@ -16,6 +33,29 @@ class ControladorFacultades:
 		return self.__facultades[codigo]
 
 	def encontrarCarreraPorNombre(self, nombre: str) -> tuple[Facultad, Carrera] | None:
+		found = False
+		facultades = list(self.__facultades.values())
+		i = 0
+		facultad = None
+		carrera = None
+
+		while not found and i < len(facultades):
+			facultad = facultades[i]
+			carreras = list(facultad.getCarreras().values())
+			y = 0
+			while not found and y < len(carreras):
+				carrera = carreras[y]
+				if(carrera.getNombre() == nombre):
+					found = True
+				else: 
+					y += 1
+			i += 1
+
+		if not found:
+			return None
+
+		return facultad, carrera #type: ignore
+
 		for facultad in self.__facultades.values():
 			for carrera in facultad.getCarreras().values():
 				if carrera.getNombre() == nombre:

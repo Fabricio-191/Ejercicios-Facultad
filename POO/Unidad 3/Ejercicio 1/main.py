@@ -19,7 +19,7 @@ D. A través de un menú de opciones implementar las siguientes funcionalidades:
 """
 from os import path
 from Menu import Menu
-from ControladorFacultades import ControladorFacultades
+from src.ControladorFacultades import ControladorFacultades
 
 def opcion1(controladorFacultades: ControladorFacultades):
 	codigoFacultad = input("Ingrese el código de la facultad: ")
@@ -55,3 +55,7 @@ if __name__ == '__main__':
 	menu.registrarOpcion('1', 'Mostrar facultad y carreras', opcion1, controlador)
 	menu.registrarOpcion('2', 'Encontrar carrera por nombre', opcion2, controlador)
 	menu.iniciar()
+
+"""
+11aa22bb33cc
+"""

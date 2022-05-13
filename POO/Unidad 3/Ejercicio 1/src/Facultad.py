@@ -1,4 +1,4 @@
-from Carrera import Carrera
+from .Carrera import Carrera
 
 class Facultad:
 	__codigo: int
@@ -34,7 +34,7 @@ class Facultad:
 
 		return None
 
-	def agregarCarrera(self, codigo: str, nombre: str, duracion: str, fechaInicio: str, titulo: str):
+	def agregarCarrera(self, codigo: str, nombre: str, titulo: str, duracion: str, fechaInicio: str):
 		if codigo in self.__carreras:
 			raise Exception(f"La facultad {self.__codigo} ya tiene una carrera con el código {codigo}")
 

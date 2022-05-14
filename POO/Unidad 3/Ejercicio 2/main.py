@@ -11,7 +11,7 @@ def opcion3(gestorRamos: GestorRamos):
 if __name__ == '__main__':
 	gestorFlores = GestorFlores(path.dirname(__file__) + '/flores.csv')
 	gestorRamos = GestorRamos(gestorFlores)
-	gestorRamos.leerArchivo(path.dirname(__file__) + '/ramos.csv')
+	# gestorRamos.leerArchivo(path.dirname(__file__) + '/ramos.csv')
 
 	menu = Menu()
 	menu.registrarOpcion('1', 'Vender ramo', gestorRamos.venderRamo)

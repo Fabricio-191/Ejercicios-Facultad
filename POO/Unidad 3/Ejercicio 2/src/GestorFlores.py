@@ -7,7 +7,7 @@ class GestorFlores:
 	__flores: np.ndarray[Flor, Any]
 
 	def __init__(self, archivo: str):
-		self.__flores = np.array(self.__leerArchivo(archivo), dtype=Flor)
+		self.__flores = np.array(GestorFlores.__leerArchivo(archivo), dtype=Flor)
 
 	def listaFlores(self) -> list[str]:
 		return list(map(lambda flor: flor.getNumero(), self.__flores))
@@ -17,6 +17,7 @@ class GestorFlores:
 			if flor.getNombre() == nombre:
 				return flor
 
-	def __leerArchivo(self, archivo: str) -> list[Flor]:
+	@staticmethod
+	def __leerArchivo(archivo: str) -> list[Flor]:
 		with open(archivo, encoding='utf8') as file:
 			return list(map(Flor, reader(file, delimiter=';')))

@@ -1,1 +1,7 @@
-# https://campusvirtual.unsj.edu.ar/mod/assign/view.php?id=182591
+from Menu import Menu
+from src.GestorEquipos import GestorEquipos
+from src.GestorJugadores import GestorJugadores
+from src.GestorEquipos import GestorEquipos
+
+if __name__ == '__main__':
+	pass

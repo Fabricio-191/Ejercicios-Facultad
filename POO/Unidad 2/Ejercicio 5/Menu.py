@@ -27,30 +27,16 @@ class Menu:
 		print('===========\n')
 
 	def iniciar(self):
-		while True:
-			self.__menu()
-			opcion = input('Ingrese una opcion: ')
+		self.__menu()
+		opcion = input('Ingrese una opcion: ')
+		while opcion != '0':
 			if self.__clear: system('cls') 
-			if opcion == '0': break
+
 			if opcion in self.__functions:
 				entry = self.__functions[opcion]
 				entry[1](*entry[2])
 			else:
 				print('Opcion invalida')
-
-def Opcion1():
-	print('Se ejecuto la opcion 1')
-
-def Opcion2():
-	print('Se ejecuto la opcion 2')
-
-if __name__ == "__main__":
-	menu = Menu()
-	menu.registrarOpcion('1', 'Esto ejecutara la opcion 1', Opcion1)
-	menu.registrarOpcion('2', 'Esto ejecutara la opcion 2', Opcion2)
-	menu.registrarOpcion(
-		'3',
-		'Esto ejecutara la opcion 3',
-		lambda: print('Se ejecuto la opcion 3')
-	)
-	menu.iniciar()
+			
+			self.__menu()
+			opcion = input('Ingrese una opcion: ')

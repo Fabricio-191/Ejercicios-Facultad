@@ -4,11 +4,26 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from .Jugador import Jugador
 
-
 class Equipo:
 	__nombre: str
 	__ciudad: str
 	__jugadores: list[Jugador]
 
 	def __init__(self, nombre: str, ciudad: str):
-		pass
+		self.__nombre = nombre
+		self.__ciudad = ciudad
+		self.__jugadores = []
+
+	def getNombre(self):
+		return self.__nombre
+
+	def añadirJugador(self, jugador: Jugador) -> None:
+		self.__jugadores.append(jugador)
+
+	def __repr__(self):
+		str = ''
+
+		for jugador in self.__jugadores:
+			str += f'\t\t{jugador.getNombre()}\n'
+
+		return f'Equipo[\n\tnombre: {self.__nombre},\n\tjugadores: [\n{str}\t]\n]'

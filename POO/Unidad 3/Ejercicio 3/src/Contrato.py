@@ -1,9 +1,16 @@
-class Contrato:
-	__fechaInicio: str
-	__fechaFin: str
-	__pagoMensual: int
+from .Jugador import Jugador
+from .Equipo import Equipo
 
-	def __init__(self, fechaInicio: str, fechaFin: str, pagoMensual: str):
-		self.__fechaInicio = fechaInicio
-		self.__fechaFin = fechaFin
-		self.__pagoMensual = int(pagoMensual)
+class Contrato:
+	fechaInicio: str
+	fechaFin: str
+	pagoMensual: float
+	equipo: Equipo
+	jugador: Jugador
+
+	def __init__(self,  pagoMensual: float, fechaInicio: str, fechaFin: str, jugador: Jugador, equipo: Equipo):
+		self.fechaInicio = fechaInicio
+		self.fechaFin = fechaFin
+		self.pagoMensual = pagoMensual
+		self.equipo = equipo
+		self.jugador = jugador

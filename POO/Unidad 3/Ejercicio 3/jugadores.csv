@@ -1,0 +1,51 @@
+nombre; DNI; ciudadNatal; paisOrigen; fechaNacimiento; equipos
+Nombre 1;DNI 1;Ciudad 1;Pais 1;Fecha 1;Equipo a,Equipo b
+Nombre 2;DNI 2;Ciudad 2;Pais 2;Fecha 2;Equipo a
+Nombre 3;DNI 3;Ciudad 3;Pais 3;Fecha 3;Equipo d,Equipo c
+Nombre 4;DNI 4;Ciudad 4;Pais 4;Fecha 4;Equipo a
+Nombre 5;DNI 5;Ciudad 5;Pais 5;Fecha 5;Equipo e,Equipo d,Equipo b
+Nombre 6;DNI 6;Ciudad 6;Pais 6;Fecha 6;Equipo e,Equipo d,Equipo b,Equipo c
+Nombre 7;DNI 7;Ciudad 7;Pais 7;Fecha 7;Equipo a,Equipo e
+Nombre 8;DNI 8;Ciudad 8;Pais 8;Fecha 8;Equipo e
+Nombre 9;DNI 9;Ciudad 9;Pais 9;Fecha 9;Equipo d,Equipo a,Equipo c
+Nombre 10;DNI 10;Ciudad 10;Pais 10;Fecha 10;Equipo c
+Nombre 11;DNI 11;Ciudad 11;Pais 11;Fecha 11;Equipo e,Equipo d,Equipo b,Equipo c
+Nombre 12;DNI 12;Ciudad 12;Pais 12;Fecha 12;Equipo e,Equipo c
+Nombre 13;DNI 13;Ciudad 13;Pais 13;Fecha 13;Equipo e,Equipo a
+Nombre 14;DNI 14;Ciudad 14;Pais 14;Fecha 14;Equipo c
+Nombre 15;DNI 15;Ciudad 15;Pais 15;Fecha 15;Equipo c,Equipo d,Equipo e
+Nombre 16;DNI 16;Ciudad 16;Pais 16;Fecha 16;Equipo b
+Nombre 17;DNI 17;Ciudad 17;Pais 17;Fecha 17;Equipo e,Equipo d
+Nombre 18;DNI 18;Ciudad 18;Pais 18;Fecha 18;Equipo e,Equipo a,Equipo b
+Nombre 19;DNI 19;Ciudad 19;Pais 19;Fecha 19;Equipo c,Equipo e
+Nombre 20;DNI 20;Ciudad 20;Pais 20;Fecha 20;Equipo d,Equipo a
+Nombre 21;DNI 21;Ciudad 21;Pais 21;Fecha 21;Equipo a,Equipo e
+Nombre 22;DNI 22;Ciudad 22;Pais 22;Fecha 22;Equipo d
+Nombre 23;DNI 23;Ciudad 23;Pais 23;Fecha 23;Equipo c
+Nombre 24;DNI 24;Ciudad 24;Pais 24;Fecha 24;Equipo d,Equipo e
+Nombre 25;DNI 25;Ciudad 25;Pais 25;Fecha 25;Equipo a,Equipo d
+Nombre 26;DNI 26;Ciudad 26;Pais 26;Fecha 26;Equipo a
+Nombre 27;DNI 27;Ciudad 27;Pais 27;Fecha 27;Equipo a,Equipo b
+Nombre 28;DNI 28;Ciudad 28;Pais 28;Fecha 28;Equipo c,Equipo e
+Nombre 29;DNI 29;Ciudad 29;Pais 29;Fecha 29;Equipo b,Equipo a,Equipo c,Equipo e
+Nombre 30;DNI 30;Ciudad 30;Pais 30;Fecha 30;Equipo d,Equipo b
+Nombre 31;DNI 31;Ciudad 31;Pais 31;Fecha 31;Equipo c,Equipo b,Equipo e,Equipo d
+Nombre 32;DNI 32;Ciudad 32;Pais 32;Fecha 32;Equipo c,Equipo d,Equipo b
+Nombre 33;DNI 33;Ciudad 33;Pais 33;Fecha 33;Equipo e,Equipo a,Equipo d
+Nombre 34;DNI 34;Ciudad 34;Pais 34;Fecha 34;Equipo a,Equipo c,Equipo d
+Nombre 35;DNI 35;Ciudad 35;Pais 35;Fecha 35;Equipo b
+Nombre 36;DNI 36;Ciudad 36;Pais 36;Fecha 36;Equipo a,Equipo e
+Nombre 37;DNI 37;Ciudad 37;Pais 37;Fecha 37;Equipo a,Equipo e
+Nombre 38;DNI 38;Ciudad 38;Pais 38;Fecha 38;Equipo b
+Nombre 39;DNI 39;Ciudad 39;Pais 39;Fecha 39;Equipo d,Equipo a,Equipo e
+Nombre 40;DNI 40;Ciudad 40;Pais 40;Fecha 40;Equipo a
+Nombre 41;DNI 41;Ciudad 41;Pais 41;Fecha 41;Equipo b,Equipo a
+Nombre 42;DNI 42;Ciudad 42;Pais 42;Fecha 42;Equipo b
+Nombre 43;DNI 43;Ciudad 43;Pais 43;Fecha 43;Equipo e
+Nombre 44;DNI 44;Ciudad 44;Pais 44;Fecha 44;Equipo e,Equipo d
+Nombre 45;DNI 45;Ciudad 45;Pais 45;Fecha 45;Equipo c,Equipo b
+Nombre 46;DNI 46;Ciudad 46;Pais 46;Fecha 46;Equipo e,Equipo c,Equipo a
+Nombre 47;DNI 47;Ciudad 47;Pais 47;Fecha 47;Equipo a
+Nombre 48;DNI 48;Ciudad 48;Pais 48;Fecha 48;Equipo c,Equipo d
+Nombre 49;DNI 49;Ciudad 49;Pais 49;Fecha 49;Equipo d,Equipo c
+Nombre 50;DNI 50;Ciudad 50;Pais 50;Fecha 50;Equipo d,Equipo b,Equipo a

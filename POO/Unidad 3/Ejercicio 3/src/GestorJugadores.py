@@ -36,11 +36,3 @@ class GestorJugadores:
 				self.__jugadores.append(jugador)
 
 				GestorEquipos.agregarJugadorAEquipos(jugador, equipos)
-
-	def __repr__(self) -> str:
-		str = ''
-
-		for jugador in self.__jugadores:
-			str += f'\t{jugador}\n'
-
-		return f'GestorJugadores[\n{str}]'

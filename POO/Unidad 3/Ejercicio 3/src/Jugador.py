@@ -21,6 +21,3 @@ class Jugador:
 
 	def getDNI(self):
 		return self.__DNI
-
-	def __repr__(self) -> str:
-		return f'Jugador[{self.__nombre}]'

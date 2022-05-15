@@ -1,5 +1,3 @@
-from .Jugador import Jugador
-from .Equipo import Equipo
 from .Contrato import Contrato
 from .GestorEquipos import GestorEquipos
 from .GestorJugadores import GestorJugadores
@@ -15,6 +13,24 @@ class GestorContratos:
 		self.__gestorEquipos = gestorEquipos
 		self.__gestorJugadores = gestorJugadores
 		self.__contratos = np.array(self.__leerArchivo(archivo))
+
+	def crearContrato(self, fechaInicio: str, fechaFin: str, pagoMensual: str, DNIjugador: str, nombreEquipo: str):
+		jugador = self.__gestorJugadores.getJugador(DNIjugador)
+		equipo = self.__gestorEquipos.getEquipo(nombreEquipo)
+
+		self.__contratos = np.append(
+			self.__contratos,
+			Contrato(float(pagoMensual), fechaInicio, fechaFin, jugador, equipo) # type: ignore
+		)
+
+	def encontrarContratos(self, jugadorDNI: str) -> list[Contrato]:
+		lista = []
+
+		for contrato in self.__contratos:
+			if contrato.getJugador().getDNI() == jugadorDNI:
+				lista.append(contrato)
+
+		return lista
 
 	def __leerArchivo(self, archivo: str) -> list[Contrato]:
 		with open(archivo, 'r') as file:

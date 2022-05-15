@@ -19,11 +19,3 @@ class Equipo:
 
 	def añadirJugador(self, jugador: Jugador) -> None:
 		self.__jugadores.append(jugador)
-
-	def __repr__(self):
-		str = ''
-
-		for jugador in self.__jugadores:
-			str += f'\t\t{jugador.getNombre()}\n'
-
-		return f'Equipo[\n\tnombre: {self.__nombre},\n\tjugadores: [\n{str}\t]\n]'

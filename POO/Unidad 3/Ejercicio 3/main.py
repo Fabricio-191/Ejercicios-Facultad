@@ -15,7 +15,18 @@ from os import path
 def pathRelativo(p: str) -> str:
 	return path.join(path.dirname(__file__), p)
 
+def crearContrato(gestorContratos: GestorContratos):
+	dni = input("Ingrese el DNI del jugador: ")
+	equipo = input("Ingrese el nombre del equipo: ")
+	fechaInicio = input("Ingrese la fecha de inicio del contrato: ")
+	fechaFin = input("Ingrese la fecha de finalización del contrato: ")
+	pagoMensual = input("Ingrese el pago mensual: ")
 
+	gestorContratos.crearContrato(fechaInicio, fechaFin, pagoMensual, dni, equipo)
+
+def contultarContratosJugador(gestorContratos: GestorContratos):
+	dni = input("Ingrese el DNI del jugador: ")
+	print(gestorContratos.consultarJugadorContratado(dni))
 
 if __name__ == '__main__':
 	gestorEquipos = GestorEquipos(pathRelativo('equipos.csv'))
@@ -23,4 +34,14 @@ if __name__ == '__main__':
 	gestorContratos = GestorContratos(pathRelativo('contratos.csv'), gestorEquipos, gestorJugadores)
 
 	menu = Menu()
+	menu.registrarOpcion('1', "Crear contrato", crearContrato, gestorContratos)
+	menu.iniciar()
 
+"""
+1
+DNI 1
+Equipo a
+0/0/0000
+0/0/0000
+30000
+"""

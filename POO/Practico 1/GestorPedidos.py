@@ -11,9 +11,10 @@ class GestorPedidos:
 	def listarPedidosRepartidorSinEntregar(self) -> None:
 		idRepartidor = int(input('Ingrese el id del repartidor: '))
 
+		print('\nPedidos sin entregar:')
 		for pedido in self.__pedidos:
 			if pedido.getRepartidor() == idRepartidor and pedido.getEstado() == 'N':
-				print(f'idPedido: {pedido.getNumeroPedido()}')
+				print(f'ID: {pedido.getNumeroPedido()}')
 	
 	def listarPedidos(self, idRepartidor: int) -> float:
 		total = 0

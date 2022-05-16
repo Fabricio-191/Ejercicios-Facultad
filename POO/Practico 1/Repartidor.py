@@ -32,7 +32,7 @@ class Repartidor:
 		return self.__tipoMovilidad
 
 	def setComision(self, comision: float) -> None:
-		self.__comision += comision
+		self.__comision = comision
 
 	def getComision(self) -> float:
 		return self.__comision

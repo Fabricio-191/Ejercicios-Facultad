@@ -1,0 +1,17 @@
+idRepartidor;numeroPeido;Descripcion;Cantidad;PrecioUnitario;Estado
+1;333;Medialunas por docena;2;750;N
+1;111;Carne al horno por porcion;2;1200;E
+2;123;Papas por kilo;4;50;E
+3;321;Filet de Merluza por kilo;3;750;N
+1;455;Zapallo ingles;2;101;N
+3;667;Clavos por kilo;1;750;E
+1;567;Te en hebras;2;200;N
+2;890;Tafirol por caja;1;650;E
+2;987;Lomo por unidad;2;1300;E
+4;144;Azucar por kilo;5;120;N
+4;112;Fideos por medio kilo;2;110;N
+3;456;Ca¤o pvc media pulgada por metro;2;357;N
+5;781;Papas fritas por porcion;1;780;N
+5;788;Lomo por unidad;2;1300;N
+6;331;Carne de lomo por kilo;2;1190;E
+6;543;Carr‚ de cerdo por kilo;1;1350;E

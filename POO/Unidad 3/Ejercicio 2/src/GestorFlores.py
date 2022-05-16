@@ -7,7 +7,10 @@ class GestorFlores:
 	__flores: np.ndarray[Flor, Any]
 
 	def __init__(self, archivo: str):
-		self.__flores = np.array(GestorFlores.__leerArchivo(archivo), dtype=Flor)
+		self.__flores = np.array( # type: ignore
+			GestorFlores.__leerArchivo(archivo),
+			dtype=Flor
+		)
 
 	def listaFlores(self) -> list[str]:
 		return list(map(lambda flor: flor.getNumero(), self.__flores))

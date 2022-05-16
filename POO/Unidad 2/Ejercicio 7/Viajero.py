@@ -65,7 +65,7 @@ class Viajero:
 
 		return self.__add__(-millas)
 
-	def __eq__(self, otro: Viajero | int) -> bool:
+	def __eq__(self, otro: Viajero | object | int) -> bool:
 		if(type(otro) == Viajero):
 			return self.__millas == otro.cantidadTotaldeMillas()  # type: ignore
 		elif(type(otro) == int):

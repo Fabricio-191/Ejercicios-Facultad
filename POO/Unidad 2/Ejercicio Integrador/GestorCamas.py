@@ -1,13 +1,13 @@
-from numpy import array, ndarray, dtype
+import numpy as np
 from csv import reader
 from Cama import Cama
 from GestorMedicamentos import GestorMedicamentos
 
 class GestorCamas:
-	__camas: ndarray
+	__camas: np.ndarray[Cama, np.dtype[np.object0]]
 	__gestorMedicamentos: GestorMedicamentos
 	def __init__(self, camasPath: str, medicamentosPath: str):
-		self.__camas = array(
+		self.__camas = np.array( # type: ignore
 			GestorCamas.leerArchivo(camasPath)
 		)
 		self.__gestorMedicamentos = GestorMedicamentos(medicamentosPath)

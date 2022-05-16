@@ -1,5 +1,4 @@
 from __future__ import annotations
-from csv import reader
 
 """
 A cada paciente internado, se le aplican medicamentos, los datos de los medicamentos se almacenan en un archivo “medicamentos.csv”, que guarda la siguiente información: idCama, idMedicamento (1 a 100),nombre comercial, monodroga, presentación, cantidad aplicada, precio total (este archivo se genera sin un orden particular). 

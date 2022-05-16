@@ -40,7 +40,7 @@ class PlanAhorro:
 	def valorCuota(self) -> float:
 		return self.__valorCuota
 	
-	def actualizarValor(self, valor):
+	def actualizarValor(self, valor: float):
 		self.__valor = valor
 		self.__valorCuota = (self.__valor / self.__cuotas) + self.__valor * 0.10
 

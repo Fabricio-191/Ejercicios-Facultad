@@ -3,7 +3,7 @@ from os import system
 
 class Menu:
 	# dict[str, tuple[Literal['Salir del menu'], () -> None, tuple[()]]]
-	__functions: dict[str, tuple[str, Callable, tuple[Any]]] = {
+	__functions: dict[str, tuple[str, Callable[..., Any], tuple[Any]]] = {
 		'0': ('Salir del menu', lambda: None, ()) # type: ignore
 	}
 	__name: str
@@ -13,7 +13,7 @@ class Menu:
 		self.__name = name
 		self.__clear = clear
 
-	def registrarOpcion(self, key: str, description: str, value: Callable, *args):
+	def registrarOpcion(self, key: str, description: str, value: Callable[..., Any], *args: ...):
 		if key in self.__functions:
 			raise Exception('La opcion ya existe')
 

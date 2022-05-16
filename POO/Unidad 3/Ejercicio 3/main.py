@@ -4,14 +4,6 @@ from src.GestorJugadores import GestorJugadores
 from src.GestorContratos import GestorContratos
 from os import path
 
-"""
-2. Crear un contrato para un jugador en un equipo: Se genera un contrato para un jugador en un equipo.
-3. Consultar jugadores Contratados: Ingresar el DNI de un jugador, si está contratado, mostrar el nombre del Equipo en el que fue contratado, y la fecha de finalización de contrato.
-4. Consultar Contratos: Ingresar el identificador de un Equipo y listar los datos de los Jugadores cuyo contrato vence en 6 meses.
-5. Obtener importe de contratos: Para un nombre de equipo leído desde teclado, determinar el importe total de los contratos que posee con los jugadores del equipo.
-5. Guardar Contratos: Generar un nuevo archivo que contenga los siguientes datos de los contratos: DNI del jugador, Nombre del equipo, fecha de inicio, fecha de fin, y el pago mensual.
-"""
-
 def pathRelativo(p: str) -> str:
 	return path.join(path.dirname(__file__), p)
 
@@ -24,9 +16,36 @@ def crearContrato(gestorContratos: GestorContratos):
 
 	gestorContratos.crearContrato(fechaInicio, fechaFin, pagoMensual, dni, equipo)
 
-def contultarContratosJugador(gestorContratos: GestorContratos):
+def consultarContratosJugador(gestorContratos: GestorContratos):
 	dni = input("Ingrese el DNI del jugador: ")
-	print(gestorContratos.consultarJugadorContratado(dni))
+	contratos = gestorContratos.encontrarContratos(dni)
+
+	if len(contratos) == 0:
+		print("El jugador no está contratado")
+	else:
+		for contrato in contratos:
+			print(f'Equipo: {contrato.getEquipo().getNombre()}')
+			print(f'Fecha de finalización: {contrato.getFechaFinalizacion()}')
+
+def contratosPorVencer(gestorContratos: GestorContratos):
+	equipo = input("Ingrese el nobre del equipo: ")
+
+	contratos = gestorContratos.encontrarContratosPorVencer(equipo)
+
+	if len(contratos) == 0:
+		print("No hay contratos por vencer")
+	else:
+		for contrato in contratos:
+			print(f'DNI: {contrato.getJugador().getDNI()}')
+
+def obtenerImporteContratos(gestorContratos: GestorContratos):
+	nombreEquipo = input("Ingrese el nombre del equipo: ")
+	importe = gestorContratos.getImporteContratos(nombreEquipo)
+
+	print(f'El importe total de los contratos es: {importe}')
+
+def guardarContratos(gestorContratos: GestorContratos):
+	gestorContratos.guardarEn(pathRelativo('contratosNuevo.txt'))
 
 if __name__ == '__main__':
 	gestorEquipos = GestorEquipos(pathRelativo('equipos.csv'))
@@ -35,6 +54,10 @@ if __name__ == '__main__':
 
 	menu = Menu()
 	menu.registrarOpcion('1', "Crear contrato", crearContrato, gestorContratos)
+	menu.registrarOpcion('2', "Consultar contratos de jugador", consultarContratosJugador, gestorContratos)
+	menu.registrarOpcion('3', "Contratos por vencer", contratosPorVencer, gestorContratos)
+	menu.registrarOpcion('4', "Obtener importe de contratos", obtenerImporteContratos, gestorContratos)
+	menu.registrarOpcion('5', "Guardar contratos", guardarContratos, gestorContratos)
 	menu.iniciar()
 
 """

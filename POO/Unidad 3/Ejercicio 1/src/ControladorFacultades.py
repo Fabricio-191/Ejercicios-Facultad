@@ -2,23 +2,6 @@ from .Facultad import Facultad
 from .Carrera import Carrera
 from csv import reader
 
-def find(iter, fn):
-	elements = list(iter)
-	band = True
-	i = 0
-
-	while(i < len(elements) and band):
-		if(fn(elements[i])):
-			band = True
-	
-		i += 1
-
-	if(len(elements) == i):
-		i = -1
-
-	return i
-
-
 class ControladorFacultades:
 	__facultades: dict[str, Facultad]
 

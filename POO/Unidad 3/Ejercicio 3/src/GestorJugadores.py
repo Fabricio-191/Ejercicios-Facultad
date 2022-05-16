@@ -1,8 +1,6 @@
-from re import S
 from .Jugador import Jugador
 from csv import reader
 from .GestorEquipos import GestorEquipos
-from .Equipo import Equipo
 
 class GestorJugadores:
 	__jugadores: list[Jugador]

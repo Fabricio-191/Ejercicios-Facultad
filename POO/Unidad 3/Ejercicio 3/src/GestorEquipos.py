@@ -1,13 +1,15 @@
+from typing import Any
 import numpy as np
 from csv import reader
 from .Equipo import Equipo
 from .Jugador import Jugador
+from numpy.typing import NDArray
 
 class GestorEquipos:
-	__equipos: np.ndarray
+	__equipos: NDArray[Any]
 
 	def __init__(self, archivo: str):
-		self.__equipos = np.array(self.__leerArchivo(archivo))
+		self.__equipos = np.array(self.__leerArchivo(archivo)) # type: ignore
 
 	def __leerArchivo(self, archivo: str) -> list[Equipo]:
 		with open(archivo, 'r') as file:

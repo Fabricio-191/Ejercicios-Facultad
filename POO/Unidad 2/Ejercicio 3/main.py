@@ -22,10 +22,10 @@ def leerArchivo(path: str) -> list[list[Registro]]:
 	lista: list[list[Registro]] = []
 
 	for dia in range(30):
-		horas = []
+		horas: list[Registro] = []
 
 		for hora in range(24):
-			horas.append(None)
+			horas.append(None) # type: ignore
 
 		lista.append(horas)
 

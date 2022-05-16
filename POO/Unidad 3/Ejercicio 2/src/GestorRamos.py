@@ -34,17 +34,17 @@ class GestorRamos:
 	
 	# Mostrar el nombre de las 5 flores más pedidas en un ramo, considerando todos los ramos vendidos.
 	def mostrar5FloresMasVendidas(self) -> None:
-		dict = {}
+		diccionario: dict[str, int] = {}
 
 		for ramo in self.__ramosVendidos:
 			for flor in ramo.getFlores():
 				nom = flor.getNombre()
-				if nom in dict:
-					dict[nom] += 1
+				if nom in diccionario:
+					diccionario[nom] += 1
 				else:
-					dict[nom] = 1
+					diccionario[nom] = 1
 
-		lista = sorted(dict.items(), key=lambda x: x[1], reverse=True)
+		lista = sorted(diccionario.items(), key=lambda x: x[1], reverse=True)
 
 		i = 0
 		while i < 5 and i < len(lista):

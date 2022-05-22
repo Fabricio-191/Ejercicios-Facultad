@@ -5,9 +5,6 @@ from src.GestorRamos import GestorRamos
 from src.GestorFlores import GestorFlores
 from os import path
 
-def opcion3(gestorRamos: GestorRamos):
-	gestorRamos.indicarFloresVendidasEnTamaño()
-
 if __name__ == '__main__':
 	gestorFlores = GestorFlores(path.dirname(__file__) + '/flores.csv')
 	gestorRamos = GestorRamos(gestorFlores)
@@ -16,7 +13,7 @@ if __name__ == '__main__':
 	menu = Menu()
 	menu.registrarOpcion('1', 'Vender ramo', gestorRamos.venderRamo)
 	menu.registrarOpcion('2', 'Mostrar 5 flores mas vendidas', gestorRamos.mostrar5FloresMasVendidas)
-	menu.registrarOpcion('3', 'Indicar flores vendidas en tamaño', opcion3, gestorRamos)
+	menu.registrarOpcion('3', 'Indicar flores vendidas en tamaño', gestorRamos.indicarFloresVendidasEnTamaño)
 	menu.iniciar()
 
 

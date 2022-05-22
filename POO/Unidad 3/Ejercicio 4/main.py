@@ -1,4 +1,5 @@
 """
+https://campusvirtual.unsj.edu.ar/mod/assign/view.php?id=182603
 b-  Definir una clase colección basada en un arreglo cuyo tamaño se debe ingresar por teclado, para almacenar los  calefactores.
 c-  Almacenar en memoria principal los calefactores obteniendo los datos de los archivos “calefactor-electrico.csv”, “calefactor-a-gas.csv” que contienen los datos de cada uno de los tipos de calefactores.
 d-  Implementar un programa que a partir de la información almacenada en memoria permita:
@@ -6,6 +7,8 @@ d-  Implementar un programa que a partir de la información almacenada en memori
     Ingresar por teclado el costo de el kilowatt/h, la cantidad que se estima consumir por hora y mostrar  marca  y modelo del calefactor eléctrico de menor consumo.
     Teniendo en cuenta los dos ítems anteriores, muestre: tipo de calefactor y todos los datos del calefactor de menor consumo. 
 """
+from __future__ import annotations
+from typing import Sized, Iterable, Iterator
 import numpy as np
 
 class Calefactor:
@@ -25,9 +28,16 @@ class CalefactorElectrico(Calefactor):
 
 class CalefactorAGas(Calefactor):
 	__matricula: str # ejemplo: GN01-00001-06-057
-	__calorias: int # ejemplo: 4000kilocalorias/m3. 
+	__calorias: int # ejemplo: 4000 kilocalorias/m3. 
 
 	def __init__(self, marca: str, modelo: str, matricula: str, calorias: str):
 		super().__init__(marca, modelo)
 		self.__matricula = matricula
 		self.__calorias = int(calorias)
+
+class ColeccionCalefactores:
+	__calefactores: np.ndarray[CalefactorElectrico | CalefactorAGas, np.dtype[np.object0]]
+
+	def __init__(self, tamaño: int):
+		self.__calefactores = np.empty(tamaño, dtype=CalefactorElectrico | CalefactorAGas)
+		super()

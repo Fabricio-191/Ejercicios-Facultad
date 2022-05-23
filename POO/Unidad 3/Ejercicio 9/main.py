@@ -2,9 +2,6 @@ from unittest import TestCase, main
 from palindromo import Palindromo
 import string
 import random
-import numpy
-
-numpy.array([]).resize()
 
 def random_string(length):
 	return ''.join(

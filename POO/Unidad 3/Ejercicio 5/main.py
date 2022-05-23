@@ -10,25 +10,10 @@ c- mostrarElemento: dada una posición de la colección, mostrar los datos del e
 
 from zope.interface import Interface, implementer
 
-'''Declaración de interface ICajero
-El Cajero solo puede buscar productos por descripción
-el método declarado es
-buscarProductoPorDescripcion(descripcion)
-'''
-
-class ICajero(Interface):  # type: ignore
-	def buscarProductoPorDescripcion(descripcion):
+class IColeccion(Interface):  # type: ignore
+	def insertarElemento(self, posicion, elemento):
 		pass
-
-'''Declaración de interface ISupervisor
-El Supervisor modificar el precio de un producto, que busca por código
-Los métodos que declara la intereface es
-buscarProductoPorCodigo(codigo)
-modificarPrecioProducto(codigo, precio)
-'''
-class ISupervisor(Interface):  # type: ignore
-	def buscarProductoPorCodigo(codigo):
+	def agregarElemento(self, elemento):
 		pass
-
-	def modificarPrecioProducto(codigo, precio):
+	def mostrarElemento(self, posicion):
 		pass

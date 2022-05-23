@@ -10,30 +10,21 @@ La interfaz del Director, permite modificar el sueldo básico de todos los agent
 Usted deberá crear las interfaces mencionadas con las funcionalidades solicitadas.
 
 class ITesorero (Interface)
-
    def gastosSueldoPorEmpleado ( dni):
-
        pass
-
- 
 
 class IDirector (Interface)
+   	def modificarBasico(dni, nuevoBasico):
+       	pass
 
-   def modificarBasico(dni, nuevoBasico):
+   	def modificarPorcentajeporcargo(dni, nuevoPorcentaje):
+     	pass
 
-       pass
+   	def modificarPorcentajeporcategoría(dni, nuevoPorcentaje):
+      	pass
 
-   def modificarPorcentajeporcargo(dni, nuevoPorcentaje):
-
-     pass
-
-   def modificarPorcentajeporcategoría(dni, nuevoPorcentaje):
-
-       pass
-
-def modificarImporteExtra(dni, nuevoImporteExtra):
-
-       pass
+	def modificarImporteExtra(dni, nuevoImporteExtra):
+		pass
 
  
 

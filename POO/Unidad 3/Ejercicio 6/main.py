@@ -45,3 +45,4 @@ c) Implemente un programa que a través de un menú de opciones permita:
     Mostrar para todos los aparatos que la empresa tiene a la venta, marca, país de fabricación e importe de venta.
     Almacenar los objetos de la colección Lista en el archivo “aparatoselectronicos.json”.
 """
+

@@ -16,7 +16,7 @@ el método declarado es
 buscarProductoPorDescripcion(descripcion)
 '''
 
-class ICajero(Interface):
+class ICajero(Interface):  # type: ignore
 	def buscarProductoPorDescripcion(descripcion):
 		pass
 
@@ -26,7 +26,7 @@ Los métodos que declara la intereface es
 buscarProductoPorCodigo(codigo)
 modificarPrecioProducto(codigo, precio)
 '''
-class ISupervisor(Interface):
+class ISupervisor(Interface):  # type: ignore
 	def buscarProductoPorCodigo(codigo):
 		pass
 

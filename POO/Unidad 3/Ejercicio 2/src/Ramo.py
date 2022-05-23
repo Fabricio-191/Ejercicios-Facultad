@@ -5,8 +5,8 @@ class Ramo:
 	__flores: list[Flor]
 	__tamaño: Literal['grande', 'mediano', 'chico']
 
-	def __init__(self, tamaño: Literal['grande', 'mediano', 'chico']) -> None:
-		self.__flores = []
+	def __init__(self, tamaño: Literal['grande', 'mediano', 'chico'], flores: list[Flor]) -> None:
+		self.__flores = flores
 		self.__tamaño = tamaño
 
 	def getFlores(self) -> list[Flor]:
@@ -14,9 +14,3 @@ class Ramo:
 
 	def getTamaño(self) -> Literal['grande', 'mediano', 'chico']:
 		return self.__tamaño
-
-	def agregarFlor(self, flor: Flor) -> None:
-		self.__flores.append(flor)
-
-	def cantidadFlores(self) -> int:
-		return len(self.__flores)

@@ -1,10 +1,12 @@
 from .Ramo import Ramo
+from .Flor import Flor
 from .GestorFlores import GestorFlores
 from csv import reader
 
 class GestorRamos:
 	__gestorFlores: GestorFlores
 	__ramosVendidos: list[Ramo]
+	__tamañosValidos = ['grande', 'mediano', 'chico']
 
 	def __init__(self, gestorFlores: GestorFlores):
 		self.__ramosVendidos = []
@@ -14,23 +16,25 @@ class GestorRamos:
 	def venderRamo(self):
 		tamaño = input('Ingrese el tamaño del ramo a vender: ')
 
-		if tamaño not in ['grande', 'mediano', 'chico']:
+		if tamaño not in self.__tamañosValidos:
 			print('Ese tamaño de ramo no es valido')
 		else:
-			ramo = Ramo(tamaño) # type: ignore
+			lista: list[Flor] = []
+			nombreFlor = input('Ingrese la flor a agregar al ramo ("terminar" para salir): ')
 
-			while(ramo.cantidadFlores() <= 5):
-				nombreFlor = input('Ingrese la flor a agregar al ramo ("terminar" para salir): ')
-				if(nombreFlor == 'terminar'): break
-
+			while(len(lista) < 4 or nombreFlor != 'terminar'):
 				flor = self.__gestorFlores.obtenerFlor(nombreFlor)
 
 				if flor is None:
 					print('La flor no existe')
 				else:
-					ramo.agregarFlor(flor)
+					lista.append(flor)
 
-			self.__ramosVendidos.append(ramo)
+				nombreFlor = input('Ingrese la flor a agregar al ramo ("terminar" para salir): ')
+
+			self.__ramosVendidos.append(
+				Ramo(tamaño, lista) # type: ignore
+			)
 	
 	# Mostrar el nombre de las 5 flores más pedidas en un ramo, considerando todos los ramos vendidos.
 	def mostrar5FloresMasVendidas(self) -> None:
@@ -58,7 +62,7 @@ class GestorRamos:
 		if tipo not in ['grande', 'mediano', 'chico']:
 			print('Ese tipo de ramo no es valido')
 		else:
-			vendidas = set([])
+			vendidas = set()
 
 			for ramo in self.__ramosVendidos:
 				if ramo.getTamaño() == tipo:
@@ -71,10 +75,12 @@ class GestorRamos:
 	def leerArchivo(self, ruta: str) -> None:
 		with open(ruta, 'r', encoding='utf8') as f:
 			for linea in reader(f, delimiter=';'):
-				ramo = Ramo(linea[0]) #type: ignore
+				flores: list[Flor] = []
 
 				for flor in linea[1].split(','):
-					ramo.agregarFlor(
+					flores.append(
 						self.__gestorFlores.obtenerFlor(flor) # type: ignore
 					)
-				self.__ramosVendidos.append(ramo)
+				self.__ramosVendidos.append(
+					Ramo(linea[0], flores) #type: ignore
+				)

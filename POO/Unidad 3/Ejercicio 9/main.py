@@ -1,29 +1,44 @@
-"""
-Testing
+from unittest import TestCase, main
+from palindromo import Palindromo
+import string
+import random
+import numpy
 
-Dada la Clase Palindromo, que tiene como atributo una palabra y una función para chequear que la palabra es palíndromo o no, dicha función devuelve True si la palabra es palíndromo, False en caso contrario.
+numpy.array([]).resize()
 
-Regla de Negocio: una palabra es palíndromo si se puede chequear que se escribe igual de adelante hacia atrás y de atrás hacia adelante. Ejemplos: ana, ANA, anana, MENEM.
+def random_string(length):
+	return ''.join(
+		random.SystemRandom().choice(string.ascii_letters + string.digits) for _ in range(length)
+	)
 
-La implementación provista por una empresa subcontratista, “Mi Softw@re siempre @nda”, es la siguiente:
+class TestPalindromo(TestCase):
+	__palindromo: Palindromo
 
-class Palindromo:
-    __palabra = None
-    def __init__(self, palabra):
-        self.__palabra = palabra
-    def esPalindromo(self):
-        i=0
-        j=-len(self.palabra)
-        bandera = True
-        while i<abs(j) and bandera:
-           if self.__palabra[i] != self.__palabra[i]:
-               bandera=False
-           else:
-               i += 1
-               j += 1
-        return bandera
-    def setPalabra(self, nuevaPalabra):
-        self.__palabra = nuevaPalabra
+	def setUp(self):
+		self.__palindromo = Palindromo("")
 
- Su tarea consiste en diseñar los tests para probar la implementación realizada por la empresa, en caso de que alguno no funcione, deberá corregir la función correspondiente.
-"""
+	def test_palindromo_vacio(self):
+		self.assertFalse(self.__palindromo.esPalindromo())
+	
+	def test_palindromo_con_un_caracter(self):
+		self.__palindromo.setPalabra("a")
+		self.assertTrue(self.__palindromo.esPalindromo())
+
+	def test_palindromo_con_dos_caracteres(self):
+		self.__palindromo.setPalabra("aa")
+		self.assertTrue(self.__palindromo.esPalindromo())
+
+	def test_palindromo_con_tres_caracteres(self):
+		self.__palindromo.setPalabra("aaa")
+		self.assertTrue(self.__palindromo.esPalindromo())
+
+	def test_palindromo_con_cuatro_caracteres(self):
+		self.__palindromo.setPalabra("aaaa")
+		self.assertTrue(self.__palindromo.esPalindromo())
+
+	def generarPalindromo(self, palabra):
+		self.__palindromo.setPalabra(palabra)
+		return self.__palindromo.esPalindromo()
+
+if __name__ == '__main__':
+	main()

@@ -16,7 +16,7 @@ class GestorEquipos:
 			lector = reader(file, delimiter=';')
 			next(lector, None)
 
-			return list(map(lambda x: Equipo(*x), lector))
+			return [Equipo(*linea) for linea in lector]
 
 	def getEquipo(self, nombre: str) -> Equipo:
 		for equipo in self.__equipos:

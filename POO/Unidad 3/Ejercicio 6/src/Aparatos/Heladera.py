@@ -5,6 +5,12 @@ class Heladera(Aparato):
 	__freezer: bool
 	__cyclica: bool
 
+	def __init__(self, marca: str, modelo: str, color: str, pais: str, precio: float, capacidad: float, freezer: bool, cyclica: bool):
+		super().__init__(marca, modelo, color, pais, precio)
+		self.__capacidad = capacidad
+		self.__freezer = freezer
+		self.__cyclica = cyclica
+
 	def cacularPrecioVenta(self):
 		precio = self.__precio
 

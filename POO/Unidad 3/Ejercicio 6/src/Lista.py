@@ -5,18 +5,21 @@ from .Aparatos.Aparato import Aparato
 
 @implementer(IColeccion)
 class Lista:
-	__head: Nodo
-	__tail: Nodo
+	__head: Nodo | None
+
+	def __init__(self) -> None:
+		self.__head = None
+		self.__tail = None
 
 	def agregarElemento(self, dato: Aparato):
-		if self.__head == None:
+		if self.__head is None:
 			self.__head = Nodo(dato, None)
 			self.__tail = self.__head
 		else:
-			self.__tail.__next = Nodo(dato, None)
-			self.__tail = self.__tail.__next
+			self.__tail.__next = Nodo(dato, None) # type: ignore
+			self.__tail = self.__tail.__next # type: ignore
 
-	def __encontrarElemento(self, posicion: int):
+	def encontrarElemento(self, posicion: int):
 		if posicion < 0:
 			raise Exception("Posicion invalida")
 
@@ -32,13 +35,13 @@ class Lista:
 		return actual
 
 	def insertarElemento(self, posicion: int, dato: Aparato):
-		nodo = self.__encontrarElemento(posicion)
+		nodo = self.encontrarElemento(posicion)
 		nodo.setNext(
 			Nodo(dato, nodo.getNext())
 		)
 
 	def mostrarElemento(self, posicion: int):
-		nodo = self.__encontrarElemento(posicion)
+		nodo = self.encontrarElemento(posicion)
 
 		print(f"Dato: {nodo.getDato()}")
 

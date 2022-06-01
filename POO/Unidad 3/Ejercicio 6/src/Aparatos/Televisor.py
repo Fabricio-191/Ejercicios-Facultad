@@ -6,6 +6,13 @@ class Televisor(Aparato):
 	__tipoDefinicion: str # SD | HD | FULL HD
 	__internet: bool
 
+	def __init__(self, marca: str, modelo: str, color: str, pais: str, precio: float, tipoPantalla: str, pulgadas: int, tipoDefinicion: str, internet: bool):
+		super().__init__(marca, modelo, color, pais, precio)
+		self.__tipoPantalla = tipoPantalla
+		self.__pulgadas = pulgadas
+		self.__tipoDefinicion = tipoDefinicion
+		self.__internet = internet
+
 	def cacularPrecioVenta(self):
 		precio = self.__precio
 

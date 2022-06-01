@@ -7,13 +7,6 @@ d-  Implementar un programa que a partir de la información almacenada en memori
     * Ingresar por teclado el costo de el kilowatt/h, la cantidad que se estima consumir por hora y mostrar  marca  y modelo del calefactor eléctrico de menor consumo.
     * Teniendo en cuenta los dos ítems anteriores, muestre: tipo de calefactor y todos los datos del calefactor de menor consumo. 
 """
-from Menu import Menu
-from src.coleccionCalefactores import ColeccionCalefactores
-
-def opcion1(gestorCalefactores: ColeccionCalefactores):
-	costo = input("Ingrese el costo por m3: ")
-
-	
-
-if __name__ == '__main__':
-	menu = Menu()
+from csv import reader
+# from Menu import Menu
+# from src.coleccionCalefactores import ColeccionCalefactores

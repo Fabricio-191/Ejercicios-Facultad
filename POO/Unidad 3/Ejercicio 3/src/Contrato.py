@@ -1,13 +1,13 @@
 from .Jugador import Jugador
 from .Equipo import Equipo
-import datetime
+from datetime import datetime, date
 
-def parseDate(str: str) -> datetime.date:
-	return datetime.datetime.strptime(str, '%d/%m/%Y').date()
+def parseDate(str: str) -> date:
+	return datetime.strptime(str, '%d/%m/%Y').date()
 
 class Contrato:
-	__fechaInicio: datetime.date
-	__fechaFin: datetime.date
+	__fechaInicio: date
+	__fechaFin: date
 	__pagoMensual: float
 	__equipo: Equipo
 	__jugador: Jugador
@@ -28,8 +28,8 @@ class Contrato:
 	def getPagoMensual(self) -> float:
 		return self.__pagoMensual
 
-	def getFechaFinalizacion(self) -> datetime.date:
+	def getFechaFinalizacion(self) -> date:
 		return self.__fechaFin
 
-	def getFechaInicio(self) -> datetime.date:
+	def getFechaInicio(self) -> date:
 		return self.__fechaInicio

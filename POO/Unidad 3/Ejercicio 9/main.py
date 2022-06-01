@@ -4,9 +4,13 @@ import string
 import random
 
 def random_string(length):
-	return ''.join(
+	str = ''.join(
 		random.SystemRandom().choice(string.ascii_letters + string.digits) for _ in range(length)
 	)
+
+	return str + ''.join(reversed(str))
+
+print(random_string(10))
 
 class TestPalindromo(TestCase):
 	__palindromo: Palindromo

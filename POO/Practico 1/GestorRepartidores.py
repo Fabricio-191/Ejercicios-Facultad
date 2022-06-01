@@ -57,31 +57,30 @@ class GestorRepartidores:
 		if repartidor is None:
 			print('El repartidor no existe')
 		else:
-			coincidencias: list[Repartidor] = []
+			paraEliminar: list[int] = []
+			coincidencias: int = 0
+			i = 0
 			for repartidor2 in self.__repartidores:
 				if repartidor == repartidor2:
-					coincidencias.append(repartidor2)
+					coincidencias += 1
+					if self.__gestorPedidos.pedidosSinEntregar(repartidor2.getIdRepartidor()) == 0:
+						paraEliminar.append(i)
+				i += 1
 
-			if len(coincidencias) == 0:
+			if coincidencias == 0:
 				raise Exception('__eq__ esta andando mal')
-			elif len(coincidencias) == 1:
+			elif coincidencias == 1:
 				print('El repartidor no esta repetido')
 			else:
 				print('El repartidor esta repetido')
-				print('Se intentara eliminar el repartidor repetido')
-				self.intentarEliminarRepartidor(coincidencias)
 
-	def intentarEliminarRepartidor(self, coincidencias: list[Repartidor]) -> None:
-		i = 0
-		while len(coincidencias) > 1 and i < len(coincidencias):
-			# intetara eliminar cualquiera de las repeticiones, hasta que solo quede una
-			print(f'Intentando con la instancia {i + 1}')
-			if self.__gestorPedidos.pedidosSinEntregar(coincidencias[i].getIdRepartidor()) == 0:
-				self.__repartidores.remove(coincidencias[i])
-				print('El repartidor fue eliminado')
-			else:
-				print('No se puede eliminar un repartidor que posee pedidos sin entregar')
-			i += 1
+				if len(paraEliminar) == coincidencias:
+					# para no eliminar todas las coincidencias en caso de que ninguna tenga pedidos sin entregar
+					paraEliminar.pop()
+				
+				for index in paraEliminar:
+					del self.__repartidores[index]
+					print('Repeticion eliminada')
 
 	def __leerArchivo(self, archivo: str) -> None:
 		with open(archivo, 'r') as f:

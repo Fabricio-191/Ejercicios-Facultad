@@ -6,16 +6,6 @@ from ..Personal.Investigador import Investigador
 from ..Personal.DocenteInvestigador import DocenteInvestigador
 from ..Personal.PersonalApoyo import PersonalApoyo
 
-
-"""
-permite modificar el sueldo básico de todos los agentes,
-el porcentaje que se paga por cargo a un docente,
-el porcentaje que se paga por categoría a un personal de apoyo,
-y el porcentaje extra que se paga a un docente investigador;
-
-para ello debe proveerse el cuil del agente, y el valor que corresponda según lo que se quiera modificar.
-"""
-
 @implementer(IDirector)
 class MenuDirector:
 	__gestor: GestorPesonal
@@ -56,19 +46,22 @@ class MenuDirector:
 				elem.setSueldoBasico(sueldo)
 
 	def modificarPorcentajeDocente(self):
+		cuil = input("Ingrese el CUIL del agente: ")
 		porcentaje = float(input("Ingrese el nuevo porcentaje: "))
 		for elem in self.__gestor:
-			if isinstance(elem, Docente):
-				elem.setPorcentaje(porcentaje)
+			if elem.getCUIL() == cuil and isinstance(elem, Docente):
+				elem.setPorcentaje(porcentaje / 100)
 
 	def modificarPorcentajePersonalApoyo(self):
+		cuil = input("Ingrese el CUIL del agente: ")
 		porcentaje = float(input("Ingrese el nuevo porcentaje: "))
 		for elem in self.__gestor:
-			if isinstance(elem, PersonalApoyo):
-				elem.setPorcentaje(porcentaje)
+			if elem.getCUIL() == cuil and isinstance(elem, PersonalApoyo):
+				elem.setPorcentaje(porcentaje / 100)
 
 	def modificarPorcentajeDocenteInvestigador(self):
-		porcentaje = float(input("Ingrese el nuevo porcentaje: "))
+		cuil = input("Ingrese el CUIL del agente: ")
+		importe = float(input("Ingrese el nuevo importe extra: "))
 		for elem in self.__gestor:
-			if isinstance(elem, DocenteInvestigador):
-				elem.setPorcentaje(porcentaje)
+			if elem.getCUIL() == cuil and isinstance(elem, DocenteInvestigador):
+				elem.setImporteExtra(importe)

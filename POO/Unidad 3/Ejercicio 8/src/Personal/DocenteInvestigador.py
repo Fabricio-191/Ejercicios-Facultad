@@ -19,3 +19,6 @@ class DocenteInvestigador(Docente, Investigador):
 
 	def calcularSueldo(self):
 		return Docente.calcularSueldo(self) + self.__importeExtra
+
+	def setImporteExtra(self, importe: float):
+		self.__importeExtra = importe

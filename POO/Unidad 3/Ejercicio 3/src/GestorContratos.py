@@ -42,9 +42,6 @@ class GestorContratos:
 
 		return importe
 
-	"""
-	Consultar Contratos: Ingresar el identificador de un Equipo y listar los datos de los Jugadores cuyo contrato vence en 6 meses.
-	"""
 	def encontrarContratosPorVencer(self, equipo: str) -> list[Contrato]:
 		lista: list[Contrato] = []
 		dentroDe6Meses = datetime.timedelta(days=180) + datetime.date.today()

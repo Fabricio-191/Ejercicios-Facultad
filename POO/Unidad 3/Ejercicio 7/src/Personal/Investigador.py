@@ -4,10 +4,11 @@ class Investigador(Personal):
 	__area: str
 	__tipo: str
 
-	def __init__(self, area: str, tipo: str, **kwargs):
-		super().__init__(**kwargs)
-		self.__area = area
-		self.__tipo = tipo
+	def __init__(self, data: dict):
+		super().__init__(data)
+		self.__area = data['area']
+		self.__tipo = data['tipo']
 
 	def getArea(self):
 		return self.__area
+

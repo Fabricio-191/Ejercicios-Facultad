@@ -46,7 +46,9 @@ class GestorAparatos:
 
 			for elem in data:
 				self.__lista.agregarElemento(
-					dict[elem['__class__']](**elem['__atributos__'])
+					dict[elem['__class__']](
+						elem['__atributos__']
+					)
 				)
 
 	def guardar(self, ruta: str):

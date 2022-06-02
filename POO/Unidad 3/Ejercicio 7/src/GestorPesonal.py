@@ -2,8 +2,9 @@ import json
 from zope.interface import implementer
 from .IColeccion import IColeccion
 from .Nodo import Nodo
-from .Personal.Docente import Docente
 from .Personal.Personal import Personal
+
+from .Personal.Docente import Docente
 from .Personal.Investigador import Investigador
 from .Personal.DocenteInvestigador import DocenteInvestigador
 from .Personal.PersonalApoyo import PersonalApoyo
@@ -11,7 +12,8 @@ from .Personal.PersonalApoyo import PersonalApoyo
 dict = {
 	'Docente': Docente,
 	'Investigador': Investigador,
-	'DocenteInvestigador': DocenteInvestigador
+	'DocenteInvestigador': DocenteInvestigador,
+	'PersonalApoyo': PersonalApoyo
 }
 
 @implementer(IColeccion)
@@ -67,7 +69,7 @@ class GestorPesonal:
 		with open(archivo, "r") as file:
 			for elem in json.load(file):
 				self.agregarElemento(
-					dict[elem['__class__']](**elem)
+					dict[elem['__class__']](elem['__atributos__'])
 				)
 
 	def guardar(self, archivo: str):
@@ -91,12 +93,12 @@ class GestorPesonal:
 			datos['cargo'] = input('Ingrese el cargo: ')
 			datos['catedra'] = input('Ingrese la catedra: ')
 
-			return Docente(**datos)
+			return Docente(datos)
 		elif tipo == 'Investigador':
 			datos['area'] = input('Ingrese el area: ')
 			datos['tipo'] = input('Ingrese el tipo: ')
 
-			return Investigador(**datos)
+			return Investigador(datos)
 		elif tipo == 'DocenteInvestigador':
 			datos['carrera'] = input('Ingrese la carrera: ')
 			datos['cargo'] = input('Ingrese el cargo: ')
@@ -106,11 +108,11 @@ class GestorPesonal:
 			datos['categoria'] = input('Ingrese la categoria: ')
 			datos['importeExtra'] = float(input('Ingrese el importe extra: '))
 
-			return DocenteInvestigador(**datos)
+			return DocenteInvestigador(datos)
 		elif tipo == 'PersonalApoyo':
 			datos['categoria'] = input('Ingrese la categoria: ')
 			datos['importeExtra'] = float(input('Ingrese el importe extra: '))
 
-			return PersonalApoyo(**datos)
+			return PersonalApoyo(datos)
 		else:
 			raise Exception("Tipo de personal invalido")

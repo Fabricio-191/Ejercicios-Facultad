@@ -26,11 +26,23 @@ class Menu:
 		print("1. Insertar a agentes a la colección.")
 		print("2. Agregar agentes a la colección.")
 		print("3. Mostrar tipo de agente en posicion")
-		print("4. ")
-		print("5. ")
-		print("6. ")
-		print("7. ")
-		print("8. Guardar datos")
+		print("4. Docentes investigadores de una carrera")
+		print("5. Investigadores y docentes investigadores de una area de investigacion")
+		print("6. Listar personal")
+		print("7. Calcular importe extra de categoria de investigacion")
+		print("8. Guardar datos\n")
+
+	def iniciar(self):
+		self.menu()
+		opcion = int(input("Ingrese una opcion: "))
+		while opcion != 0:
+			if opcion in self.__dictOpciones:
+				self.__dictOpciones[opcion]()
+			else:
+				print("Opcion invalida")
+			
+			self.menu()
+			opcion = int(input("Ingrese una opcion: "))
 
 	def opcion1(self):
 		personal = GestorPesonal.leerPersonal()
@@ -44,7 +56,8 @@ class Menu:
 
 	def opcion3(self):
 		pos = int(input("Ingrese una posicion: "))
-		print(self.__gestor.encontrarElemento(pos).__class__.__name__)
+		print(
+			self.__gestor.encontrarElemento(pos).getDato().__class__.__name__)
 
 	def opcion4(self):
 		carrera = input("Ingrese una carrera: ")
@@ -57,7 +70,7 @@ class Menu:
 		lista.sort(key=lambda x: x.getApellido())
 
 		for elem in lista:
-			print(elem)
+			print(elem.getNombre(), elem.getApellido())
 
 	def opcion5(self):
 		area = input("Ingrese una area de investigacion: ")
@@ -72,22 +85,6 @@ class Menu:
 					cont2 += 1
 
 		print('En esa area existen {} investigadores y {} investigadores docentes'.format(cont2, cont))
-		
-	"""
-	Reglas de negocio para el cálculo del sueldo:
-
-	Por cada año de antigüedad el sueldo se incrementa en un porcentaje sobre el sueldo básico por ejemplo: si tienen 5 años de antigüedad el sueldo sería sueldo básico + 5%(básico).
-
-	Porcentaje por cargo: 10 % si el cargo es simple, 20% si el cargo es semiexclusivo, 50% si el cargo es exclusivo.
-	Porcentaje por categoría: 10% si la categoría es de 1 a 10, 20 % si la categoría es de 11 a      20, 30% si la categoría es de 21 a 22.
-
-	Todos los porcentajes se calculan sobre el sueldo básico.
-
-	sueldoPersonalDeApoyo = Sueldo Básico + %antigüedad% + por categorías
-	sueldoDocente = Sueldo Básico + %antigüedad% + por cargo
-	sueldoInvestigador = Sueldo básico + %antigüedad%
-	sueldoDocenteInvestigador = sueldoDocente() + importe extra por docencia e investigación.
-	"""
 
 	def opcion6(self):
 		lista = list(self.__gestor)
@@ -95,7 +92,6 @@ class Menu:
 
 		for elem in lista:
 			print(elem.getNombre(), elem.getApellido(), elem.__class__.__name__, elem.calcularSueldo())
-
 
 	def opcion7(self):
 		cat = input("Ingrese una categoria: ")
@@ -107,18 +103,7 @@ class Menu:
 
 				print(elem.getApellido(), elem.getNombre(), elem.getImporteExtra())
 
-			print('El total es: {}'.format(total))
+		print('El total es: {}'.format(total))
   
 	def opcion8(self):
 		self.__gestor.guardar(path.dirname(__file__) + "/personal.json")
-
-	def iniciar(self):
-		opcion = int(input("Ingrese una opcion: "))
-		while opcion != 0:
-			if opcion in self.__dictOpciones:
-				self.__dictOpciones[opcion]()
-			else:
-				print("Opcion invalida")
-			
-			opcion = int(input("Ingrese una opcion: "))
-

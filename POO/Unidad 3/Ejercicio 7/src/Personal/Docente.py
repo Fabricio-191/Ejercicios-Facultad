@@ -6,12 +6,22 @@ class Docente(Personal):
 	__cargo: str
 	__catedra: str
 
-	def __init__(self, carrera: str, cargo: str, catedra: str, **kwarg):
-		super().__init__(**kwarg)
-		self.__carrera = carrera
-		self.__cargo = cargo		
-		self.__catedra = catedra
+	def __init__(self, data: dict):
+		super().__init__(data)
+		self.__carrera = data['carrera']
+		self.__cargo = data['cargo']		
+		self.__catedra = data['catedra']
 
 	def getCarrera(self):
 		return self.__carrera
+
+	def calcularSueldo(self):
+		percent = 0.1
+
+		if self.__cargo == "semiexclusivo":
+			percent = 0.2
+		elif self.__cargo == "exclusivo":
+			percent = 0.5
+		
+		return super().calcularSueldo() + self.getSueldoBasico() * percent
 		

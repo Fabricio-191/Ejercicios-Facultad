@@ -11,3 +11,9 @@ class Personal:
 		self.__nombre = nombre
 		self.__sueldo = sueldo
 		self.__antiguedad = antiguedad
+
+	def getApellido(self):
+		return self.__apellido
+
+	def getNombre(self):
+		return self.__nombre

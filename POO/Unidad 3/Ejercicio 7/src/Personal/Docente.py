@@ -11,4 +11,7 @@ class Docente(Personal):
 		self.__carrera = carrera
 		self.__cargo = cargo		
 		self.__catedra = catedra
+
+	def getCarrera(self):
+		return self.__carrera
 		

@@ -8,3 +8,6 @@ class Investigador(Personal):
 		super().__init__(**kwargs)
 		self.__area = area
 		self.__tipo = tipo
+
+	def getArea(self):
+		return self.__area

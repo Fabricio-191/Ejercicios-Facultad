@@ -1,0 +1,90 @@
+[
+    {
+        "__class__": "Docente",
+        "__atributos__": {
+            "cuil": "20-3454506-8",
+            "apellido": "Perez",
+            "nombre": "Nicolas",
+            "sueldo": 89000,
+            "antiguedad": 3,
+            "carrera": "LCC",
+            "cargo": "semiexclusivo",
+            "catedra": "Sistemas de Informacion"
+        }
+    },
+    {
+        "__class__": "Investigador",
+        "__atributos__": {
+            "cuil": "15-324235-5",
+            "apellido": "Dominguez",
+            "nombre": "Juan",
+            "sueldo": 120000,
+            "antiguedad": 2,
+            "area": "Computacional",
+            "tipo": "Cientifica"
+        }
+    },
+    {
+        "__class__": "PersonalApoyo",
+        "__atributos__": {
+            "cuil": "12-456543-4",
+            "apellido": "Castro",
+            "nombre": "Maria",
+            "sueldo": 140000,
+            "antiguedad": 2,
+            "categoria": "12"
+        }
+    },
+    {
+        "__class__": "DocenteInvestigador",
+        "__atributos__": {
+            "cuil": "18-3446706-8",
+            "apellido": "Lopez",
+            "nombre": "Marcos",
+            "sueldo": 89000,
+            "antiguedad": 3,
+            "carrera": "LCC",
+            "cargo": "exclusivo",
+            "catedra": "EyFCI",
+            "area": "Estructuras",
+            "tipo": "Teorica",
+            "categoria": "III",
+            "importe": 25000
+        }
+    },
+    {
+        "__class__": "DocenteInvestigador",
+        "__atributos__": {
+            "cuil": "18-3446706-8",
+            "apellido": "Lopez",
+            "nombre": "Agustin",
+            "sueldo": 89000,
+            "antiguedad": 3,
+            "carrera": "LCC",
+            "cargo": "semiexclusivo",
+            "catedra": "EyFCI",
+            "area": "Estructuras",
+            "tipo": "Teorica",
+            "categoria": "IV",
+            "importe": 25000
+        }
+    },
+    {
+        "__class__": "DocenteInvestigador",
+        "__atributos__": {
+            "cuil": "18-3446706-8",
+            "apellido": "Lopez",
+            "nombre": "Zariel",
+            "sueldo": 89000,
+            "antiguedad": 3,
+            "carrera": "LCC",
+            "cargo": "exclusivo",
+            "catedra": "EyFCI",
+            "area": "Estructuras",
+            "tipo": "Teorica",
+            "categoria": "II",
+            "importe": 25000
+        }
+    }
+
+]

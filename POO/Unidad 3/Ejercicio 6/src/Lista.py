@@ -6,18 +6,19 @@ from .Aparatos.Aparato import Aparato
 @implementer(IColeccion)
 class Lista:
 	__head: Nodo | None
+	__tail: Nodo | None
 
 	def __init__(self) -> None:
 		self.__head = None
 		self.__tail = None
 
 	def agregarElemento(self, dato: Aparato):
-		if self.__head is None:
+		if self.__tail is None:
 			self.__head = Nodo(dato, None)
 			self.__tail = self.__head
 		else:
-			self.__tail.__next = Nodo(dato, None) # type: ignore
-			self.__tail = self.__tail.__next # type: ignore
+			self.__tail.setNext(Nodo(dato, None))
+			self.__tail = self.__tail.__next
 
 	def encontrarElemento(self, posicion: int):
 		if posicion < 0:
@@ -36,9 +37,9 @@ class Lista:
 
 	def insertarElemento(self, posicion: int, dato: Aparato):
 		nodo = self.encontrarElemento(posicion)
-		nodo.setNext(
-			Nodo(dato, nodo.getNext())
-		)
+		siguiente = nodo.getNext()
+
+		nodo.setNext(Nodo(dato, siguiente))
 
 	def mostrarElemento(self, posicion: int):
 		nodo = self.encontrarElemento(posicion)

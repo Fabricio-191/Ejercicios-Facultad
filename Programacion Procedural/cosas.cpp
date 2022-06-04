@@ -654,13 +654,3 @@ namespace misc{
 		return valor;
 	}
 }
-
-#include <stdio.h>
-
-for(char i = 'A'; i <= 'Z'; i++){
-    printf("%c", i);
-}
-
-for(int i = 0; i < 5; i++){
-	printf("a");
-}

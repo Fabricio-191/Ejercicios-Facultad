@@ -136,6 +136,7 @@ int main(){
 	int cant = genera (prod, prodn);
 	mostrar2 (prodn, cant);
 }
+
 /*
 Este es el lote de prueba, se puede copiar y pegar en consola:
 Notebook

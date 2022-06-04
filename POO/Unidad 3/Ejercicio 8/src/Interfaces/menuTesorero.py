@@ -1,5 +1,5 @@
 from zope.interface import implementer
-from ITesorero import ITesorero
+from .ITesorero import ITesorero
 from ..GestorPesonal import GestorPesonal
 
 @implementer(ITesorero)
@@ -27,8 +27,8 @@ class MenuTesorero:
 			opcion = int(input("Ingrese una opcion: "))
 
 	def consultarSueldos(self):
-		numeroDocumento = int(input("Ingrese el CUIL del agente: "))
+		cuil = input("Ingrese el CUIL del agente: ")
 		
 		for elem in self.__gestor:
-			if elem.getCUIL() == numeroDocumento:
+			if elem.getCUIL() == cuil:
 				print("El sueldo del agente es: ", elem.calcularSueldo())

@@ -69,7 +69,9 @@ class GestorPesonal:
 		with open(archivo, "r") as file:
 			for elem in json.load(file):
 				self.agregarElemento(
-					dict[elem['__class__']](elem['__atributos__'])
+					dict[elem['__class__']](
+						elem['__atributos__']
+					)
 				)
 
 	def guardar(self, archivo: str):

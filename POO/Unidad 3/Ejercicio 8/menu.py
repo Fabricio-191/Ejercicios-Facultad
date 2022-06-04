@@ -11,8 +11,8 @@ class Menu:
 	__dictOpciones: dict
 	__auth: int = 0 # 1 si es tesorero 2 si es director 0 si no esta autenticado
 	__credencialesValidas = {
-		'uTesoreso/ag@74ck': MenuDirector,
-		'uDirector/ufC77#!1': MenuTesorero,
+		'uTesoreso/ag@74ck': MenuTesorero,
+		'uDirector/ufC77#!1': MenuDirector,
 	}
 
 	def __init__(self, gestor: GestorPesonal):

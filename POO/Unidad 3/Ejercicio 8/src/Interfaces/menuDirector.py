@@ -1,5 +1,5 @@
 from zope.interface import implementer
-from IDirector import IDirector
+from .IDirector import IDirector
 from ..GestorPesonal import GestorPesonal
 from ..Personal.Docente import Docente
 from ..Personal.Investigador import Investigador

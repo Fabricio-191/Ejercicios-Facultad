@@ -17,8 +17,10 @@ class Lista:
 			self.__head = Nodo(dato, None)
 			self.__tail = self.__head
 		else:
-			self.__tail.setNext(Nodo(dato, None))
-			self.__tail = self.__tail.__next
+			nodo = Nodo(dato, None)
+
+			self.__tail.setNext(nodo)
+			self.__tail = nodo
 
 	def encontrarElemento(self, posicion: int):
 		if posicion < 0:

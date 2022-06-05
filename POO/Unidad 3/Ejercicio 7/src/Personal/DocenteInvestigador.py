@@ -6,8 +6,7 @@ class DocenteInvestigador(Docente, Investigador):
 	__importeExtra: float
 
 	def __init__(self, data: dict):
-		Docente.__init__(self, data)
-		Investigador.__init__(self, data)
+		super().__init__(data)
 		self.__categoria = data['categoria']
 		self.__importeExtra = data['importe']
 

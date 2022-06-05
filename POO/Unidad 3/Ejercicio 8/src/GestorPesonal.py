@@ -74,12 +74,12 @@ class GestorPesonal:
 
 	def guardar(self, archivo: str):
 		with open(archivo, "w") as file:
-			json.dump(list([
+			json.dump([
 				{
 					'__class__': elem.__class__.__name__,
 					'__atributos__': elem.toJSON()
 				} for elem in self
-			]), file, indent='\t')
+			], file, indent='\t')
 
 	@staticmethod
 	def leerPersonal() -> Personal:

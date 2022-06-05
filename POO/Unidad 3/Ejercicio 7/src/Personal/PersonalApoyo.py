@@ -18,3 +18,9 @@ class PersonalApoyo(Personal):
 			percent = 0.1
 
 		return super().calcularSueldo() + self.getSueldoBasico() * percent
+
+	def toJSON(self):
+		data = super().toJSON()
+		data['categoria'] = self.__categoria
+		
+		return data

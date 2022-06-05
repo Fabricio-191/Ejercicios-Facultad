@@ -25,3 +25,11 @@ class Lavarropa(Aparato):
 
 	def cargaSuperior(self):
 		return self.__carga == 'Superior'
+
+	def toJSON(self):
+		data = super().toJSON()
+		data['capacidad'] = self.__capacidad
+		data['velocidad'] = self.__velocidad
+		data['carga'] = self.__carga
+		data['programas'] = self.__programas
+		return data

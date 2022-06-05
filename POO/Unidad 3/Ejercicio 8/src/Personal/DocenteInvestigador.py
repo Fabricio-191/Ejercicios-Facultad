@@ -22,3 +22,11 @@ class DocenteInvestigador(Docente, Investigador):
 
 	def setImporteExtra(self, importe: float):
 		self.__importeExtra = importe
+
+	def toJSON(self):
+		return {
+			**Docente.toJSON(self),
+			**Investigador.toJSON(self),
+			'categoria': self.__categoria,
+			'importe': self.__importeExtra
+		}

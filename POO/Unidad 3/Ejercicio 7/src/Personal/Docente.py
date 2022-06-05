@@ -25,3 +25,9 @@ class Docente(Personal):
 		
 		return super().calcularSueldo() + self.getSueldoBasico() * percent
 		
+	def toJSON(self):
+		data = super().toJSON()
+		data['carrera'] = self.__carrera
+		data['cargo'] = self.__cargo
+		data['catedra'] = self.__catedra
+		return data

@@ -28,3 +28,10 @@ class Docente(Personal):
 		
 	def setPorcentaje(self, porcentaje: float):
 		self.__porcentaje = porcentaje
+	
+	def toJSON(self):
+		data = super().toJSON()
+		data['carrera'] = self.__carrera
+		data['cargo'] = self.__cargo
+		data['catedra'] = self.__catedra
+		return data

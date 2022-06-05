@@ -56,7 +56,7 @@ class GestorAparatos:
 			json.dump(
 				[{
 					'__class__': elem.__class__.__name__,
-					'__atributos__': elem.__dict__
+					'__atributos__': elem.toJSON()
 				} for elem in self.__lista],
 				file,
 				indent=4

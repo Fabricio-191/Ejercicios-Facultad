@@ -23,3 +23,12 @@ class Personal:
 
 	def getSueldoBasico(self):
 		return self.__sueldo
+
+	def toJSON(self):
+		return {
+			'cuil': self.__cuil,
+			'apellido': self.__apellido,
+			'nombre': self.__nombre,
+			'sueldo': self.__sueldo,
+			'antiguedad': self.__antiguedad
+		}

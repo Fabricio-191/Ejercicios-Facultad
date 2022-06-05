@@ -29,3 +29,12 @@ class Aparato:
 
 	def getPrecio(self):
 		return self.__precio
+
+	def toJSON(self):
+		return {
+			'marca': self.__marca,
+			'modelo': self.__modelo,
+			'color': self.__color,
+			'pais': self.__pais,
+			'precio': self.__precio
+		}

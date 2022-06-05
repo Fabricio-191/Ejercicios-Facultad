@@ -12,3 +12,9 @@ class Investigador(Personal):
 	def getArea(self):
 		return self.__area
 
+	def toJSON(self):
+		data = super().toJSON()
+		data['area'] = self.__area
+		data['tipo'] = self.__tipo
+		return data
+

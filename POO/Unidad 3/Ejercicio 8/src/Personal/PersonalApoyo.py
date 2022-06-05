@@ -27,4 +27,10 @@ class PersonalApoyo(Personal):
 
 	def setPorcentaje(self, porcentaje: float):
 		self.__porcentaje = porcentaje
+
+	def toJSON(self):
+		data = super().toJSON()
+		data['categoria'] = self.__categoria
+		
+		return data
 	

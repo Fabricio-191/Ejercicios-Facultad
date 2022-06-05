@@ -22,8 +22,8 @@
             "precio": 450000.0,
             "capacidad": 4,
             "velocidad": 2300,
-            "programas": 2,
-            "carga": "Superior"
+            "carga": "Superior",
+            "programas": 2
         }
     },
     {

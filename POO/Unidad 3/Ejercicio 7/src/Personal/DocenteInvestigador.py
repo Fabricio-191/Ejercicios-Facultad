@@ -19,3 +19,11 @@ class DocenteInvestigador(Docente, Investigador):
 
 	def calcularSueldo(self):
 		return Docente.calcularSueldo(self) + self.__importeExtra
+
+	def toJSON(self):
+		return {
+			**Docente.toJSON(self),
+			**Investigador.toJSON(self),
+			'categoria': self.__categoria,
+			'importe': self.__importeExtra
+		}

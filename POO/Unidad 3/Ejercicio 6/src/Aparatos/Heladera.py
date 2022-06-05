@@ -24,3 +24,9 @@ class Heladera(Aparato):
 
 		return precio
 
+	def toJSON(self):
+		data = super().toJSON()
+		data['capacidad'] = self.__capacidad
+		data['freezer'] = self.__freezer
+		data['cyclica'] = self.__cyclica
+		return data

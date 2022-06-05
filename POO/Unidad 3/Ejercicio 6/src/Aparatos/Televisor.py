@@ -27,3 +27,11 @@ class Televisor(Aparato):
 			precio += self.__precio * 0.1
 
 		return precio
+
+	def toJSON(self):
+		data = super().toJSON()
+		data['tipoPantalla'] = self.__tipoPantalla
+		data['pulgadas'] = self.__pulgadas
+		data['tipoDefinicion'] = self.__tipoDefinicion
+		data['internet'] = self.__internet
+		return data

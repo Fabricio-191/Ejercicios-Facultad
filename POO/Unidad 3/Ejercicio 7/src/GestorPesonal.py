@@ -95,17 +95,18 @@ class GestorPesonal:
 
 		tipo = input('Ingrese el tipo de personal: ')
 
+		valor = None
 		if tipo == 'Docente':
 			datos['carrera'] = input('Ingrese la carrera: ')
 			datos['cargo'] = input('Ingrese el cargo: ')
 			datos['catedra'] = input('Ingrese la catedra: ')
 
-			return Docente(datos)
+			valor = Docente(datos)
 		elif tipo == 'Investigador':
 			datos['area'] = input('Ingrese el area: ')
 			datos['tipo'] = input('Ingrese el tipo: ')
 
-			return Investigador(datos)
+			valor = Investigador(datos)
 		elif tipo == 'DocenteInvestigador':
 			datos['carrera'] = input('Ingrese la carrera: ')
 			datos['cargo'] = input('Ingrese el cargo: ')
@@ -115,11 +116,13 @@ class GestorPesonal:
 			datos['categoria'] = input('Ingrese la categoria: ')
 			datos['importeExtra'] = float(input('Ingrese el importe extra: '))
 
-			return DocenteInvestigador(datos)
+			valor = DocenteInvestigador(datos)
 		elif tipo == 'PersonalApoyo':
 			datos['categoria'] = input('Ingrese la categoria: ')
 			datos['importeExtra'] = float(input('Ingrese el importe extra: '))
 
-			return PersonalApoyo(datos)
+			valor = PersonalApoyo(datos)
 		else:
 			raise Exception("Tipo de personal invalido")
+
+		return valor

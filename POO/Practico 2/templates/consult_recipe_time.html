@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Inicio{% endblock %}
+{% block content %}
+    <h2>Consultar recetas</h2>
+    <h3>Ingrese tiempo de elaboracion</h3>
+    <form action="{{ url_for('consult_recipe_time') }}" method="POST">
+        <input type="number" min="0" name="tiempo" class="mb-3 form-control">
+        <input class="d-block my-3 w-100 btn btn-primary" type="submit" value="Buscar">
+    </form>
+    <a href="{{ url_for('home') }} " class="d-block w-100 my-3 btn btn-primary">Volver</a>
+{% endblock %}

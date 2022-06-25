@@ -1,11 +1,10 @@
-from pyparsing import srange
 from .Personal import Personal
 
 class Docente(Personal):
 	__carrera: str
 	__cargo: str
 	__catedra: str
-
+ 
 	def __init__(self, data: dict):
 		super().__init__(data)
 		self.__carrera = data['carrera']
@@ -24,7 +23,7 @@ class Docente(Personal):
 			percent = 0.5
 		
 		return super().calcularSueldo() + self.getSueldoBasico() * percent
-		
+
 	def toJSON(self):
 		data = super().toJSON()
 		data['carrera'] = self.__carrera

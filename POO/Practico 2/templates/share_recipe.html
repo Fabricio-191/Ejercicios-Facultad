@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Compartir receta{% endblock %}
+{% block content %}
+    <h2>Registrar receta</h2>
+    <form action="{{ url_for('share_recipe') }}" method="post">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control mb-3" name="nombre" placeholder="Nombre">
+
+        <label for="tiempo" class="form-label">Tiempo (en minutos)</label>
+        <input type="number" min="0" class="form-control mb-3" name="tiempo" placeholder="Tiempo">
+
+        <label for="elaboracion" class="form-label">Elaboración</label>
+        <textarea class="form-control" name="elaboracion" rows="3" placeholder="Descripción"></textarea>
+
+        <input type="submit" class="d-block w-100 my-3 btn btn-primary" value="Continuar">
+    </form>
+{% endblock %}

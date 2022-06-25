@@ -8,7 +8,7 @@ class PersonalApoyo(Personal):
 		self.__categoria = int(data['categoria'])
 
 	def calcularSueldo(self):
-		percent = 0.1
+		percent = 0
 
 		if self.__categoria == 21 or self.__categoria == 22:
 			percent = 0.3

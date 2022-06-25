@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Listar receta{% endblock %}
+{% block content %}
+    <div class="card m-3" style="max-width: 40rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{receta.nombre}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Usuario: {{receta.usuario.nombre}}</h6>
+            <h6>Elaboracion:</h6>
+            <p class="card-text">{{receta.elaboracion}}</p>
+            <h6>Tiempo: {{receta.tiempo}} minutos</h6>
+            <div class="d-flex align-items-center">
+                <h6 class="">Cantidad de mg: {{receta.cantidadmegusta}}</h6>
+                {% if receta.usuario.id != session.user_id %}
+                    <a class="ms-auto btn btn-primary" href="{{url_for('like', receta_id=receta.id)}}" role="button">Me gusta</a>
+                {% endif %}
+
+            </div>
+        </div>
+        <table class="table table-hover table-borderless">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Ingrediente</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Unidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ingrediente in receta.ingrediente %}
+                <tr>
+                    <th scope="col"></th>
+                    <td>{{ ingrediente.nombre }}</td>
+                    <td>{{ ingrediente.cantidad }}</td>
+                    <td>{{ ingrediente.unidad }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="card-footer">{{receta.fecha.date()}}</div>
+    </div>
+    <a href="{{ url_for('home') }}" class="d-block m-3 btn btn-primary" role="button">Volver</a>
+{% endblock %}

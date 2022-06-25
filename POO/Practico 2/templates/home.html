@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Inicio{% endblock %}
+{% block content %}
+	{% if session.user_id: %}
+		<h2>Bienvenido {{ session.user_name }}</h2>
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 col-sm-12 my-2">
+					<a href="{{ url_for('share_recipe') }}"
+						class="w-100 h-100 p-3 text-dark border border-2 btn btn-outline-light" role="button">
+						<img class="imagen p-2"src="/static/icons/recipes.png" width="75" />
+						<h5>Compartir receta</h5>
+					</a>
+				</div>
+				<div class="col-md-6 col-sm-12 my-2 ">
+					<a href="{{ url_for('consult_recipe_ingredient') }}"
+						class="w-100 h-100 p-3 text-dark border border-2 btn btn-outline-light">
+						<img class="imagen p-2"src="/static/icons/ingredients.png" width="75" />
+						<h5>Consultar recetas por ingrediente</h5>
+					</a>
+				</div>
+				<div class="col-md-6 col-sm-12 my-2">
+					<a href="{{ url_for('consult_recipe_time') }}"
+						class="w-100 h-100 p-3 text-dark border border-2 btn btn-outline-light" role="button">
+						<img class="imagen p-2"src="/static/icons/search.png" width="75" />
+						<h5>Consultar recetas por tiempo</h5>
+					</a>
+				</div>
+				<div class="col-md-6 col-sm-12 my-2">
+					<a href="{{ url_for('ranking') }}" class="w-100 h-100 p-3 text-dark border border-2 btn btn-outline-light"
+						role="button">
+						<img class="imagen p-2"src="/static/icons/ranking.png" width="75" />
+						<h5>Ver ranking</h5>
+					</a>
+				</div>
+				<a href="{{ url_for('logout') }}" class="my-2 btn btn-secondary">Cerrar Sesion</a>
+			</div>
+		</div>
+	{% else %}
+		<div>
+			<form action="{{ url_for('home') }}" method='POST'>
+				<label for="email">Correo electronico</label>
+				<input type="email" name="email" class="mb-3 form-control" placeholder="name@example.com">
+				<label for="password">Contraseña</label>
+				<input type="password" name="password" class="mb-3 form-control" placeholder="Contraseña">
+				<input class="w-100 my2 btn btn-primary" type="submit" value="Iniciar sesion">
+			</form>
+		</div>
+		<a href="{{ url_for('registration') }}" class="w-100 my-2 btn btn-outline-primary">Registrarme</a>
+	{% endif %}
+{% endblock %}

@@ -17,4 +17,3 @@ class Investigador(Personal):
 		data['area'] = self.__area
 		data['tipo'] = self.__tipo
 		return data
-

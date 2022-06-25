@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Registro{% endblock %}
+{% block content %}
+    <form action="{{ request.path }}" method="POST">
+        <label for="email">Correo electronico</label>
+        <input type="email" name="email" class="form-control" placeholder="name@example.com">
+
+        <label for="name">Nombre</label>
+        <input type="text" name="nombre" class="form-control" placeholder="name">
+		
+        <label for="password">Contraseña</label>
+        <input type="password" name="contraseña" class="form-control" placeholder="constraseña">
+		
+        <input class="d-block my-3 btn btn-primary"type="submit" value="Registrarse">
+    </form>
+    <a href="{{ url_for('home') }} " class="d-block w-100 my-3 btn btn-primary">Volver</a>
+{% endblock %}

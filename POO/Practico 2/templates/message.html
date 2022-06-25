@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Inicio{% endblock %}
+{% block content %}
+	<div class="col-md-12 text-center">
+		<h2 class> {{ message }} </h2>
+	</div>
+	</br>
+    <a href="{{ url_for('home') }}" class="d-block m-3 btn btn-primary" role="button">Volver</a>
+{% endblock %}

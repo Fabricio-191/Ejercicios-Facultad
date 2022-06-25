@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Listar receta{% endblock %}
+{% block content %}
+    <h2>Ranking</h2>
+    <table class="table table-hover table-borderless">
+        <thead class="table-light">
+            <tr>
+                <th scope="col">Receta</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Likes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for receta in recetas %}
+            <tr>
+                <td>{{ receta.nombre }}</td>
+                <td>{{ receta.usuario.nombre }}</td>
+                <td>{{ receta.cantidadmegusta }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('home') }} " class="d-block w-100 my-3 btn btn-primary">Volver</a>
+{% endblock %}

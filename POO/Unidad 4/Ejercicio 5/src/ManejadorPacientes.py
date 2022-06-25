@@ -1,4 +1,4 @@
-from Paciente import Paciente
+from .Paciente import Paciente
 import json
 
 class ManejadorPacientes:
@@ -12,24 +12,33 @@ class ManejadorPacientes:
 	def añadir(self, paciente: Paciente):
 		self.__lista.append(paciente)
 		self.guardar()
-	
-	def __iter__(self):
-		return iter(self.__lista)
 
-	def obtenerPaciente(self, pos):
-		return self.__lista[pos]
+	def actualizar(self, ops: int, paciente: Paciente):
+		self.__lista[ops] = paciente
+		self.guardar()
+
+	def obtener(self, pos):
+		if len(self.__lista) > pos:
+			return self.__lista[pos]
+		else:
+			return None
+
+	def borrar(self, ops):
+		del self.__lista[ops]
+		self.guardar()
 
 	def cargarArchivo(self):
 		with open(self.__ruta, 'r') as file:
 			self.__lista = [Paciente(data) for data in json.load(file)]
 
-	def first(self):
-		return self.__lista[0]
-
 	def guardar(self):
 		with open(self.__ruta, 'w') as file:
 			json.dump(
-				[contacto.toJSON() for contacto in self.__lista],
+				[paciente.toJSON() for paciente in self.__lista],
 				file,
 				indent='\t'
 			)
+	
+	def __iter__(self):
+		return iter(self.__lista)
+	

@@ -5,7 +5,6 @@ from .database import db, Receta, Ingrediente
 @app.route('/ranking')
 def ranking():
     recetas = Receta.query.all()
-
     recetas.sort(key=lambda x: x.cantidadmegusta, reverse=True)
 
     return render_template('ranking.html', recetas = recetas[0:5])

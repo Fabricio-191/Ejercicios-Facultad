@@ -1,55 +1,105 @@
-from ManejadorPacientes import ManejadorPacientes
-from VentanaNuevoPaciente import VentanaNuevoPaciente
-from FormDatosPaciente import FormDatosPaciente2
+from .ManejadorPacientes import ManejadorPacientes
+from .VentanaNuevoPaciente import VentanaNuevoPaciente
+from .FormDatosPaciente import FormDatosPaciente
+from .VentanaIMC import VentanaIMC
+from .Paciente import Paciente
 
-from tkinter import Tk, Button, Listbox, Scrollbar, Frame
+from tkinter import Tk, Button, Listbox, Scrollbar, Frame, messagebox
 from tkinter import LEFT, RIGHT, BOTH, BOTTOM, Y, END
 
 class VentanaPrincipal(Tk):
-    __manejador: ManejadorPacientes
-    __pacienteSeleccionado = None
+	__manejadorPacientes: ManejadorPacientes
+	__pacienteSeleccionado: tuple[int, Paciente] | None
 
-    def __init__(self, manejador):
-        super().__init__()
-        self.__manejador = manejador
-        self.title("Lista de Pacientes")
+	def __init__(self, manejador):
+		super().__init__()
+		self.__manejadorPacientes = manejador
+		self.title("Lista de Pacientes")
 
-        self.__pacientesFrame = Frame(self)
-        self.__pacientesFrame.pack(side=LEFT, padx=10, pady=10)
-        self.__listbox = Listbox(self.__pacientesFrame, height=15)
-        self.__listbox.pack(side=LEFT, fill=BOTH, expand=1)
-        self.__listbox.bind("<Double-Button-1>", self.seleccionarPaciente)
-    
-        scroll = Scrollbar(self.__pacientesFrame, command=self.__listbox.yview)
-        scroll.pack(side=RIGHT, fill=Y)
-        self.__listbox.config(yscrollcommand=scroll.set)
+		self.__pacientesFrame = Frame(self)
+		self.__pacientesFrame.pack(side=LEFT, padx=10, pady=10)
 
-        self.__form = FormDatosPaciente2(self)
-        self.__form.pack(padx=10, pady=10)
+		self.__listbox = Listbox(self.__pacientesFrame, height=15)
+		self.__listbox.pack(side=LEFT, fill=BOTH, expand=1)
+		self.__listbox.bind("<Double-Button-1>", self.seleccionarPaciente)
+		self.__listbox.bind("<<ListboxSelect>>", self.seleccionarPaciente)
+	
+		scroll = Scrollbar(self.__pacientesFrame, command=self.__listbox.yview)
+		scroll.pack(side=RIGHT, fill=Y)
+		self.__listbox.config(yscrollcommand=scroll.set)
 
-        self.__botonAgregarContacto = Button(self, text="Agregar Paciente", command=self.añadirPaciente)
-        self.__botonAgregarContacto.pack(side=BOTTOM, pady=5)
+		self.__form = FormDatosPaciente(self)
+		self.__form.pack(padx=10, pady=10)
+		
+		self.__botonGuardar = Button(self.__form, text="Guardar", command=self.guardar)
+		self.__botonGuardar.pack(side=RIGHT, ipadx=5, padx=5, pady=5)
+		
+		self.__botonBorrar = Button(self.__form, text="Borrar", command=self.borrar)
+		self.__botonBorrar.pack(side=RIGHT, ipadx=5, padx=5, pady=5)
+		
+		self.__botonIMC = Button(self.__form, text="Ver IMC", command=self.verIMC)
+		self.__botonIMC.pack(side=RIGHT, ipadx=5, padx=5, pady=5)
 
-        for paciente in self.__manejador:
-            self.cargarPaciente(paciente)
+		self.__botonAgregarContacto = Button(self, text="Agregar Paciente", command=self.añadirPaciente)
+		self.__botonAgregarContacto.pack(side=BOTTOM, pady=5)
 
-        self.__pacienteSeleccionado = self.__manejador.first()
-        self.__form.setPaciente(self.__pacienteSeleccionado)
+		for paciente in self.__manejadorPacientes:
+			self.cargarPacienteALista(paciente)
 
-    def añadirPaciente(self):
-        def callback(paciente):
-            self.__manejador.añadir(paciente)
-            self.cargarPaciente(paciente)
+		self.mostrarPaciente(0)
 
-        ventana = VentanaNuevoPaciente(self, callback)
-        ventana.wait_window()
+	def cargarPacienteALista(self, paciente):
+		self.__listbox.insert(END, paciente.getNombre() + ' ' + paciente.getApellido())
 
-    def cargarPaciente(self, paciente):
-        self.__listbox.insert(END, paciente.getNombre() + ' ' + paciente.getApellido())
+	def mostrarPaciente(self, pos):
+		primerPaciente = self.__manejadorPacientes.obtener(pos)
 
-    def seleccionarPaciente(self, _):
-        pos = self.__listbox.curselection()[0]
-        paciente = self.__manejador.obtenerPaciente(pos)
+		if primerPaciente is None:
+			self.__pacienteSeleccionado = None
+			self.__form.clear()
+		else:
+			self.__pacienteSeleccionado = (pos, primerPaciente)
+			self.__form.setPaciente(primerPaciente)
+			self.__listbox.select_set(pos)
 
-        self.__pacienteSeleccionado = paciente
-        self.__form.setPaciente(paciente)
+	def añadirPaciente(self):
+		def callback(paciente):
+			self.__manejadorPacientes.añadir(paciente)
+			self.cargarPacienteALista(paciente)
+
+		ventana = VentanaNuevoPaciente(self, callback)
+		ventana.wait_window()
+
+	def guardar(self):
+		if self.__pacienteSeleccionado is None:
+			return messagebox.showerror("Error", "No hay paciente seleccionado")
+		
+		datos = self.__form.obtenerDatos()
+		pos = self.__pacienteSeleccionado[0]
+		paciente = Paciente(datos)
+		self.__manejadorPacientes.actualizar(pos, paciente)
+
+	def borrar(self):
+		if self.__pacienteSeleccionado is None:
+			return messagebox.showerror("Error", "No hay paciente seleccionado")
+			
+		pos = self.__pacienteSeleccionado[0]
+
+		self.__manejadorPacientes.borrar(pos)
+		self.__listbox.delete(pos)
+		self.__form.clear()
+
+		self.mostrarPaciente(0)
+
+	def verIMC(self):
+		if self.__pacienteSeleccionado is None:
+			return messagebox.showerror("Error", "No hay paciente seleccionado")
+
+		ventana = VentanaIMC(self, self.__pacienteSeleccionado[1])
+		ventana.wait_window()
+
+	def seleccionarPaciente(self, _):
+		currentSelection = self.__listbox.curselection()
+
+		if len(currentSelection) != 0:
+			self.mostrarPaciente(currentSelection[0])

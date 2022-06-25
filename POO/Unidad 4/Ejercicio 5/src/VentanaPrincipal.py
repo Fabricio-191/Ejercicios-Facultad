@@ -31,17 +31,17 @@ class VentanaPrincipal(Tk):
 		self.__form = FormDatosPaciente(self)
 		self.__form.pack(padx=10, pady=10)
 		
-		self.__botonGuardar = Button(self.__form, text="Guardar", command=self.guardar)
-		self.__botonGuardar.pack(side=RIGHT, ipadx=5, padx=5, pady=5)
+		botonGuardar = Button(self.__form, text="Guardar", command=self.guardar)
+		botonGuardar.pack(side=RIGHT, ipadx=5, padx=5, pady=5)
 		
-		self.__botonBorrar = Button(self.__form, text="Borrar", command=self.borrar)
-		self.__botonBorrar.pack(side=RIGHT, ipadx=5, padx=5, pady=5)
+		botonBorrar = Button(self.__form, text="Borrar", command=self.borrar)
+		botonBorrar.pack(side=RIGHT, ipadx=5, padx=5, pady=5)
 		
-		self.__botonIMC = Button(self.__form, text="Ver IMC", command=self.verIMC)
-		self.__botonIMC.pack(side=RIGHT, ipadx=5, padx=5, pady=5)
+		botonVerIMC = Button(self.__form, text="Ver IMC", command=self.verIMC)
+		botonVerIMC.pack(side=RIGHT, ipadx=5, padx=5, pady=5)
 
-		self.__botonAgregarContacto = Button(self, text="Agregar Paciente", command=self.añadirPaciente)
-		self.__botonAgregarContacto.pack(side=BOTTOM, pady=5)
+		botonAgregarPaciente = Button(self, text="Agregar Paciente", command=self.añadirPaciente)
+		botonAgregarPaciente.pack(side=BOTTOM, pady=5)
 
 		for paciente in self.__manejadorPacientes:
 			self.cargarPacienteALista(paciente)

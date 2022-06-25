@@ -42,7 +42,7 @@ class Paciente:
 		return self.__peso
 
 	def calcularMCI(self):
-		return self.__peso / (self.__altura ** 2 / 100)
+		return self.__peso / ((self.__altura / 100) ** 2)
 
 	def tipo(self):
 		return clasificarMCI(self.calcularMCI())      

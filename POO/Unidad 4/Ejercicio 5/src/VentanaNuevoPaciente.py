@@ -18,7 +18,6 @@ class VentanaNuevoPaciente(Toplevel):
 		data = self.__form.obtenerDatos()
 		
 		if data is not None:
-			paciente = Paciente(self.__form.obtenerDatos())
-			self.__callback(paciente) # type: ignore
+			self.__callback(Paciente(data)) # type: ignore
 			self.destroy()
 	

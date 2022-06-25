@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from decimal import DivisionByZero
 from Fraccion import Fraccion
 """
 Created on Sat Feb 29 23:03:53 2020
@@ -12,9 +11,9 @@ from tkinter import ttk
 from functools import partial
 
 class Calculadora(object):
-    __ventana = None
-    __operador = None
-    __panel = None
+    __ventana: Tk
+    __operador: StringVar
+    __panel: StringVar
     __valorPrevio: int | Fraccion = 0
     __valorActual: int | Fraccion = 0
 
@@ -23,7 +22,7 @@ class Calculadora(object):
         self.__ventana.title('Tk-Calculadora')
 
         mainframe = ttk.Frame(self.__ventana, padding="3 10 3 10")
-        mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
+        mainframe.grid(column=0, row=0, sticky=(N, W, E, S)) # type: ignore
         mainframe.columnconfigure(0, weight=1)
         mainframe.rowconfigure(0, weight=1)
         mainframe['borderwidth'] = 2
@@ -51,9 +50,9 @@ class Calculadora(object):
         self.__operador = StringVar()
 
         operatorEntry = ttk.Entry(mainframe, width=10, textvariable=self.__operador, justify='center', state='disabled')
-        operatorEntry.grid(column=1, row=1, columnspan=1, sticky=(W,E))
+        operatorEntry.grid(column=1, row=1, columnspan=1, sticky=(W,E)) # type: ignore
         panelEntry = ttk.Entry(mainframe, width=20, textvariable=self.__panel, justify='right',state='disabled')
-        panelEntry.grid(column=2, row=1, columnspan=2, sticky=(W, E))
+        panelEntry.grid(column=2, row=1, columnspan=2, sticky=(W, E)) # type: ignore
         self.__panel.set('0')
         panelEntry.focus()
         
@@ -96,7 +95,7 @@ class Calculadora(object):
         
         print(self.__valorPrevio, operacion, self.__valorActual, '=', resultado)
 
-        self.__valorActual = resultado
+        self.__valorActual = resultado # type: ignore
         self.__panel.set(str(resultado))
 
     def ponerOPERADOR(self, op):

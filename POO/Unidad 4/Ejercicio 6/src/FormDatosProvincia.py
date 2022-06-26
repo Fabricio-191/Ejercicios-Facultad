@@ -1,10 +1,13 @@
 from tkinter import messagebox, LabelFrame, Frame, Label, Entry, Button, RIGHT, END
 from .Provincia import Provincia
+from .ManejadorProvincias import ManejadorProvincias
 
 class FormDatosProvincia(LabelFrame):
 	__campos = {}
-	def __init__(self, master, **kwargs):
-		super().__init__(master, text="Provincia", padx=10, pady=10, **kwargs)
+	__manejador: ManejadorProvincias
+	def __init__(self, master, manejador):
+		super().__init__(master, text="Provincia", padx=10, pady=10)
+		self.__manejador = manejador
 		self.__frame = Frame(self)
 		self.__frame.pack()
 
@@ -14,7 +17,7 @@ class FormDatosProvincia(LabelFrame):
 			'habitantes': self.crearCampo(2, 'Cantidad de habitantes'),
 			'departamentos': self.crearCampo(3, 'Cantidad de departamentos/partidos'),
 			'temperatura': self.crearCampo(4, 'Temperatura'),
-			'sensacion termica': self.crearCampo(5, 'Sensacion térmica'),
+			'sensacionTermica': self.crearCampo(5, 'Sensacion térmica'),
 			'humedad': self.crearCampo(6, 'Humedad'),
 		}
 
@@ -34,3 +37,14 @@ class FormDatosProvincia(LabelFrame):
 	def setProvincia(self, provincia: Provincia):
 		self.clear()
 		self.__campos['nombre'].insert(0, provincia.getNombre())
+		self.__campos['capital'].insert(0, provincia.getCapital())
+		self.__campos['habitantes'].insert(0, str(provincia.getHabitantes()))
+		self.__campos['departamentos'].insert(0, str(provincia.getDepartamentos()))
+
+		datosDelTiempo = self.__manejador.getDatosTiempo(provincia.getNombre())  # type: ignore
+
+		self.__campos['temperatura'].insert(0, str(datosDelTiempo['temperatura']))
+		self.__campos['sensacionTermica'].insert(0, str(datosDelTiempo['sensacionTermica']))
+		self.__campos['humedad'].insert(0, str(datosDelTiempo['humedad']))
+
+		

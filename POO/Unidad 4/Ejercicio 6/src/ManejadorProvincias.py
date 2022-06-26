@@ -27,12 +27,25 @@ class ManejadorProvincias:
 	def getDatosTiempo(self, provincia: str):
 		response = requests.get(f'https://api.openweathermap.org/data/2.5/weather?units=metric&q={provincia}&appid={apiKey}')
 		data = response.json()
-
+	
 		return {
 			'temperatura': data['main']['temp'],
 			'humedad': data['main']['humidity'],
-			'sensacionTermica': data['wind']['feels_like'],
+			'sensacionTermica': data['main']['feels_like'],
 		}
+
+	def existeProvincia(self, provincia: str):
+		response = requests.get(f'https://api.openweathermap.org/data/2.5/weather?units=metric&q={provincia}&appid={apiKey}')
+		data = response.json()
+		
+		return data['cod'] == 200
+
+	def yaExisteProvincia(self, provincia: str):
+		for p in self.__provincias:
+			if p.getNombre() == provincia:
+				return True
+				
+		return False
 
 	def cargar(self):
 		with open(self.__archivo, 'r') as f:

@@ -1,16 +1,9 @@
 # -*- coding: utf-8 -*-
 from Fraccion import Fraccion
-"""
-Created on Sat Feb 29 23:03:53 2020
-
-@author: morte
-"""
-
-from tkinter import *
-from tkinter import ttk
+from tkinter import Tk, ttk, StringVar, E, W
 from functools import partial
 
-class Calculadora(object):
+class Calculadora:
     __ventana: Tk
     __operador: StringVar
     __panel: StringVar

@@ -17,7 +17,7 @@ class Provincia:
 	def getCapital(self):
 		return self.__capital
 	
-	def getPoblacion(self):
+	def getHabitantes(self):
 		return self.__habitantes
 	
 	def getDepartamentos(self):

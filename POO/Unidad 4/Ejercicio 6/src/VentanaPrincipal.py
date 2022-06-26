@@ -26,7 +26,7 @@ class VentanaPrincipal(Tk):
 		scroll.pack(side=RIGHT, fill=Y)
 		self.__listbox.config(yscrollcommand=scroll.set)
 
-		self.__form = FormDatosProvincia(self)
+		self.__form = FormDatosProvincia(self, manejador)
 		self.__form.pack(padx=10, pady=10)
 
 		self.__botonAgregarProvincia = Button(self, text="Agregar Provincia", command=self.añadirProvincia)
@@ -42,7 +42,7 @@ class VentanaPrincipal(Tk):
 			self.__manejadorProvincias.agregar(provincia)
 			self.cargarProvinciaALista(provincia)
 
-		ventana = VentanaNuevaProvincia(self, callback)
+		ventana = VentanaNuevaProvincia(self, self.__manejadorProvincias, callback)
 		ventana.wait_window()
 
 	def cargarProvinciaALista(self, provincia):

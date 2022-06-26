@@ -1,16 +1,21 @@
-from tkinter import Toplevel, Button
+from tkinter import Toplevel, Button, messagebox, LabelFrame, Frame, Label, Entry, Button, RIGHT, END
 from .Provincia import Provincia
+from .ManejadorProvincias import ManejadorProvincias
 
-from tkinter import messagebox, LabelFrame, Frame, Label, Entry, Button, RIGHT, END
-from .Provincia import Provincia
-
-class FormDatosProvincia(LabelFrame):
+class VentanaNuevaProvincia(Toplevel):
 	__campos = {}
-	def __init__(self, master, **kwargs):
-		super().__init__(master, text="Provincia", padx=10, pady=10, **kwargs)
-		self.__frame = Frame(self)
-		self.__frame.pack()
+	__callback = None
+	__manejadorProvincias: ManejadorProvincias
+	def __init__(self, parent, manejadorProvincias, callback):
+		super().__init__(parent)
+		self.__callback = callback
+		self.__manejadorProvincias = manejadorProvincias
 
+		self.__labelFrame = LabelFrame(self, text="Provincia", padx=10, pady=10)
+		self.__labelFrame.pack(padx=10, pady=10)
+		self.__frame = Frame(self.__labelFrame)
+		self.__frame.pack()
+		
 		self.__campos = {
 			'nombre': self.crearCampo(0, 'Nombre'),
 			'capital': self.crearCampo(1, 'Capital'),
@@ -18,6 +23,9 @@ class FormDatosProvincia(LabelFrame):
 			'departamentos': self.crearCampo(3, 'Cantidad de departamentos/partidos'),
 		}
 
+		self.__botonConfirmar = Button(self, text="Confirmar", command=self.confirmar)
+		self.__botonConfirmar.pack(pady=10)
+	
 	def crearCampo(self, i, text):
 		label = Label(self.__frame, text=text)
 		label.grid(row=i, column=0, pady=5)
@@ -51,23 +59,18 @@ class FormDatosProvincia(LabelFrame):
 		
 		return data
 
-class VentanaNuevaProvincia(Toplevel):
-	__callback = None
-	def __init__(self, parent, callback):
-		super().__init__(parent)
-
-		self.__callback = callback
-		self.__form = FormDatosProvincia(self)
-		self.__form.pack(padx=10, pady=10)
-
-		self.__botonConfirmar = Button(self, text="Confirmar", command=self.confirmar)
-		self.__botonConfirmar.pack(pady=10)
-
 	def confirmar(self):
-		data = self.__form.obtenerDatos()
-		
-		if data is not None:
+		data = self.obtenerDatos()
+
+		if data is None:
+			return
+
+		if self.__manejadorProvincias.yaExisteProvincia(data['nombre']):
+			messagebox.showerror("Error", "Ya existe una provincia con ese nombre")
+		elif not self.__manejadorProvincias.existeProvincia(data['nombre']):
+			messagebox.showerror("Error", "No existe una provincia con ese nombre")
+		else:
 			provincia = Provincia(data)
 			self.__callback(provincia) # type: ignore
 			self.destroy()
-	
+		

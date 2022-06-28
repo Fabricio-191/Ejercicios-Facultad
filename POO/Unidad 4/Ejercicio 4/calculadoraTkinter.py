@@ -40,13 +40,15 @@ class Calculadora:
 		ttk.Button(mainframe, text='=', command=partial(self.ponerOPERADOR, '=')).grid(column=3, row=8, sticky=W)
 	 
 		self.__panel = StringVar()
+		self.__panel.set('0')
+		
 		self.__operador = StringVar()
 
 		operatorEntry = ttk.Entry(mainframe, width=10, textvariable=self.__operador, justify='center', state='disabled')
 		operatorEntry.grid(column=1, row=1, columnspan=1, sticky=(W,E)) # type: ignore
+
 		panelEntry = ttk.Entry(mainframe, width=20, textvariable=self.__panel, justify='right',state='disabled')
 		panelEntry.grid(column=2, row=1, columnspan=2, sticky=(W, E)) # type: ignore
-		self.__panel.set('0')
 		panelEntry.focus()
 		
 		self.__ventana.mainloop()
@@ -86,6 +88,9 @@ class Calculadora:
 				resultado = self.__valorPrevio / self.__valorActual
 		else:
 			resultado = self.__valorActual
+
+		if isinstance(resultado, Fraccion) and resultado.getDenominador() == 1:
+			resultado = resultado.getNumerador()
 		
 		if not noHacerNada:
 			self.__valorActual = resultado # type: ignore
@@ -94,6 +99,8 @@ class Calculadora:
 	def ponerOPERADOR(self, op):
 		if op == '=':
 			self.resolverOperacion(self.__operador.get())
+		elif self.__valorActual == 0:
+			self.__operador.set(op)
 		else:
 			self.__operador.set(op)
 			self.__valorPrevio = self.__valorActual

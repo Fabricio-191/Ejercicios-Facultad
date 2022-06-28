@@ -1,1 +1,9 @@
-[]
+[
+	{
+		"apellido": "asd",
+		"nombre": "asd",
+		"telefono": "asd",
+		"peso": 123.0,
+		"altura": 123.0
+	}
+]

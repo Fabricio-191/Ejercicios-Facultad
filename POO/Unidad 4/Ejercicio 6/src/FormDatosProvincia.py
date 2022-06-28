@@ -35,7 +35,11 @@ class FormDatosProvincia(LabelFrame):
 			self.__campos[campo].delete(0, END)
 
 	def setProvincia(self, provincia: Provincia):
+		for campo in self.__campos:
+			self.__campos[campo].config(state='normal')
+
 		self.clear()
+
 		self.__campos['nombre'].insert(0, provincia.getNombre())
 		self.__campos['capital'].insert(0, provincia.getCapital())
 		self.__campos['habitantes'].insert(0, str(provincia.getHabitantes()))
@@ -46,5 +50,6 @@ class FormDatosProvincia(LabelFrame):
 		self.__campos['temperatura'].insert(0, str(datosDelTiempo['temperatura']))
 		self.__campos['sensacionTermica'].insert(0, str(datosDelTiempo['sensacionTermica']))
 		self.__campos['humedad'].insert(0, str(datosDelTiempo['humedad']))
-
 		
+		for campo in self.__campos:
+			self.__campos[campo].config(state='readonly')

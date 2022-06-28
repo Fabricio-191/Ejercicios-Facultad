@@ -18,10 +18,12 @@ class ManejadorPacientes:
 		self.guardar()
 
 	def obtener(self, pos):
+		valor = None
+
 		if len(self.__lista) > pos:
-			return self.__lista[pos]
-		else:
-			return None
+			valor = self.__lista[pos]
+		
+		return valor
 
 	def borrar(self, ops):
 		del self.__lista[ops]

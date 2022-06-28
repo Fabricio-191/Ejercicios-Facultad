@@ -72,31 +72,31 @@ class VentanaPrincipal(Tk):
 
 	def guardar(self):
 		if self.__pacienteSeleccionado is None:
-			return messagebox.showerror("Error", "No hay paciente seleccionado")
-		
-		datos = self.__form.obtenerDatos()
-		pos = self.__pacienteSeleccionado[0]
-		paciente = Paciente(datos)
-		self.__manejadorPacientes.actualizar(pos, paciente)
+			messagebox.showerror("Error", "No hay paciente seleccionado")
+		else:
+			datos = self.__form.obtenerDatos()
+			pos = self.__pacienteSeleccionado[0]
+			paciente = Paciente(datos)
+			self.__manejadorPacientes.actualizar(pos, paciente)
 
 	def borrar(self):
 		if self.__pacienteSeleccionado is None:
-			return messagebox.showerror("Error", "No hay paciente seleccionado")
-			
-		pos = self.__pacienteSeleccionado[0]
+			messagebox.showerror("Error", "No hay paciente seleccionado")
+		else:
+			pos = self.__pacienteSeleccionado[0]
 
-		self.__manejadorPacientes.borrar(pos)
-		self.__listbox.delete(pos)
-		self.__form.clear()
+			self.__manejadorPacientes.borrar(pos)
+			self.__listbox.delete(pos)
+			self.__form.clear()
 
-		self.mostrarPaciente(0)
+			self.mostrarPaciente(0)
 
 	def verIMC(self):
 		if self.__pacienteSeleccionado is None:
-			return messagebox.showerror("Error", "No hay paciente seleccionado")
-
-		ventana = VentanaIMC(self, self.__pacienteSeleccionado[1])
-		ventana.wait_window()
+			messagebox.showerror("Error", "No hay paciente seleccionado")
+		else:
+			ventana = VentanaIMC(self, self.__pacienteSeleccionado[1])
+			ventana.wait_window()
 
 	def seleccionarPaciente(self, _):
 		currentSelection = self.__listbox.curselection()

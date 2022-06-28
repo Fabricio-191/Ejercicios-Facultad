@@ -38,39 +38,44 @@ class VentanaNuevaProvincia(Toplevel):
 	def obtenerDatos(self):
 		data = {}
 
-		for campo in self.__campos:
-			valor = self.__campos[campo].get()
+		campos = list(self.__campos.keys())
+		i = 0
+		band = False
 
-			if valor == '':
-				messagebox.showerror("Error", "Falta completar campo: {}".format(campo))
-				return
-		
-			data[campo] = valor
+		while i < len(campos) and not band:
+			if self.__campos[campos[i]].get() == '':
+				band = True
+				messagebox.showerror("Error", "Faltan datos en el campo {}".format(campos[i]))
+			else:
+				data[campos[i]] = self.__campos[campos[i]].get()
+			i += 1
 
-		try:
-			float(data['habitantes'])
-		except:
-			messagebox.showerror("Error", "Habitantes debe ser un numero")
-	
-		try:
-			float(data['departamentos'])
-		except:
-			messagebox.showerror("Error", "Departamentos debe ser un numero")
+		valor = None
+		if not band:
+			try:
+				float(data['habitantes'])
+			except:
+				messagebox.showerror("Error", "Habitantes debe ser un numero")
 		
-		return data
+			try:
+				float(data['departamentos'])
+			except:
+				messagebox.showerror("Error", "Departamentos debe ser un numero")
+			
+			valor = data
+
+		return valor
 
 	def confirmar(self):
 		data = self.obtenerDatos()
 
-		if data is None:
-			return
-
-		if self.__manejadorProvincias.yaExisteProvincia(data['nombre']):
-			messagebox.showerror("Error", "Ya existe una provincia con ese nombre")
-		elif not self.__manejadorProvincias.existeProvincia(data['nombre']):
-			messagebox.showerror("Error", "No existe una provincia con ese nombre")
-		else:
-			provincia = Provincia(data)
-			self.__callback(provincia) # type: ignore
-			self.destroy()
+		if data is not None:
+			if self.__manejadorProvincias.yaExisteProvincia(data['nombre']):
+				messagebox.showerror("Error", "Ya existe una provincia con ese nombre")
+			elif not self.__manejadorProvincias.existeProvincia(data['nombre']):
+				messagebox.showerror("Error", "No existe una provincia con ese nombre")
+			else:
+				provincia = Provincia(data)
+				self.__callback(provincia) # type: ignore
+				self.destroy()
 		

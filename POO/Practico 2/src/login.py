@@ -8,45 +8,54 @@ def encode(password):
 
 @app.route('/', methods=['GET','POST'])
 def home():
-    if request.method == 'POST':
-        if not request.form['email'] or not request.form['password']:
-            return render_template('message.html', message="Por favor ingrese los datos requeridos")
-        
-        usuario_actual = Usuario.query.filter_by(correo=request.form['email']).first()
-        if usuario_actual is None:
-            return render_template('message.html', message="El correo no está registrado")
-        
-        clave = encode(request.form['password'])
-        if usuario_actual.clave != clave:
-            return render_template('message.html', message="La contraseña no es válida")
-        
-        session['user_id'] = usuario_actual.id
-        session['user_name'] = usuario_actual.nombre
-        return render_template('home.html')
-    else:
-        return render_template('home.html', usuario = None)
+	valorRetorno = None
+
+	if request.method == 'POST':
+		if not request.form['email'] or not request.form['password']:
+			valorRetorno = render_template('message.html', message="Por favor ingrese los datos requeridos")
+		else:
+			usuario_actual = Usuario.query.filter_by(correo=request.form['email']).first()
+			if usuario_actual is None:
+				valorRetorno = render_template('message.html', message="El correo no está registrado")
+			else:
+				clave = encode(request.form['password'])
+				if usuario_actual.clave != clave:
+					valorRetorno = render_template('message.html', message="La contraseña no es válida")
+				else:
+					session['user_id'] = usuario_actual.id
+					session['user_name'] = usuario_actual.nombre
+					valorRetorno = render_template('home.html')
+	else:
+		valorRetorno = render_template('home.html', usuario = None)
+
+	return valorRetorno
 
 @app.route('/logout')
 def logout():
-    del session['user_id']
-    del session['user_name']
-    return redirect(url_for('home'))
+	del session['user_id']
+	del session['user_name']
+	return redirect(url_for('home'))
 
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():
-    if request.method != 'POST':
-        return render_template('registration.html')
-        
-    if not request.form['nombre'] or not request.form['email'] or not request.form['contraseña']:
-        return render_template('message.html', message="Los datos ingresados no son correctos...")
+	valorRetorno = None
+	
+	if request.method == 'POST':
+		if not request.form['nombre'] or not request.form['email'] or not request.form['contraseña']:
+			valorRetorno = render_template('message.html', message="Los datos ingresados no son correctos...")
+		else:
+			nuevo_usuario = Usuario(
+				nombre=request.form['nombre'],
+				correo=request.form['email'],
+				clave=encode(request.form['contraseña'])
+			)
 
-    nuevo_usuario = Usuario(
-		nombre=request.form['nombre'],
-		correo=request.form['email'],
-		clave=encode(request.form['contraseña'])
-	)
+			db.session.add(nuevo_usuario)
+			db.session.commit()
 
-    db.session.add(nuevo_usuario)
-    db.session.commit()
+			valorRetorno = render_template('message.html', message="El usuario se registró exitosamente")
+	else:
+		valorRetorno = render_template('registration.html')
 
-    return render_template('message.html', message="El usuario se registró exitosamente")
+	return valorRetorno
+		

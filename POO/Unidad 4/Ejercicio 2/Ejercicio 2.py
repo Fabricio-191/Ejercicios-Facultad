@@ -42,7 +42,8 @@ class Aplicacion(Tk):
 			column=2, row=6, columnspan=2, sticky=E
 		) 
 		
-		self.radioValue.set(-1)
+		self.radioValue.set(0)
+		self.__valorIVA.set('21')
 
 		for child in self.winfo_children():
 			child.grid_configure(padx=5, pady=5)
@@ -60,7 +61,7 @@ class Aplicacion(Tk):
 			try:
 				valor = float(self.precioEntry.get())
 				valor += valor * float(self.__valorIVA.get()) / 100
-				self.__precioConIva.set(str(valor))
+				self.__precioConIva.set('{:.2f}'.format(valor))
 			except ValueError:
 				messagebox.showerror(
 					'Error de tipo',

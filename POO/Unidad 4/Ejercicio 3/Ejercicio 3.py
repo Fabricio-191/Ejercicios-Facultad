@@ -1,7 +1,6 @@
 from tkinter import ttk, messagebox, Tk, StringVar, W, E, Label, Button
 import requests
-from threading import Timer
-
+from threading import Thread, Timer
 
 class Aplicacion(Tk):
 	__precioArs: StringVar
@@ -39,7 +38,7 @@ class Aplicacion(Tk):
 	def actualizarPrecioDolar(self):
 		response = requests.get('https://www.dolarsi.com/api/api.php?type=dolar')
 		data = response.json()
-		
+
 		i = 0
 		band = False
 		while not band and i < len(data):
@@ -62,6 +61,8 @@ class Aplicacion(Tk):
 				messagebox.showerror('Error de tipo', 'Debe ingresar un valor numérico')
 				self.__precioDls.set('')
 				self.precioEntry.focus()
+
+		# Thread(target=self.actualizarPrecioDolar).start()
 
 if __name__ == '__main__':
 	app = Aplicacion()

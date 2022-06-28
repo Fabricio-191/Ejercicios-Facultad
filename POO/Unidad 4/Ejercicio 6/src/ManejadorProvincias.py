@@ -15,10 +15,12 @@ class ManejadorProvincias:
 		return iter(self.__provincias)
 
 	def obtener(self, pos: int):
+		valor = None
+
 		if len(self.__provincias) > pos:
-			return self.__provincias[pos]
-		else:
-			return None
+			valor = self.__provincias[pos]
+		
+		return valor
 
 	def agregar(self, provincia: Provincia):
 		self.__provincias.append(provincia)
@@ -41,11 +43,14 @@ class ManejadorProvincias:
 		return data['cod'] == 200
 
 	def yaExisteProvincia(self, provincia: str):
-		for p in self.__provincias:
-			if p.getNombre() == provincia:
-				return True
-				
-		return False
+		valor = False
+		i = 0
+		while i < len(self.__provincias) and not valor:
+			if self.__provincias[i].getNombre() == provincia:
+				valor = True
+			i += 1
+
+		return valor
 
 	def cargar(self):
 		with open(self.__archivo, 'r') as f:

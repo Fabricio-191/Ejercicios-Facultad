@@ -27,35 +27,48 @@ class FormDatosPaciente(LabelFrame):
 	def obtenerDatos(self):
 		data = {}
 
-		for campo in self.__campos:
-			valor = self.__campos[campo].get()
+		campos = list(self.__campos.keys())
+		i = 0
+		band = False
 
-			if valor == '':
-				messagebox.showerror("Error", "Falta completar campo: {}".format(campo))
-				return
+		while i < len(campos) and not band:
+			if self.__campos[campos[i]].get() == '':
+				band = True
+				messagebox.showerror("Error", "Faltan datos en el campo {}".format(campos[i]))
+			else:
+				data[campos[i]] = self.__campos[campos[i]].get()
+			i += 1
+
+		valor = None
+		if not band:
+			try:
+				float(data['altura'])
+			except:
+				messagebox.showerror("Error", "Altura debe ser un numero")
 		
-			data[campo] = valor
-	
-		try:
-			float(data['altura'])
-		except:
-			messagebox.showerror("Error", "Altura debe ser un numero")
-	
-		try:
-			float(data['peso'])
-		except:
-			messagebox.showerror("peso", "Altura debe ser un numero")
-		
-		return data
+			try:
+				float(data['peso'])
+			except:
+				messagebox.showerror("peso", "Altura debe ser un numero")
+			
+			valor = data
+
+		return valor
 
 	def clear(self):
 		for campo in self.__campos:
 			self.__campos[campo].delete(0, END)
+			self.__campos[campo].config(state='disabled') # normal disabled readonly
 
 	def setPaciente(self, paciente: Paciente):
 		self.clear()
+		for campo in self.__campos:
+			self.__campos[campo].config(state='normal')
+			
 		self.__campos['nombre'].insert(0, paciente.getNombre())
 		self.__campos['apellido'].insert(0, paciente.getApellido())
 		self.__campos['telefono'].insert(0, paciente.getTelefono())
 		self.__campos['altura'].insert(0, "{:.2f}".format(paciente.getAltura()))
 		self.__campos['peso'].insert(0, "{:.2f}".format(paciente.getPeso()))
+
+		

@@ -56,7 +56,6 @@ class Fraccion:
     def simplificar(self):
         i = self.__numerador
 
-        print(self.__numerador, self.__denominador)
         while i <= self.__numerador and i >= 2:
             if self.__numerador % i == 0 and self.__denominador % i == 0:
                 self.__numerador = self.__numerador // i

@@ -54,8 +54,10 @@ class Calculadora:
 		self.__ventana.mainloop()
 
 	def borrarPanel(self):
+		self.__valorPrevio = 0
 		self.__valorActual = 0
 		self.__panel.set('0')
+		self.__operador.set('')
 
 	def ponerNUMERO(self, numero):
 		self.__valorActual *= 10
@@ -99,12 +101,18 @@ class Calculadora:
 	def ponerOPERADOR(self, op):
 		if op == '=':
 			self.resolverOperacion(self.__operador.get())
+			self.__operador.set('=')
 		elif self.__valorActual == 0:
 			self.__operador.set(op)
 		else:
+			operadorAnterior = self.__operador.get()
+
+			if operadorAnterior != '' and operadorAnterior != '=':
+				self.resolverOperacion(operadorAnterior)
+
 			self.__operador.set(op)
 			self.__valorPrevio = self.__valorActual
 			self.__valorActual = 0
-	
+
 if __name__ == '__main__':
 	calculadora = Calculadora()

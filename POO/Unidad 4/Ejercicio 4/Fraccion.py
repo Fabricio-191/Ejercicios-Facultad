@@ -24,8 +24,7 @@ class Fraccion:
 			otro = Fraccion(otro)
 
 		return Fraccion(
-			self.__numerador * otro.__denominador +
-			self.__denominador * otro.__numerador,
+			self.__numerador * otro.__denominador + self.__denominador * otro.__numerador,
 			self.__denominador * otro.__denominador
 		)
 

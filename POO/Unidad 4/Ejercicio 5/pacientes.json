@@ -1,9 +1,16 @@
 [
 	{
-		"apellido": "asd",
-		"nombre": "asd",
-		"telefono": "asd",
-		"peso": 123.0,
-		"altura": 123.0
+		"apellido": "Rubio",
+		"nombre": "Fabricio",
+		"telefono": "+54 264 576-4513",
+		"peso": 70.0,
+		"altura": 170.0
+	},
+	{
+		"apellido": "Cristian",
+		"nombre": "Lucas",
+		"telefono": "-",
+		"peso": 60.0,
+		"altura": 170.0
 	}
 ]

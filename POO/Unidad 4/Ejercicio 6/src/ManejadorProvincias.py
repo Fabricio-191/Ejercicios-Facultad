@@ -59,4 +59,4 @@ class ManejadorProvincias:
 
 	def guardar(self):
 		with open(self.__archivo, 'w') as f:
-			json.dump([p.toJSON() for p in self.__provincias], f)
+			json.dump([p.toJSON() for p in self.__provincias], f, indent='\t')

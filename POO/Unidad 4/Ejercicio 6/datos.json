@@ -1,1 +1,20 @@
-[{"nombre": "San Juan", "capital": "San Juan", "habitantes": 30, "departamentos": 5}, {"nombre": "Cordoba", "capital": "Cordoba", "habitantes": -2, "departamentos": 1}, {"nombre": "Mendoza", "capital": "asd", "habitantes": 123, "departamentos": 3}]
+[
+	{
+		"nombre": "San Juan",
+		"capital": "San Juan",
+		"habitantes": 30,
+		"departamentos": 5
+	},
+	{
+		"nombre": "Cordoba",
+		"capital": "Cordoba",
+		"habitantes": 17000,
+		"departamentos": 5
+	},
+	{
+		"nombre": "Buenos Aires",
+		"capital": "Ciudad autonoma de Buenos Aires",
+		"habitantes": 20000000,
+		"departamentos": 12
+	}
+]

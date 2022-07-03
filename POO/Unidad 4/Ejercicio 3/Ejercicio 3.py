@@ -1,6 +1,6 @@
 from tkinter import ttk, messagebox, Tk, StringVar, W, E, Label, Button
 import requests
-from threading import Thread, Timer
+from threading import Timer, Thread
 
 class Aplicacion(Tk):
 	__precioArs: StringVar

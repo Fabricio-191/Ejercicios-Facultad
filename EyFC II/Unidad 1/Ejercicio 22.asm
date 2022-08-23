@@ -10,3 +10,24 @@ de la tabla origen se encuentran almacenados a partir de la dirección de memori
 con 25 datos de 8 bits almacenados en forma consecutiva en memoria. La dirección en memoria
 para la carga del programa objeto es D12Fh.
 */
+
+	ORG D12Fh
+	LD IX, B913h
+	LD IY, C1AAh
+	LD B, 25
+	LD SP, FFFFh
+
+	CALL SUBRUTINA
+
+
+
+
+SUBRUTINA:
+	LD A, (IX + 24d)
+	LD (IY), A
+
+	INC IY
+	DEC IX
+
+	DJNZ SUBRUTINA
+	RET

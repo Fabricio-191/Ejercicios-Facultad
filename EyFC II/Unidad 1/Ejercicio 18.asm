@@ -15,17 +15,19 @@ La dirección en memoria para la carga del programa objeto es C801h.
 	ORG POSITI
 SUBRUTINA:
 	LD A, (IX)
-	LD (HL), A
-
 	CP FFh
-	
+	JP Z, FINSUBRUTINA
+	CP 0h
+	JP M, NOPASAR
+
+	LD (HL), A
+NOPASAR:
+
 	INC IX
 	INC HL
 
-	JP NZ, SUBRUTINA
-
+FINSUBRUTINA:
 	RET
-	END SUBRUTINA
 
 
 
@@ -33,6 +35,7 @@ SUBRUTINA:
 INICIO:
 	LD IX, DCF1h
 	LD HL, BC34h
+	LD SP, FFFFh
 
 	CALL SUBRUTINA
 

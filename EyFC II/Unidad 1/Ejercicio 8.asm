@@ -1,0 +1,29 @@
+
+	ORG D45Ch
+INICIO:
+	LD B, 25d
+	LD IX, 53F0h
+	LD C, 0d ; sumatoria
+
+LOOP:
+	LD A, (IX)
+	CP 30d
+	JP Z, SIGUE
+	JP M, SIGUE
+
+	CP 40d
+	JP Z, SIGUE
+	JP P, SIGUE
+
+	ADD A, C
+	LD C, A
+
+SIGUE:
+	INC IX
+	DJNZ LOOP
+
+	ADD IX, F5d
+
+	LD (IX), C
+
+	END INICIO

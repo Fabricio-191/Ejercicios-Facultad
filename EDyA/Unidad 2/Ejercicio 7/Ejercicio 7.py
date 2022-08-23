@@ -45,7 +45,7 @@ class Cliente:
 
 class Caja:
     __ocupada: bool
-    __cliente: Cliente or None
+    __cliente: Cliente | None
 
     def __init__(self):
         self.__ocupada = False

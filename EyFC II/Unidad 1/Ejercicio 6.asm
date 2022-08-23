@@ -26,8 +26,8 @@ LOOP:
 	LD (IY), A
 	INC IX
 
-	DJNZ ENDING      ; decrementa el registro B y si el resultado es 0 salta a ENDING
-	JP LOOP
+	DJNZ LOOP      ; decrementa el registro B y si el resultado es 0 salta a ENDING
+	JP ENDING
 
 OVERFLOW:
 	LD (IY + 01h), 01h

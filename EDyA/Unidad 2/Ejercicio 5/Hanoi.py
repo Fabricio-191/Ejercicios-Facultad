@@ -27,7 +27,7 @@ class Torre:  # Pila
 
 	def getTamañoUltimoDisco(self):
 		if(self.cantidadDiscos() == 0):
-			return 100
+			return 999999
 
 		return self.__elementos[-1].getTamaño()
 
@@ -78,7 +78,7 @@ class TorresDeHanoi:
 	def termino(self):
 		return self.__torres[2].cantidadDiscos() == self.__cantidadDiscos
 
-	def isTower(self, num):
+	def esTorre(self, num):
 		if num < 0 or num > 3:
 			return False
 
@@ -96,8 +96,6 @@ class TorresDeHanoi:
 			)
 		"""
 		for i in range(self.__cantidadDiscos, 0, -1):
-			for i in range(3):
-				string += ''
 			string += '    {}|{}         {}|{}         {}|{}    \n'.format(
 				self.__torres[0].obtenerDisco(i),
 				self.__torres[0].obtenerDisco(i),
@@ -119,22 +117,30 @@ def clearConsole():
 	elif platform == "win32":
 		os.system('cls')
 
+def leerEntero(msg: str) -> int:
+	try:
+		return int(input(msg))
+	except ValueError:
+		print('Valor incorrecto')
+		return leerEntero(msg)
+		
+
 clearConsole()
 
 while True:
-	cantidadDiscos = int(input('Introduzca la cantidad de discos: '))
+	cantidadDiscos = leerEntero('Introduzca la cantidad de discos: ')
 	juego = TorresDeHanoi(cantidadDiscos)
 	movimientos = 0
 
 	while not juego.termino():
 		print(juego)
 		print('introduzca el movimiento a hacer')
-		de = int(input('de: '))
-		a = int(input('a: '))
+		de = leerEntero('de: ')
+		a = leerEntero('a: ')
 
 		clearConsole()
 
-		if juego.isTower(de) and juego.isTower(a):
+		if juego.esTorre(de) and juego.esTorre(a):
 			movimientos += 1
 			juego.moverDisco(de - 1, a - 1)
 			print('Movimientos: {}'.format(movimientos))

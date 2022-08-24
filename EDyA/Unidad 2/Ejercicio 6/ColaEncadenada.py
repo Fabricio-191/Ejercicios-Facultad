@@ -18,10 +18,12 @@ class Nodo:
 class ColaEnlazada:
     __cabeza = None
     __cola = None
+	__tamaño = 0
 
     def __init__(self):
         self.__cabeza = None
         self.__cola = None
+		self.__tamaño = 0
 
     def add(self, elem):
         nuevo = Nodo(elem)
@@ -32,6 +34,7 @@ class ColaEnlazada:
             self.__cola.setNext(nuevo)
 
         self.__cola = nuevo
+		self.__tamaño += 1
 
     def get(self):
         if self.__cabeza == None:
@@ -39,5 +42,6 @@ class ColaEnlazada:
 
         nodo = self.__cabeza
         self.__cabeza = nodo.getNext()
+		self.__tamaño -= 1
 
         return nodo

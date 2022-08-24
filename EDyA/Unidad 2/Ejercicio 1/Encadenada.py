@@ -31,6 +31,7 @@ class Pila: # lifo
 
     def add(self, dato):
         self.__cabeza = Nodo(dato, self.__cabeza)
+		self.__tamaño += 1
 
     def get(self):
         nodo = self.__cabeza
@@ -38,6 +39,7 @@ class Pila: # lifo
         if nodo is None:
             raise Exception('No hay elementos en la lista')
 
+		self.__tamaño -= 1
         self.__cabeza = nodo.getNext()
 
         return nodo.getDato()

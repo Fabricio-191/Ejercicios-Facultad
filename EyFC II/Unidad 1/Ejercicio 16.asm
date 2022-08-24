@@ -6,7 +6,6 @@ CEREO:
 
 	DJNZ CEREO
 	RET
-	END CEREO
 
 
 	ORG C500h

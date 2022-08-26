@@ -21,15 +21,24 @@ class Pila: # lifo
 def factorial(num: int):
     pila = Pila()
 
-    while num != 0:
-        pila.add(num)
+    resultado: int = num
+    while num != 2:
         num -= 1
-
-    resultado: int = 1
+        pila.add(num)
 
     while pila.getTamaño() != 0:
         resultado *= pila.get()
 
     return resultado
 
+def factorialSinPila(num: int):
+    resultado: int = num
+
+    while num != 2:
+        num -= 1
+        resultado *= num
+
+    return resultado
+
 print(factorial(6))
+print(factorialSinPila(6))

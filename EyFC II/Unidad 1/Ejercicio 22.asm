@@ -20,8 +20,6 @@ para la carga del programa objeto es D12Fh.
 	CALL SUBRUTINA
 
 
-
-
 SUBRUTINA:
 	LD A, (IX + 24d)
 	LD (IY), A

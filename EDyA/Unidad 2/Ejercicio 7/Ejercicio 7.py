@@ -16,6 +16,9 @@ class Cola:
 	def longitud(self):
 		return len(self.__elementos)
 
+	def estaVacia(self):
+		return len(self.__elementos) == 0
+
 	def add(self, obj):
 		self.__elementos.append(obj)
 
@@ -58,30 +61,27 @@ class Caja:
 
 if __name__ == '__main__':
 	tiempoSimulacion = int(input('Ingrese el tiempo de la simulacion: '))
+	frecuenciaLlegadaClientes = int(input('Ingrese la frecuencia de los clientes (en minutos): '))
 	tiempoAtencionCajero = int(input('Ingrese el tiempo que el cajero atiende (en minutos): '))
-	tiempoFrecuenciaLlegadaClientes = int(input('Ingrese la frecuencia de los clientes (en minutos): '))
 
-	tiempoTranscurrido = 0 # minutos
 	clientesTotales = 0
 	clientesAtendidos = 0
 	tiempoEsperaTotal = 0
 	cola = Cola()
 	caja = Caja()
 
-	while tiempoTranscurrido < tiempoSimulacion:
+	for tiempoTranscurrido in range(tiempoSimulacion):
 		tiempoEsperaTotal += cola.longitud()
 
-		if tiempoTranscurrido % tiempoFrecuenciaLlegadaClientes == 0:
+		if tiempoTranscurrido % frecuenciaLlegadaClientes == 0:
 			clientesTotales += 1
 			print('llego cliente: {}'.format(clientesTotales))
 			cola.add(Cliente())
 
-		if tiempoTranscurrido % tiempoAtencionCajero == 0 and cola.longitud() != 0:
+		if tiempoTranscurrido % tiempoAtencionCajero == 0 and not cola.estaVacia():
 			clientesAtendidos += 1
 			print('se atendio un cliente: {}'.format(clientesAtendidos))
 			caja.atenderCliente(cola.get())
 
-		tiempoTranscurrido += 1
-
 	promedio = tiempoEsperaTotal / clientesTotales
-	print('Tiempo de espera promedio {} minutos'.format(promedio))
+	print('Tiempo de espera promedio {:.2f} minutos'.format(promedio))

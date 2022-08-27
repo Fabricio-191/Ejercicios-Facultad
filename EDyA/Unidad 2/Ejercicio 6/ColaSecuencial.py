@@ -12,3 +12,9 @@ class Cola:
 			raise Exception('No quedan elementos en la cola')
 
 		return self.__elementos.pop(0)
+
+	def tamaño(self):
+		return len(self.__elementos)
+
+	def estaVacia(self):
+		return len(self.__elementos) == 0

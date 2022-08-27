@@ -45,3 +45,9 @@ class ColaEnlazada:
 		self.__tamaño -= 1
 
 		return nodo
+
+	def tamaño(self):
+		return self.__tamaño
+
+	def estaVacia(self):
+		return self.__tamaño == 0

@@ -1,6 +1,9 @@
-"""
-Realice un programa  que simule el comportamiento de un hospital, donde los pacientes acuden a sacar turnos para los consultorios externos en mesa de entradas  donde se toma la siguiente información: nombre, documento y especialidad (Ginecología, Clínica médica, Oftalmología, Pediatría)  con un tiempo promedio de atención de 2 minutos. Dependiendo de la especialidad se le indica el numero de  consultorio en que será atendido. El tiempo promedio de atención del médico es de 20’. 
-Considerando que la frecuencia de llegada de los pacientes al hospital es de 1 por minutos  aproximadamente; que en cada especialidad se atiende un máximo de 10 pacientes y los turnos solamente se dan de 7 a 8 de la mañana.
+'''
+la frecuencia de llegada de los pacientes al hospital es de 1 por minutos aproximadamente;
+con un turno se da en un promedio de 2 minutos. dependiendo de la especialidad se le indica el numero de consultorio en que será atendido.
+los turnos solamente se dan de 7 a 8 de la mañana.
+en cada especialidad se atiende un máximo de 10 pacientes
+El tiempo promedio de atención del médico es de 20’. 
 
 Se pide
 	a) calcular el tiempo promedio de espera en la cola de turnos.
@@ -8,14 +11,14 @@ Se pide
 	c) cantidad de personas que no pudieron obtener turnos.
 
 Nota: considere el tiempo de simulación de 4 horas
-"""
-import time, random, string
+'''
+import random, string
 
 especialidades = [
-	"Ginecología",
-	"Clínica médica",
-	"Oftalmología",
-	"Pediatría"
+	'Ginecología',
+	'Clínica médica',
+	'Oftalmología',
+	'Pediatría'
 ]
 
 class Turno:
@@ -28,29 +31,49 @@ class Turno:
 		self.__documento = documento
 		self.__especialidad = especialidad
 
-class Especialidad: # Cola
-	__turnos: list
+class Cola:
+	__elementos: list
+
+	def __init__(self):
+		self.__elementos = []
+
+	def add(self, obj):
+		self.__elementos.append(obj)
+
+	def get(self):
+		if len(self.__elementos) == 0:
+			raise Exception('No quedan elementos en la cola')
+
+		return self.__elementos.pop(0)
+
+	def tamaño(self):
+		return len(self.__elementos)
+
+	def estaVacia(self):
+		return len(self.__elementos) == 0
+
+class Especialidad:
+	__turnos: Cola
 	__nombre: str
 
 	def __init__(self, nombre):
-		self.__turnos = []
+		self.__turnos = Cola()
 		self.__nombre = nombre
-
-	def darTurno(self, nombre, dni):
-		self.__turnos.append(Turno(nombre, dni, self.__nombre))
-
-	def obtenerTurno(self):
-		if len(self.__turnos) == 0:
-			raise Exception('No quedan elementos en la cola')
-
-		return self.__turnos.pop(0)
-
-	def longitud(self):
-		return len(self.__turnos)
 
 	def getNombre(self):
 		return self.__nombre
-		
+
+	def darTurno(self, nombre, dni):
+		self.__turnos.add(Turno(nombre, dni, self.__nombre))
+
+	def obtenerTurno(self):
+		if self.__turnos.estaVacia():
+			raise Exception('No quedan elementos en la cola')
+
+		return self.__turnos.get()
+
+	def quedanTurnos(self):
+		return self.__turnos.tamaño() < 10
 
 class Hospital:
 	__especialidades: dict[str, Especialidad]
@@ -69,4 +92,25 @@ def darTurnoAleatorio(hospital):
 	dni = random.randint(10 ** 7, 10 ** 8)
 	especialidad = hospital.getEspecialidad(random.choice(especialidades))
 
-	especialidad.darTurno(nombre, dni)
+	if especialidad.tieneEspacio():
+		especialidad.darTurno(nombre, dni)
+
+if __name__ == '__main__':
+	tiempoTranscurrido = 0
+	tiempoSimulacion = int(input('Ingrese el tiempo de la simulacion: '))
+	hospital = Hospital()
+
+	pacientesSinTurno = Cola()
+
+	for tiempoTranscurrido in range(tiempoSimulacion):
+		pacientesQueLlegaron += 1 # llega paciente
+
+		if tiempoTranscurrido % 2 == 0 and tiempoTranscurrido <= 60: # se da turno
+			darTurnoAleatorio(hospital)
+
+		for especialidad in hospital.__especialidades.values():
+			if especialidad.quedanTurnos():
+				especialidad.obtenerTurno()
+			else:
+				print('No quedan turnos para la especialidad {}'.format(especialidad.getNombre()))
+				pacientesQueLlegaron -= 1

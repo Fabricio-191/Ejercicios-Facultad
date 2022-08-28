@@ -1,17 +1,3 @@
-'''
-la frecuencia de llegada de los pacientes al hospital es de 1 por minutos aproximadamente;
-con un turno se da en un promedio de 2 minutos. dependiendo de la especialidad se le indica el numero de consultorio en que será atendido.
-los turnos solamente se dan de 7 a 8 de la mañana.
-en cada especialidad se atiende un máximo de 10 pacientes
-El tiempo promedio de atención del médico es de 20’. 
-
-Se pide
-	a) calcular el tiempo promedio de espera en la cola de turnos.
-	b) tiempo promedio de espera de los pacientes en cada especialidad.
-	c) cantidad de personas que no pudieron obtener turnos.
-
-Nota: considere el tiempo de simulación de 4 horas
-'''
 import random, string
 
 especialidades = [
@@ -55,28 +41,56 @@ class Cola:
 class Especialidad:
 	__turnos: Cola
 	__nombre: str
+	__tiempoRestante: int
+
+	__esperaTotal: int
+	__turnosTotales: int
 
 	def __init__(self, nombre):
 		self.__turnos = Cola()
 		self.__nombre = nombre
+		self.__tiempoRestante = 1
+		self.__esperaTotal = 0
+		self.__turnosTotales = 0
 
 	def getNombre(self):
 		return self.__nombre
 
+	def estaDisponible(self):
+		return self.__tiempoRestante == 0
+
+	def paso1min(self): 
+		if self.__tiempoRestante != 0:
+			self.__tiempoRestante -= 1
+		
+		self.__esperaTotal += self.cantTurnos()
+		
+		if self.estaDisponible() and self.cantTurnos() != 0:
+			self.obtenerTurno()
+
 	def darTurno(self, nombre, dni):
 		self.__turnos.add(Turno(nombre, dni, self.__nombre))
+		self.__turnosTotales += 1
 
 	def obtenerTurno(self):
 		if self.__turnos.estaVacia():
 			raise Exception('No quedan elementos en la cola')
 
+		self.__tiempoRestante = 20 # El tiempo promedio de atención del médico es de 20’. 
 		return self.__turnos.get()
 
-	def quedanTurnos(self):
-		return self.__turnos.tamaño() < 10
+	def cantTurnos(self):
+		return self.__turnos.tamaño()
+
+	def tiempoPromedio(self):
+		if self.__turnosTotales == 0:
+			return 0
+		
+		return self.__esperaTotal / self.__turnosTotales
 
 class Hospital:
 	__especialidades: dict[str, Especialidad]
+	__colaTurnos: Cola
 
 	def __init__(self):
 		self.__especialidades = {}
@@ -84,33 +98,45 @@ class Hospital:
 		for especialidad in especialidades:
 			self.__especialidades[especialidad] = Especialidad(especialidad)
 
-	def getEspecialidad(self, esp):
-		return self.__especialidades[esp]
+	def getEspecialidad(self, nombre):
+		return self.__especialidades[nombre]
 
-def darTurnoAleatorio(hospital):
-	nombre = ''.join(random.choice(string.ascii_letters) for _ in range(20))
-	dni = random.randint(10 ** 7, 10 ** 8)
-	especialidad = hospital.getEspecialidad(random.choice(especialidades))
-
-	if especialidad.tieneEspacio():
-		especialidad.darTurno(nombre, dni)
+'''
+Se pide
+	a) calcular el tiempo promedio de espera en la cola de turnos.
+	b) tiempo promedio de espera de los pacientes en cada especialidad.
+	c) cantidad de personas que no pudieron obtener turnos.
+'''
 
 if __name__ == '__main__':
-	tiempoTranscurrido = 0
-	tiempoSimulacion = int(input('Ingrese el tiempo de la simulacion: '))
 	hospital = Hospital()
+	pacientesSinTurno = 0
+	pacientesQueLlegaron = 0
+	
+	def darTurnoAleatorio():
+		nombre = ''.join(random.choice(string.ascii_letters) for _ in range(20))
+		dni = random.randint(10 ** 7, 10 ** 8)
+		esp = random.choice(especialidades)
+		especialidad = hospital.getEspecialidad(esp)
+		
+		if especialidad.cantTurnos() < 10:
+			especialidad.darTurno(nombre, dni)
+		else:
+			pacientesSinTurno += 1
 
-	pacientesSinTurno = Cola()
+	for tiempoTranscurrido in range(60 * 4): # Nota: considere el tiempo de simulación de 4 horas
+		# la frecuencia de llegada de los pacientes al hospital es de 1 por minutos aproximadamente;
+		pacientesQueLlegaron += 1
 
-	for tiempoTranscurrido in range(tiempoSimulacion):
-		pacientesQueLlegaron += 1 # llega paciente
+		if tiempoTranscurrido % 2 == 0 and tiempoTranscurrido <= 60:
+			darTurnoAleatorio()
+		else:
+			pacientesSinTurno += 1
 
-		if tiempoTranscurrido % 2 == 0 and tiempoTranscurrido <= 60: # se da turno
-			darTurnoAleatorio(hospital)
+		for esp in especialidades:
+			hospital.getEspecialidad(esp).paso1min()
 
-		for especialidad in hospital.__especialidades.values():
-			if especialidad.quedanTurnos():
-				especialidad.obtenerTurno()
-			else:
-				print('No quedan turnos para la especialidad {}'.format(especialidad.getNombre()))
-				pacientesQueLlegaron -= 1
+	print()
+	for esp in especialidades:
+		especialidad = hospital.getEspecialidad(esp)
+		print('{} tiempo promedio de espera: {:.2f}'.format(esp, especialidad.tiempoPromedio()))

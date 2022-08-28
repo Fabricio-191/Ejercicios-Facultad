@@ -1,4 +1,5 @@
 import random, string
+from clases import Cola, Turno, Paciente
 
 especialidades = [
 	'Ginecología',
@@ -6,43 +7,6 @@ especialidades = [
 	'Oftalmología',
 	'Pediatría'
 ]
-
-class Paciente:
-	__documento: str
-	__nombre: str
-
-	def __init__(self, documento, nombre):
-		self.__documento = documento
-		self.__nombre = nombre
-
-class Turno:
-	__paciente: Paciente
-	__especialidad: str
-	
-	def __init__(self, paciente, especialidad):
-		self.__paciente = paciente
-		self.__especialidad = especialidad
-
-class Cola:
-	__elementos: list
-
-	def __init__(self):
-		self.__elementos = []
-
-	def add(self, obj):
-		self.__elementos.append(obj)
-
-	def get(self):
-		if len(self.__elementos) == 0:
-			raise Exception('No quedan elementos en la cola')
-
-		return self.__elementos.pop(0)
-
-	def tamaño(self):
-		return len(self.__elementos)
-
-	def estaVacia(self):
-		return len(self.__elementos) == 0
 
 class Especialidad:
 	__turnos: Cola
@@ -135,13 +99,6 @@ class Hospital:
 
 	def pacientesTotales(self):
 		return self.__pacienesConTurno + self.pacienesSinTurno()
-
-'''
-Se pide
-	a) calcular el tiempo promedio de espera en la cola de turnos.
-	b) tiempo promedio de espera de los pacientes en cada especialidad.
-	c) cantidad de personas que no pudieron obtener turnos.
-'''
 
 if __name__ == '__main__':
 	hospital = Hospital()

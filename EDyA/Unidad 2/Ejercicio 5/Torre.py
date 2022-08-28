@@ -24,24 +24,13 @@ class Torre:  # Pila
 	def estaVacia(self):
 		return len(self.__elementos) == 0
 
-	def getTamañoUltimoDisco(self):
-		if(self.estaVacia()):
-			return math.inf
-
-		return self.__elementos[-1].getTamaño()
-
-	def añadirDisco(self, obj: Disco):
-		if(self.getTamañoUltimoDisco() <= obj.getTamaño()):
+	def añadirDisco(self, disco: Disco):
+		if(self.getTamañoUltimoDisco() <= disco.getTamaño()):
 			print('No se puede poner un Disco encima de uno mas pequeño')
 			raise Exception('No se puede poner un Disco encima de uno mas pequeño')
 		else:
-			self.__elementos.append(obj)
+			self.__elementos.append(disco)
 
-	def obtenerDisco(self, i):
-		if len(self.__elementos) < i:
-			return ' '
-
-		return self.__elementos[i - 1]
 
 	def quitarDisco(self):
 		if self.estaVacia():
@@ -49,3 +38,15 @@ class Torre:  # Pila
 			raise Exception('No quedan Discos en la torre')
 
 		return self.__elementos.pop()
+
+	def obtenerDisco(self, i: int):
+		if len(self.__elementos) < i:
+			return ' '
+
+		return self.__elementos[i - 1]
+
+	def getTamañoUltimoDisco(self):
+		if(self.estaVacia()):
+			return math.inf
+
+		return self.__elementos[-1].getTamaño()

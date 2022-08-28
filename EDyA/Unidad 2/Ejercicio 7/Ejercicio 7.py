@@ -65,9 +65,8 @@ if __name__ == '__main__':
 	tiempoEsperaTotal = 0
 	cola = Cola()
 	caja = Caja()
-
+	
 	for tiempoTranscurrido in range(tiempoSimulacion):
-		print(tiempoTranscurrido)
 		tiempoEsperaTotal += cola.longitud()
 
 		if tiempoTranscurrido % frecuenciaLlegadaClientes == 0:

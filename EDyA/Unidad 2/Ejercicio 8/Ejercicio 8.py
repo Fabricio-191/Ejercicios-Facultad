@@ -7,14 +7,20 @@ especialidades = [
 	'Pediatría'
 ]
 
-class Turno:
-	__nombre: str
+class Paciente:
 	__documento: str
+	__nombre: str
+
+	def __init__(self, documento, nombre):
+		self.__documento = documento
+		self.__nombre = nombre
+
+class Turno:
+	__paciente: Paciente
 	__especialidad: str
 	
-	def __init__(self, nombre, documento, especialidad):
-		self.__nombre = nombre
-		self.__documento = documento
+	def __init__(self, paciente, especialidad):
+		self.__paciente = paciente
 		self.__especialidad = especialidad
 
 class Cola:
@@ -68,8 +74,8 @@ class Especialidad:
 		if self.estaDisponible() and self.cantTurnos() != 0:
 			self.obtenerTurno()
 
-	def darTurno(self, nombre, dni):
-		self.__turnos.add(Turno(nombre, dni, self.__nombre))
+	def darTurno(self, paciente):
+		self.__turnos.add(Turno(paciente, self.__nombre))
 		self.__turnosTotales += 1
 
 	def obtenerTurno(self):
@@ -90,16 +96,45 @@ class Especialidad:
 
 class Hospital:
 	__especialidades: dict[str, Especialidad]
-	__colaTurnos: Cola
+	__colaPacientes: Cola
+	__pacienesConTurno: int
 
 	def __init__(self):
 		self.__especialidades = {}
+		self.__colaPacientes = Cola()
+		self.__pacienesConTurno = 0
 
 		for especialidad in especialidades:
 			self.__especialidades[especialidad] = Especialidad(especialidad)
 
 	def getEspecialidad(self, nombre):
 		return self.__especialidades[nombre]
+
+	def llegoPaciente(self):
+		nombre = ''.join(random.choice(string.ascii_letters) for _ in range(20))
+		dni = random.randint(10 ** 7, 10 ** 8)
+
+		self.__colaPacientes.add(Paciente(dni, nombre))
+	
+	def darTurno(self):
+		paciente = self.__colaPacientes.get()
+
+		esp = random.choice(especialidades)
+		especialidad = self.__especialidades[esp]
+	
+		if especialidad.cantTurnos() < 10:
+			especialidad.darTurno(paciente)
+			self.__pacienesConTurno += 1
+			return True
+		else:
+			print('especialidad {} llena'.format(esp))
+			return False
+
+	def pacienesSinTurno(self):
+		return self.__colaPacientes.tamaño()
+
+	def pacientesTotales(self):
+		return self.__pacienesConTurno + self.pacienesSinTurno()
 
 '''
 Se pide
@@ -110,33 +145,23 @@ Se pide
 
 if __name__ == '__main__':
 	hospital = Hospital()
-	pacientesSinTurno = 0
-	pacientesQueLlegaron = 0
+	esperaPorTurnos = 0
 	
-	def darTurnoAleatorio():
-		nombre = ''.join(random.choice(string.ascii_letters) for _ in range(20))
-		dni = random.randint(10 ** 7, 10 ** 8)
-		esp = random.choice(especialidades)
-		especialidad = hospital.getEspecialidad(esp)
-		
-		if especialidad.cantTurnos() < 10:
-			especialidad.darTurno(nombre, dni)
-		else:
-			pacientesSinTurno += 1
-
-	for tiempoTranscurrido in range(60 * 4): # Nota: considere el tiempo de simulación de 4 horas
-		# la frecuencia de llegada de los pacientes al hospital es de 1 por minutos aproximadamente;
-		pacientesQueLlegaron += 1
+	for tiempoTranscurrido in range(60 * 4):
+		hospital.llegoPaciente()
+		esperaPorTurnos += hospital.pacienesSinTurno()
 
 		if tiempoTranscurrido % 2 == 0 and tiempoTranscurrido <= 60:
-			darTurnoAleatorio()
-		else:
-			pacientesSinTurno += 1
+			hospital.darTurno()
 
 		for esp in especialidades:
 			hospital.getEspecialidad(esp).paso1min()
-
+	
+	print()
+	print('Tiempo promedio de espera: {:.2f}'.format(esperaPorTurnos / hospital.pacientesTotales()))
 	print()
 	for esp in especialidades:
 		especialidad = hospital.getEspecialidad(esp)
-		print('{} tiempo promedio de espera: {:.2f}'.format(esp, especialidad.tiempoPromedio()))
+		print('Tiempo promedio de espera en {}: {:.2f}'.format(esp, especialidad.tiempoPromedio()))
+	print()
+	print('Pacientes sin turno: {}'.format(hospital.pacienesSinTurno()))

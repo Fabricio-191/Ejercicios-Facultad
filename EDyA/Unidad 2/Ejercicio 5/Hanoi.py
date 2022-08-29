@@ -7,23 +7,25 @@ class TorresHanoi:
 	__cantidadDiscos: int
 
 	def __init__(self, cantidadDiscos: int):
-		self.__torres = [Torre() for _ in range(3)]
+		self.__cantidadDiscos = cantidadDiscos
+		self.__torres = [Torre(), Torre(), Torre()]
 
 		for i in range(cantidadDiscos, 0, -1):
 			self.__torres[0].añadirDisco(Disco(i))
 
-		self.__cantidadDiscos = cantidadDiscos
-
 	def moverDisco(self, de, a):
-		try:
-			disco = self.__torres[de].quitarDisco()
-		except:
+		desde = self.__torres[de]
+		hasta = self.__torres[a]
+
+		if desde.estaVacia():
+			print('No quedan Discos en la torre')
 			return
 
-		try:
-			self.__torres[a].añadirDisco(disco)
-		except:
-			self.__torres[de].añadirDisco(disco)
+		if desde.tamañoUltimoDisco() >= hasta.tamañoUltimoDisco():
+			print('No se puede poner un Disco encima de uno mas pequeño')
+			return
+
+		hasta.añadirDisco(desde.quitarDisco())
 
 	def termino(self):
 		return self.__torres[2].cantidadDiscos() == self.__cantidadDiscos
@@ -33,12 +35,12 @@ class TorresHanoi:
 
 		for i in range(self.__cantidadDiscos, 0, -1):
 			string += '    {}|{}         {}|{}         {}|{}    \n'.format(
-				self.__torres[0].obtenerDisco(i),
-				self.__torres[0].obtenerDisco(i),
-				self.__torres[1].obtenerDisco(i),
-				self.__torres[1].obtenerDisco(i),
-				self.__torres[2].obtenerDisco(i),
-				self.__torres[2].obtenerDisco(i),
+				self.__torres[0].obtenerTamañoDisco(i),
+				self.__torres[0].obtenerTamañoDisco(i),
+				self.__torres[1].obtenerTamañoDisco(i),
+				self.__torres[1].obtenerTamañoDisco(i),
+				self.__torres[2].obtenerTamañoDisco(i),
+				self.__torres[2].obtenerTamañoDisco(i),
 			)
 
 		string += '=================================='
@@ -73,7 +75,7 @@ if __name__ == '__main__':
 			print(juego)
 			print('Introduzca el movimiento a hacer')
 			de = leerEntero('de: ')
-			a = leerEntero('a: ')
+			a  = leerEntero('a: ')
 
 			clearConsole()
 

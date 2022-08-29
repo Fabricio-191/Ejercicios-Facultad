@@ -7,26 +7,43 @@ Obtener el tiempo máximo de espera de los clientes en la cola.
 
 Nota: Ingresar el tiempo de atención de cajero y la frecuencia de llegada de los clientes a la cola.
 """
-class Cola:
-	__elementos: list
+import numpy as np
 
-	def __init__(self):
-		self.__elementos = []
+class Cola: # lifo
+	__elementos: np.ndarray
+	__tope: int
+	__tamañoTotal: int
 
-	def longitud(self):
-		return len(self.__elementos)
+	def __init__(self, tamañoTotal: int = 100):
+		self.__elementos = np.full(tamañoTotal, None)
+		self.__tope = 0
+		self.__tamañoTotal = tamañoTotal
+	
+	def getTamaño(self):
+		return self.__tope
 
 	def estaVacia(self):
-		return len(self.__elementos) == 0
+		return self.__tope == 0
 
-	def add(self, obj):
-		self.__elementos.append(obj)
+	def add(self, elem):
+		if self.__tope == self.__tamañoTotal:
+			raise Exception('La cola esta llena')
+
+		self.__elementos[self.__tope] = elem
+		self.__tope += 1
 
 	def get(self):
-		if len(self.__elementos) == 0:
+		if self.__tope == 0:
 			raise Exception('No quedan elementos en la cola')
+		
+		valor = self.__elementos[0]
+		
+		for i in range(1, self.__tope):
+			self.__elementos[i-1] = self.__elementos[i]
 
-		return self.__elementos.pop(0)
+		self.__tope -= 1
+
+		return valor
 
 class Cliente:
 	__num: int
@@ -63,11 +80,11 @@ if __name__ == '__main__':
 
 	clientesTotales = 0
 	tiempoEsperaTotal = 0
-	cola = Cola()
+	cola = Cola(tiempoSimulacion)
 	caja = Caja()
 	
 	for tiempoTranscurrido in range(tiempoSimulacion):
-		tiempoEsperaTotal += cola.longitud()
+		tiempoEsperaTotal += cola.getTamaño()
 
 		if tiempoTranscurrido % frecuenciaLlegadaClientes == 0:
 			clientesTotales += 1

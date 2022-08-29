@@ -17,7 +17,7 @@ class Especialidad:
 	__turnosTotales: int
 
 	def __init__(self, nombre):
-		self.__turnos = Cola()
+		self.__turnos = Cola(10)
 		self.__nombre = nombre
 		self.__tiempoRestante = 1
 		self.__esperaTotal = 0
@@ -50,7 +50,7 @@ class Especialidad:
 		return self.__turnos.get()
 
 	def cantTurnos(self):
-		return self.__turnos.tamaño()
+		return self.__turnos.getTamaño()
 
 	def tiempoPromedio(self):
 		if self.__turnosTotales == 0:
@@ -65,7 +65,7 @@ class Hospital:
 
 	def __init__(self):
 		self.__especialidades = {}
-		self.__colaPacientes = Cola()
+		self.__colaPacientes = Cola(1000)
 		self.__pacienesConTurno = 0
 
 		for especialidad in especialidades:
@@ -95,7 +95,7 @@ class Hospital:
 			return False
 
 	def pacienesSinTurno(self):
-		return self.__colaPacientes.tamaño()
+		return self.__colaPacientes.getTamaño()
 
 	def pacientesTotales(self):
 		return self.__pacienesConTurno + self.pacienesSinTurno()

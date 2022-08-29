@@ -1,3 +1,4 @@
+import numpy as np
 import math
 
 class Disco:
@@ -9,32 +10,47 @@ class Disco:
 	def getTamaño(self):
 		return self.__tamaño
 
-class Torre:  # Pila
-	__elementos: list[Disco]
+class Torre: # lifo
+	__elementos: np.ndarray
+	__tope: int
+	__tamañoTotal: int
 
-	def __init__(self):
-		self.__elementos = []
-
+	def __init__(self, tamañoTotal: int = 100):
+		self.__elementos = np.full(tamañoTotal, None)
+		self.__tope = 0
+		self.__tamañoTotal = tamañoTotal
+	
 	def cantidadDiscos(self):
-		return len(self.__elementos)
+		return self.__tope
 
 	def estaVacia(self):
-		return len(self.__elementos) == 0
+		return self.__tope == 0
 
-	def añadirDisco(self, disco: Disco):
-		self.__elementos.append(disco)
+	def añadirDisco(self, elem):
+		if self.__tope == self.__tamañoTotal:
+			raise Exception('La pila esta llena')
+
+		self.__elementos[self.__tope] = elem
+		self.__tope += 1
 
 	def quitarDisco(self):
-		return self.__elementos.pop()
+		if self.__tope == 0:
+			raise Exception('No quedan elementos en la pila')
+		
+		self.__tope -= 1
+		valor = self.__elementos[self.__tope]
+		self.__elementos[self.__tope] = None
+		return valor
 
 	def tamañoUltimoDisco(self):
 		if(self.estaVacia()):
 			return math.inf
 
-		return self.__elementos[-1].getTamaño()
+		return self.__elementos[self.__tope - 1].getTamaño()
 
 	def obtenerTamañoDisco(self, i: int):
-		if len(self.__elementos) < i:
+		value = self.__elementos[i - 1]
+		if value is None:
 			return ' '
 
-		return str(self.__elementos[i - 1].getTamaño())
+		return str(value.getTamaño())

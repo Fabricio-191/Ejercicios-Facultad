@@ -39,12 +39,15 @@ class Lista:
 	def getTamaño(self):
 		return self.__tope
 
-	def insertar(self, elemento, pos):
+	def insertar(self, elemento, pos = -1):
+		if pos == -1:
+			pos = self.__tope
+
 		if self.estaLlena():
 			raise Exception('La lista está llena')
-
-		if not self.__posicionValida(pos):
+		elif not self.__posicionValida(pos):
 			raise Exception('La posición no es válida')
+
 
 		self.__shift(pos)
 		self.__elementos[pos] = elemento
@@ -86,9 +89,9 @@ class Lista:
 if __name__ == '__main__':
 	lista = Lista(100)
 
-	lista.insertar(1, 0)
-	lista.insertar(2, 0)
-	lista.insertar(3, 0)
+	lista.insertar(1)
+	lista.insertar(2)
+	lista.insertar(3)
 	lista.insertar(4, 2)
 
 	lista.eliminar(0)

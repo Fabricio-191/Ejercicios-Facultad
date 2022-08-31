@@ -1,5 +1,6 @@
 """
-La secretaria de modernización de presidencia de la Nación, cuenta con conjuntos de datos (Dataset):  Estadística de designaciones de magistrados de la Justicia Federal y Nacional por género.
+La secretaria de modernización de presidencia de la Nación, cuenta con conjuntos de datos (Dataset):
+Estadística de designaciones de magistrados de la Justicia Federal y Nacional por género.
 
 Los datos del archivo están ordenados por año.
 
@@ -7,88 +8,93 @@ se pide
 
 a) Generar la clase designación: con los atributos que posee el archivo.
 
-b)Leer los datos del archivo csv, y generar una lista de designaciones.
+b) Leer los datos del archivo csv, y generar una lista de designaciones.
 
-c)Leer un tipo de cargo por teclado, y mostrar la cantidad de mujeres designadas en ese cargo por año.
+c) Leer un tipo de cargo por teclado, y mostrar la cantidad de mujeres designadas en ese cargo por año.
 
-d)Leer una materia, un cargo y un año y mostrar la cantidad de agentes designados en ese cargo,  esa materia en ese año.
+d) Leer una materia, un cargo y un año y mostrar la cantidad de agentes designados en ese cargo,  esa materia en ese año.
 """
+from Lista import Lista
+from os import path
+import csv
 
-import numpy as np
+class Designacion:
+	__año: int
+	__materia: str
+	__tipoCargo: str
+	__esMujer: str
 
-class Lista:
-	__elementos: np.ndarray	
-	__tope: int
-	__tamañoTotal: int
+	def __init__(self, año, tipoCargo, materia, genero):
+		self.__año = int(año)
+		self.__tipoCargo = tipoCargo
+		self.__materia = materia
+		self.__esMujer = genero == 'Femenino'
 
-	def __init__(self, tamañoTotal):
-		self.__elementos = np.full(tamañoTotal, None)
-		self.__tope = 0
-		self.__tamañoTotal = tamañoTotal
+	def getAño(self):
+		return self.__año
 
-	def __posicionValida(self, pos):
-		return 0 <= pos <= self.__tope
+	def getMateria(self):
+		return self.__materia
 
-	def __shift(self, pos, forward = True):
-		if forward:
-			for i in range(self.__tope, pos, -1):
-				self.__elementos[i] = self.__elementos[i - 1]
-		else:
-			for i in range(pos, self.__tope):
-				self.__elementos[i] = self.__elementos[i + 1]
+	def getTipoCargo(self):
+		return self.__tipoCargo
 
-	def estaLlena(self):
-		return self.__tope == self.__tamañoTotal
+	def esMujer(self):
+		return self.__esMujer
 
-	def estaVacia(self):
-		return self.__tope == 0
+class ManejadorDesignaciones:
+	__designaciones: Lista
 
-	def getTamaño(self):
-		return self.__tope
+	def __init__(self, tamaño):
+		self.__designaciones = Lista(tamaño)
 
-	def insertar(self, elemento, pos):
-		if self.estaLlena():
-			raise Exception('La lista está llena')
+	def incisoC(self, cargo):
+		cantidad = 0
 
-		if not self.__posicionValida(pos):
-			raise Exception('La posición no es válida')
+		for designacion in self.__designaciones:
+			if designacion.getTipoCargo() == cargo and designacion.esMujer():
+				cantidad += 1
 
-		self.__shift(pos)
-		self.__elementos[pos] = elemento
-		self.__tope += 1
+		return cantidad
 
-	def eliminar(self, pos):
-		if not self.__posicionValida(pos):
-			raise Exception('La posición no es válida')
+	def incisoD(self, materia, cargo, año):
+		cantidad = 0
 
-		self.__shift(pos, False)
-		self.__tope -= 1
+		for designacion in self.__designaciones:
+			if designacion.getMateria() == materia and designacion.getTipoCargo() == cargo and designacion.getAño() == año:
+				cantidad += 1
 
-	def recuperar(self, pos):
-		if not self.__posicionValida(pos):
-			raise Exception('La posición no es válida')
+		return cantidad
 
-		return self.__elementos[pos]
+	def cargar(self, archivo):
+		if not path.isfile(archivo):
+			raise Exception('El archivo no existe')
 
-	def buscar(self, elem):
-		pos = 0
-
-		while pos < self.__tope and self.__elementos[pos] != elem:
-			pos += 1
-
-		return pos if pos != self.__tope else -1
-
-	def primerElemento(self):
-		return self.__elementos[0] if not self.estaVacia() else None
-
-	def ultimoElemento(self):
-		return self.__elementos[self.__tope - 1] if not self.estaVacia() else None
-
-	def __iter__(self):
-		return iter(self.__elementos[:self.__tope])
-
-	def __repr__(self):
-		return str(list(self))
+		with open(archivo, 'r') as f:
+			reader = csv.reader(f, delimiter=';')
+			next(reader)
+			
+			for linea in reader:
+				self.__designaciones.insertar(Designacion(*linea))
 
 if __name__ == '__main__':
-	lista = Lista(100)
+	manejador = ManejadorDesignaciones(100)
+	manejador.cargar(path.dirname(__file__) + '/designaciones.csv')
+
+	cargo = input('\nIngrese un cargo: ')
+	cant = manejador.incisoC(cargo)
+	print(f'La cantidad de mujeres asignadas al cargo {cargo} es {cant}')
+
+	materia = input('\nIngrese una materia: ')
+	año = int(input('Ingrese un año: '))
+	cargo = input('Ingrese un cargo: ')
+	cant = manejador.incisoD(materia, cargo, año)
+	print(f'\nLa cantidad de agentes designados a la materia {materia} en el cargo {cargo} en el año {año} es {cant}')
+
+
+"""
+Juez
+Fiscal de la Justicia Nacional
+2022
+Fiscal
+"""

@@ -6,93 +6,59 @@ se pide:
 b) Leer los datos del archivo csv, y generar una lista donde cada componente contenga: Nombre de provincia y superficie total afectada.
 c) Mostrar, Nombre de provincia y superficie afectada ordenada de mayor a menor por superficie total afectada. 
 """
-
-import numpy as np
+from ListaOrdenada import Lista
 import csv
 from os import path
 
-class Lista:
-	__elementos: np.ndarray	
-	__tope: int
-	__tamañoTotal: int
+class Incendio:
+	__provincia: str
+	__superficie: int
 
-	def __init__(self, tamañoTotal):
-		self.__elementos = np.full(tamañoTotal, None)
-		self.__tope = 0
-		self.__tamañoTotal = tamañoTotal
+	def __init__(self, provincia, superficie):
+		self.__provincia = provincia
+		self.__superficie = int(superficie)
 
-	def __posicionValida(self, pos):
-		return 0 <= pos <= self.__tope
+	def getProvincia(self):
+		return self.__provincia
 
-	def __shift(self, pos, forward = True):
-		if forward:
-			for i in range(self.__tope, pos, -1):
-				self.__elementos[i] = self.__elementos[i - 1]
-		else:
-			for i in range(pos, self.__tope):
-				self.__elementos[i] = self.__elementos[i + 1]
+	def getSuperficie(self):
+		return self.__superficie
 
-	def estaLlena(self):
-		return self.__tope == self.__tamañoTotal
+	def __gt__(self, other):
+		if not isinstance(other, Incendio):
+			raise Exception('No se puede comparar un incendio contra algo que no sea otro incendio')
 
-	def estaVacia(self):
-		return self.__tope == 0
+		return self.__superficie < other.getSuperficie()
 
-	def getTamaño(self):
-		return self.__tope
+class ManejadorIncendios:
+	__incendios: Lista
 
-	def insertar(self, elemento, pos):
-		if self.estaLlena():
-			raise Exception('La lista está llena')
+	def __init__(self, tamaño):
+		self.__incendios = Lista(tamaño)
 
-		if not self.__posicionValida(pos):
-			raise Exception('La posición no es válida')
 
-		self.__shift(pos)
-		self.__elementos[pos] = elemento
-		self.__tope += 1
+	def mostrarIncendios(self):
+		print('\n       Incendios')
+		print('Hectareas      Provincia')
+		for incendio in self.__incendios:
+			print(' {}            {}'.format(
+				incendio.getSuperficie(), incendio.getProvincia(), 
+			))
 
-	def eliminar(self, pos):
-		if not self.__posicionValida(pos):
-			raise Exception('La posición no es válida')
+	def cargarIncendios(self, archivo):
+		if not path.isfile(archivo):
+			raise Exception('El archivo no existe')
 
-		self.__shift(pos, False)
-		self.__tope -= 1
-
-	def recuperar(self, pos):
-		if not self.__posicionValida(pos):
-			raise Exception('La posición no es válida')
-
-		return self.__elementos[pos]
-
-	def buscar(self, elem):
-		pos = 0
-
-		while pos < self.__tope and self.__elementos[pos] != elem:
-			pos += 1
-
-		return pos if pos != self.__tope else -1
-
-	def primerElemento(self):
-		return self.__elementos[0] if not self.estaVacia() else None
-
-	def ultimoElemento(self):
-		return self.__elementos[self.__tope - 1] if not self.estaVacia() else None
-
-	def __iter__(self):
-		return iter(self.__elementos[:self.__tope])
-
-	def __repr__(self):
-		return str(list(self))
+		with open(archivo, 'r') as f:
+			reader = csv.reader(f, delimiter=';')
+			next(reader)
+			
+			for linea in reader:
+				self.__incendios.insertar(
+					Incendio(linea[0], linea[1])
+				)
 
 if __name__ == '__main__':
-	with open(path.dirname(__file__) + '/incendios.csv', 'r') as archivo:
-		reader = csv.reader(archivo, delimiter=';')
-		next(reader)
-
-		lista = Lista(1000)
-
-		for fila in reader:
-			lista.insertar(fila, lista.getTamaño())
-			
-		print(lista)
+	manejador = ManejadorIncendios(100)
+	manejador.cargarIncendios(path.dirname(__file__) + '/incendios.csv')
+	manejador.mostrarIncendios()

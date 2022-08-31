@@ -1,7 +1,7 @@
-hectareas de incendio; número de focos por departamento; número de focos por provincia
-300; 20; 10
-400; 30; 20
-500; 40; 30
-600; 50; 40
-700; 60; 50
-800; 70; 60
+provincia; hectareas; focos por departamento; focos totales
+San Juan; 300; 20; 100
+Mendoza; 400; 30; 200
+La Rioja; 500; 40; 300
+San Juan; 600; 50; 400
+La Rioja; 700; 60; 500
+La Rioja; 800; 70; 600

@@ -28,9 +28,7 @@ class Pila: # lifo
 			raise Exception('No quedan elementos en la pila')
 		
 		self.__tope -= 1
-		valor = self.__elementos[self.__tope]
-		self.__elementos[self.__tope] = None
-		return valor
+		return self.__elementos[self.__tope]
 
 if __name__ == '__main__':
 	pila = Pila(10)

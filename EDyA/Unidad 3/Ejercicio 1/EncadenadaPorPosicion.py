@@ -21,6 +21,9 @@ class Elemento:
 	def setSiguiente(self, siguiente):
 		self.__siguiente = siguiente
 
+	def __repr__(self):
+		return f'[{self.__valor} => {self.__siguiente}]'
+
 class Lista:
 	__elementos: np.ndarray
 	__inicio: int
@@ -50,43 +53,52 @@ class Lista:
 	def getTamaño(self):
 		return self.__cantElementos
 
-	def insertar(self, dato, pos = 0):
+	def __alloc(self, valor):
+		posElem = self.__inicioVacio
+		elemento = self.__elementos[posElem]
+		
+		elemento.setValor(valor)
+		self.__inicioVacio = elemento.getSiguiente()
+
+		return (posElem, elemento)
+
+	def insertar(self, dato, pos = -1):
+		if pos == -1:
+			pos = self.__cantElementos
+
 		if self.estaLlena():
 			raise Exception('La lista está llena')
 		elif not self.__posicionValida(pos):
 			raise Exception('La posición no es válida')
-
-		posElem = self.__inicioVacio
-		elemento = self.__elementos[posElem]
-
-		elemento.setValor(dato)
-		self.__inicioVacio = elemento.getSiguiente()
+	
+		(posElem, elemento) = self.__alloc(dato)
 
 		if pos == 0:
 			elemento.setSiguiente(self.__inicio)
 			self.__inicio = posElem
 		else:
-			e = self.recuperar(pos - 1)
-			
-			elemento.setSiguiente(e.getSiguiente())
-			e.setSiguiente(posElem)
-		
+			anterior = self.__recuperar(pos - 1)
+
+			elemento.setSiguiente(anterior.getSiguiente())
+			anterior.setSiguiente(posElem)
+
 		self.__cantElementos += 1
 
 	def eliminar(self, pos):
 		if not self.__posicionValida(pos):
 			raise Exception('La posición no es válida')
 
-	def recuperar(self, pos):
-		if not self.__posicionValida(pos):
-			raise Exception('La posición no es válida')
-
-		aux = self.__inicio
-		while pos != -1:
-			aux = self.__elementos[pos].getSiguiente()
-			pos -= 1
-
-		return self.__elementos[aux]
+		if pos == 0:
+			aux = self.__inicio
+			self.__inicio = self.__elementos[aux].getSiguiente()
+			self.__elementos[aux].setSiguiente(self.__inicioVacio)
+			self.__inicioVacio = aux
+		else:
+			e = self.__recuperar(pos - 1)
+			aux = e.getSiguiente()
+			e.setSiguiente(self.__elementos[aux].getSiguiente())
+			self.__elementos[aux].setSiguiente(self.__inicioVacio)
+			self.__inicioVacio = aux
 
 	def buscar(self, elem):
 		pos = 0
@@ -105,11 +117,29 @@ class Lista:
 
 		return self.recuperar(self.__cantElementos - 1)
 
-	def mostrar(self):
-		print(self.__inicio, self.__inicioVacio)
+	def __recuperar(self, pos):
+		if not self.__posicionValida(pos):
+			raise Exception('La posición no es válida')
 
+		aux = self.__inicio
+		while pos != 0:
+			aux = self.__elementos[aux].getSiguiente()
+			pos -= 1
+
+		return self.__elementos[aux]
+
+	def recuperar(self, pos):
+		return self.__elementos[pos].getValor() if self.__posicionValida(pos) else None
+
+	def mostrar(self):
+		print('\n')
+		print('Inicio:', self.__inicio)
+		print('Inicio vacio:', self.__inicioVacio)
+
+		i = 0
 		for elem in self.__elementos:
-			print(elem.getValor(), elem.getSiguiente())
+			print(f'{i}: {elem}')
+			i += 1
 
 	def __iter__(self):
 		pos = self.__inicio
@@ -126,7 +156,11 @@ if __name__ == '__main__':
 	lista.insertar(1)
 	lista.insertar(2)
 	lista.insertar(3)
-	lista.insertar(4, 2)
+	lista.insertar(4)
+	lista.insertar(5)
+	lista.insertar(6)
+	
+	lista.eliminar(3)
 
 	print(lista)
 	lista.mostrar()

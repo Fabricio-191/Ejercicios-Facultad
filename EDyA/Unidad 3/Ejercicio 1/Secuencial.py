@@ -1,14 +1,5 @@
 import numpy as np
 
-"""
-insertar
-suprimir
-recuperar
-buscar
-primerElemento
-ultimoElemento
-"""
-
 class Lista:
 	__elementos: np.ndarray	
 	__tope: int

@@ -13,14 +13,6 @@ class Lista:
 	def __posicionValida(self, pos):
 		return 0 <= pos <= self.__tope
 
-	def __shift(self, pos, forward = True):
-		if forward:
-			for i in range(self.__tope, pos, -1):
-				self.__elementos[i] = self.__elementos[i - 1]
-		else:
-			for i in range(pos, self.__tope):
-				self.__elementos[i] = self.__elementos[i + 1]
-
 	def estaLlena(self):
 		return self.__tope == self.__tamañoTotal
 
@@ -39,8 +31,9 @@ class Lista:
 		elif not self.__posicionValida(pos):
 			raise Exception('La posición no es válida')
 
+		for i in range(self.__tope, pos, -1):
+			self.__elementos[i] = self.__elementos[i - 1]
 
-		self.__shift(pos)
 		self.__elementos[pos] = elemento
 		self.__tope += 1
 
@@ -48,7 +41,9 @@ class Lista:
 		if not self.__posicionValida(pos):
 			raise Exception('La posición no es válida')
 
-		self.__shift(pos, False)
+		for i in range(pos, self.__tope):
+			self.__elementos[i] = self.__elementos[i + 1]
+			
 		self.__tope -= 1
 
 	def recuperar(self, pos):

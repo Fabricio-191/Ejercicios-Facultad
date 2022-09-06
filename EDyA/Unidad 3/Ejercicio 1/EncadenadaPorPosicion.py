@@ -1,163 +1,116 @@
+from __future__ import annotations
 from typing import Any
-import numpy as np
 
-class Elemento:
-	__valor: Any
-	__siguiente: int
+class Nodo:
+	__dato: Any
+	__next: Nodo | None
 
-	def __init__(self, valor, siguiente):
-		self.__valor = valor
-		self.__siguiente = siguiente
+	def __init__(self, dato, next: Nodo | None = None):
+		self.__dato = dato
+		self.__next = next
 
-	def getValor(self):
-		return self.__valor
+	def getDato(self):
+		return self.__dato
 
-	def setValor(self, valor):
-		self.__valor = valor
+	def getNext(self) -> Nodo:
+		return self.__next # type: ignore
 
-	def getSiguiente(self):
-		return self.__siguiente
+	def setNext(self, next: Nodo | None):
+		self.__next = next
 
-	def setSiguiente(self, siguiente):
-		self.__siguiente = siguiente
+class Lista: # lifo
+	__cabeza: Nodo
+	__tamaño: int
 
-	def __repr__(self):
-		return f'[{self.__valor} => {self.__siguiente}]'
-
-class Lista:
-	__elementos: np.ndarray
-	__inicio: int
-	__inicioVacio: int
-	__cantElementos: int
-
-	def __init__(self, tamañoTotal):
-		self.__elementos = np.empty(tamañoTotal, dtype=Elemento)
-		self.__inicio = -1
-		self.__inicioVacio = 0
-		self.__cantElementos = 0
-
-		for i in range(tamañoTotal - 1):
-			self.__elementos[i] = Elemento(None, i + 1)
-		
-		self.__elementos[tamañoTotal - 1] = Elemento(None, -1)
-
+	def __init__(self):
+		self.__cabeza = None # type: ignore
+		self.__tamaño = 0
+	
 	def __posicionValida(self, pos):
-		return 0 <= pos <= self.__cantElementos
-
-	def estaLlena(self):
-		return self.__inicioVacio == -1
+		return 0 <= pos <= self.__tamaño
+	
+	def getTamaño(self):
+		return self.__tamaño
 
 	def estaVacia(self):
-		return self.__inicio == -1
+		return self.__cabeza is None
 
-	def getTamaño(self):
-		return self.__cantElementos
-
-	def __alloc(self, valor):
-		posElem = self.__inicioVacio
-		elemento = self.__elementos[posElem]
-		
-		elemento.setValor(valor)
-		self.__inicioVacio = elemento.getSiguiente()
-
-		return (posElem, elemento)
-
-	def insertar(self, dato, pos = -1):
-		if pos == -1:
-			pos = self.__cantElementos
-
-		if self.estaLlena():
-			raise Exception('La lista está llena')
-		elif not self.__posicionValida(pos):
-			raise Exception('La posición no es válida')
-	
-		(posElem, elemento) = self.__alloc(dato)
-
-		if pos == 0:
-			elemento.setSiguiente(self.__inicio)
-			self.__inicio = posElem
-		else:
-			anterior = self.__recuperar(pos - 1)
-
-			elemento.setSiguiente(anterior.getSiguiente())
-			anterior.setSiguiente(posElem)
-
-		self.__cantElementos += 1
-
-	def eliminar(self, pos):
+	def insertar(self, dato, pos = 0):
 		if not self.__posicionValida(pos):
 			raise Exception('La posición no es válida')
 
+		self.__tamaño += 1
+
 		if pos == 0:
-			aux = self.__inicio
-			self.__inicio = self.__elementos[aux].getSiguiente()
-			self.__elementos[aux].setSiguiente(self.__inicioVacio)
-			self.__inicioVacio = aux
+			self.__cabeza = Nodo(dato, self.__cabeza)
 		else:
-			e = self.__recuperar(pos - 1)
-			aux = e.getSiguiente()
-			e.setSiguiente(self.__elementos[aux].getSiguiente())
-			self.__elementos[aux].setSiguiente(self.__inicioVacio)
-			self.__inicioVacio = aux
+			prev = self.__recuperarNodo(pos - 1)
+			nodo = Nodo(dato, prev.getNext())
+			prev.setNext(nodo)
 
-	def buscar(self, elem):
-		pos = 0
+	def eliminar(self, pos):
+		if not self.__posicionValida(pos - 1):
+			raise Exception('La posición no es válida')
 
-		while pos != -1 and self.__elementos[pos].getValor() != elem:
-			pos = self.__elementos[pos].getSiguiente()
+		self.__tamaño -= 1
+		if pos == 0:
+			nodo = self.__cabeza
+			self.__cabeza = nodo.getNext()
+		else:
+			prev = self.__recuperarNodo(pos - 1)
+			nodo = prev.getNext()
+			prev.setNext(nodo.getNext())
 
-		return pos if pos != self.__cantElementos else -1
+		return nodo.getDato()
 
-	def primerElemento(self):
-		return self.__elementos[self.__inicio].getValor() if not self.estaVacia() else None
+	def __recuperarNodo(self, pos) -> Nodo:
+		if not self.__posicionValida(pos):
+			raise Exception('La posición no es válida')
 
-	def ultimoElemento(self):
-		if self.estaVacia():
-			return None
+		nodo = self.__cabeza
+		for i in range(pos):
+			nodo = nodo.getNext()
 
-		return self.recuperar(self.__cantElementos - 1)
-
-	def __recuperar(self, pos) -> Elemento:
-		aux = self.__inicio
-		while pos != 0:
-			aux = self.__elementos[aux].getSiguiente()
-			pos -= 1
-
-		return self.__elementos[aux]
+		return nodo
 
 	def recuperar(self, pos):
-		return self.__recuperar(pos).getValor() if self.__posicionValida(pos) else None
+		return self.__recuperarNodo(pos).getDato()
 
-	def mostrar(self):
-		print('\n')
-		print('Inicio:', self.__inicio)
-		print('Inicio vacio:', self.__inicioVacio)
-
+	def buscar(self, dato):
+		nodo = self.__cabeza
 		i = 0
-		for elem in self.__elementos:
-			print(f'{i}: {elem}')
+		while nodo is not None and nodo.getDato() != dato:
+			nodo = nodo.getNext()
 			i += 1
+		
+		return i if nodo is not None else -1
+
+	def primerElemento(self):
+		return self.__cabeza.getDato() if not self.estaVacia() else None
+
+	def ultimoElemento(self):
+		return self.recuperar(self.__tamaño - 1) if not self.estaVacia() else None
 
 	def __iter__(self):
-		pos = self.__inicio
-		while pos != -1:
-			yield self.__elementos[pos].getValor()
-			pos = self.__elementos[pos].getSiguiente()
+		nodo = self.__cabeza
+		while nodo is not None:
+			yield nodo.getDato()
+			nodo = nodo.getNext()
 
 	def __repr__(self):
 		return str(list(self))
 
 if __name__ == '__main__':
-	lista = Lista(10)
+	pila = Lista()
 
-	lista.insertar(1)
-	lista.insertar(2)
-	lista.insertar(3)
-	lista.insertar(4)
-	lista.insertar(5)
-	lista.insertar(6)
-	
-	lista.eliminar(3)
+	pila.insertar(4, 0)
+	pila.insertar(5, 1)
+	pila.insertar(6, 2)
 
-	print(lista)
-	lista.mostrar()
+	pila.insertar(8, 2)
+
+	print(pila)
+
+	print(pila.eliminar(2))
+	print(pila.eliminar(1))
+	print(pila.eliminar(0))

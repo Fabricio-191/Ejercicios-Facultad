@@ -117,10 +117,7 @@ class Lista:
 
 		return self.recuperar(self.__cantElementos - 1)
 
-	def __recuperar(self, pos):
-		if not self.__posicionValida(pos):
-			raise Exception('La posición no es válida')
-
+	def __recuperar(self, pos) -> Elemento:
 		aux = self.__inicio
 		while pos != 0:
 			aux = self.__elementos[aux].getSiguiente()
@@ -129,7 +126,7 @@ class Lista:
 		return self.__elementos[aux]
 
 	def recuperar(self, pos):
-		return self.__elementos[pos].getValor() if self.__posicionValida(pos) else None
+		return self.__recuperar(pos).getValor() if self.__posicionValida(pos) else None
 
 	def mostrar(self):
 		print('\n')

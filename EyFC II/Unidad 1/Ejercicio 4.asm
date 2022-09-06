@@ -7,20 +7,17 @@ obtenido en la celda de memoria anterior al inicio de la tabla de datos y cargar
 partir de la dirección de memoria FFB5h.
 */
 
-	ORG FFB5h
-	LD B, 15
-	LD C, 0
-	LD IX, DATOS
+		ORG FFB5h
+INICIO:	LD B, 15
+		LD C, 0
+		LD IX, DATOS
 
-LOOP:
-	LD A, (IX + 00h)
-	CP A, 0
+LOOP:	LD A, (IX + 00h)
+		CP A, 0
 
-	JP P, DONT_COUNT
-	INC C
-DONT_COUNT:
-	INC IX
-	DEC B
-	JP NZ, LOOP
-
-	END.
+		JP P, SEGUIR
+		INC C
+SEGUIR:	INC IX
+		DEC B
+		JP NZ, LOOP
+		END INICIO

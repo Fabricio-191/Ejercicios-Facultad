@@ -11,21 +11,23 @@ con 25 datos de 8 bits almacenados en forma consecutiva en memoria. La direcció
 para la carga del programa objeto es D12Fh.
 */
 
-	ORG D12Fh
-	LD IX, B913h
-	LD IY, C1AAh
-	LD B, 25
-	LD SP, FFFFh
+			ORG D12Fh
+INICIO:		LD IX, B913h
+			LD IY, C1AAh
+			LD B, 25d
+			LD SP, FFFFh
 
-	CALL SUBRUTINA
+			CALL SUBRUTINA
+			END INICIO
 
 
-SUBRUTINA:
-	LD A, (IX + 24d)
-	LD (IY), A
+			ORG E12Fh
+SUBRUTINA:  NOP
+LOOP:		LD A, (IX + 24d)
+			LD (IY), A
 
-	INC IY
-	DEC IX
+			INC IY
+			DEC IX
 
-	DJNZ SUBRUTINA
-	RET
+			DJNZ LOOP
+			RET

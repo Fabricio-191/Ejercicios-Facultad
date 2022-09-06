@@ -14,47 +14,41 @@ contrario almacenar el resultado de la sumatoria en la dirección de memoria 473
 La dirección en memoria para la carga del programa objeto es B4A0h.
 */
 
-	ORG SUMAR
-SUBRUTINA:
-	LD E, 0d
-	LD A, (HL)
+			ORG SUMAR
+SUBRUTINA:	LD E, 0d
+LOOP:		LD A, (HL)
 
-	ADD A, E
-	LD E, A
-	INC HL
+			ADD A, E
+			LD E, A
+			INC HL
 
-	DJNZ SUBRUTINA
-	RET
+			DJNZ LOOP
+			RET
 
-	ORG B4A0h
-INICIO: 
-	LD HL, B34Ah
-	LD B, 30d
+			ORG B4A0h
+INICIO: 	LD HL, B34Ah
+			LD B, 30d
 
-	PUSH HL
-	PUSH BC
-	CALL SUBRUTINA
-	POP BC
-	POP HL
+			PUSH HL
+			PUSH BC
+			CALL SUBRUTINA
+			POP BC
+			POP HL
 
-	CP 100d
-
-	JP M, ABC
-	
-	LD (4731h), E
-END:
-	END INICIO
+			CP 100d
+			JP M, ABC
+		
+			LD (4731h), E
+END:		END INICIO
 
 
-	ORG C412H
-ABC:
-	LD SP, FFFFh
-	LD C, 1d
-LOOP:
-	LD (HL), C
-	INC HL
-	INC C
+			ORG C412H
+ABC:		LD SP, FFFFh
+			LD C, 1d
+LOOP:		LD (HL), C
+			INC HL
+			INC C
 
-	DJNZ LOOP
+			DJNZ LOOP
 
-	JP END
+			JP END

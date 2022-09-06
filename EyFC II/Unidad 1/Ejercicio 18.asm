@@ -12,31 +12,26 @@ Desarrollar un programa en Assembler que invoque a la subrutina del apartado ant
 La dirección en memoria para la carga del programa objeto es C801h.
 */
 
-	ORG POSITI
-SUBRUTINA:
-	LD A, (IX)
-	CP FFh
-	JP Z, FINSUBRUTINA
-	CP 0h
-	JP M, NOPASAR
+				ORG POSITI
+SUBRUTINA:		LD A, (IX)
+				CP FFh
+				JP Z, FINSUBRUTINA
+				CP 0h
+				JP M, NOPASAR
 
-	LD (HL), A
-NOPASAR:
+				LD (HL), A
+NOPASAR:		INC IX
+				INC HL
 
-	INC IX
-	INC HL
-
-FINSUBRUTINA:
-	RET
+FINSUBRUTINA:	RET
 
 
 
-	ORG C801h
-INICIO:
-	LD IX, DCF1h
-	LD HL, BC34h
-	LD SP, FFFFh
+				ORG C801h
+INICIO:			LD IX, DCF1h
+				LD HL, BC34h
+				LD SP, FFFFh
 
-	CALL SUBRUTINA
+				CALL SUBRUTINA
 
-	END INICIO
+				END INICIO

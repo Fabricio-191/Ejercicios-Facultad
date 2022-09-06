@@ -9,49 +9,44 @@ principal la cantidad de datos de la tabla en el registro B. Guardar el registro
 siguiente al final de tabla. La dirección en memoria para la carga del programa objeto es CA00h.
 */
 
-	ORG C000h
-CONCAT:
-	LD B, 0d
-LOOP1:
-	LD A, (IX)
-	CP FFh
-	JP Z, LOOP2
+			ORG C000h
+CONCAT:		LD B, 0d
+LOOP1:		LD A, (IX)
+			CP FFh
+			JP Z, LOOP2
 
-	LD (HL), A
+			LD (HL), A
 
-	INC B
-	INC IX
-	INC HL
+			INC B
+			INC IX
+			INC HL
 
-	JP LOOP1
-LOOP2:
-	LD A, (IY)
-	CP FFh
-	JP NZ, ENDCONCAT
+			JP LOOP1
+LOOP2:		LD A, (IY)
+			CP FFh
+			JP NZ, ENDCONCAT
 
-	LD (HL), A
+			LD (HL), A
 
-	INC B
-	INC IY
-	INC HL
+			INC B
+			INC IY
+			INC HL
 
-ENDCONCAT:
-	LD (HL), FFh
-	RET
+ENDCONCAT:	LD (HL), FFh
+			RET
 
 
+			ORG CA00h
+INICIO:		LD IX, 4ABCh
+			LD IY, 5DABh
+			LD HL, 7FFFh
+			LD SP, FFFFh
 
-	ORG CA00h
-INICIO:
-	LD IX, 4ABCh
-	LD IY, 5DABh
-	LD HL, 7FFFh
-	LD SP, FFFFh
+			CALL CONCAT
 
-	CALL CONCAT
-
-	INC HL
-	LD (HL), B
+			INC HL
+			LD (HL), B
+			END INICIO
 
 
 	

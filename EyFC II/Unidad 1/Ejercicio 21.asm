@@ -15,31 +15,26 @@ previa al inicio de la tabla de datos obtenida en la subrutina. La dirección en
 carga del programa objeto es A49Fh.
 */
 
-	ORG A100h
-SUBRUTINA:
-	LD A, (IX)
-	CP 0d
-
-	JP Z, CONTAR
-	JP NOCONTAR
-CONTAR:
-	INC C
-	JP DESPUESDECONTAR
-NOCONTAR:
-	LD (HL), A
-DESPUESDECONTAR:
-	INC IX
-	INC HL
-	DJNZ SUBRUTINA
-	RET
+					ORG A100h
+SUBRUTINA:			NOP
+LOOP:				LD A, (IX)
+					CP 0d
+					JP NZ, NOCONTAR
+CONTAR:				INC C
+					JP SEGUIR
+NOCONTAR:			LD (HL), A
+SEGUIR:				INC IX
+					INC HL
+					DJNZ LOOP
+					RET
 
 
-	ORG A49Fh
-INICIO:
-	LD IX, DC10h
-	LD B, 25d
-	LD HL, AB89h
-	LD C, 0d
-	LD SP, FFFFh
-	
-	CALL SUBRUTINA
+					ORG A49Fh
+INICIO:				LD IX, DC10h
+					LD HL, AB89h
+					LD B, 25d
+					LD C, 0d
+					LD SP, FFFFh
+					
+					CALL SUBRUTINA
+					FIN INICIO

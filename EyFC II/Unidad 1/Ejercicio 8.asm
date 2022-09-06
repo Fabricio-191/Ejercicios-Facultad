@@ -22,8 +22,6 @@ SIGUE:
 	INC IX
 	DJNZ LOOP
 
-	ADD IX, F5d
-
-	LD (IX), C
+	LD (IX + F5d), C
 
 	END INICIO

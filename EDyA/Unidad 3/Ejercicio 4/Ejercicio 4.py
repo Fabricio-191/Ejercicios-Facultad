@@ -49,13 +49,23 @@ class ManejadorDesignaciones:
 		self.__designaciones = Lista(tamaño)
 
 	def incisoC(self, cargo):
-		cantidad = 0
+		if self.__designaciones.estaVacia():
+			print('No hay datos cargados')
+			return
 
+		año = self.__designaciones.primerElemento().getAño() # type: ignore
+		cantidad = 0
 		for designacion in self.__designaciones:
+			if designacion.getAño() != año:
+				print(f'{año}: {cantidad}')
+				año = designacion.getAño()
+				cantidad = 0
+
 			if designacion.getTipoCargo() == cargo and designacion.esMujer():
 				cantidad += 1
 
-		return cantidad
+		print(f'{año}: {cantidad}')
+
 
 	def incisoD(self, materia, cargo, año):
 		cantidad = 0
@@ -81,9 +91,7 @@ if __name__ == '__main__':
 	manejador = ManejadorDesignaciones(100)
 	manejador.cargar(path.dirname(__file__) + '/designaciones.csv')
 
-	cargo = input('\nIngrese un cargo: ')
-	cant = manejador.incisoC(cargo)
-	print(f'La cantidad de mujeres asignadas al cargo {cargo} es {cant}')
+	manejador.incisoC(input('\nIngrese un cargo: '))
 
 	materia = input('\nIngrese una materia: ')
 	año = int(input('Ingrese un año: '))

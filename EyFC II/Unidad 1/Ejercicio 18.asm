@@ -13,7 +13,7 @@ La dirección en memoria para la carga del programa objeto es C801h.
 */
 
 				ORG POSITI
-SUBRUTINA:		LD A, (IX)
+SUBRUTINA:		LD A, (IX + 00h)
 				CP FFh
 				JP Z, FINSUBRUTINA
 				CP 0h

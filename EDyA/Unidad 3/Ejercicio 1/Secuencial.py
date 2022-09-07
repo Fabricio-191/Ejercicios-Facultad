@@ -80,7 +80,8 @@ if __name__ == '__main__':
 	lista.insertar(3)
 	lista.insertar(4, 2)
 
-	lista.eliminar(0)
+	lista.eliminar(3)
 
 	print(lista)
 	print(lista.buscar(4))
+	

@@ -51,20 +51,19 @@ class ManejadorDesignaciones:
 	def incisoC(self, cargo):
 		if self.__designaciones.estaVacia():
 			print('No hay datos cargados')
-			return
+		else:
+			año = self.__designaciones.primerElemento().getAño() # type: ignore
+			cantidad = 0
+			for designacion in self.__designaciones:
+				if designacion.getAño() != año:
+					print(f'{año}: {cantidad}')
+					año = designacion.getAño()
+					cantidad = 0
 
-		año = self.__designaciones.primerElemento().getAño() # type: ignore
-		cantidad = 0
-		for designacion in self.__designaciones:
-			if designacion.getAño() != año:
-				print(f'{año}: {cantidad}')
-				año = designacion.getAño()
-				cantidad = 0
+				if designacion.getTipoCargo() == cargo and designacion.esMujer():
+					cantidad += 1
 
-			if designacion.getTipoCargo() == cargo and designacion.esMujer():
-				cantidad += 1
-
-		print(f'{año}: {cantidad}')
+			print(f'{año}: {cantidad}')
 
 
 	def incisoD(self, materia, cargo, año):

@@ -53,15 +53,6 @@ class Lista:
 	def getTamaño(self):
 		return self.__cantElementos
 
-	def __alloc(self, valor):
-		posElem = self.__inicioVacio
-		elemento = self.__elementos[posElem]
-		
-		elemento.setValor(valor)
-		self.__inicioVacio = elemento.getSiguiente()
-
-		return (posElem, elemento)
-
 	def insertar(self, dato, pos = -1):
 		if pos == -1:
 			pos = self.__cantElementos
@@ -71,7 +62,11 @@ class Lista:
 		elif not self.__posicionValida(pos):
 			raise Exception('La posición no es válida')
 	
-		(posElem, elemento) = self.__alloc(dato)
+		posElem = self.__inicioVacio
+		elemento = self.__elementos[posElem]
+		
+		elemento.setValor(dato)
+		self.__inicioVacio = elemento.getSiguiente()
 
 		if pos == 0:
 			elemento.setSiguiente(self.__inicio)
@@ -94,9 +89,9 @@ class Lista:
 			self.__elementos[aux].setSiguiente(self.__inicioVacio)
 			self.__inicioVacio = aux
 		else:
-			e = self.__recuperar(pos - 1)
-			aux = e.getSiguiente()
-			e.setSiguiente(self.__elementos[aux].getSiguiente())
+			anterior = self.__recuperar(pos - 1)
+			aux = anterior.getSiguiente()
+			anterior.setSiguiente(self.__elementos[aux].getSiguiente())
 			self.__elementos[aux].setSiguiente(self.__inicioVacio)
 			self.__inicioVacio = aux
 
@@ -150,14 +145,15 @@ class Lista:
 if __name__ == '__main__':
 	lista = Lista(10)
 
-	lista.insertar(1)
-	lista.insertar(2)
-	lista.insertar(3)
-	lista.insertar(4)
-	lista.insertar(5)
-	lista.insertar(6)
+	lista.insertar(100)
+	lista.insertar(200)
+	lista.insertar(300)
+	lista.insertar(400)
+	lista.insertar(500)
+	lista.insertar(600)
 	
 	lista.eliminar(3)
+	lista.insertar(800, 2)
 
 	print(lista)
 	lista.mostrar()

@@ -8,6 +8,7 @@ Obtener el tiempo máximo de espera de los clientes en la cola.
 Nota: Ingresar el tiempo de atención de cajero y la frecuencia de llegada de los clientes a la cola.
 """
 import numpy as np
+import random
 
 class Cola: # lifo
 	__elementos: np.ndarray
@@ -86,12 +87,12 @@ if __name__ == '__main__':
 	for tiempoTranscurrido in range(tiempoSimulacion):
 		tiempoEsperaTotal += cola.getTamaño()
 
-		if tiempoTranscurrido % frecuenciaLlegadaClientes == 0:
+		if random.random() <= (1 / 2):
 			clientesTotales += 1
 			cola.add(Cliente(clientesTotales))
 			print('llego cliente: {}'.format(clientesTotales))
 
-		if tiempoTranscurrido % tiempoAtencionCajero == 0 and not cola.estaVacia():
+		if random.randint(1, 5) == 1 and not cola.estaVacia():  # cajero atiende cada 5 mins
 			cliente = cola.get()
 			caja.atenderCliente(cliente)
 			print('se atendio un cliente: {}'.format(cliente.getNum()))

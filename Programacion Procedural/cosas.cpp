@@ -194,18 +194,18 @@ namespace listas{
 		}
 	}
 
-	void cargaRecursiva(nodo_t nodo){
+	void cargaRecursiva(nodo_t anterior){
 		int value = obtenerValor();
 
 		if(value == 0) return;
 
-		nodo_t temp = (nodo_t) malloc(sizeof(struct node));
-		temp->value = value;
-		temp->next = NULL;
+		nodo_t nodo = (nodo_t) malloc(sizeof(struct node));
+		nodo->value = value;
+		nodo->next = NULL;
 
-		nodo->next = temp;
+		anterior->next = nodo;
 
-		cargaRecursiva(temp);
+		cargaRecursiva(nodo);
 	}
 
 	void cargaOrdenada(nodo_t cabeza){

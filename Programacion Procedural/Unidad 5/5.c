@@ -3,7 +3,7 @@
 
 struct nodo {
     int valor;
-    struct nodo *next;
+    struct nodo* next;
 };
 typedef struct nodo* nodo_t;
 
@@ -52,9 +52,7 @@ void ordenar(nodo_t nodo){
 void ultimoPar(nodo_t nodo){
 	if(nodo->next == NULL && (nodo->valor % 2) == 0){
 		printf("\nEl ultimo numero de la lista es par");
-		return;
-	}
-	ultimoPar(nodo->next);
+	}else ultimoPar(nodo->next);
 }
 
 void mostrar(nodo_t nodo, int i){

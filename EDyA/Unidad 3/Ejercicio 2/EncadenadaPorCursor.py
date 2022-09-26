@@ -96,21 +96,18 @@ class Lista:
 			self.__inicioVacio = aux
 
 	def buscar(self, elem):
-		pos = 0
+		pos = self.__inicio
 
 		while pos != -1 and self.__elementos[pos].getValor() != elem:
 			pos = self.__elementos[pos].getSiguiente()
 
-		return pos if pos != self.__cantElementos else -1
+		return pos
 
 	def primerElemento(self):
 		return self.__elementos[self.__inicio].getValor() if not self.estaVacia() else None
 
 	def ultimoElemento(self):
-		if self.estaVacia():
-			return None
-
-		return self.recuperar(self.__cantElementos - 1)
+		return None if self.estaVacia() else self.recuperar(self.__cantElementos - 1)
 
 	def __recuperar(self, pos) -> Elemento:
 		aux = self.__inicio

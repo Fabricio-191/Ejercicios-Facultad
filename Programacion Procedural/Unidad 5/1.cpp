@@ -26,14 +26,14 @@ vector cargarVector(){
 float productoEscalar(vector vec1, vector vec2){
 	if(vec1.cant != vec2.cant){
 		printf("Para calcular el producto escalar los vectores necesitan tener la misma cantidad de componentes");
-	}
+	}else{
+		float result = 0;
+		for(int i = 0; i < vec1.cant; i++){
+			result += vec1.valores[i] * vec2.valores[i]; 
+		}
 
-	float result = 0;
-	for(int i = 0; i < vec1.cant; i++){
-		result += vec1.valores[i] * vec2.valores[i]; 
+		return result;
 	}
-
-	return result;
 }
 
 void cargarImpares(vector &impares, vector vec1){

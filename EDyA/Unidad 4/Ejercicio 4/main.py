@@ -1,4 +1,8 @@
-"""
-Codifique un programa que utilice el algoritmo de Huffman  para comprimir un archivo de caracteres ya generado. Nota: hallar la frecuencia de cada caracter.
-"""
+from Huffman import Huffman
+from os import path
 
+if __name__ == '__main__':
+    Huffman().comprimir(
+		path.dirname(__file__) + '/input.txt',
+		path.dirname(__file__) + '/output.txt'
+	)

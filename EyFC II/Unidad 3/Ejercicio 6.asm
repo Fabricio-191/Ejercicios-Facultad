@@ -39,9 +39,8 @@ programa de encuestas de interrupciones para localizar las rutinas de servicio d
 			ORG 1400h
 RUTIN1  	EQU 1650d
 RUTIN2  	EQU 1700d 
-RUTIN2  	EQU 1750d
-RUTIN3  	EQU 1800d 
-RUTIN4  	EQU 1850d 
+RUTIN3  	EQU 1750d
+RUTIN4  	EQU 1800d 
 			PUSH AF
 			PUSH BC
 			PUSH DE
@@ -49,9 +48,29 @@ RUTIN4  	EQU 1850d
 			PUSH IX
 			PUSH IY
 
-			
-			; INCOMLETO0
+			IN A, (1d)
+			BIT 7, A
+			JP Z, DISP2
+			BIT 0, A
+			JP Z, DISP2
+			JP RUTIN1
 
+DISP2		IN A, (4d)
+			BIT 7, A
+			JP Z, DISP3
+			BIT 0, A
+			JP Z, DISP3
+			JP RUTIN2
+
+DIPS3		IN A, (9d)
+			BIT 7, A
+			JP Z, CB
+			BIT 0, A
+			JP Z, CB
+			JP RUTIN3
+CB			BIT 6, A
+			JP Z, FIN
+			JP RUTIN4
 
 FIN 		POP IY
 			POP IX

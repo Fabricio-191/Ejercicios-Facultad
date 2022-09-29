@@ -11,11 +11,15 @@ PIAs del sistema:
 */
 
 		ORG 1000h
-INICIO  NOP
+		LD A, 63d ;00111111b
+		OUT (0d), A
+		LD A, 56d ; 00111000b
+		OUT (1d), A
 
-		OUT (0d), 63d ;00111111b
-		OUT (1d), 56d ;00111000b
+		LD A, 255d ;11111111b
+		OUT (3d), A
+		LD A, 48d ;00110000b
+		OUT (4d), A
 
-		OUT (3d), 255d ;11111111b
-		OUT (4d), 48d ;00110000b
+		JP INICIO
 		FIN

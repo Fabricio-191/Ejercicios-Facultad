@@ -31,6 +31,7 @@ class MonticuloBinario:
 	def eliminar(self):
 		elemento = self.__elementos[1]
 		self.__eliminar(1)
+		self.__cant -= 1
 
 		return elemento
 	
@@ -71,7 +72,13 @@ class MonticuloBinario:
 				self.__elementos[indice] = elemder
 				self.__eliminar(posder)
 
-	def __repr__(self):        
+	def estaVacio(self):
+		return self.__cant == 0
+
+	def __repr__(self):
+		if self.__cant == 0:
+			return "Monticulo vacio"
+		
 		cantniveles = math.ceil(math.log2(self.__cant))
 		niveles = []
 

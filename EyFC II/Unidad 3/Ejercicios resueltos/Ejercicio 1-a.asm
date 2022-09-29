@@ -11,7 +11,7 @@ PIA Nº 0 Lado B:
 */
 
 			ORG 1024d 		; carga del programa a partir de la dirección 1024
-INICIO		LD A, 03d
+			LD A, 03d
 			OUT (01d), A 	; carga “1” en el bit 0 de RCA-PIA0 (habilitación de interrupciones) y “1” en el bit 1 de RCA-PIA0 (reconocimiento de interrupciones por flanco positivo).
 			LD A, FFh
 			OUT (03d), A 	; carga todos unos sobre el RSTDB-PIA0 (define PB0 a PB7 como salidas)

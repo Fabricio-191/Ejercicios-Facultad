@@ -23,7 +23,7 @@ Nº 0, lo que produce un pedido de interrupción sobre el uP que hace ejecutar l
 		FIN
 
 ; Rutina de servicio
-		ORG 1400h
+		ORG 1748d
 		PUSH AF
 		PUSH BC
 		PUSH DE

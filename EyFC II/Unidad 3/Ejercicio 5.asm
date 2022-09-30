@@ -10,7 +10,7 @@ PIAs del sistema:
 · Línea CB2 de la PIA0 definida como salida y en estado “0”
 */
 
-		ORG 1000h
+		ORG 1024d
 		LD A, 63d ;00111111b
 		OUT (0d), A
 		LD A, 56d ; 00111000b

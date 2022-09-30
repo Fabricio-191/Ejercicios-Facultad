@@ -11,7 +11,7 @@ El dispositivo Nº 4 es un dispositivo de salida, no genera pedidos de interrupc
 Generar el programa de inicialización de las PIAs para atender a los mencionados dispositivos y el
 programa de encuestas de interrupciones para localizar las rutinas de servicio de cada dispositivo.
 */
-			ORG 1024h
+			ORG 1024d
 			LD SP, 2047h
 
 			LD A, 0d
@@ -36,7 +36,7 @@ programa de encuestas de interrupciones para localizar las rutinas de servicio d
 			FIN
 
 
-			ORG 1400h
+			ORG 1748d
 RUTIN1  	EQU 1650d
 RUTIN2  	EQU 1700d 
 RUTIN3  	EQU 1750d

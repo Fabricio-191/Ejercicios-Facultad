@@ -14,6 +14,11 @@ class MonticuloBinario:
 		self.__cant = 0
 		self.__elementos[0] = -math.inf
 
+	def __intercambiar(self, pos1, pos2):
+		aux = self.__elementos[pos1]
+		self.__elementos[pos1] = self.__elementos[pos2]
+		self.__elementos[pos2] = aux
+
 	def insertar(self, elemento):
 		self.__cant += 1
 		self.__elementos[self.__cant] = elemento
@@ -21,84 +26,65 @@ class MonticuloBinario:
 		actual = self.__cant
 		padre = self.__cant // 2
 		while self.__elementos[padre] > self.__elementos[actual]:
-			aux = self.__elementos[padre]
-			self.__elementos[padre] = self.__elementos[actual]
-			self.__elementos[actual] = aux
+			self.__intercambiar(padre, actual)
 
 			actual = padre
 			padre = actual // 2
 
 	def eliminar(self):
-		elemento = self.__elementos[1]
-		self.__eliminar(1)
+		elementoEliminado = self.__elementos[1]
+		self.__elementos[1] = None
+
+		self.__intercambiar(1, self.__cant)
+		
+		actual = 1
+		elemActual = self.__elementos[actual]
+		hijoIzq = actual * 2
+		hijoDer = actual * 2 + 1
+		while hijoDer < len(self.__elementos) and (
+			elemActual > self.__elementos[hijoIzq] or
+			elemActual > self.__elementos[hijoDer]
+		):
+			if self.__elementos[hijoIzq] < self.__elementos[hijoDer]:
+				self.__intercambiar(actual, hijoIzq)
+				actual = hijoIzq
+			else:
+				self.__intercambiar(actual, hijoDer)
+				actual = hijoDer
+			
+			elemActual = self.__elementos[actual]
+			hijoIzq = actual * 2
+			hijoDer = actual * 2 + 1
+
 		self.__cant -= 1
 
-		return elemento
-	
-	def __grado(self, indice):
-		posizq = indice * 2
-		posder = indice * 2 + 1
-
-		if posizq > self.__cant:
-			return 0
-		elif posder > self.__cant:
-			return 1
-		else:
-			return 2
-
-	def __eliminar(self, indice):
-		if self.__grado(indice) == 0:
-			self.__elementos[indice] = None
-			return
-		
-		posizq = indice * 2
-		posder = indice * 2 + 1
-
-		elemizq = self.__elementos[posizq]
-		elemder = self.__elementos[posder]
-
-		if self.__grado(indice) == 1:
-			if elemizq is None:
-				self.__elementos[indice] = elemder
-				self.__eliminar(posder)
-			else:
-				self.__elementos[indice] = elemizq
-				self.__eliminar(posizq)
-		elif self.__grado(indice) == 2:
-			if elemizq < elemder:
-				self.__elementos[indice] = elemizq
-				self.__eliminar(posizq)
-			else:
-				self.__elementos[indice] = elemder
-				self.__eliminar(posder)
+		return elementoEliminado
 
 	def estaVacio(self):
 		return self.__cant == 0
+
+	def inOrden(self, callback, nivel = 0, posicion = 1):
+		if posicion < len(self.__elementos):
+			self.inOrden(callback, nivel + 1, posicion * 2)
+			callback(self.__elementos[posicion], nivel)
+			self.inOrden(callback, nivel + 1, posicion * 2 + 1)
 
 	def __repr__(self):
 		if self.__cant == 0:
 			return "Monticulo vacio"
 		
-		cantniveles = math.ceil(math.log2(self.__cant))
-		niveles = []
-
-		for i in range(cantniveles):
-			niveles.append([])
-			for j in range(2**i):
-				niveles[i].append(self.__elementos[2**i + j] or '-1')
-		
 		string = ''
-		
-		for i in range(cantniveles):
-			cantEspacios = 2 ** (cantniveles - i)
-			for j in range(2**i):
-				string += ' ' * cantEspacios +  f'{niveles[i][j]} '
-			string += '\n'
 
-		return string # str(self.__elementos[:self.__cant+1])
+		def callback(elemento, nivel):
+			nonlocal string
+			string += ' ' * 4 * nivel + str(elemento) + '\n'
+
+		self.inOrden(callback)
+
+		return string
 
 if __name__ == '__main__':
-	monticulo = MonticuloBinario(100)
+	monticulo = MonticuloBinario(16)
 	monticulo.insertar(1)
 	monticulo.insertar(2)
 	monticulo.insertar(3)

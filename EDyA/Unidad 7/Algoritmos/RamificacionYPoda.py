@@ -1,6 +1,58 @@
 from Path import Path, City
 from TravellingSalesman import TravellingSalesman
 
+def ramificacionYPoda(tsp: TravellingSalesman, baseCase = True):
+	solutions = []
+	lessDistance = float('inf')
+
+	def backtrack(path: Path):
+		nonlocal lessDistance, solutions
+
+		if path.length() == len(tsp.getCities()):
+			finalSolution = path + tsp.getStart()
+
+			if finalSolution.getTravelledDistance() <= lessDistance:
+				lessDistance = finalSolution.getTravelledDistance()
+				solutions.append(finalSolution)
+				print(finalSolution)
+		else:
+			for city in tsp.getCities():
+				if city not in path:
+					newPath = path + city
+
+					if newPath.getTravelledDistance() < lessDistance:
+						backtrack(newPath)
+
+	if baseCase:
+		start = tsp.getStart()
+		path = Path([start], 0)
+
+		for i in range(len(tsp.getCities()) - 1):
+			closestCity = tsp.getCities()[0]
+			closestDistance = float('inf')
+
+			for city in tsp.getCities():
+				if city not in path:
+					distance = tsp.distanceBetweenCities(path.getCities()[-1], city)
+
+					if distance < closestDistance:
+						closestDistance = distance
+						closestCity = city
+
+			path = path + closestCity
+
+		path = path + start
+		solutions.append(path)
+		lessDistance = path.getTravelledDistance()
+		print('Caso base', path)
+
+	backtrack(
+		Path([tsp.getStart()], 0)
+	)
+
+	return list(filter(lambda path: path.getTravelledDistance() == lessDistance, solutions))
+
+"""
 class RamificacionYPoda:
 	__problem: TravellingSalesman
 	__lessDistance: float
@@ -59,3 +111,5 @@ class RamificacionYPoda:
 		bestSolutions = list(filter(lambda path: path.getTravelledDistance() == self.__lessDistance, self.__solutions))
 
 		return bestSolutions
+
+"""

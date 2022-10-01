@@ -1,6 +1,30 @@
 from Path import Path, City
 from TravellingSalesman import TravellingSalesman
 
+def bruteForce(tsp: TravellingSalesman) -> list[Path]:
+	solutions = []
+	lessDistance = float('inf')
+
+	def process(path: Path):
+		nonlocal lessDistance, solutions
+
+		if path.length() == len(tsp.getCities()):
+			finalPath = path + tsp.getStart()
+
+			if finalPath.getTravelledDistance() <= lessDistance:
+				print(finalPath)
+				lessDistance = finalPath.getTravelledDistance()
+				solutions.append(finalPath)
+		else:
+			for city1 in tsp.getCities():
+				if city1 not in path:
+					process(path + city1)
+
+	process(Path([tsp.getStart()], 0))
+
+	return list(filter(lambda path: path.getTravelledDistance() == lessDistance, solutions))
+
+"""
 class BruteForce:
 	__problem: TravellingSalesman
 	__lessDistance: float
@@ -29,3 +53,5 @@ class BruteForce:
 		bestSolutions = list(filter(lambda path: path.getTravelledDistance() == self.__lessDistance, self.__solutions))
 
 		return bestSolutions
+
+"""

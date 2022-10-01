@@ -42,9 +42,6 @@ class TravellingSalesman:
 	def getStart(self) -> City:
 		return self.__start
 
-	def distanceBetweenCities(self, city1: City, city2: City) -> float:
-		return self.__distancesBetweenCities[city1][city2]
-
 	def getCities(self) -> list[City]:
 		return self.__cities
 
@@ -54,6 +51,9 @@ class TravellingSalesman:
 
 	def intermediateSolution(self, path: Path):
 		if self.__graph: self.__graph.updateCurrentPath(path)
+
+	def distanceBetweenCities(self, city1: City, city2: City) -> float:
+		return self.__distancesBetweenCities[city1][city2]
 
 	def restart(self):
 		self.__solutions = []
@@ -68,3 +68,7 @@ class TravellingSalesman:
 			)
 
 		return cities
+	
+	@staticmethod
+	def citiesFromArray(array: list[tuple[int, int]]) -> list[City]:
+		return list(map(lambda x: City(*x), array))

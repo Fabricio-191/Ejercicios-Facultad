@@ -1,19 +1,13 @@
 from TravellingSalesman import TravellingSalesman
 from Graph import Graph, staticGraph
-from Algoritmos.RamificacionYPoda import ramificacionYPoda
-from Algoritmos.BruteForce import bruteForce
+from Algoritmos.RamificacionYPoda import RamificacionYPoda
+from Algoritmos.BruteForce import BruteForce
 
 if __name__ == '__main__':
 	cities = TravellingSalesman.generateCities(10)
-	print(cities)
+	print(len(cities), cities)
 
 	tsp = TravellingSalesman(cities, cities[0])
 
-	bestSolutions = ramificacionYPoda(tsp)
+	bestSolutions = RamificacionYPoda(tsp).resolve()
 	staticGraph(cities, bestSolutions[-1])
-
-	tsp.restart()
-
-	bestSolutions = bruteForce(tsp)
-	staticGraph(cities, bestSolutions[-1])
-	

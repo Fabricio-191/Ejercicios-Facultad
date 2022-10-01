@@ -76,7 +76,7 @@ class Graph: # to-do
 def staticGraph(cities: list[City], path: Path):
 	fig = plt.figure()
 	plot = fig.add_subplot(111)
-	plot.set_title("Current path")
+	plot.set_title("Best path")
 
 	for city in cities:
 		plot.plot(*city.getCoordinates(), 'bo')

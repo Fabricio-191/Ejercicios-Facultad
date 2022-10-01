@@ -1,18 +1,21 @@
-from TravellingSalesman import TravellingSalesman, City
-from Graph import Graph
-import json
-from os import path
+from TravellingSalesman import TravellingSalesman
+from Graph import Graph, staticGraph
+from Algoritmos.RamificacionYPoda import RamificacionYPoda
+from Algoritmos.BruteForce import BruteForce
 
-with open(path.dirname(__file__) + '/data.json', 'r') as file:
-	data = json.load(file)
+if __name__ == '__main__':
+	cities = TravellingSalesman.generateCities(10)
 
-	cities = [City(cityData) for cityData in data["cities"]]
-	travellingSalesman = TravellingSalesman(cities)
+	tsp = TravellingSalesman(cities, cities[0])
+	print(cities)
 
-	solutions = travellingSalesman.resolve(cities[0])
-	for solution in solutions:
-		print(solution)
+	bestSolutions = RamificacionYPoda(tsp).resolve()
+
+	staticGraph(cities, bestSolutions[-1])
+
 	
-	Graph(data, solutions[-1])
+	tsp.restart()
+	bestSolutions = BruteForce(tsp).resolve()
 
+	staticGraph(cities, bestSolutions[-1])
 	

@@ -1,66 +1,18 @@
-from __future__ import annotations
-import math
-
-class City:
-	__name: str
-	__x: float
-	__y: float
-
-	def __init__(self, data):
-		self.__name = data["name"]
-		self.__x = data["x"]
-		self.__y = data["y"]
-
-	def getCoordinates(self):
-		return (self.__x, self.__y)
-
-	def __repr__(self):
-		return str(self.getCoordinates())
-
-	def distance(self, city: City):
-		return math.sqrt(
-			abs(self.__x - city.__x) ** 2 +
-			abs(self.__y - city.__y) ** 2
-		)
-
-class Path:
-	__cities: list[City]
-	__travelledDistance: float
-
-	def __init__(self, path, distance):
-		self.__cities = path
-		self.__travelledDistance = distance
-
-	def getTravelledDistance(self):
-		return self.__travelledDistance
-
-	def length(self):
-		return len(self.__cities)
-
-	def getCities(self):
-		return self.__cities
-
-	def __add__(self, city: City):
-		return Path(
-			self.__cities + [city],
-			self.__travelledDistance + self.__cities[-1].distance(city)
-		)
-
-	def __contains__(self, city: City):
-		return city in self.__cities
-
-	def __repr__(self):
-		return f"Distancia: {self.__travelledDistance}, Camino: {self.__cities}"
+from Path import City, Path
+from Graph import Graph
+import random
 
 class TravellingSalesman:
 	__solutions: list[Path]
 	__cities: list[City]
 	__start: City
 	__distancesBetweenCities: dict[City, dict[City, float]]
-	__lessDistance: float
+	__graph: Graph | None
 
-	def __init__(self, cities):
+	def __init__(self, cities: list[City], start: City, graph: Graph | None = None):
 		self.__cities = cities
+		self.__start = start
+		self.__graph = graph
 		self.__distancesBetweenCities = {}
 
 		for city1 in cities:
@@ -68,29 +20,51 @@ class TravellingSalesman:
 
 			for city2 in cities:
 				self.__distancesBetweenCities[city1][city2] = city1.distance(city2)
+
+	def addCity(self, city: City):
+		self.__cities.append(city)
+		self.__distancesBetweenCities[city] = {}
+
+		for otherCity in self.__cities:
+			self.__distancesBetweenCities[city][otherCity] = city.distance(otherCity)
+			self.__distancesBetweenCities[otherCity][city] = city.distance(otherCity)
 	
-	def __isSolution(self, solution: Path):
-		return solution.length() == len(self.__cities)
+	def removeCity(self, city: City):
+		self.__cities.remove(city)
+		self.__distancesBetweenCities.pop(city)
 
-	def __backtrack(self, path: Path):
-		if self.__isSolution(path):
-			finalSolution = path + self.__start
-			
-			if finalSolution.getTravelledDistance() < self.__lessDistance:
-				self.__lessDistance = finalSolution.getTravelledDistance()
-				self.__solutions.append(finalSolution)
-		else:
-			for city in self.__cities:
-				if city not in path:
-					newPath = path + city
-
-					if newPath.getTravelledDistance() <= self.__lessDistance:
-						self.__backtrack(newPath)
-
-	def resolve(self, start: City):
-		self.__lessDistance = math.inf
+		for otherCity in self.__cities:
+			self.__distancesBetweenCities[otherCity].pop(city)
+	
+	def setStart(self, start: City):
 		self.__start = start
-		self.__solutions = []
-		self.__backtrack(Path([start], 0))
+	
+	def getStart(self) -> City:
+		return self.__start
 
-		return self.__solutions
+	def distanceBetweenCities(self, city1: City, city2: City) -> float:
+		return self.__distancesBetweenCities[city1][city2]
+
+	def getCities(self) -> list[City]:
+		return self.__cities
+
+	def addSolution(self, solution: Path):
+		self.__solutions.append(solution)
+		if self.__graph: self.__graph.updateCurrentBestPath(solution)
+
+	def intermediateSolution(self, path: Path):
+		if self.__graph: self.__graph.updateCurrentPath(path)
+
+	def restart(self):
+		self.__solutions = []
+
+	@staticmethod
+	def generateCities(n: int = 10) -> list[City]:
+		cities = []
+
+		for i in range(n):
+			cities.append(
+				City(random.randint(0, 100), random.randint(0, 100))
+			)
+
+		return cities

@@ -1,29 +1,11 @@
 from __future__ import annotations
 import math
 
-class City:
-	__x: float
-	__y: float
-
-	def __init__(self, x, y):
-		self.__x = x
-		self.__y = y
-
-	def getCoordinates(self):
-		return (self.__x, self.__y)
-
-	def __repr__(self):
-		return str(self.getCoordinates())
-
-	def distance(self, city: City):
-		return math.sqrt(
-			abs(self.__x - city.__x) ** 2 +
-			abs(self.__y - city.__y) ** 2
-		)
+City = tuple[int, int]
 
 class Path:
-	__cities: list[City]
 	__travelledDistance: float
+	__cities: list[City]
 
 	def __init__(self, path, distance):
 		self.__cities = path
@@ -39,9 +21,13 @@ class Path:
 		return self.__cities
 
 	def __add__(self, city: City):
+		lastCity = self.__cities[-1]
 		return Path(
 			self.__cities + [city],
-			self.__travelledDistance + self.__cities[-1].distance(city)
+			self.__travelledDistance + math.sqrt(
+				(lastCity[0] - city[0]) ** 2 +
+				(lastCity[1] - city[1]) ** 2
+			)
 		)
 
 	def __contains__(self, city: City):

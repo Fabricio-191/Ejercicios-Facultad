@@ -1,96 +1,107 @@
-import matplotlib.pyplot as plt
 from Path import Path, City
 
 """
 https://upload.wikimedia.org/wikipedia/commons/2/2b/Bruteforce.gif
-https://medium.com/analytics-vidhya/editing-data-visualization-in-python-64f42225ba21
-https://pythonprogramming.net/python-matplotlib-live-updating-graphs/
-https://stackoverflow.com/questions/39658717/plot-dynamically-changing-graph-using-matplotlib-in-jupyter-notebook
-https://www.geeksforgeeks.org/change-plot-size-in-matplotlib-python/
-https://stackoverflow.com/questions/332289/how-do-i-change-the-size-of-figures-drawn-with-matplotlib
-https://stackoverflow.com/questions/8595973/truncate-to-three-decimals-in-python
+https://dynetx.readthedocs.io/en/latest/index.html
+https://networkx.org/documentation/stable/index.html
 """
 
-class Graph: # to-do
-	__cities: list[City]
-	__soluciones: int
-	__mejoresSoluciones: int
+"""
+import dynetx as dn
+
+class Graph:
+	__g: dn.DynGraph
+	__currentPath: Path | None
+	__currentBestPath: Path | None
 
 	def __init__(self, cities: list[City]):
-		self.__soluciones = 0
-		self.__mejoresSoluciones = 0
-		self.__cities = cities
-		self.__currentPathPlot = plt.subplot2grid((2, 4), (0, 0), 2, 2)
-		self.__currentBestPathPlot = plt.subplot2grid((2, 4), (0, 2), 2, 2)
+		self.__g = dn.DynGraph()
+		self.__g.add_nodes_from(cities)
+		self.__currentPath = None
+		self.__currentBestPath = None
 
-		self.__currentPathPlot.set_title("Current path")
-		self.__currentBestPathPlot.set_title("Current best path")
-
-		for city in cities:
-			self.__currentPathPlot.plot(*city.getCoordinates(), 'bo')
-			self.__currentBestPathPlot.plot(*city.getCoordinates(), 'bo')
-
-		plt.tight_layout()
-		plt.show()
-	
 	def updateCurrentPath(self, path: Path):
-		self.__soluciones += 1
-		plot = self.__currentPathPlot
-		plot.clear()
-		
-		plt.suptitle('Distancia: {:.2f}'.format(path.getTravelledDistance()))
-		for city in self.__cities:
-			plot.plot(*city.getCoordinates(), 'ro')
-
-		x = []
-		y = []
-
-		for city in path.getCities():
-			coords = city.getCoordinates()
-			x.append(coords[0])
-			y.append(coords[1])
-
-		plot.plot(x, y, 'r-')
-		plt.show()
+		if self.__currentPath:
+			self.__g.remove_edges_from(self.__currentPath.getCities())
+		self.__currentPath = path
+		self.__g.add_edges_from(path.getCities())
 
 	def updateCurrentBestPath(self, path: Path):
-		self.__mejoresSoluciones += 1
-		plot = self.__currentPathPlot
-		plot.clear()
-		
-		plt.suptitle('Distancia: {:.2f}'.format(path.getTravelledDistance()))
-		for city in self.__cities:
-			plot.plot(*city.getCoordinates(), 'ro')
+		if self.__currentBestPath:
+			self.__g.remove_edges_from(self.__currentBestPath.getCities())
+		self.__currentBestPath = path
+		self.__g.add_edges_from(path.getCities())
+"""
+	
 
+import matplotlib.pyplot as plt
+
+class Graph:
+	__fig, __ax = plt.subplots()
+	__currentBestPath: Path | None = None
+	__currentPath: Path | None = None
+	__cities: list[City]
+
+	def __init__(self, cities: list[City]):
+		self.__cities = cities
+		self.__fig, self.__ax = plt.subplots()
+		self.__updateGraph()
+		self.__fig.show()
+	
+	def updateCurrentBestPath(self, path: Path):
+		self.__currentBestPath = path
+		self.__updateGraph()
+	
+	def updateCurrentPath(self, path: Path):
+		self.__currentPath = path
+		self.__updateGraph()
+
+	def __updateGraph(self):
+		self.__ax.clear()
+		plt.title(f"Distance: {self.__currentBestPath.getTravelledDistance() if self.__currentBestPath else 0}")
+		self.__drawCities()
+		self.__drawCurrentBestPath()
+		self.__drawCurrentPath()
+		self.__fig.canvas.draw()
+		self.__fig.canvas.flush_events()
+	
+	def __drawCities(self):
+		for city in self.__cities:
+			self.__ax.scatter(*city, color="black")
+		
+	def __drawCurrentBestPath(self):
+		if self.__currentBestPath is not None:
+			self.__drawPath(self.__currentBestPath, "red")
+	
+	def __drawCurrentPath(self):
+		if self.__currentPath is not None:
+			self.__drawPath(self.__currentPath, "blue")
+		
+	def __drawPath(self, path: Path, color: str):
 		x = []
 		y = []
-
 		for city in path.getCities():
-			coords = city.getCoordinates()
-			x.append(coords[0])
-			y.append(coords[1])
+			x.append(city[0])
+			y.append(city[1])
 
-		plot.plot(x, y, 'r-')
-		plt.show()
-
+		self.__ax.plot(x, y, color=color)
+	
+	def __del__(self):
+		plt.close(self.__fig)
+	
 def staticGraph(cities: list[City], path: Path):
-	fig = plt.figure()
-	plot = fig.add_subplot(111)
-	plot.set_title("Best path")
+	fig, ax = plt.subplots()
+	ax.set_aspect('equal')
 
 	for city in cities:
-		plot.plot(*city.getCoordinates(), 'bo')
-
+		ax.plot(*city, 'bo')
+	
 	x = []
 	y = []
-
 	for city in path.getCities():
-		coords = city.getCoordinates()
-		x.append(coords[0])
-		y.append(coords[1])
+		x.append(city[0])
+		y.append(city[1])
 
-	plot.plot(x, y, 'r-')
+	ax.plot(x, y, 'r-')
+
 	plt.show()
-
-if __name__ == '__main__':
-	Graph([City(0, 0), City(1, 1), City(2, 2)])

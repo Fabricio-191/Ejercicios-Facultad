@@ -1,6 +1,6 @@
 from Path import Path
 from TravellingSalesman import TravellingSalesman
-import abc
+from abc import abstractmethod
 
 class Base:
 	_problem: TravellingSalesman
@@ -10,7 +10,7 @@ class Base:
 	def __init__(self, problem: TravellingSalesman):
 		self._problem = problem
 
-	@abc.abstractmethod
+	@abstractmethod
 	def _process(self, path: Path):
 		pass
 

@@ -10,7 +10,6 @@ a) Implemente el Código del ítem a.
 d) Considere la lista dada, ordenada por contenido, y en función de esto optimice el código del ítem b. 
 """
 from __future__ import annotations
-from typing import Any
 import numpy as np
 
 class Lista:

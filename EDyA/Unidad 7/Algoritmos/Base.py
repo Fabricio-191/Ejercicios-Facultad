@@ -1,11 +1,13 @@
 from Path import Path
+from Graph import Graph
 from TravellingSalesman import TravellingSalesman
 from abc import abstractmethod
 
 class Base:
 	_problem: TravellingSalesman
 	_lessDistance: float
-	_solutions: list[Path]
+	_solution: Path | None
+	__graph: Graph | None
 
 	def __init__(self, problem: TravellingSalesman):
 		self._problem = problem
@@ -13,6 +15,12 @@ class Base:
 	@abstractmethod
 	def _process(self, path: Path):
 		pass
+
+	def _graph(self, path: Path):
+		if path.length() == len(self._problem.getCities()) + 1:
+			print(path)
+			if self.__graph: self.__graph.updateBestPath(path)
+		elif self.__graph: self.__graph.updatePath(path)
 
 	def __baseCase(self):
 		start = self._problem.getStart()
@@ -32,21 +40,23 @@ class Base:
 
 			path = path + closestCity
 
-		baseCase = path + start
+		self._solution = path + start
 		
-		self._solutions.append(baseCase)
-		self._lessDistance = baseCase.getTravelledDistance()
-		print('Caso base', baseCase)
+		self._lessDistance = self._solution.getTravelledDistance()
+		self._graph(self._solution)
+		print('Caso base')
 
-	def resolve(self, baseCase = True):
+	def resolve(self, baseCase = True, graph = True):
 		self._lessDistance = float('inf')
-		self._solutions = []
+		self._solution = None
+		if graph: self.__graph = Graph(self._problem.getCities())
 		if baseCase: self.__baseCase()
 		
 		self._process(
 			Path([self._problem.getStart()], 0)
 		)
 
-		return list(
-			filter(lambda path: path.getTravelledDistance() == self._lessDistance, self._solutions)
-		)
+		if self._solution is None:
+			raise Exception('No se encontró solución')
+
+		return self._solution

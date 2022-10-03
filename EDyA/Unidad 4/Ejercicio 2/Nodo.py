@@ -2,8 +2,8 @@ from __future__ import annotations
 
 class Nodo:
 	__dato = None
-	__izq: Nodo | None = None
-	__der: Nodo | None = None
+	__izq: Nodo | None
+	__der: Nodo | None
 
 	def __init__(self, dato):
 		self.__dato = dato

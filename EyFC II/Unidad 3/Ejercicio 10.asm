@@ -29,18 +29,17 @@ Registro C: Contiene el resultado del promedio calculado (parámetro de salida).
 		OUT (0d), A
 		OUT (3d), A
 
-		LD A, 255d
+		LD A, FFh
 		OUT (8d), A
 
 		; registros de control
-		LD A, 2d ; 00000010b (flanco positivo)
+		LD A, 3d ; 00000011b (flanco positivo)
 		OUT (1d), A
 		LD A, 0d
 		OUT (4d), A
 		OUT (9d), A
 		JP INICIO
 		FIN
-
 
 
 		ORG 1400h
@@ -76,15 +75,15 @@ FIN		LD H, D
 		JP Z, D2
 		JP P, D1
 
-D3		LD A, 128d ; 1000 0000
+D3		LD A, 80h ; 1000 0000
 		OUT (10d), A
 		JP FINAL
 
-D2		LD A, 8d ; 0000 1000
+D2		LD A, 8h ; 0000 1000
 		OUT (10d), A
 		JP FINAL
 
-D1		LD A, 2d ; 0000 0010
+D1		LD A, 2h ; 0000 0010
 		OUT (10d), A
 
 FINAL 	POP IY

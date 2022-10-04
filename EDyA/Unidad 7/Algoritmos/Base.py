@@ -11,6 +11,7 @@ class Base:
 
 	def __init__(self, problem: TravellingSalesman):
 		self._problem = problem
+		self.__graph = None
 
 	@abstractmethod
 	def _process(self, path: Path):

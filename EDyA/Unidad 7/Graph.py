@@ -13,7 +13,7 @@ class Graph:
 	
 	def updateBestPath(self, path: Path):
 		self.__ax[1].set_title('Mejor camino, distancia: {}'.format(path.getTravelledDistance()))
-		self.__draw(self.__ax[1], path, 'blue', 'green')
+		self.__draw(self.__ax[1], path, 'green')
 		self.updatePath(path)
 		sleep(1)
 	
@@ -21,15 +21,15 @@ class Graph:
 	def updatePath(self, path: Path):
 		self.__intento += 1
 		self.__ax[0].set_title('Intento: {}, distancia: {:.2f}'.format(self.__intento, path.getTravelledDistance()))
-		self.__draw(self.__ax[0], path, 'blue', 'red')
+		self.__draw(self.__ax[0], path, 'red')
 		self.__fig.canvas.draw()
 		self.__fig.canvas.flush_events()
 
-	def __draw(self, axes, path: Path, citiesColor: str, plotColor: str):
+	def __draw(self, axes, path: Path, plotColor: str):
 		axes.clear()
 
 		for city in self.__cities:
-			axes.scatter(*city, color=citiesColor)
+			axes.scatter(*city, color='blue', marker='s')
 
 		x = []
 		y = []
@@ -38,9 +38,6 @@ class Graph:
 			y.append(city[1])
 
 		axes.plot(x, y, color=plotColor)
-	
-	def __del__(self):
-		plt.close(self.__fig)
 	
 """
 https://upload.wikimedia.org/wikipedia/commons/2/2b/Bruteforce.gif
@@ -60,13 +57,13 @@ class Graph:
 		self.__currentPath = None
 		self.__currentBestPath = None
 
-	def updateCurrentPath(self, path: Path):
+	def updatePath(self, path: Path):
 		if self.__currentPath:
 			self.__g.remove_edges_from(self.__currentPath.getCities())
 		self.__currentPath = path
 		self.__g.add_edges_from(path.getCities())
 
-	def updateCurrentBestPath(self, path: Path):
+	def updateBestPath(self, path: Path):
 		if self.__currentBestPath:
 			self.__g.remove_edges_from(self.__currentBestPath.getCities())
 		self.__currentBestPath = path

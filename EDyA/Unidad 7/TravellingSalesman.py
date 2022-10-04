@@ -9,7 +9,6 @@ class TravellingSalesman:
 	def __init__(self, cities: list[City], start: City):
 		self.__cities = cities
 		self.__start = start
-		self.__graph = None
 		self.__distancesBetweenCities = {}
 
 		for city1 in cities:

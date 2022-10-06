@@ -2,7 +2,7 @@ from TravellingSalesman import TravellingSalesman
 import math
 
 if __name__ == '__main__':
-	cities = TravellingSalesman.generateCities(7)
+	cities = TravellingSalesman.generateCities(13)
 	print('Caminos posibles: ', math.factorial(len(cities) - 1))
 	print('Ciudades: ', cities)
 

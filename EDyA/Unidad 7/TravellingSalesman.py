@@ -2,13 +2,11 @@ import random, math
 from Graph import Graph
 from Path import Path, City
 
-
-
 class TravellingSalesman:
 	cities: list[City]
 	start: City
 	distancesBetweenCities: dict[City, dict[City, float]]
-	_graph: Graph | None
+	__graph: Graph | None
 
 	def __init__(self, cities: list[City]):
 		self.cities = cities
@@ -40,8 +38,8 @@ class TravellingSalesman:
 	def graph(self, path: Path):
 		if path.length() == len(self.cities) + 1:
 			print(path)
-			if self._graph: self._graph.updateBestPath(path)
-		elif self._graph: self._graph.updatePath(path)
+			if self.__graph: self.__graph.updateBestPath(path)
+		elif self.__graph: self.__graph.updatePath(path)
 
 	def baseCase(self):
 		start = self.start
@@ -70,8 +68,7 @@ class TravellingSalesman:
 		self.solution = None
 		self.start = start
 
-		if graph: self._graph = Graph(self.cities)
-		else: self._graph = None
+		self.__graph = Graph(self.cities) if graph else None
 		if baseCase: self.baseCase()
 		
 		self.process(

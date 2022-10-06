@@ -1,16 +1,14 @@
 from TravellingSalesman import TravellingSalesman
-from Algoritmos.RamificacionYPoda import RamificacionYPoda
-from Algoritmos.BruteForce import BruteForce
 import math
 
 if __name__ == '__main__':
-	cities = TravellingSalesman.generateCities(10)
+	cities = TravellingSalesman.generateCities(7)
 	print('Caminos posibles: ', math.factorial(len(cities) - 1))
 	print('Ciudades: ', cities)
 
-	tsp = TravellingSalesman(cities, cities[0])
+	tsp = TravellingSalesman(cities)
 
-	solution = RamificacionYPoda(tsp).resolve(baseCase=True, graph=False)
+	solution = tsp.resolve(cities[0], baseCase=True, graph=False)
 	print('Mejor solución:', solution)
 
 # [(64, 46), (38, 36), (0, 74), (95, 65), (19, 13), (3, 12), (91, 10), (78, 74), (45, 50), (58, 70)]

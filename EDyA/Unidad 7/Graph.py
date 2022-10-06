@@ -3,7 +3,7 @@ from Path import Path, City
 from time import sleep
 
 class Graph:
-	__cities: list[City]
+	cities: list[City]
 
 	def __init__(self, cities: list[City]):
 		self.__cities = cities
@@ -12,7 +12,7 @@ class Graph:
 		self.__fig.show()
 	
 	def updateBestPath(self, path: Path):
-		self.__ax[1].set_title('Mejor camino, distancia: {}'.format(path.getTravelledDistance()))
+		self.__ax[1].set_title('Mejor camino, distancia: {}'.format(path.travelledDistance))
 		self.__draw(self.__ax[1], path, 'green')
 		self.updatePath(path)
 		sleep(1)
@@ -20,7 +20,7 @@ class Graph:
 	__intento = 0
 	def updatePath(self, path: Path):
 		self.__intento += 1
-		self.__ax[0].set_title('Intento: {}, distancia: {:.2f}'.format(self.__intento, path.getTravelledDistance()))
+		self.__ax[0].set_title('Intento: {}, distancia: {:.2f}'.format(self.__intento, path.travelledDistance))
 		self.__draw(self.__ax[0], path, 'red')
 		self.__fig.canvas.draw()
 		self.__fig.canvas.flush_events()
@@ -33,7 +33,7 @@ class Graph:
 
 		x = []
 		y = []
-		for city in path.getCities():
+		for city in path:
 			x.append(city[0])
 			y.append(city[1])
 

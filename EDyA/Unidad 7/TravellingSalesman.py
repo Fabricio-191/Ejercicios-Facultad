@@ -1,33 +1,87 @@
-from Path import City, Path
 import random, math
+from Graph import Graph
+from Path import Path, City
+
+
 
 class TravellingSalesman:
-	__cities: list[City]
-	__start: City
-	__distancesBetweenCities: dict[City, dict[City, float]]
+	cities: list[City]
+	start: City
+	distancesBetweenCities: dict[City, dict[City, float]]
+	_graph: Graph | None
 
-	def __init__(self, cities: list[City], start: City):
-		self.__cities = cities
-		self.__start = start
-		self.__distancesBetweenCities = {}
+	def __init__(self, cities: list[City]):
+		self.cities = cities
+		self.distancesBetweenCities = {}
 
 		for city1 in cities:
-			self.__distancesBetweenCities[city1] = {}
+			self.distancesBetweenCities[city1] = {}
 
 			for city2 in cities:
-				self.__distancesBetweenCities[city1][city2] = math.sqrt(
+				self.distancesBetweenCities[city1][city2] = math.sqrt(
 					(city1[0] - city2[0]) ** 2 +
 					(city1[1] - city2[1]) ** 2
 				)
 
-	def getStart(self) -> City:
-		return self.__start
+	def process(self, path: Path):
+		self.graph(path)
+		if path.length() == len(self.cities):
+			finalPath = path + self.start
 
-	def getCities(self) -> list[City]:
-		return self.__cities
+			if finalPath.travelledDistance < self.lessDistance:
+				self.graph(finalPath)
+				self.lessDistance = finalPath.travelledDistance
+				self.solution = finalPath
+		elif path.travelledDistance < self.lessDistance:
+			for city in self.cities:
+				if city not in path:
+					self.process(path + city)
 
-	def distanceBetweenCities(self, city1: City, city2: City) -> float:
-		return self.__distancesBetweenCities[city1][city2]
+	def graph(self, path: Path):
+		if path.length() == len(self.cities) + 1:
+			print(path)
+			if self._graph: self._graph.updateBestPath(path)
+		elif self._graph: self._graph.updatePath(path)
+
+	def baseCase(self):
+		start = self.start
+		path = Path([start], 0)
+
+		for i in range(len(self.cities) - 1):
+			closestCity = self.cities[0]
+			closestDistance = float('inf')
+
+			for city in self.cities:
+				if city not in path:
+					distance = self.distancesBetweenCities[path.lastCity()][city]
+
+					if distance < closestDistance:
+						closestDistance = distance
+						closestCity = city
+
+			path = path + closestCity
+
+		self.solution = path + start
+		self.lessDistance = self.solution.travelledDistance
+		self.graph(self.solution)
+
+	def resolve(self, start: City, baseCase = True, graph = True):
+		self.lessDistance = float('inf')
+		self.solution = None
+		self.start = start
+
+		if graph: self._graph = Graph(self.cities)
+		else: self._graph = None
+		if baseCase: self.baseCase()
+		
+		self.process(
+			Path([self.start], 0)
+		)
+
+		if self.solution is None:
+			raise Exception('No se encontró solución')
+
+		return self.solution
 
 	@staticmethod
 	def generateCities(n: int = 10) -> list[City]:

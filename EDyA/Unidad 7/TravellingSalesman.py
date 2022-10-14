@@ -32,34 +32,31 @@ class TravellingSalesman:
 				self.solution = finalPath
 		elif path.travelledDistance < self.lessDistance:
 			for city in self.cities:
-				if city not in path:
+				if city not in path.cities:
 					self.process(path + city)
-
+ 
 	def graph(self, path: Path):
 		if path.length() == len(self.cities) + 1:
 			print(path)
 			if self.__graph: self.__graph.updateBestPath(path)
 		elif self.__graph: self.__graph.updatePath(path)
 
+	def __closestCity(self, path: Path):
+		lastCity = path.cities[-1]
+		closestCity = min(
+			filter(lambda city: city not in path.cities, self.cities),
+			key = lambda city: self.distancesBetweenCities[lastCity][city]
+		)
+
+		return closestCity
+
 	def baseCase(self):
-		start = self.start
-		path = Path([start], 0)
+		path = Path([self.start], 0)
 
 		for i in range(len(self.cities) - 1):
-			closestCity = self.cities[0]
-			closestDistance = float('inf')
+			path += self.__closestCity(path)
 
-			for city in self.cities:
-				if city not in path:
-					distance = self.distancesBetweenCities[path.lastCity()][city]
-
-					if distance < closestDistance:
-						closestDistance = distance
-						closestCity = city
-
-			path = path + closestCity
-
-		self.solution = path + start
+		self.solution = path + self.start
 		self.lessDistance = self.solution.travelledDistance
 		self.graph(self.solution)
 

@@ -1,15 +1,16 @@
 """
-mplemente el TAD Tabla Hash teniendo en cuenta la política de manejo de colisiones direccionamiento abierto, utilizando como función de transformación de claves el método de la división, procesando las claves sinónimas a través de la secuencia de Prueba Lineal y considerando trabajar con 1000 claves numéricas que serán generadas aleatoriamente a través de la función rand.
+Implemente el TAD Tabla Hash teniendo en cuenta la política de manejo de colisiones direccionamiento abierto, utilizando como función de transformación de claves el método de la división, procesando las claves sinónimas a través de la secuencia de Prueba Pseudo Random y considerando trabajar con 1000 claves numéricas que serán generadas pseudoaleatoriamente a través de la función rand.
 
 Se pide calcular la Longitud de la Secuencia de Prueba al Buscar una clave teniendo en cuenta:
 
 1.    El tamaño de la tabla Hash no es un número primo.
+
 2.    El tamaño de la tabla Hash sí es un número primo.
-Realice un breve análisis comparativo basado en las dos consideraciones anteriores
 """
+from enum import IntEnum
 import numpy as np
-from numpy.typing import NDArray
 from typing import Any
+from numpy.typing import NDArray
 import string, random
 
 def getPrimeNumber(size):
@@ -44,43 +45,36 @@ class TablaHash:
 	def getSize(self):
 		return self.__size
 
-	def __linearProbeInsert(self, key: int):
+	def __randomProbeInsert(self, key: int):
 		index = self.__hash(key)
-		
-		if index >= self.__size:
-			raise IndexError('Tabla llena')
-
 		while self.__table[index] is not None:
 			if self.__table[index][0] == key:
 				raise ValueError('La clave ya existe')
 
-			index += 1
-
-			if index >= self.__size:
-				raise IndexError('Tabla llena')
+			index = (index + 1) % self.__size
 
 		return index
 
 	def insertar(self, key: int, value):
-		index = self.__linearProbeInsert(key)
+		index = self.__randomProbeInsert(key)
 		self.__table[index] = (key, value)
 
-	def __linearProbeSearch(self, key: int):
+	def __randomProbeSearch(self, key: int):
 		index = self.__hash(key)
 		while self.__table[index] is not None:
 			if self.__table[index][0] == key:
 				return index
 
-			index += 1
+			index = (index + 1) % self.__size
 
 		raise ValueError('No se encontró la clave')
 
 	def buscar(self, key: int):
-		index = self.__linearProbeSearch(key)
+		index = self.__randomProbeSearch(key)
 		return self.__table[index][1]
 
 	def eliminar(self, key: int):
-		index = self.__linearProbeSearch(key)
+		index = self.__randomProbeSearch(key)
 		self.__table[index] = None
 
 	def __str__(self) -> str:
@@ -94,7 +88,7 @@ class TablaHash:
 if __name__ == '__main__':
 	table = TablaHash(1000, False)
 
-	dataset = [(random.randint(0, 10000), randomString()) for i in range(1000)]
+	dataset = [(random.randint(0, 100), randomString()) for i in range(1000)]
 	for key, value in dataset:
 		table.insertar(key, value)
 

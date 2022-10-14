@@ -35,12 +35,28 @@ class Graph:
 
 		x = []
 		y = []
-		for city in path:
+		for city in path.cities:
 			x.append(city[0])
 			y.append(city[1])
 
 		axes.plot(x, y, color=plotColor)
-	
+
+def staticGraph(path: Path):
+	fig = plt.figure()
+	plot = fig.add_subplot(111)
+	plot.set_title("Best path")
+
+	x = []
+	y = []
+
+	for city in path.cities:
+		plot.plot(*city, 'bo')
+		x.append(city[0])
+		y.append(city[1])
+
+	plot.plot(x, y, 'r-')
+	plt.show()
+
 """
 https://upload.wikimedia.org/wikipedia/commons/2/2b/Bruteforce.gif
 https://dynetx.readthedocs.io/en/latest/index.html

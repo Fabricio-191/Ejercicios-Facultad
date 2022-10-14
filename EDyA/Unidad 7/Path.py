@@ -13,11 +13,8 @@ class Path:
 	def length(self):
 		return len(self.cities)
 
-	def lastCity(self):
-		return self.cities[-1]
-
 	def __add__(self, city: City):
-		lastCity = self.lastCity()
+		lastCity = self.cities[-1]
 		return Path(
 			self.cities + [city],
 			self.travelledDistance + math.sqrt(
@@ -25,12 +22,6 @@ class Path:
 				(lastCity[1] - city[1]) ** 2
 			)
 		)
-
-	def __iter__(self):
-		return iter(self.cities)
-
-	def __contains__(self, city: City):
-		return city in self.cities
 
 	def __repr__(self):
 		return "Distance: {:.2f}, Path: {}".format(self.travelledDistance, self.cities)

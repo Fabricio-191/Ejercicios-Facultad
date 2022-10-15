@@ -34,21 +34,18 @@ def randomString(stringLength = 10):
 
 class Bucket:
 	__array: NDArray[Any]
-	size = 3
+	__tope: int
 
-	def __init__(self) -> None:
-		self.__array = np.full(Bucket.size, None, dtype=tuple[int, Any])
+	def __init__(self, bucketSize: int) -> None:
+		self.__array = np.full(bucketSize, None, dtype=tuple[int, Any])
+		self.__tope = 0
 
 	def insert(self, key, value):
 		if self.__array[-1] is not None:
 			raise Exception('El bucket esta completo')
 
-		for i in range(Bucket.size):
-			if self.__array[i] is None:
-				self.__array[i] = (key, value)
-				return True
-
-		return False
+		self.__array[self.__tope] = (key, value)
+		self.__tope += 1
 
 	def search(self, key):
 		for pair in self.__array:
@@ -59,23 +56,28 @@ class Bucket:
 
 class TablaHash:
 	__size: int
+	__extraccionLength: int
 	__table: NDArray[Any]
 
-	def __init__(self, size: int, usarPrimo = True) -> None:
+	def __init__(self, size: int, bucketSize: int, usarPrimo = True) -> None:
 		self.__size = int(size / 0.7 + 1)
 
 		if usarPrimo:
 			self.__size = getPrimeNumber(self.__size)
 
+		self.__extraccionLength = len(str(self.__size))
 		self.__table = np.empty(self.__size, dtype=Bucket)
 		for i in range(self.__size):
-			self.__table[i] = Bucket()
+			self.__table[i] = Bucket(bucketSize)
 
 	def getSize(self) -> int:
 		return self.__size
 
 	def __hash(self, key: int) -> int:
-		return key % self.__size
+		keyStr = str(key)
+		hash = int(keyStr[-self.__extraccionLength:])
+
+		return hash % self.__size
 
 	def insert(self, key: Any, data: Any):
 		self.__table[ self.__hash(key) ].insertar(key, data)

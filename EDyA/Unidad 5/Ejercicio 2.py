@@ -4,13 +4,12 @@ Implemente el TAD Tabla Hash teniendo en cuenta la política de manejo de colisi
 Se pide calcular la Longitud de la Secuencia de Prueba al Buscar una clave teniendo en cuenta:
 
 1.    El tamaño de la tabla Hash no es un número primo.
-
 2.    El tamaño de la tabla Hash sí es un número primo.
 """
-from enum import IntEnum
-import numpy as np
-from typing import Any
 from numpy.typing import NDArray
+from typing import Any
+
+import numpy as np
 import string, random
 
 def getPrimeNumber(size):
@@ -30,13 +29,15 @@ def randomString(stringLength = 10):
 class TablaHash:
 	__size: int
 	__table: NDArray[Any]
+	__randomNum: int
 
 	def __init__(self, size: int, usarPrimo = True) -> None:
-		if usarPrimo:
-			self.__size = getPrimeNumber(size)
-		else:
-			self.__size = size
+		self.__size = int(size / 0.7 + 1)
 
+		if usarPrimo:
+			self.__size = getPrimeNumber(self.__size)
+
+		self.__randomNum = random.randint(1, self.__size)
 		self.__table = np.full(self.__size, None)
 
 	def __hash(self, key: int) -> int:
@@ -45,54 +46,63 @@ class TablaHash:
 	def getSize(self):
 		return self.__size
 
-	def __randomProbeInsert(self, key: int):
-		index = self.__hash(key)
-		while self.__table[index] is not None:
-			if self.__table[index][0] == key:
-				raise ValueError('La clave ya existe')
+	def __pseudoRandomProbe(self, key: int):
+		originalIndex = index = self.__hash(key)
 
-			index = (index + 1) % self.__size
+		while self.__table[index] is not None and self.__table[index][0] != key:
+			index = self.__hash(index + self.__randomNum)
+
+			if index == originalIndex:
+				raise ValueError('Tabla llena')
 
 		return index
 
 	def insertar(self, key: int, value):
-		index = self.__randomProbeInsert(key)
+		index = self.__pseudoRandomProbe(key)
 		self.__table[index] = (key, value)
 
-	def __randomProbeSearch(self, key: int):
-		index = self.__hash(key)
-		while self.__table[index] is not None:
-			if self.__table[index][0] == key:
-				return index
-
-			index = (index + 1) % self.__size
-
-		raise ValueError('No se encontró la clave')
-
 	def buscar(self, key: int):
-		index = self.__randomProbeSearch(key)
-		return self.__table[index][1]
+		index = self.__pseudoRandomProbe(key)
 
-	def eliminar(self, key: int):
-		index = self.__randomProbeSearch(key)
-		self.__table[index] = None
+		if self.__table[index] is not None and self.__table[index][0] == key:
+			return self.__table[index][1]
+		else:
+			return None
 
-	def __str__(self) -> str:
-		return str(self.__table)
+	def calcularLongitudSecuenciaBusqueda(self, key: int):
+		index = self.__hash(key)
+		count = 0
+
+		while self.__table[index] is not None and self.__table[index][0] != key:
+			index = self.__hash(index + 1)
+			count += 1
+
+		return count
 
 	def calcularFactorCarga(self):
 		cantidad = sum(1 for i in self.__table if i is not None)
 
 		return cantidad / self.__size
 
+	def __repr__(self) -> str:
+		return str(self.__table)
+
 if __name__ == '__main__':
-	table = TablaHash(1000, False)
+	dataset = [(random.randint(0, 1000000), randomString()) for i in range(1000)]
 
-	dataset = [(random.randint(0, 100), randomString()) for i in range(1000)]
-	for key, value in dataset:
-		table.insertar(key, value)
-
-	print('Factor de carga:', table.calcularFactorCarga())
+	table1 = TablaHash(1000, False)
+	table2 = TablaHash(1000, True)
 
 	for key, value in dataset:
-		table.buscar(key)
+		table1.insertar(key, value)
+		table2.insertar(key, value)
+
+	searchKey = random.choice(dataset)[0]
+
+	print('Tabla 1 (sin usar un numero primo)')
+	print(f'Longitud de búsqueda: {table1.calcularLongitudSecuenciaBusqueda(searchKey)}')
+	print(f'Factor de carga: {table1.calcularFactorCarga() * 100:.2f}%')
+
+	print('Tabla 2 (usando un numero primo)')
+	print(f'Longitud de búsqueda: {table2.calcularLongitudSecuenciaBusqueda(searchKey)}')
+	print(f'Factor de carga: {table2.calcularFactorCarga() * 100:.2f}%')

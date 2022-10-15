@@ -11,11 +11,10 @@ Considerando:
 1.    La cantidad de listas de claves sinónimas no es un número primo.
 2.    La cantidad de listas de claves sinónimas sí es un número primo.
 """
-
-from enum import IntEnum
-import numpy as np
-from typing import Any
 from numpy.typing import NDArray
+from typing import Any
+
+import numpy as np
 import string, random
 
 def getPrimeNumber(size):
@@ -26,69 +25,129 @@ def getPrimeNumber(size):
 		else:
 			return i
 
-	raise ValueError("No se encontró un número primo")
+	raise ValueError('No se encontró un número primo')
 
 def randomString(stringLength = 10):
 	letters = string.ascii_lowercase
 	return ''.join(random.choice(letters) for i in range(stringLength))
+
+class Node:
+	__key: Any
+	__data: Any
+	__next: 'Node' | None
+
+	def __init__(self, key: Any, data: Any, next: 'Node' | None = None):
+		self.__key = key
+		self.__data = data
+		self.__next = next
+
+	def getKey(self): return self.__key
+	def getData(self): return self.__data
+	def setData(self, data: Any): self.__data = data
+	def setNext(self, next: 'Node' | None): self.__next = next
+	def getNext(self): return self.__next
 
 class TablaHash:
 	__size: int
 	__table: NDArray[Any]
 
 	def __init__(self, size: int, usarPrimo = True) -> None:
+		self.__size = int(size / 0.7 + 1)
+
 		if usarPrimo:
-			self.__size = getPrimeNumber(size)
-		else:
-			self.__size = size
+			self.__size = getPrimeNumber(self.__size)
 
 		self.__table = np.full(self.__size, None)
 
 	def __hash(self, key: int) -> int:
-		indices = [key % 10_000 // 100, key % 100 // 10]
-		index = 0
-		contador = 0
-		for (power, indice) in zip(range(2, 0, -1), indices):
-			if contador == power:
-				index += contador
+		result = 0
 
-			contador = (contador * 10 + indice) % self.__size
+		while key != 0:
+			result += key % 100
+			key //= 100
 
-		return index
+		return result % self.__size
 
 	def getSize(self):
 		return self.__size
 
-	def insertar(self, key: int):
+	def insertar(self, key: int, value):
 		index = self.__hash(key)
-		if self.__table[index] is None:
-			self.__table[index] = Node(endNode = True)
 
-		self.__table[index] = Node(key, self.__table[index])
+		nodo = self.__table[index]
 
+		if nodo is None:
+			self.__table[index] = Node(key, value)
+		elif nodo.getKey() == key:
+			nodo.setData(value)
+		else:
+			while nodo.getNext() is not None:
+				nodo = nodo.getNext()
 
-class Node:
-	__key: int
-	__next: Any
+				if nodo.getKey() == key:
+					nodo.setData(value)
+					return
 
-	def __init__(self, key: int, next: Any = None, endNode = False) -> None:
-		self.__key = key
-		self.__next = next
+			nodo.setNext(Node(key, value))
 
-		if endNode:
-			self.__next = Node()
+	def buscar(self, key: int):
+		index = self.__hash(key)
 
-	def getKey(self):
-		return self.__key
+		nodo = self.__table[index]
+		while nodo is not None:
+			if nodo.getKey() == key:
+				return nodo.getKey()
 
-	def getNext(self):
-		return self.__next
+			nodo = nodo.getNext()
 
-	def setNext(self, next: Any):
-		self.__next = next
+		return None
 
-	def isEndNode(self):
-		return self.__next is None
+	def eliminar(self, key: int):
+		index = self.__hash(key)
 
-	def __str__(self) -> str:
-		return f"({self.__key}, {self.__next})"
+		nodo = self.__table[index]
+		ant = None
+
+		while nodo is not None:
+			if nodo.getKey() == key:
+				if ant is None:
+					self.__table[index] = nodo.getNext()
+				else:
+					ant.setNext(nodo.getNext())
+
+				return True
+
+			ant = nodo
+			nodo = nodo.getNext()
+
+		return False
+
+	def calcularFactorCarga(self):
+		cantidad = sum(1 for i in self.__table if i is not None)
+
+		return cantidad / self.__size
+
+	def __repr__(self) -> str:
+		return str(self.__table)
+
+if __name__ == '__main__':
+	dataset = [(random.randint(0, 1000000), randomString()) for i in range(1000)]
+
+	table1 = TablaHash(1000, False)
+	"""
+	table2 = TablaHash(1000, True)
+
+	for key, value in dataset:
+		table1.insertar(key, value)
+		table2.insertar(key, value)
+
+	searchKey = random.choice(dataset)[0]
+
+	print('Tabla 1 (sin usar un numero primo)')
+	print(f'Longitud de búsqueda: {table1.calcularLongitudSecuenciaBusqueda(searchKey)}')
+	print(f'Factor de carga: {table1.calcularFactorCarga() * 100:.2f}%')
+
+	print('Tabla 2 (usando un numero primo)')
+	print(f'Longitud de búsqueda: {table2.calcularLongitudSecuenciaBusqueda(searchKey)}')
+	print(f'Factor de carga: {table2.calcularFactorCarga() * 100:.2f}%')
+	"""

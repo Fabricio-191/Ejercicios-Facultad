@@ -1,10 +1,10 @@
 from TravellingSalesman import TravellingSalesman
 from Graph import staticGraph
-import math
+from math import factorial
 
 if __name__ == '__main__':
-	cities = [(64, 46), (38, 36), (0, 74), (95, 65), (19, 13), (3, 12), (91, 10), (78, 74), (45, 50), (58, 70)]
-	print('Caminos posibles: ', math.factorial(len(cities) - 1))
+	cities = TravellingSalesman.generateCities(10)
+	print('Caminos posibles: ', factorial(len(cities) - 1))
 	print('Ciudades: ', cities)
 
 	tsp = TravellingSalesman(cities)

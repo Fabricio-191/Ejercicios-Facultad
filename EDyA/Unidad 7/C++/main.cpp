@@ -69,12 +69,12 @@ class Path {
 			return Path(newCities, this->citiesQty + 1, newDistance);
 		}
 
-		Path operator += (City city){
-			return *this + city;
-		}
-
 		void print(){
-			printf("Distance: %.2f \t Cities: [ \n", this->distance);
+			printf("Distance: %.2f   Cities: [ ", this->distance);
+			for(int i = 0; i < this->citiesQty - 1; i++){
+				printf("(%.0f, %.0f), ", this->cities[i].x, this->cities[i].y);
+			}
+			printf("(%.0f, %.0f) ]\n", this->cities[this->citiesQty - 1].x, this->cities[this->citiesQty - 1].y);
 		}
 };
 
@@ -115,7 +115,7 @@ class TravellingSalesman {
 	private:
 		void process(Path path){
 			if(path.citiesQty == N){
-				path += *this->start;
+				path = path + *this->start;
 
 				if (path.distance < this->lessDistance){
 					this->solution = &path;
@@ -154,10 +154,10 @@ class TravellingSalesman {
 					}
 				}
 
-				path += closestCity;
+				path = path + closestCity;
 			}
 
-			path += *this->start;
+			path = path + *this->start;
 			this->solution = &path;
 			printf("Caso base: \n");
 			this->solution->print();

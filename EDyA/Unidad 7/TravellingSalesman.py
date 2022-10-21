@@ -61,13 +61,14 @@ class TravellingSalesman:
 		self.graph(self.solution)
 
 	def resolve(self, start: City, baseCase = True, graph = True):
-		self.lessDistance = float('inf')
 		self.solution = None
+		self.lessDistance = float('inf')
 		self.start = start
-
+		
+		Path.distancesBetweenCities = self.distancesBetweenCities
 		self.__graph = Graph(self.cities) if graph else None
 		if baseCase: self.baseCase()
-		
+
 		self.process(
 			Path([self.start], 0)
 		)

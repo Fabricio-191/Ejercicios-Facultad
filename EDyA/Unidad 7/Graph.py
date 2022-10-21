@@ -5,25 +5,24 @@ from time import sleep
 class Graph:
 	cities: list[City]
 
-
 	def __init__(self, cities: list[City]):
 		self.__cities = cities
 		self.__fig, self.__ax = plt.subplots(1, 2)
 		self.__fig.set_size_inches(12, 6)
-		self.__title1 = self.__ax[0].set_title('Intento: 0, distancia: 0')
-		self.__title2 = self.__ax[1].set_title('Mejor camino, distancia: 0')
+		# self.__title1 = self.__ax[0].set_title('Intento: 0, distancia: 0')
+		# self.__title2 = self.__ax[1].set_title('Mejor camino, distancia: 0')
 		self.__fig.show()
 	
 	__intento = 0
 	def updatePath(self, path: Path):
 		self.__intento += 1
-		self.__title1.set_text('Intento: {}, distancia: {:.2f}'.format(self.__intento, path.travelledDistance))
+		# self.__title1.set_text('Intento: {}, distancia: {:.2f}'.format(self.__intento, path.travelledDistance))
 		self.__draw(self.__ax[0], path, 'red')
 		self.__fig.canvas.draw()
 		self.__fig.canvas.flush_events()
 	
 	def updateBestPath(self, path: Path):
-		self.__title2.set_text('Mejor camino, distancia: {}'.format(path.travelledDistance))
+		# self.__title2.set_text('Mejor camino, distancia: {}'.format(path.travelledDistance))
 		self.__draw(self.__ax[1], path, 'green')
 		self.updatePath(path)
 

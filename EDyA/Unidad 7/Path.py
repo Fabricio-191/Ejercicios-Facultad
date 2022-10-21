@@ -3,8 +3,9 @@ import math
 City = tuple[int, int]
 
 class Path:
-	travelledDistance: float
+	distancesBetweenCities: dict[City, dict[City, float]] = {}
 	cities: list[City]
+	travelledDistance: float
 
 	def __init__(self, path, distance):
 		self.cities = path
@@ -14,13 +15,9 @@ class Path:
 		return len(self.cities)
 
 	def __add__(self, city: City):
-		lastCity = self.cities[-1]
 		return Path(
 			self.cities + [city],
-			self.travelledDistance + math.sqrt(
-				(lastCity[0] - city[0]) ** 2 +
-				(lastCity[1] - city[1]) ** 2
-			)
+			self.travelledDistance + self.distancesBetweenCities[self.cities[-1]][city]
 		)
 
 	def __repr__(self):

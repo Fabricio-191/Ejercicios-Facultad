@@ -79,48 +79,32 @@ class Path {
 };
 
 class TravellingSalesman {
-	private:
+	public:
 		City* cities;
 		City* start;
 		Path* solution;
 		float lessDistance;
-		map<City, map<City, float>> distances;
 
-	public:
 		TravellingSalesman(City* cities){
 			this->cities = cities;
-			this->solution = NULL;
-
-			for(int i = 0; i < N; i++){
-				City city1 = cities[i];
-				for(int j = 0; j < N; j++){
-					City city2 = cities[j];
-					this->distances[city1][city2] = city1.distanceTo(city2);
-				}
-			}
 		};
 
-		Path* resolve(City start) {
+		Path resolve(City start) {
 			Path startPath = Path({ &start }, 1, 0);
 			this->start = &start;
 			this->lessDistance = Infinity;
 
 			this->process(startPath);
 
-			printf("B");
-			this->solution->print();
-			return this->solution;
+			return *this->solution;
 		}
 
-	private:
 		void process(Path path){
 			if(path.citiesQty == N){
 				path = path + *this->start;
 
 				if (path.distance < this->lessDistance){
 					this->solution = &path;
-					printf("A");
-					this->solution->print();
 					this->lessDistance = path.distance;
 				}
 			}else if(path.distance < this->lessDistance){
@@ -145,7 +129,7 @@ class TravellingSalesman {
 					City city = this->cities[j];
 
 					if(!path.hasCity(city)){
-						float distance = this->distances[path.cities[path.citiesQty - 1]][city];
+						float distance = path.cities[path.citiesQty - 1].distanceTo(city);
 
 						if(distance < closestDistance){
 							closestDistance = distance;
@@ -182,9 +166,9 @@ int main(){
 	City* cities = generateCities();
 	TravellingSalesman salesman = TravellingSalesman(cities);
 
-	Path* solution = salesman.resolve(cities[0]);
+	Path solution = salesman.resolve(cities[0]);
 	printf("Mejor solucion: \n");
-	solution->print();
+	solution.print();
 
 	return 0;
 }

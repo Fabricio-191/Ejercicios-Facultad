@@ -6,7 +6,7 @@ class TravellingSalesman:
 	cities: list[City]
 	start: City
 	distancesBetweenCities: dict[City, dict[City, float]]
-	__graph: Graph | None
+	__graph: None # Graph | None
 
 	def __init__(self, cities: list[City]):
 		self.cities = cities

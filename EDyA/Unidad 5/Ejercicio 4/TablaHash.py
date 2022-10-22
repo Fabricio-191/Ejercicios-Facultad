@@ -17,11 +17,14 @@ class Bucket:
 	__tope: int
 
 	def __init__(self, bucketSize: int) -> None:
-		self.__array = np.full(bucketSize, None, dtype=tuple[int, Any])
+		self.__array = np.full(bucketSize, None)
 		self.__tope = 0
 
 	def estaLleno(self):
 		return self.__array[-1] is not None
+
+	def estaSubocupado(self):
+		return self.__tope < (self.__array.size // 3)
 
 	def insert(self, key, value):
 		if self.estaLleno():
@@ -37,6 +40,9 @@ class Bucket:
 		
 		return None
 
+	def __repr__(self):
+		return str(self.__array)
+
 class TablaHash:
 	__extraccionLength: int
 	__size: int
@@ -45,18 +51,20 @@ class TablaHash:
 	__overflowTable: Any # NDArray[Bucket]
 
 	def __init__(self, size: int, bucketSize: int, usarPrimo = True) -> None:
-		self.__size = int(size / 0.7 + 1)
+		self.__size = size
 
 		if usarPrimo:
-			self.__size = getPrimeNumber(self.__size)
+			self.__size = getPrimeNumber(int(self.__size / 0.7 + 1))
 
 		self.__extraccionLength = len(str(self.__size))
 		self.__mainTable = np.empty(self.__size, dtype=Bucket)
 		for i in range(self.__size):
 			self.__mainTable[i] = Bucket(bucketSize)
 
-		self.__overflowSize = int(self.__size / 100)
+		self.__overflowSize = self.__size // 10
 		self.__overflowTable = np.empty(self.__overflowSize, dtype=Bucket)
+		for i in range(self.__overflowSize):
+			self.__overflowTable[i] = Bucket(bucketSize)
 
 	def getSize(self) -> int:
 		return self.__size
@@ -70,7 +78,7 @@ class TablaHash:
 	def __overflowHash(self, key: int) -> int:
 		return key % self.__overflowSize
 
-	def insert(self, key: Any, data: Any):
+	def insertar(self, key: int, data: Any):
 		hash = self.__hash(key)
 		bucket = self.__mainTable[ hash ]
 
@@ -80,7 +88,7 @@ class TablaHash:
 		else:
 			bucket.insert(key, data)
 
-	def search(self, key: int) -> Any:
+	def buscar(self, key: int) -> Any:
 		hash = self.__hash(key)
 		result = self.__mainTable[ hash ].search(key)
 
@@ -90,5 +98,5 @@ class TablaHash:
 		overflowBucket = self.__overflowTable[ self.__overflowHash(hash) ]
 		return overflowBucket.search(key)
 
-		
-
+	def __iter__(self):
+		return iter(self.__mainTable)

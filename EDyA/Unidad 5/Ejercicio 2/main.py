@@ -9,41 +9,24 @@ Se pide calcular la Longitud de la Secuencia de Prueba al Buscar una clave tenie
 import random
 from TablaHash import TablaHash
 
-def getPrimeNumber(size):
-	for i in range(size, 2 * size):
-		for j in range(2, i):
-			if i % j == 0:
-				break
-		else:
-			return i
-
-	raise ValueError('No se encontró un número primo')
-
-def datasetWithoutDuplicates(dataset):
-	yielded = []
-
-	for key, value in reversed(dataset):
-		if key not in yielded:
-			yielded.append(key)
-			yield key, value
-
 def test(dataset, size, usarPrimo):
 	table = TablaHash(size, usarPrimo)
 
 	for key, value in dataset:
 		table.insertar(key, value)
 
-	table.getProbeLength()
+	table.probeLength = 0
 
-	for key, value in datasetWithoutDuplicates(dataset):
-		assert table.buscar(key) == value
+	for key, value in dataset:
+		table.buscar(key)
 
-	print(f'Tamaño {size} (tamaño real {table.getSize()})')
-	print(f'Factor de carga: {table.calcularFactorCarga() * 100:.2f}%')
-	print('Longitud de la secuencia de prueba:', table.getProbeLength())
+	print(f'  Tamaño {size} (tamaño real {table.getSize()})')
+	print(f'  Factor de carga: {table.calcularFactorCarga() * 100 :.2f}%')
+	print(f'  Longitud promedio de la secuencia de prueba: {table.probeLength / 1000 :.2f}')
 
 if __name__ == '__main__':
 	tamañoInicial = 1000
+	# random.seed(30)
 	dataset = [(random.randint(0, 1000000), i) for i in range(tamañoInicial)]
 
 	print('Tabla Hash con tamaño no primo')

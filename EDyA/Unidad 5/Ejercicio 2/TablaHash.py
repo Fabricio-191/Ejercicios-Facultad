@@ -19,13 +19,14 @@ class TablaHash:
 	__randomNum: int
 
 	def __init__(self, size: int, usarPrimo = True) -> None:
-		self.__size = int(size / 0.7 + 1)
+		self.__size = size
 
 		if usarPrimo:
-			self.__size = getPrimeNumber(self.__size)
+			self.__size = getPrimeNumber(int(self.__size / 0.7) + 1)
 
-		self.__randomNum = random.randint(1, self.__size)
 		self.__table = np.full(self.__size, None)
+		self.probeLength = 0
+		self.__randomNum = random.randint(1, self.__size)
 
 	def __hash(self, key: int) -> int:
 		return key % self.__size
@@ -33,18 +34,12 @@ class TablaHash:
 	def getSize(self):
 		return self.__size
 
-	__longProbe: int = 0
-	def getProbeLength(self):
-		value = self.__longProbe
-		self.__longProbe = 0
-
-		return value
-
+	probeLength: int = 0
 	def __pseudoRandomProbe(self, key: int):
 		originalIndex = index = self.__hash(key)
 
 		while self.__table[index] is not None and self.__table[index][0] != key:
-			self.__longProbe += 1
+			self.probeLength += 1
 			index = self.__hash(index + self.__randomNum)
 
 			if index == originalIndex:

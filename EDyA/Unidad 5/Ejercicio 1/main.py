@@ -10,31 +10,24 @@ Realice un breve análisis comparativo basado en las dos consideraciones anterio
 import random
 from TablaHash import TablaHash
 
-def datasetWithoutDuplicates(dataset):
-	yielded = []
-
-	for key, value in reversed(dataset):
-		if key not in yielded:
-			yielded.append(key)
-			yield key, value
-
 def test(dataset, size, usarPrimo):
 	table = TablaHash(size, usarPrimo)
 
 	for key, value in dataset:
 		table.insertar(key, value)
 
-	table.getProbeLength()
+	table.probeLength = 0
 
-	for key, value in datasetWithoutDuplicates(dataset):
-		assert table.buscar(key) == value
+	for key, value in dataset:
+		table.buscar(key)
 
-	print(f'Tamaño {size} (tamaño real {table.getSize()})')
-	print(f'Factor de carga: {table.calcularFactorCarga() * 100:.2f}%')
-	print('Longitud de la secuencia de prueba:', table.getProbeLength())
+	print(f'  Tamaño {size} (tamaño real {table.getSize()})')
+	print(f'  Factor de carga: {table.calcularFactorCarga() * 100 :.2f}%')
+	print(f'  Longitud promedio de la secuencia de prueba: {table.probeLength / 1000 :.2f}')
 
 if __name__ == '__main__':
 	tamañoInicial = 1000
+	# random.seed(30)
 	dataset = [(random.randint(0, 1000000), i) for i in range(tamañoInicial)]
 
 	print('Tabla Hash con tamaño no primo')

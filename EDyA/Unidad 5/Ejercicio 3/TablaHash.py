@@ -111,10 +111,10 @@ class TablaHash:
 	__table: Any # NDArray[Any]
 
 	def __init__(self, size: int, usarPrimo = True) -> None:
-		self.__size = int(size / 0.7 + 1)
-
 		if usarPrimo:
-			self.__size = getPrimeNumber(self.__size)
+			self.__size = getPrimeNumber(int(size / 0.7) + 1)
+		else:
+			self.__size = size
 
 		self.__table = np.full(self.__size, None)
 		for i in range(self.__size):
@@ -124,8 +124,8 @@ class TablaHash:
 		result = 0
 
 		while key != 0:
-			result += key % 100
-			key //= 100
+			result += key % 1000
+			key //= 1000
 
 		return result % self.__size
 

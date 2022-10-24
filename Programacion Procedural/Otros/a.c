@@ -4,7 +4,7 @@
 #include <ctype.h>
 
 #define LINE_LENGTH 7
-#define MAX_ArticuloS 100
+#define MAX_ARTICULOS 100
 
 typedef struct {
 	int orden, anio;
@@ -75,7 +75,7 @@ int main(){
 		return -1;
 	}
 
-	Articulo articulos[MAX_ArticuloS];
+	Articulo articulos[MAX_ARTICULOS];
 	int cant = leerArchivo(articulos, archivo);
 	fclose(archivo);
 	

@@ -27,7 +27,7 @@ def test(dataset, size, usarPrimo):
 
 if __name__ == '__main__':
 	tamañoInicial = 1000
-	# random.seed(30)
+	random.seed(111)
 	dataset = [(random.randint(0, 1000000), i) for i in range(tamañoInicial)]
 
 	print('Tabla Hash con tamaño no primo')

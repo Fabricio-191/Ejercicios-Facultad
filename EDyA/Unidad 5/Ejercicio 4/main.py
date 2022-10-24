@@ -40,7 +40,7 @@ def test(dataset, size: int, bucketSize: int, usarPrimo: bool):
 if __name__ == '__main__':
 	tamañoInicial = 100
 	tamañoBucket = 15
-	# random.seed(30)
+	random.seed(111)
 	dataset = [(random.randint(0, 1000000), i) for i in range(tamañoInicial * 10)]
 
 	print('Tabla Hash con tamaño no primo')

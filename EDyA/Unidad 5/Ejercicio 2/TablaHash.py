@@ -43,7 +43,7 @@ class TablaHash:
 			index = self.__hash(index + self.__randomNum)
 
 			if index == originalIndex:
-				raise ValueError('Tabla llena')
+				raise ValueError('Fallo al insertar')
 
 		return index
 

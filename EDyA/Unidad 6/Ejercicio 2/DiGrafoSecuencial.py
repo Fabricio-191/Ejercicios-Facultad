@@ -12,24 +12,21 @@ Defina TAD Grafo e implemente todas las operaciones vistas en teoría y determin
 	b. Representación encadenada.
 """
 
-Nodo = str
+Nodo = int
 
 class Grafo:
 	__nodos: NDArray[Any]
 	__adyacencia: NDArray[Any]
-	__pesos: NDArray[Any]
 
 	def __init__(self, nodos: list[Nodo], adyacencia: list[tuple[Nodo, Nodo]]) -> None:
 		self.__nodos = np.array(nodos)
 		self.__adyacencia = np.full((len(nodos), len(nodos)), False)
-		self.__pesos = np.full((len(nodos), len(nodos)), 1)
 
-		for par in adyacencia:
-			i = self.__posNodo(par[0])
-			j = self.__posNodo(par[1])
+		for nodo1, nodo2 in adyacencia:
+			i = self.__posNodo(nodo1)
+			j = self.__posNodo(nodo2)
 
 			self.__adyacencia[i][j] = True
-			self.__adyacencia[j][i] = True
 				
 	def __posNodo(self, nodo):
 		for i in range(len(self.__nodos)):
@@ -75,39 +72,25 @@ class Grafo:
 		pass
 
 	def esConexo(self):
-		encontrados = []
-		self.recorridoEnAncho(self.__nodos[0], lambda nodo: encontrados.append(nodo))
+		for nodo in self.__nodos:
+			encontrados = []
+			self.recorridoEnAncho(nodo, lambda nodo: encontrados.append(nodo))
 
-		return len(encontrados) == len(self.__nodos)
-
-	def __esAciclico(self, nodo, recorridos, padres):
-		recorridos.append(nodo)
-
-		for nodo in self.adyacentes(nodo):
-			if nodo in padres:
+			if len(encontrados) != len(self.__nodos):
 				return False
-
-			if nodo not in recorridos:
-				if not self.__esAciclico(nodo, recorridos, padres + [nodo]):
-					return False
 
 		return True
 
 	def esAciclico(self):
-		return self.__esAciclico(self.__nodos[0], [], [])
+		for nodo in self.__nodos:
+			for adyacente in self.adyacentes(nodo):
+				if self.camino(adyacente, nodo):
+					return False
+
+		return True
 
 	def arbolDeRecubrimiento(self):
 		pass
-
-	def __algoritmoDijkstra(self, nodo, pesos, recorridos, padres):
-		recorridos.append(nodo)
-
-		for nodo in self.adyacentes(nodo):
-			if nodo not in recorridos:
-				padres[nodo] = nodo
-				pesos[nodo] = pesos[nodo] + pesos[nodo]
-
-				self.__algoritmoDijkstra(nodo, pesos, recorridos, padres)
 	
 	# recorrido en ancho del grafo
 	def recorridoEnAncho(self, nodo, callback):
@@ -134,22 +117,20 @@ class Grafo:
 
 	def recorridoEnProfundidad(self, nodo, callback):
 		self.__recorridoEnProfundidad(nodo, [], callback)
-	
 
 def graficar(nodos: list[Nodo], adyacencia: list[tuple[Nodo, Nodo]]):
-	G = nx.Graph()
+	G = nx.DiGraph()
 	G.add_nodes_from(nodos)
 	G.add_edges_from(adyacencia)
 	nx.draw(G, with_labels=True)
 	plt.show()
 
 if __name__ == '__main__':
-	nodos = ['A', 'B', 'C', 'D', 'E']
-	adyacencia = [('A', 'B'), ('B', 'C'), ('C', 'E'), ('C', 'D'), ('A', 'E')]
+	nodos = [6, 7, 8, 9, 10]
+	adyacencia = [(6, 7), (7, 8), (8, 9), (8, 10)]
 
 	grafo = Grafo(nodos, adyacencia)
 
-	print(grafo.camino('A', 'E'))
-	print(grafo.camino('A', 'D'))
-	print(grafo.esAciclico())
+	print(grafo.camino(6, 9))
+	print(grafo.camino(6, 10))
 	graficar(nodos, adyacencia)

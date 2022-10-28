@@ -13,16 +13,15 @@ Defina TAD Grafo e implemente todas las operaciones vistas en teoría y determin
 	b. Representación encadenada.
 """
 
-Nodo = int
+Nodo = str
 
 class Grafo:
 	__nodos: NDArray[Any]
 	__adyacencia: NDArray[Any]
 
 	def __init__(self, nodos: list[Nodo], adyacencia: list[tuple[Nodo, Nodo]]) -> None:
-		N = len(nodos)
 		self.__nodos = np.array(nodos)
-		self.__adyacencia = np.array([ListaEnlazada() for i in range(N)])
+		self.__adyacencia = np.array([ListaEnlazada() for i in range(len(nodos))])
 
 		for nodo1, nodo2 in adyacencia:
 			i = self.__posNodo(nodo1)
@@ -31,7 +30,7 @@ class Grafo:
 			self.__adyacencia[i].insertar(j)
 			self.__adyacencia[j].insertar(i)
 				
-	def __posNodo(self, nodo):
+	def __posNodo(self, nodo: Nodo):
 		for i in range(len(self.__nodos)):
 			if self.__nodos[i] == nodo:
 				return i
@@ -125,11 +124,11 @@ def graficar(nodos: list[Nodo], adyacencia: list[tuple[Nodo, Nodo]]):
 	plt.show()
 
 if __name__ == '__main__':
-	nodos = [6, 7, 8, 9, 10]
-	adyacencia = [(6, 7), (7, 8), (8, 9), (8, 10)]
+	nodos = ['A', 'B', 'C', 'D', 'E']
+	adyacencia = [('A', 'B'), ('B', 'C'), ('C', 'E'), ('C', 'D')]
 
 	grafo = Grafo(nodos, adyacencia)
 
-	print(grafo.camino(6, 9))
-	print(grafo.camino(6, 10))
+	print(grafo.camino('A', 'E'))
+	print(grafo.camino('A', 'D'))
 	graficar(nodos, adyacencia)

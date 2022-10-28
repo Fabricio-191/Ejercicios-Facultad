@@ -59,7 +59,6 @@ class Grafo:
 
 		return None
 
-	# devulve el camino del nodo1 al nodo2
 	def camino(self, nodo1: Nodo, nodo2: Nodo) -> list[Nodo] | None:
 		self.__posNodo(nodo1)
 		self.__posNodo(nodo2)

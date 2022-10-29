@@ -73,6 +73,7 @@ class Grafo:
 
 		return len(encontrados) == len(self.__nodos)
 
+
 	def caminoMinimo(self, nodo1, nodo2):
 		# Inicializar tabla
 		tabla = {}
@@ -124,6 +125,7 @@ class Grafo:
 	def camino(self, inicio, destino):
 		return self.__camino(inicio, destino, [])
 
+
 	def recorridoEnAncho(self, nodo, callback):
 		recorridos = []
 		cola = [nodo]
@@ -148,6 +150,7 @@ class Grafo:
 
 	def recorridoEnProfundidad(self, nodo, callback):
 		self.__recorridoEnProfundidad(nodo, [], callback)
+
 
 	def __todosLosCaminosPosibles(self, nodo, destino, recorridos, caminos):
 		recorridos.append(nodo)
@@ -177,6 +180,7 @@ class Grafo:
 	def esAciclico(self):
 		return not self.tieneCicloDeLongitud3omas()
 
+
 def graficar(nodos: list[Nodo], adyacencia: list[tuple[Nodo, Nodo]]):
 	G = nx.Graph()
 	G.add_nodes_from(nodos)
@@ -193,5 +197,5 @@ if __name__ == '__main__':
 	print(grafo.caminoMinimo('A', 'D'))
 	print(grafo.caminoMinimo('A', 'E'))
 	print(grafo.caminoMinimo('A', 'B'))
-	print(grafo.tieneCicloDeLongitud3omas())
+	print(grafo.esAciclico())
 	graficar(nodos, adyacencia)

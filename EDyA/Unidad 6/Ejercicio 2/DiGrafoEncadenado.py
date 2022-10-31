@@ -13,15 +13,14 @@ class DiGrafoEncadenado(DiGrafoBase):
 
 			self._adyacencia[i].insertar(j)
 
-
 if __name__ == '__main__':
-	nodos = ['A', 'B', 'C', 'D', 'E']
-	adyacencia = [('A', 'B'), ('B', 'C'), ('C', 'E'), ('C', 'D'), ('D', 'E')]
+	nodos = ['A', 'B', 'C', 'D', 'E', 'F']
+	adyacencia = [('A', 'B'), ('A', 'D'), ('B', 'C'), ('B', 'E'), ('B', 'F'), ('C', 'D'), ('D', 'B'), ('E', 'D'), ('E', 'F'), ('F', 'D'), ('F', 'A')]
 
 	grafo = DiGrafoEncadenado(nodos, adyacencia)
 
 	print(grafo.caminoMinimo('A', 'D'))
 	print(grafo.caminoMinimo('A', 'E'))
-	print(grafo.caminoMinimo('A', 'B'))
+	print(grafo.caminoMinimo('A', 'C'))
 	print(grafo.esAciclico())
 	grafo.graficar(nodos, adyacencia)

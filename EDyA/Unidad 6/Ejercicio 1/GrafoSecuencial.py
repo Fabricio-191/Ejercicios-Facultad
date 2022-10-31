@@ -24,4 +24,4 @@ if __name__ == '__main__':
 	print(grafo.caminoMinimo('A', 'E'))
 	print(grafo.caminoMinimo('A', 'B'))
 	print(grafo.esAciclico())
-	grafo.graficar(nodos, adyacencia)
+	GrafoSecuencial.graficar(nodos, adyacencia)

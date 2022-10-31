@@ -1,4 +1,3 @@
-from re import S
 import numpy as np
 from typing import Any
 # from numpy.typing import NDArray  # type: ignore
@@ -21,7 +20,7 @@ class Registro:
         self.distancia = distancia
         self.camino = camino
 
-class GrafoBase:
+class DiGrafoBase:
 	__nodos: Any # NDArray[Any]
 	_adyacencia: Any # NDArray[Any]
 	__pesos: Any # NDArray[Any]
@@ -45,24 +44,49 @@ class GrafoBase:
 			i = self._posNodo(nodo1)
 			j = self._posNodo(nodo2)
 
-			self.__pesos[i][j] = self.__pesos[j][i] = peso
+			self.__pesos[i][j] = peso
 	
 	def adyacentes(self, nodo: Nodo):
 		posNodo = self._posNodo(nodo)
 		
 		adyacentes = []
 		for i in range(len(self._adyacencia)):
-			if self._adyacencia[posNodo][i]:
+			if self._adyacencia[posNodo][i] or self._adyacencia[i][posNodo]:
 				adyacentes.append(self.__nodos[i])
 
 		return adyacentes
 
+	# da una lista de los nodos a los que se puede ir desde un nodo particular
+	def nodosSalida(self, nodo: Nodo):
+		posNodo = self._posNodo(nodo)
+		
+		nodos = []
+		for i in range(len(self._adyacencia)):
+			if self._adyacencia[posNodo][i]:
+				nodos.append(self.__nodos[i])
+
+		return nodos
+
+	def nodosEntrada(self, nodo: Nodo):
+		posNodo = self._posNodo(nodo)
+		
+		nodos = []
+		for i in range(len(self._adyacencia)):
+			if self._adyacencia[i][posNodo]:
+				nodos.append(self.__nodos[i])
+
+		return nodos
+
 	def esConexo(self):
-		encontrados = []
-		self.recorridoEnAncho(self.__nodos[0], lambda nodo: encontrados.append(nodo))
+		for nodo in self.__nodos:
+			encontrados = []
 
-		return len(encontrados) == len(self.__nodos)
+			self.recorridoEnAncho(nodo, lambda nodo: encontrados.append(nodo))
 
+			if len(encontrados) != len(self.__nodos):
+				return False
+
+		return True
 
 	def caminoMinimo(self, nodo1, nodo2):
 		# Inicializar tabla
@@ -83,7 +107,7 @@ class GrafoBase:
 			tabla[v].conocido = True
 
 			# Actualizar tabla
-			for w in self.adyacentes(v): # type: ignore
+			for w in self.nodosSalida(v): # type: ignore
 				if not tabla[w].conocido:
 					if tabla[v].distancia + self.peso(v, w) < tabla[w].distancia:
 						tabla[w].distancia = tabla[v].distancia + self.peso(v, w)
@@ -96,9 +120,9 @@ class GrafoBase:
 			camino.append(nodo)
 			nodo = tabla[nodo].camino
 
-		if camino[0] != nodo1:
+		if camino[-1] != nodo1:
 			raise Exception("No hay camino")
-			
+
 		return camino[::-1]
 
 	def camino(self, inicio, destino, recorridos = []):
@@ -107,12 +131,12 @@ class GrafoBase:
 
 		recorridos.append(inicio)
 
-		for nodo in self.adyacentes(inicio):
+		for nodo in self.nodosSalida(inicio):
 			if nodo not in recorridos:
 				camino = self.camino(nodo, destino, recorridos)
 				if camino != None:
 					return [inicio] + camino
-		
+
 		raise Exception("No hay camino")
 
 
@@ -125,7 +149,7 @@ class GrafoBase:
 			callback(nodo)
 			recorridos.append(nodo)
 
-			for nodo in self.adyacentes(nodo):
+			for nodo in self.nodosSalida(nodo):
 				if nodo not in recorridos:
 					cola.append(nodo)
 					recorridos.append(nodo)
@@ -134,7 +158,7 @@ class GrafoBase:
 		callback(nodo)
 		recorridos.append(nodo)
 
-		for nodo in self.adyacentes(nodo):
+		for nodo in self.nodosSalida(nodo):
 			if nodo not in recorridos:
 				self.recorridoEnProfundidad(nodo, recorridos, callback)
 
@@ -145,7 +169,7 @@ class GrafoBase:
 		if nodo == destino:
 			caminos.append(recorridos[:])
 		else:
-			for nodo in self.adyacentes(nodo):
+			for nodo in self.nodosSalida(nodo):
 				if nodo not in recorridos:
 					self._todosLosCaminosPosibles(nodo, destino, recorridos, caminos)
 
@@ -153,10 +177,9 @@ class GrafoBase:
 		return caminos
 
 	# devuelve true si el grafo tiene un ciclo de longitud 3 o mas
-
 	def esAciclico(self):
 		for nodo in self.__nodos:
-			for nodo2 in self.adyacentes(nodo):
+			for nodo2 in self.nodosSalida(nodo):
 				caminos = self._todosLosCaminosPosibles(nodo2, nodo, [], [])
 				for camino in caminos:
 					if len(camino) >= 2:
@@ -167,21 +190,38 @@ class GrafoBase:
 	"""
 	def esAciclico(self):
 		for nodo in self.__nodos:
-			for nodo2 in self.adyacentes(nodo):
-				for nodo3 in self.adyacentes(nodo2):
-					if nodo3 in self.adyacentes(nodo):
+			for nodo2 in self.nodosSalida(nodo):
+				for nodo3 in self.nodosSalida(nodo2):
+					if nodo3 in self.nodosSalida(nodo):
 						return False
 
 		return True
 	"""
+
+	def nodosFuente(self):
+		nodos = []
+		for nodo in self.__nodos:
+			if len(self.nodosEntrada(nodo)) == 0:
+				nodos.append(nodo)
+
+		return nodos
+
+	def nodosSumidero(self):
+		nodos = []
+		for nodo in self.__nodos:
+			if len(self.nodosSalida(nodo)) == 0:
+				nodos.append(nodo)
+
+		return nodos
 	
 	@staticmethod
 	def graficar(nodos: list[Nodo], adyacencia: list[tuple[Nodo, Nodo]]):
-		G = nx.Graph()
+		G = nx.DiGraph()
 		G.add_nodes_from(nodos)
 		G.add_edges_from(adyacencia)
 		nx.draw(G, with_labels=True)
 		plt.show()
+
 
 
 """

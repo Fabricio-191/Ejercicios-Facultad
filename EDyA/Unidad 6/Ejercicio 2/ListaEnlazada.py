@@ -2,7 +2,7 @@ from __future__ import annotations
 
 class Nodo:
 	__value: int
-	__next: Nodo | None
+	__next: 'Nodo' | None
 
 	def __init__(self, value: int, next: Nodo | None = None) -> None:
 		self.__value = value
@@ -39,3 +39,5 @@ class ListaEnlazada:
 	
 	def __getitem__(self, item):
 		return self.has(item)
+
+		

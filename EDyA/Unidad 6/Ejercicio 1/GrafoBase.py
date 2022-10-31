@@ -21,56 +21,60 @@ class Registro:
         self.camino = camino
 
 class GrafoBase:
-	_nodos: NDArray[Any]
+	__nodos: NDArray[Any]
 	_adyacencia: NDArray[Any]
-	_pesos: NDArray[Any]
+	__pesos: NDArray[Any]
 
-	def __init__(self, nodos: list[Nodo], adyacencia: list[tuple[Nodo, Nodo]]) -> None:
-		self._nodos = np.array(nodos)
-		self._pesos = np.full((len(nodos), len(nodos)), 1)
+	def __init__(self, nodos: list[Nodo]) -> None:
+		self.__nodos = np.array(nodos)
+		self.__pesos = np.full((len(nodos), len(nodos)), 1)
 
 	def _posNodo(self, nodo):
-		for i in range(len(self._nodos)):
-			if self._nodos[i] == nodo:
+		for i in range(len(self.__nodos)):
+			if self.__nodos[i] == nodo:
 				return i
 		
 		raise Exception("Nodo invalido")
 
 	def peso(self, nodo1, nodo2):
-		return self._pesos[self._posNodo(nodo1)][self._posNodo(nodo2)]
+		return self.__pesos[self._posNodo(nodo1)][self._posNodo(nodo2)]
 
 	def setPesos(self, pesos: list[tuple[Nodo, Nodo, float]]):
 		for nodo1, nodo2, peso in pesos:
 			i = self._posNodo(nodo1)
 			j = self._posNodo(nodo2)
 
-			self._pesos[i][j] = self._pesos[j][i] = peso
+			self.__pesos[i][j] = self.__pesos[j][i] = peso
+	
+	def adyacentes(self, nodo: Nodo):
+		posNodo = self._posNodo(nodo)
+		
+		adyacentes = []
+		for i in range(len(self._adyacencia)):
+			if self._adyacencia[posNodo][i]:
+				adyacentes.append(self.__nodos[i])
 
-	def adyacentes(self, nodo: Nodo) -> list[Nodo]:
-		raise NotImplementedError
-
-	def grado(self, nodo):
-		return len(self.adyacentes(nodo))
+		return adyacentes
 
 	def esConexo(self):
 		encontrados = []
-		self.recorridoEnAncho(self._nodos[0], lambda nodo: encontrados.append(nodo))
+		self.recorridoEnAncho(self.__nodos[0], lambda nodo: encontrados.append(nodo))
 
-		return len(encontrados) == len(self._nodos)
+		return len(encontrados) == len(self.__nodos)
 
 
 	def caminoMinimo(self, nodo1, nodo2):
 		# Inicializar tabla
 		tabla = {}
-		for nodo in self._nodos:
+		for nodo in self.__nodos:
 			tabla[nodo] = Registro(nodo, False, np.inf, None)
 		tabla[nodo1].distancia = 0
 
 		# Dijkstra
-		for i in range(len(self._nodos)):
+		for i in range(len(self.__nodos)):
 			# Buscar vertice con distancia mas corta y desconocido
 			v = None
-			for nodo in self._nodos:
+			for nodo in self.__nodos:
 				if not tabla[nodo].conocido:
 					if v == None or tabla[nodo].distancia < tabla[v].distancia:
 						v = nodo
@@ -93,7 +97,7 @@ class GrafoBase:
 
 		return camino[::-1]
 
-	def _camino(self, inicio, destino, recorridos):
+	def camino(self, inicio, destino, recorridos = []):
 		if inicio == destino:
 			return [destino]
 
@@ -101,14 +105,11 @@ class GrafoBase:
 
 		for nodo in self.adyacentes(inicio):
 			if nodo not in recorridos:
-				camino = self._camino(nodo, destino, recorridos)
+				camino = self.camino(nodo, destino, recorridos)
 				if camino != None:
 					return [inicio] + camino
 
 		return None
-
-	def camino(self, inicio, destino):
-		return self._camino(inicio, destino, [])
 
 
 	def recorridoEnAncho(self, nodo, callback):
@@ -125,45 +126,24 @@ class GrafoBase:
 					cola.append(nodo)
 					recorridos.append(nodo)
 
-	def _recorridoEnProfundidad(self, nodo, recorridos, callback):
+	def recorridoEnProfundidad(self, nodo, callback, recorridos = []):
 		callback(nodo)
 		recorridos.append(nodo)
 
 		for nodo in self.adyacentes(nodo):
 			if nodo not in recorridos:
-				self._recorridoEnProfundidad(nodo, recorridos, callback)
+				self.recorridoEnProfundidad(nodo, recorridos, callback)
 
-	def recorridoEnProfundidad(self, nodo, callback):
-		self._recorridoEnProfundidad(nodo, [], callback)
-
-
-	def _todosLosCaminosPosibles(self, nodo, destino, recorridos, caminos):
-		recorridos.append(nodo)
-
-		if nodo == destino:
-			caminos.append(recorridos[:])
-		else:
-			for nodo in self.adyacentes(nodo):
-				if nodo not in recorridos:
-					self._todosLosCaminosPosibles(nodo, destino, recorridos, caminos)
-
-		recorridos.pop()
-		return caminos
 
 	# devuelve true si el grafo tiene un ciclo de longitud 3 o mas
-	def tieneCicloDeLongitud3omas(self):
-		for nodo in self._nodos:
-			adyacentes = self.adyacentes(nodo)
-			for nodo2 in adyacentes:
-				caminos = self._todosLosCaminosPosibles(nodo2, nodo, [], [])
-				for camino in caminos:
-					if len(camino) >= 3:
-						return True
-
-		return False
-
 	def esAciclico(self):
-		return not self.tieneCicloDeLongitud3omas()
+		for nodo in self.__nodos:
+			for nodo2 in self.adyacentes(nodo):
+				for nodo3 in self.adyacentes(nodo2):
+					if nodo3 in self.adyacentes(nodo):
+						return False
+
+		return True
 	
 	@staticmethod
 	def graficar(nodos: list[Nodo], adyacencia: list[tuple[Nodo, Nodo]]):
@@ -172,3 +152,66 @@ class GrafoBase:
 		G.add_edges_from(adyacencia)
 		nx.draw(G, with_labels=True)
 		plt.show()
+
+
+def AlgoritmoWarshall(matrizAdyacencia: NDArray[Any]):
+	# inicializar matriz de adyacencia
+	matrizAdyacencia = np.array(matrizAdyacencia, dtype=bool)
+
+	# algoritmo de warshall
+	for k in range(len(matrizAdyacencia)):
+		for i in range(len(matrizAdyacencia)):
+			for j in range(len(matrizAdyacencia)):
+				matrizAdyacencia[i][j] = matrizAdyacencia[i][j] or (matrizAdyacencia[i][k] and matrizAdyacencia[k][j])
+
+	return matrizAdyacencia
+
+def AlgoritmoFloyd(matrizAdyacencia: NDArray[Any]):
+	# inicializar matriz de adyacencia
+	matrizAdyacencia = np.array(matrizAdyacencia, dtype=int)
+
+	# algoritmo de floyd
+	for k in range(len(matrizAdyacencia)):
+		for i in range(len(matrizAdyacencia)):
+			for j in range(len(matrizAdyacencia)):
+				a = matrizAdyacencia[i][k] + matrizAdyacencia[k][j]
+				if matrizAdyacencia[i][j] > a:
+					matrizAdyacencia[i][j] = a
+
+	return matrizAdyacencia
+
+"""
+def AlgoritmoDijkstra(self, nodo1, nodo2):
+	# Inicializar tabla
+	tabla = {}
+	for nodo in self.__nodos:
+		tabla[nodo] = Registro(nodo, False, np.inf, None)
+	tabla[nodo1].distancia = 0
+
+	# Dijkstra
+	for i in range(len(self.__nodos)):
+		# Buscar vertice con distancia mas corta y desconocido
+		v = None
+		for nodo in self.__nodos:
+			if not tabla[nodo].conocido:
+				if v == None or tabla[nodo].distancia < tabla[v].distancia:
+					v = nodo
+
+		tabla[v].conocido = True
+
+		# Actualizar tabla
+		for w in self.adyacentes(v): # type: ignore
+			if not tabla[w].conocido:
+				if tabla[v].distancia + self.peso(v, w) < tabla[w].distancia:
+					tabla[w].distancia = tabla[v].distancia + self.peso(v, w)
+					tabla[w].camino = v
+	
+	# Construir camino
+	camino = []
+	nodo = nodo2
+	while nodo != None:
+		camino.append(nodo)
+		nodo = tabla[nodo].camino
+
+	return camino[::-1]
+"""

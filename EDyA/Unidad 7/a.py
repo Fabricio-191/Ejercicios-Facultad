@@ -40,12 +40,12 @@ class TravellingSalesman:
 
 	def process(self, path: Path):
 		if path.length() == len(self.__cities):
-			finalPath = path + self.__start
+			path = path + self.__start
 
-			if finalPath.travelledDistance < self.__lessDistance:
-				print(finalPath)
-				self.__lessDistance = finalPath.travelledDistance
-				self.__solution = finalPath
+			if path.travelledDistance < self.__lessDistance:
+				print(path)
+				self.__lessDistance = path.travelledDistance
+				self.__solution = path
 		elif path.travelledDistance < self.__lessDistance:
 			for city in self.__cities:
 				if city not in path:
@@ -80,7 +80,7 @@ if __name__ == '__main__':
 	print('Mejor solución:', solution)
 
 """
-Caminos posibles:  60.0
+Caminos posibles:  60
 Ciudades:  [(37, 95), (99, 31), (95, 87), (26, 33), (29, 94), (82, 25)]
 Distance: 464.16, Path: [(37, 95), (99, 31), (95, 87), (26, 33), (29, 94), (82, 25), (37, 95)]
 Distance: 384.50, Path: [(37, 95), (99, 31), (95, 87), (26, 33), (82, 25), (29, 94), (37, 95)]

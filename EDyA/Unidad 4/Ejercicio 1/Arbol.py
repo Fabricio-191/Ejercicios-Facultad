@@ -54,7 +54,7 @@ class Arbol:
 				return False
 
 	def esPadre(self, datoHijo, datoPadre):
-		return self.esPadre(datoPadre, datoHijo)
+		return self.esHijo(datoPadre, datoHijo)
 
 	def camino(self, datoInicio, datoFinal):
 		inicio = self.buscar(datoInicio)

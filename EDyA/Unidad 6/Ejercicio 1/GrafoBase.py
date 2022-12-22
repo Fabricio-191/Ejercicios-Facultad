@@ -1,4 +1,3 @@
-from re import S
 import numpy as np
 from typing import Any
 # from numpy.typing import NDArray  # type: ignore
@@ -182,7 +181,6 @@ class GrafoBase:
 		G.add_edges_from(adyacencia)
 		nx.draw(G, with_labels=True)
 		plt.show()
-
 
 """
 def AlgoritmoWarshall(matrizAdyacencia: Any): # NDArray[Any]):

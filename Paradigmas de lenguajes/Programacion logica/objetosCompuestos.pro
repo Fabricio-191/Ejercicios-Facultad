@@ -1,15 +1,15 @@
 % conteo elemetos en arbol binario
 miarbol(
-  tree(carla,
-  	tree(miguel,
-  		tree(carlos, nil, nil),
-  		tree(maria, nil, nil)
-    ),
-    tree(miriam,
-      tree(patri, nil, nil),
-      tree(jorge, nil, nil)
-    )
-  )
+	tree(carla,
+		tree(miguel,
+			tree(carlos, nil, nil),
+			tree(maria, nil, nil)
+		),
+		tree(miriam,
+			tree(patri, nil, nil),
+			tree(jorge, nil, nil)
+		)
+	)
 ).
 
 recorrer(nil).

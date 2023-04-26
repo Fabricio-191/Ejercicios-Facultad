@@ -18,20 +18,30 @@ mostrar :- miarbol(X), recorrer(X).
 % verificar si un árbol es binario
 % istree( tree(a, tree(b,nil,nil), nil)).  ->  true
 % istree( tree(a, tree(b,nil,nil))).  ->  fail
-istree(tree(_, nil, nil)) :- !.
-istree(tree(_, A,   nil)) :- istree(A), !.
-istree(tree(_, nil, B  )) :- istree(B), !.
+istree(tree(_, nil, nil)).
+istree(tree(_, A,   nil)) :- istree(A).
+istree(tree(_, nil, B  )) :- istree(B).
 istree(tree(_, A,   B  )) :- istree(A), istree(B).
 
 
 % Mostrar solo los nodo hojas
+mostrarHojas(tree(V, nil, nil)) :- writeln(V).
+mostrarHojas(tree(_, A,   nil)) :- mostrarHojas(A).
+mostrarHojas(tree(_, nil, B  )) :- mostrarHojas(B).
+mostrarHojas(tree(_, A,   B  )) :- mostrarHojas(A), mostrarHojas(B).
+
 
 % mostrar los nodos que no son hojas
+mostrarNoHojas(tree(_, nil, nil)).
+mostrarNoHojas(tree(V, A,   nil)) :- writeln(V), mostrarNoHojas(A).
+mostrarNoHojas(tree(V, nil, B  )) :- writeln(V), mostrarNoHojas(B).
+mostrarNoHojas(tree(V, A,   B  )) :- writeln(V), mostrarNoHojas(A), mostrarNoHojas(B).
 
-% calcular la cantida de nodos
+% calcular la cantidad de nodos
 contar(nil, A) :- A is 0.
 contar(tree(_, Y, Z), A) :- contar(Y, B), contar(Z, C), A is B + C + 1.
 contar :- miarbol(X), contar(X, A), write(A).
+
 
 
 

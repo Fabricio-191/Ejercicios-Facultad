@@ -4,6 +4,6 @@
 
 % potencia(A, B, C) :- C is A ** B.
 
-potencia(_, 0, 1).
-potencia(A, B, C) :- B > 0, D is B - 1, potencia(A, D, E), C is A * E, !.
+potencia(_, 0, 1) :- !.
+potencia(A, B, C) :- B > 0, D is B - 1, potencia(A, D, E), C is A * E.
 

@@ -18,9 +18,15 @@ atiende(m2,p2).
 
 atiende2(NomM, NomP) :- medico(CodM, NomM), atiende(CodM, CodP), paciente(CodP, NomP).
 
-option(1) :- write("Nombre doctor: "),   read(NomM), atiende2(NomM, NomP), writeln(NomP), fail.
-option(2) :- write("Nombre paciente: "), read(NomP), atiende2(NomM, NomP), writeln(NomM), fail.
-option(3) :- write_ln("Adios."), !, fail.
-option(_).
+medico2(M, P) :- medico(A, M), atiende(A, B), paciente(B, P).
 
-base :- read(X), option(X), base.
+opcion(1) :- write("Nombre del medico: "), read(X), medico2(X, P), writeln(P), fail.
+opcion(2) :- write("Nombre del paciente: "), read(P), medico2(X, P), writeln(X), fail.
+opcion(3) :- !, fail.
+opcion(_) :- base.
+
+base :-
+    writeln('1. encontrar pacientes de un medico'),
+    writeln('2. encontrar medicos de un paciente'),
+    writeln('3. Terminar'),
+    read(X), opcion(X).

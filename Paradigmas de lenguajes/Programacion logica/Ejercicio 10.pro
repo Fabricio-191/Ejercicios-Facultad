@@ -5,5 +5,6 @@
 % reves(LISTA, RESULTADO) :- reverse(LISTA, RESULTADO).
 
 reves([], []).
+% reves([A], [A]) :- !.
 reves([CABEZA | COLA], RESULTADO) :- reves(COLA, A), append(A, [CABEZA], RESULTADO).
 

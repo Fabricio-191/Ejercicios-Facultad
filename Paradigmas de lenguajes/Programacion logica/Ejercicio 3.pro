@@ -15,11 +15,19 @@ progenitor(X,Y). % X es padre o madre de Y.
 % prima (X,Y). X es prima de Y.
 % abuelo_o_abuela (X,Y). X es abuelo o abuela de Y
 
-es_madre(X) :- madre(X,_).
-es_padre(X) :- padre(X,_).
-es_hijo(X) :- progenitor(_,X), hombre(X).
-hija(X,Y) :- progenitor(Y,X), mujer(X).
-tio(X,Y) :- progenitor(Z,Y), progenitor(Z,X), hombre(X).
+es_madre(X) :- madre(X, _).
+% es_madre(X) :- mujer(X), progenitor(X, _).
+
+es_padre(X) :- padre(X, _).
+% es_padre(X) :- hombre(X), progenitor(X, _).
+
+es_hijo(X) :- hombre(X), progenitor(_, X).
+hija(X, Y) :- mujer(X), progenitor(Y, X).
+
+hermano(X, Y) :- progenitor(Padre, X), progenitor(Padre, Y), X \= Y.
+
+tio(Tio, Sobrino) :- hombre(Tio), hermano(Tio, Padre), progenitor(Padre, Sobrino).
 sobrino(X,Y) :- tio(Y, X).
-prima(X,Y) :- progenitor(Z,X), progenitor(Z,Y), mujer(X), mujer(Y).
-abuelo_o_abuela(X,Y) :- progenitor(X,Z), progenitor(Z,Y).
+prima(X,Y) :- mujer(X), progenitor(Padre, X), tio(Padre, Y).
+
+abuelo_o_abuela(X, Y) :- progenitor(X, Z), progenitor(Z, Y).

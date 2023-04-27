@@ -4,6 +4,6 @@
 
 % modulo(A, B, C) :- C is A mod B.
 
-modulo(A, B, R) :- A < B, R is A, !.
-modulo(A, B, R) :- A >= B, C is A - B, modulo(C, B, R), !.
+modulo(A, B, A) :- A < B, !.
+modulo(A, B, R) :- A >= B, C is A - B, modulo(C, B, R).
 

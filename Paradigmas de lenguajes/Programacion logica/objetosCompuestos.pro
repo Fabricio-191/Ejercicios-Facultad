@@ -57,11 +57,3 @@ tipo(X, N) :- animales(F), F=..[N, LISTA], member(X, LISTA), !.
 
 es(X) :- tipo(X, N), writeln(N), !.
 es(X) :- not(tipo(X, _)), writeln("ERROR").
-
-
-
-
-
-filtrarPositivos([], []) :- !.
-filtrarPositivos([A|COLA], RESULTADO) :- A < 0, filtrarPositivos(COLA, RESULTADO), !.
-filtrarPositivos([A|COLA], [A|R]) :- A >= 0, filtrarPositivos(COLA, R).

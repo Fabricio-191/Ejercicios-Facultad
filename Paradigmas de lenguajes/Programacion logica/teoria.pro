@@ -19,7 +19,7 @@ longitud([_ | COLA], X) :- longitud(COLA, A), X is A + 1.
 sum([], X) :- X is 0.
 % sum([ELEM | COLA], X) :- sum(COLA, A), X is A + ELEM.
 
-sum([ELEM | COLA], X) :- ELEM < 0, sum(COLA, A), X is A.
+sum([ELEM | COLA], A) :- ELEM < 0, sum(COLA, A).
 sum([ELEM | COLA], X) :- ELEM >= 0, sum(COLA, A), X is A + ELEM.
 
 
@@ -33,15 +33,3 @@ sum([ELEM | COLA], X) :- ELEM >= 0, sum(COLA, A), X is A + ELEM.
 cons(ELEM, LIST, Z) :- Z = [ELEM | LIST].
 cons2(ELEM, LIST, Z) :- append([ELEM], LIST, Z).
 cons3(ELEM, LIST, [ELEM | LIST]).
-
-
-
-
-
-
-esDivisible(X, A) :- 0 is X mod A.
-
-esPrimo2(_, 1) :- !.
-esPrimo2(X, A) :- A > 1, not(esDivisible(X, A)), B is A - 1, esPrimo2(X, B). 
-
-esPrimo(X) :- A is X - 1, esPrimo2(X, A).

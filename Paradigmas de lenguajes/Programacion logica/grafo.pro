@@ -16,4 +16,4 @@ ruta(4, c, d).
 % X = [2, 4]
 
 camino(A, A, []).
-camino(A, B, X) :- ruta(N, A, C), camino(C, B, D), X = [N|D].
+camino(A, B, [N|D]) :- ruta(N, A, C), camino(C, B, D).

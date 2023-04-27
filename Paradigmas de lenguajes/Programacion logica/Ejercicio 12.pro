@@ -22,7 +22,7 @@ medico2(M, P) :- medico(A, M), atiende(A, B), paciente(B, P).
 
 opcion(1) :- write("Nombre del medico: "), read(X), medico2(X, P), writeln(P), fail.
 opcion(2) :- write("Nombre del paciente: "), read(P), medico2(X, P), writeln(X), fail.
-opcion(3) :- !, fail.
+opcion(3) :- writeln("ADIOS"), !.
 opcion(_) :- base.
 
 base :-

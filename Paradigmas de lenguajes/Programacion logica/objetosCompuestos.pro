@@ -46,6 +46,7 @@ contar :- miarbol(X), contar(X, A), write(A).
 
 
 
+
 % EJERCICIO PROPUESTO
 animales(mamifero([vaca,mono])).
 animales(reptil([serpiente,coco])).

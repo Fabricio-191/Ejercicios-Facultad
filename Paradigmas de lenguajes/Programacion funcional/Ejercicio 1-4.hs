@@ -55,10 +55,10 @@ impares = [21, 19 .. 1 ]
 (replicate 10 10)
 
 -- Ejercicio N°4 Listas intencionales. Evaluar las siguientes expresiones:
-[x*2 | x <- [1..10]]
-[x*2 | x <- [1..10], x*2 >= 12]
+[x * 2 | x <- [1..10]]
+[x * 2 | x <- [1..10], x * 2 >= 12]
 frutas = ["naranjas", "peras", "uvas", "mandarinas", "peras"]
-[x | x <- frutas, x=="peras"]
+[x | x <- frutas, x == "peras"]
 lista= [3, 5, 2, 0, 4, 0, 1, 5, 0]
-sum [ 1 | x <- lista, x==0]
+sum [ 1 | x <- lista, x == 0]
 length [ x | x <- lista, x /= 0]

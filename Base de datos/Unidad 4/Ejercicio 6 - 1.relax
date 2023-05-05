@@ -1,5 +1,5 @@
 group: deporteNuevo
-PERS = {Cuil:number, Nom:string, Sexo:string, Edad:number,Dir:string,Tel:string,Zona:string
+PERS = { Cuil: number, Nom: string, Sexo: string, Edad: number, Dir: string, Tel: string, Zona: string
 	20356789003, 'Juan Perez', 'M', 33, 'Libertador 340 (E)', '4234560', 'Capital'
 	27402223331, 'María Castro', 'F', 28, 'Salta 560(N)', '4305060', 'Capital'
 	20345678903, 'Ariel Gonzalez', 'M', 25, 'Mendoza 1780(S)', '4209080', 'Rawson'

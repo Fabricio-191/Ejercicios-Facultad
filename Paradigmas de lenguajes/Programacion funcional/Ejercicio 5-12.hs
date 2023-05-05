@@ -41,6 +41,9 @@ union list1 list2
  | otherwise = union (tail list1) (head list1 : list2)
  
  
--- Ejercicio Nº 11: Definir una función que permita contar los átomos de una lista de listas.
+-- Ejercicio Nº 11: Definir una función que permita contar los átomos de una lista de listas. (de manera recursiva)
+countAtoms :: [[a]] -> Int
+countAtoms [] = 0
+countAtoms list = (length (head list)) + (countAtoms (tail list))
 
 -- Ejercicio Nº 12: Calcular el producto de una matriz por un vector.

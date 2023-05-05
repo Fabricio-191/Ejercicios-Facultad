@@ -1,0 +1,152 @@
+group: deporteNuevo
+PERS = {Cuil:number, Nom:string, Sexo:string, Edad:number,Dir:string,Tel:string,Zona:string
+	20356789003, 'Juan Perez', 'M', 33, 'Libertador 340 (E)', '4234560', 'Capital'
+	27402223331, 'María Castro', 'F', 28, 'Salta 560(N)', '4305060', 'Capital'
+	20345678903, 'Ariel Gonzalez', 'M', 25, 'Mendoza 1780(S)', '4209080', 'Rawson'
+	20334445673, 'Ian Mendez', 'M', 22, 'Pringles 457(S)', '4221190', 'Chimbas'
+	20384445673, 'Morena Torrez', 'F', 34, 'San Luis 590(E)', '4309077', 'Caucete'
+	20384445673, 'Morena Torrez', 'F', 35, 'Córdoba 234(E)', '4209027', 'Rivadavia'
+	20402004003, 'Pedro Torrez', 'M', 24, 'Córdoba 234(E)', '4209027', 'Rivadavia'
+	20405006003, 'Camila Páez', 'F', 23, 'Las Moreras 3450(N)', '4309027', 'Rivadavia'
+	20412009003, 'Karen García', 'F', 21, 'San Lorenzo', '4234511', 'Desamparados'
+	20204984253, 'Juan Perez', 'M', 50, 'Fray Justo 678(N)', '4334455', 'Capital'
+	20184984253, 'Ana García', 'F', 54, 'Salta 560(N)','4335566', 'Capital'
+	20174904953, 'Felipe Castro', 'M', 56, 'Santiago del Estero 670 (o)', '4300096', 'Ullúm'
+}
+
+DEPO = { Codd: string, Nomd: string, Clase: string
+	'D01', 'Fútbol', 'Balón'
+	'D02', 'Básquet', 'Balón'
+	'D03', 'Hockey sobre césped', 'Balón'
+	'D04', 'Tenis', 'Balón'
+	'D05', 'Natación', 'Atlético'
+	'D06', 'Kitesurf', 'Agua'
+	'D10', 'Boxeo', 'Combate'
+	'D22', 'Kick Boxing', 'Combate'
+	'D30', 'Trekking', 'Montaña'
+}
+
+CLUB = { Codc: number, Nomc: string, Dir: string, Tel: string, Cat: number, Zona: string
+	100, 'Ausonia', 'Av. José Ignacio de la Roza Oeste 2174', '4356090', 1, 'Rivadavia'
+	200, 'Banco Hispano', 'Paula Albarracín de Sarmiento Sur', '4231860', 2, 'Capital'
+	300, 'Kayak Club', 'Ruta Del Sol', '4406865', 1, 'Rivadavia'
+	400, 'Sportivo Desamparados', 'Echeverría Norte 99', '4456723', 1, 'Desamparados'
+	500, 'Club Julio Mocoroa', 'Mendoza Norte 585-667', '4212687', 2, 'Rawson'
+	600, 'UVT', 'Abraham Tapia 1380', '4214716', 2, 'Rawson'
+}
+
+PRAC = { Cuil: number, Codd: string, Codc: number
+	20356789003, 'D01', 100
+	20356789003, 'D01', 200
+	20356789003, 'D02', 200
+	27402223331, 'D01', 100
+	27402223331, 'D04', 200
+	27402223331, 'D06', 300
+	20405006003, 'D05', 100
+	20356789003, 'D02', 100
+	20356789003, 'D03', 100
+	20356789003, 'D04', 100
+	20356789003, 'D05', 100
+	20356789003, 'D05', 100
+	20412009003, 'D01', 100
+	20412009003, 'D02', 100
+	20412009003, 'D04', 100
+	20412009003, 'D03', 100
+	20204984253, 'D06', 100
+	20204984253, 'D06', 200
+	20204984253, 'D06', 300
+	20174904953, 'D10', 600
+	20174904953, 'D22', 600
+	20412009003, 'D10', 100
+	20412009003, 'D10', 200
+	20412009003, 'D10', 300
+	20412009003, 'D10', 400
+	20412009003, 'D10', 500
+	20412009003, 'D10', 600
+	20412009003, 'D22', 100
+	20356789003, 'D10', 100
+	20356789003, 'D22', 100
+	20174904953, 'D30', 300
+	20356789003, 'D30', 300
+	20356789003, 'D06', 100
+}
+
+-- 1. Nombre, edad y zona de todas las personas.
+π Nom, Edad, Zona (PERS)
+
+-- 2. Zonas donde viven las personas.
+π Zona (PERS)
+
+-- 3. Zonas donde hay clubes.
+π Zona (CLUB)
+
+-- 4. Todas las zonas.
+π Zona (CLUB) ∪ π Zona (PERS)
+
+-- 5. Obtener un listado que incluya el nombre de los clubes que están ubicados en Capital, los que están en Desamparados y los que están en Rivadavia (deben incluirse las tres zonas).
+π Nomc (σ Zona='Capital' or Zona='Desamparados' or Zona='Rivadavia' (CLUB))
+
+-- 6. Nombre, Cuil y edad de las personas que practican deportes.
+π Nom, Cuil, Edad (PRAC ⨝ PERS)
+
+-- 7. Cuil de las personas que practican tenis.
+π Cuil (PRAC ⨝ (σ Nomd='Tenis' (DEPO)))
+π Cuil (σ Nomd='Tenis' (PRAC ⨝ DEPO))
+
+-- 8. Nombre de los clubes donde se practica fútbol.
+π Nomc (CLUB ⨝ (PRAC ⨝ (σ Nomd='Fútbol' (DEPO))))
+
+-- 9. Para todas las personas que practican deportes: cuil y nombre de la persona, nombre del deporte y el nombre del club correspondiente.
+(π Cuil, Nom PERS) ⨝ (π Nomc, Cuil, Nomd (CLUB ⨝ PRAC ⨝ DEPO))
+
+-- 10. Cuil y nombre de las personas que practican (simultáneamente) los deportes D01, D22 y D10 (códigos).
+A = π Cuil σ Codd='D01' PRAC
+B = π Cuil σ Codd='D22' PRAC
+C = π Cuil σ Codd='D10' PRAC
+
+π Cuil,Nom PERS ⨝ (A ∩ B ∩ C)
+
+-- π Cuil,Nom (PERS) ÷ (π Cuil,Codd (σ Codd='D01' or Codd='D22' or Codd='D10' PRAC))
+
+-- 11. Cuil y nombre de las personas que no practican deportes en Ausonia.
+A = π Cuil,Nom,Sexo,Edad,Dir,Tel,Zona σ Nomc='Ausonia' (PERS ⨝ PRAC ⨝ (π Codc,Nomc CLUB))
+
+π Cuil,Nom (PERS - A)
+
+-- 12. Cuil de las personas que practican deportes en Ausonia o bien practican en la UVT.
+A = π Cuil (PERS ⨝ PRAC)
+B = σ Nomc='Ausonia' or Nomc='UVT' CLUB
+π Cuil (A ⨝ B)
+
+-- 13. Código de los deportes que son practicados solamente por hombres.
+DEPOM = π Codd (σ Sexo='F' (PERS ⨝ PRAC))
+
+(π Codd DEPO) - DEPOM
+
+-- 14. Cuil, nombre y dirección de las personas que viven en la misma zona que Juan Pérez, CUIL 20.498.425.
+ZONA = π Zona (σ Nom='Juan Perez' PERS)
+π Cuil,Nom,Dir (PERS ⨝ ZONA)
+
+-- 15. Cuil y nombre de las personas mayores que Ana García (CUIL: 18.498.425).
+EDAD = ρ EDAD π Edad (σ Cuil=20184984253 PERS)
+π Cuil,Nom (PERS ⨝ PERS.Edad > EDAD.Edad EDAD)
+
+-- 16. Cuil y nombre de las personas que practican en clubes que están ubicados en la misma zona en la que ellos viven.
+π Cuil,Nom (PERS ⨝ PERS.Zona=CLUB.Zona CLUB)
+
+-- 17. Nombre de todas las personas junto al nombre del deporte que practica. Se deben incluir todas las personas registradas más allá que no estén practicando algún deporte.
+π Nom, Nomd (PERS ⟕ (PRAC ⨝ DEPO))
+
+-- 18. Nombre de los deportes practicados en todos los clubes.
+π Nomd (((π Codc,Codd PRAC) ÷ (π Codd DEPO)) ⨝ DEPO)
+
+-- 19. Clubes (Codc) en los que se practican todos los deportes de balón (clase).
+π Codc,Clase (CLUB ⨝ (σ Clase='Balón' DEPO))
+
+-- 20. Personas (todos sus datos personales) que practican todos los deportes.
+PERS ⨝ ((π Cuil,Codd PRAC) ÷ (π Codd DEPO))
+
+-- 21. Nombre de las personas que practican todos los deportes que se practican en el Banco Hispano.
+A = σ Nomc='Banco Hispano' (DEPO ⨝ PRAC ⨝ CLUB)
+π Nom (PERS ⨝ ((π Cuil,Codd PRAC) ÷ (π Codd A)))
+

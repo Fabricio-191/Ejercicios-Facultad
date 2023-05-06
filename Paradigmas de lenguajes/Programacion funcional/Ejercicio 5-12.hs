@@ -46,4 +46,5 @@ countAtoms :: [[a]] -> Int
 countAtoms [] = 0
 countAtoms list = (length (head list)) + (countAtoms (tail list))
 
+
 -- Ejercicio Nº 12: Calcular el producto de una matriz por un vector.

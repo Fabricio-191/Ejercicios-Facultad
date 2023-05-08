@@ -157,8 +157,18 @@ Docentes = π Correo (DICTA ⨝ (σ Ch < 30 CURSO))
 Docentes ⨝ PERS
 
 -- Docentes (todos los datos) que dictan multiples cursos cuyas cargas horarias sean inferiores a 30 horas.
+CURSOS = π Nom (σ Ch < 30 CURSO)
+A = (ρ DICTA2 DICTA) ⨝ CURSOS
+B = DICTA ⨝ CURSOS
+Docentes = π DICTA.Correo (A ⨝ DICTA.Correo=DICTA2.Correo and DICTA.Nom≠DICTA2.Nom B)
+Docentes ⨝ PERS
 
--- Docentes (todos los datos) que dictan multiples cursos cuyas cargas horarias sean inferiores a 30 horas.
+-- Docentes (todos los datos) que dictan multiples cursos donde la carga horaria de almenos un curso es inferior a 30 horas.
+CURSOS = π Nom (σ Ch < 30 CURSO)
+A = (ρ DICTA2 DICTA) ⨝ CURSOS
+B = DICTA
+Docentes = π DICTA.Correo (A ⨝ DICTA.Correo=DICTA2.Correo and DICTA.Nom≠DICTA2.Nom B)
+Docentes ⨝ PERS
 
 
 -- 21. Pares de alumnos (correo) que cursaron los mismos cursos.

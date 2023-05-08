@@ -145,16 +145,32 @@ AprobadosB = π Correo (σ Nota >= 7 and Nom='Python II' INSC)
 PERS ⨝ (AprobadosA ∩ AprobadosB)
 
 -- 19. Alumnos (Correo) que se inscribieron en más de un curso de verano.
-
+INSC2 = ρ INSC2 INSC
+A = INSC ⨝ INSC.Correo=INSC2.Correo and INSC.Nom≠INSC2.Nom INSC2
+π INSC.Correo A
 
 -- 20. Docentes (todos los datos) que dictan más de un curso cuya carga horaria sea inferior a 30 horas reloj.
+-- ???
+
+-- Docentes (todos los datos) que dictan un curso cuya carga horaria es inferior a 30 horas.
+Docentes = π Correo (DICTA ⨝ (σ Ch < 30 CURSO))
+Docentes ⨝ PERS
+
+-- Docentes (todos los datos) que dictan multiples cursos cuyas cargas horarias sean inferiores a 30 horas.
+
+-- Docentes (todos los datos) que dictan multiples cursos cuyas cargas horarias sean inferiores a 30 horas.
 
 
 -- 21. Pares de alumnos (correo) que cursaron los mismos cursos.
-
+A = INSC ⨝ INSC.Correo≠INSC2.Correo and INSC.Nom=INSC2.Nom (ρ INSC2 INSC)
+π INSC.Correo,INSC2.Correo A
 
 -- 22. Pares de alumnos (todos los datos) que cursaron los mismos cursos.
-
+A = INSC ⨝ INSC.Correo≠INSC2.Correo and INSC.Nom=INSC2.Nom (ρ INSC2 INSC)
+B = π INSC.Correo,INSC2.Correo A
+(B ⨝ INSC.Correo=PERS.Correo PERS) ⨝ INSC2.Correo=PERS2.Correo (ρ PERS2 PERS)
 
 -- 23. Pares de alumnos que cursaron los mismos cursos con distinto profesor.
-
+A = INSC ⨝ INSC.Correo≠INSC2.Correo and INSC.Nom=INSC2.Nom and INSC.Correod≠INSC2.Correod (ρ INSC2 INSC)
+B = π INSC.Correo,INSC2.Correo A
+(B ⨝ INSC.Correo=PERS.Correo PERS) ⨝ INSC2.Correo=PERS2.Correo (ρ PERS2 PERS)

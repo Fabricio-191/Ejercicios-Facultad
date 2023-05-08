@@ -1,5 +1,5 @@
 group: Caso1 
-PERS =  { Correo:string,NomU:string, Nom:string
+PERS =  { Correo: string, NomU: string, Nom: string
 	'anagarcia32@gmail.com','AnaGarcia131','Ana Garcia' 
 	'anagarcia56@gmail.com','AnaG56','Ana Garcia' 
 	'pablogomes45@gmail.com','Pablito45','Pablo Gomes' 
@@ -12,7 +12,7 @@ PERS =  { Correo:string,NomU:string, Nom:string
 	'giselleV146@gmail.com','GVasquez24','Giselle Vasquez' 
 }
 
-CURSO = { Nom:string, Ch:number
+CURSO = { Nom: string, Ch: number
 	'Python I',29
 	'Python II',28
 	'Javascript I',50
@@ -22,7 +22,7 @@ CURSO = { Nom:string, Ch:number
 	'SQL',25
 }
 
-INSC =  { Correo:string, Nom:string, Correod:string, Nota:number
+INSC =  { Correo: string, Nom: string, Correod: string, Nota: number
 	'anagarcia32@gmail.com','Python I','estefaniaperalta@gmail.com',7
 	'franciscopeña52@yahoo.com.ar','Python I','estefaniaperalta@gmail.com', 9
 	'anagarcia32@gmail.com','Python II','pedroibañez@yahoo.com.ar', 8
@@ -36,7 +36,7 @@ INSC =  { Correo:string, Nom:string, Correod:string, Nota:number
 	'giselleV146@gmail.com','Javascript II','pablogomes45@gmail.com', 7
 }
 
-DICTA  = { Correo:string,Nom:string
+DICTA  = { Correo: string, Nom: string
 	'estefaniaperalta@gmail.com','Python I'
 	'estefaniaperalta@gmail.com','Python II'
 	'pedroibañez@yahoo.com.ar','Kotlin I'
@@ -48,7 +48,7 @@ DICTA  = { Correo:string,Nom:string
 	'pablogomes45@gmail.com','Javascript II'
 }
 
-TEMAS={ Nom:string,Tema:string
+TEMAS = { Nom: string, Tema: string
 	'Python I','Estructuras de datos'
 	'Python I','Estructuras de control'
 	'Python I','Aplicacion'

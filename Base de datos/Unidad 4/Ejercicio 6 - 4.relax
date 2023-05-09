@@ -23,8 +23,12 @@ ARG ⨝ (π cuil G)
 
 
 -- 4. Empresas (todos los datos) donde trabajaron geólogos tanto de nacionalidad argentina como chilena.
-A = π cuil (σ pais='Argentina' GEO)
-B = π cuil (σ pais='Chile' GEO)
+ARGT = TRA ⨝ (π cuil (σ pais='Argentina' GEO))
+CHT = TRA ⨝ (π cuil (σ pais='Chile' GEO))
+
+A = (π cod ARGT) ∩ (π cod CHT)
+E = π num (PROY ⨝ A)
+EMP ⨝ E
 
 
 -- 5. Proyectos (código, inversión y país) donde trabajaron únicamente extranjeros.

@@ -13,9 +13,10 @@ E = π num (σ nombre='Techint' EMP)
 
 
 -- 2. Geólogos argentinos (todos los datos) que han trabajado en más de una ocasión en el mismo proyecto.
+ARG = σ pais='argentina' GEO
 G = TRA ⨝ (TRA.cuil=TRA2.cuil and TRA.cod=TRA2.cod and TRA.fecha≠TRA2.fecha) (ρ TRA2 TRA)
-EMPLEADOS ⨝ (π dni G)
--- FALTA FILTRAR POR ARGENTINOS
+ARG ⨝ (π cuil G)
+
 
 -- 3. Geólogos que residen en el país donde nacieron.
 σ pais=paisr GEO

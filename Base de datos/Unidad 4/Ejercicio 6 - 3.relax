@@ -1,0 +1,99 @@
+PROYECTOS = { codp: string, nomp: string, cliente: string, finicio: date, lider: number
+    'P22-51', 'KeePassXC',   'Schillers',      2022-09-17, 27292372
+    'P23-04', 'Vim',         'Brestein-Feest', 2023-04-22, 26848574
+    'P27-11', 'Light Table', 'Skiles Inc',     2022-11-27, 33702753
+    'P27-11', 'GNU Octave',  'Kris Company',   2022-09-16, 27353711
+    'P08-05', 'Geany',       'Fresh Group',    2022-05-08, 29266108
+    'P22-05', 'Meld',        'Schillers',      2023-01-01, 27292372
+    'P22-11', 'LilyTerm',    'OSSE',           2023-01-01, 33702753
+}
+
+EMPLEADOS = { dni: number, nom: string, tel: number
+	20119756, Lorena,    2643128670
+	28838180, Bruno,     2641880643
+	32165358, Carlos,    2642700121
+	24996998, Marianela, 2647782660
+	32631887, Johana,    2646653898
+	32757060, Tobias,    2645073850
+}
+
+TRAB ={ dni: number, codp: string, rol: string, fDesde: date, fHasta: date, cantHoras: number
+    20119756, 'P22-51', 'programador', 2022-09-17, 2022-09-30, 40
+    20119756, 'P23-04', 'analista',    2023-04-22, 2023-05-22, 20
+    28838180, 'P27-11', 'programador', 2022-11-27, 2022-12-15, 30
+    32165358, 'P08-05', 'diseñador',   2022-09-16, 2022-10-16, 25
+    24996998, 'P22-05', 'analista',    2021-01-01, 2021-01-31, 15
+    32631887, 'P08-05', 'téster',      2022-05-08, 2022-05-15, 10
+    32757060, 'P22-05', 'programador', 2023-01-01, 2023-01-15, 20
+    32165358, 'P22-51', 'programador', 2022-09-17, 2022-09-30, 10
+    28838180, 'P23-04', 'programador', 2023-04-22, 2023-05-22, 15
+    24996998, 'P27-11', 'diseñador',   2021-01-01, 2021-05-18, 30
+    20119756, 'P22-51', 'programador', 2022-09-17, 2022-09-30, 15
+    24996998, 'P22-11', 'analista',    2021-06-01, 2021-06-30, 10
+    32165358, 'P22-11', 'diseñador',   2021-06-01, 2021-06-30, 5
+    20119756, 'P22-11', 'programador', 2023-01-01, 2023-01-15, 30
+    32165358, 'P22-11', 'analista',    2023-01-01, 2023-01-15, 5
+    24996998, 'P22-11', 'diseñador',   2023-01-01, 2023-01-15, 5
+    32757060, 'P22-11', 'diseñador',   2023-01-01, 2023-01-15, 20
+}
+
+/*
+Notas:
+● El líder de un proyecto se mantiene a lo largo de todo el desarrollo del mismo.
+● Una persona puede ser líder en un proyecto y en otro trabajar con un rol diferente.
+● Para cada proyecto, el líder queda registrado en la relación PROYECTOS, y el resto del equipo queda registrado en la relación TRABAJA.
+● El líder de un proyecto no cumple otro rol en ese proyecto.
+● Una persona puede ser líder de un proyecto y participar en otro proyecto con otro rol.
+*/
+
+
+-- 1. Programadores (todos sus datos) que han participado en el proyecto código ‘P22-11’ con más de 10 horas.
+P = π dni (σ codp='P22-11' and cantHoras > 10 TRAB)
+EMPLEADOS ⨝ P
+
+
+-- 2. Personas (todos sus datos) que han trabajado como analistas y diseñadores en el año 2023, independientemente sea en el mismo proyecto o no.
+A = σ year(fDesde) <= 2023 and year(fHasta) >= 2023 TRAB
+Disenadores = π dni (σ rol='diseñador' A)
+Analistas = π dni (σ rol='analista' A)
+EMPLEADOS ⨝ (Disenadores ∩ Analistas)
+
+
+-- 3. Personas (todos sus datos) que siempre han participado como líderes de proyectos.
+LIDERES = ρ dni ← lider π lider PROYECTOS
+EMPLEADOS ⨝ (LIDERES - (π dni TRAB))
+
+
+-- 4. Personas (cuil) que han participado en todos los proyectos desarrollados para ‘OSSE’ (cliente).
+A = σ cliente='OSSE' PROYECTOS
+LIDER = π dni (EMPLEADOS ⨝ (EMPLEADOS.dni=PROYECTOS.lider) A)
+TRABAJADORES = π dni (A ⨝ TRAB)
+TRABAJADORES ∪ LIDER
+
+
+-- 5. Personas (cuil) que han participado con roles diferentes en el mismo proyecto (no considerar los líderes).
+A = TRAB ⨝ (TRAB.dni=TRAB2.dni and TRAB.codp=TRAB2.codp and TRAB.rol≠TRAB2.rol) (ρ TRAB2 TRAB)
+π TRAB.dni A
+
+
+-- 6. Personas (cuil) que han participado con roles diferentes en el mismo proyecto (considerar los líderes).
+A = {rol
+	'lider'
+}
+LIDERES = (ρ dni ← lider (π lider,codp PROYECTOS)) ⨯ A
+T = (π dni,codp,rol TRAB) ∪ LIDERES
+B = T ⨝ (TRAB.dni=T2.dni and TRAB.codp=T2.codp and TRAB.rol≠T2.rol) (ρ T2 T)
+π TRAB.dni B
+
+
+-- 7. Equipo (cuil y nombre) de trabajo del proyecto ‘P22-05’ (debe incluirse el líder).
+LIDER = (ρ dni ← lider (π lider σ codp='P22-05' PROYECTOS))
+T = (π dni (σ codp='P22-05' TRAB)) ∪ LIDER
+π dni,nom (T ⟕ EMPLEADOS)
+
+
+-- 8. Personas (todos sus datos) que han trabajado como analistas y diseñadores en el año 2023, en el mismo proyecto.
+A = σ year(fDesde) <= 2023 and year(fHasta) >= 2023 TRAB
+Disenadores = π dni,codp (σ rol='diseñador' A)
+Analistas = π dni,codp (σ rol='analista' A)
+EMPLEADOS ⨝ (Disenadores ∩ Analistas)

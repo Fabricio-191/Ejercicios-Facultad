@@ -1,0 +1,39 @@
+EMP={num:number, nombre:string, web:string}
+PROY={cod:number, fechai:date, fechaf:date, inversion:number, num:number, pais:string}
+GEO={cuil:string,pais:string,nombre:string,apellido:string,fechaNac:date,paisr:string}
+TRA={cod:number,cuil:number,pais:string,fecha:date}
+
+G = TRA ⨝ (TRA.cuil=TRA2.cuil and TRA.cod=TRA2.cod and TRA.fecha≠TRA2.fecha) (ρ TRA2 TRA)
+EMPLEADOS ⨝ (π dni G)
+
+
+-- 1. Proyectos (código, inversión) desarrollados durante el 2023 en Argentina por la empresa “Techint”.
+E = π num (σ nombre='Techint' EMP)
+π cod,inversion (PROY ⨝ E)
+
+
+-- 2. Geólogos argentinos (todos los datos) que han trabajado en más de una ocasión en el mismo proyecto.
+G = TRA ⨝ (TRA.cuil=TRA2.cuil and TRA.cod=TRA2.cod and TRA.fecha≠TRA2.fecha) (ρ TRA2 TRA)
+EMPLEADOS ⨝ (π dni G)
+-- FALTA FILTRAR POR ARGENTINOS
+
+-- 3. Geólogos que residen en el país donde nacieron.
+σ pais=paisr GEO
+
+
+-- 4. Empresas (todos los datos) donde trabajaron geólogos tanto de nacionalidad argentina como chilena.
+A = π cuil (σ pais='Argentina' GEO)
+B = π cuil (σ pais='Chile' GEO)
+
+
+-- 5. Proyectos (código, inversión y país) donde trabajaron únicamente extranjeros.
+A = PROY ⨝ (PROY.pais≠GEO.pais and PROY.cod=TRA.cod) (π pais, cod (GEO ⨝ TRA))
+
+-- 6. Geólogos (todos los datos) que trabajaron en todos los proyectos de la empresa “Barrick”.
+
+
+-- 7. Geólogos (todos los datos) argentinos y/o chilenos que trabajaron en proyectos de la empresa “Techint”.
+
+
+-- 8. Geólogos (todos los datos) argentinos y/o chilenos que trabajaron únicamente en proyectos de la empresa “Techint”.
+

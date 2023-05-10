@@ -32,12 +32,21 @@ EMP ⨝ E
 
 
 -- 5. Proyectos (código, inversión y país) donde trabajaron únicamente extranjeros.
-A = PROY ⨝ (PROY.pais≠GEO.pais and PROY.cod=TRA.cod) (π pais, cod (GEO ⨝ TRA))
+P = PROY ⨝ (π pais, cod (GEO ⨝ TRA))
+π cod, inversion, pais (PROY - P)
+
 
 -- 6. Geólogos (todos los datos) que trabajaron en todos los proyectos de la empresa “Barrick”.
+PROYBARRICK = π cod (PROY ⨝ (π num (σ nombre='Barrick' EMP)))
+G = (π cuil, cod TRA) ÷ PROYBARRICK
+GEO ⨝ G
 
 
 -- 7. Geólogos (todos los datos) argentinos y/o chilenos que trabajaron en proyectos de la empresa “Techint”.
+PROYTECHINT = π cod (PROY ⨝ (π num (σ nombre='Techint' EMP)))
+TRABTECHINT = π cuil (TRA ⨝ PROYTECHINT)
+G = σ pais='argentina' or pais='chile' GEO
+G ⨝ TRABTECHINT
 
 
 -- 8. Geólogos (todos los datos) argentinos y/o chilenos que trabajaron únicamente en proyectos de la empresa “Techint”.

@@ -1,3 +1,4 @@
+group: A
 EMP={num:number, nombre:string, web:string}
 PROY={cod:number, fechai:date, fechaf:date, inversion:number, num:number, pais:string}
 GEO={cuil:string,pais:string,nombre:string,apellido:string,fechaNac:date,paisr:string}

@@ -1,4 +1,5 @@
-PROYECTOS = { codp: string, nomp: string, cliente: string, finicio: date, lider: number
+group: A
+PROYECTOS = { codp:string, nomp:string, cliente:string, finicio:date, lider:number
     'P22-51', 'KeePassXC',   'Schillers',      2022-09-17, 27292372
     'P23-04', 'Vim',         'Brestein-Feest', 2023-04-22, 26848574
     'P27-11', 'Light Table', 'Skiles Inc',     2022-11-27, 33702753
@@ -8,7 +9,7 @@ PROYECTOS = { codp: string, nomp: string, cliente: string, finicio: date, lider:
     'P22-11', 'LilyTerm',    'OSSE',           2023-01-01, 33702753
 }
 
-EMPLEADOS = { dni: number, nom: string, tel: number
+EMPLEADOS = { dni:number, nom:string, tel:number
 	20119756, Lorena,    2643128670
 	28838180, Bruno,     2641880643
 	32165358, Carlos,    2642700121
@@ -17,7 +18,7 @@ EMPLEADOS = { dni: number, nom: string, tel: number
 	32757060, Tobias,    2645073850
 }
 
-TRAB ={ dni: number, codp: string, rol: string, fDesde: date, fHasta: date, cantHoras: number
+TRAB ={ dni:number, codp:string, rol:string, fDesde:date, fHasta:date, cantHoras:number
     20119756, 'P22-51', 'programador', 2022-09-17, 2022-09-30, 40
     20119756, 'P23-04', 'analista',    2023-04-22, 2023-05-22, 20
     28838180, 'P27-11', 'programador', 2022-11-27, 2022-12-15, 30

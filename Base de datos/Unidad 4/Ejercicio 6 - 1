@@ -1,5 +1,5 @@
 group: deporteNuevo
-PERS = { Cuil: number, Nom: string, Sexo: string, Edad: number, Dir: string, Tel: string, Zona: string
+PERS = { Cuil:number, Nom:string, Sexo:string, Edad:number, Dir:string, Tel:string, Zona:string
 	20356789003, 'Juan Perez', 'M', 33, 'Libertador 340 (E)', '4234560', 'Capital'
 	27402223331, 'María Castro', 'F', 28, 'Salta 560(N)', '4305060', 'Capital'
 	20345678903, 'Ariel Gonzalez', 'M', 25, 'Mendoza 1780(S)', '4209080', 'Rawson'
@@ -14,7 +14,7 @@ PERS = { Cuil: number, Nom: string, Sexo: string, Edad: number, Dir: string, Tel
 	20174904953, 'Felipe Castro', 'M', 56, 'Santiago del Estero 670 (o)', '4300096', 'Ullúm'
 }
 
-DEPO = { Codd: string, Nomd: string, Clase: string
+DEPO = { Codd:string, Nomd:string, Clase:string
 	'D01', 'Fútbol', 'Balón'
 	'D02', 'Básquet', 'Balón'
 	'D03', 'Hockey sobre césped', 'Balón'
@@ -26,7 +26,7 @@ DEPO = { Codd: string, Nomd: string, Clase: string
 	'D30', 'Trekking', 'Montaña'
 }
 
-CLUB = { Codc: number, Nomc: string, Dir: string, Tel: string, Cat: number, Zona: string
+CLUB = { Codc:number, Nomc:string, Dir:string, Tel:string, Cat:number, Zona:string
 	100, 'Ausonia', 'Av. José Ignacio de la Roza Oeste 2174', '4356090', 1, 'Rivadavia'
 	200, 'Banco Hispano', 'Paula Albarracín de Sarmiento Sur', '4231860', 2, 'Capital'
 	300, 'Kayak Club', 'Ruta Del Sol', '4406865', 1, 'Rivadavia'
@@ -35,7 +35,7 @@ CLUB = { Codc: number, Nomc: string, Dir: string, Tel: string, Cat: number, Zona
 	600, 'UVT', 'Abraham Tapia 1380', '4214716', 2, 'Rawson'
 }
 
-PRAC = { Cuil: number, Codd: string, Codc: number
+PRAC = { Cuil:number, Codd:string, Codc:number
 	20356789003, 'D01', 100
 	20356789003, 'D01', 200
 	20356789003, 'D02', 200

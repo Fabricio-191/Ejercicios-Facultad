@@ -48,3 +48,9 @@ countAtoms list = (length (head list)) + (countAtoms (tail list))
 
 
 -- Ejercicio Nº 12: Calcular el producto de una matriz por un vector.
+
+calc :: [[Int]] -> [Int] -> [[Int]]
+calc a b = map (\x -> zipWith (*) x b) a
+
+-- calc2 :: [[Int]] -> [Int] -> Int
+-- calc2 a b = sum [sum x | x <- calc a b]

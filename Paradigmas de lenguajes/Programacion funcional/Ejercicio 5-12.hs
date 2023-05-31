@@ -17,9 +17,9 @@ cubeList list = [x^3 | x <- list]
 removeRepeated :: (Eq a) => [a] -> [a]
 removeRepeated [] = []
 -- removeRepeated list = if (elem (head list) (tail list)) then (removeRepeated (tail list)) else (head list : (removeRepeated (tail list)))
-removeRepeated list 
- | (elem (head list) (tail list)) = (removeRepeated (tail list))
- | otherwise = (head list : (removeRepeated (tail list)))
+removeRepeated (x:xs) 
+ | (elem x xs) = (removeRepeated xs)
+ | otherwise = (x : (removeRepeated xs))
 
 
 -- Ejercicio Nº 9: Implementar una función recursiva que pase un número decimal a binario
@@ -36,15 +36,15 @@ union :: (Eq a) => [a] -> [a] -> [a]
 union [] [] = []
 union list [] = list
 union [] list = list
-union list1 list2
- | (elem (head list1) list2) = union (tail list1) list2
- | otherwise = union (tail list1) (head list1 : list2)
+union (x:xs) list2
+ | (elem x list2) = union xs list2
+ | otherwise = union xs (x : list2)
  
  
 -- Ejercicio Nº 11: Definir una función que permita contar los átomos de una lista de listas. (de manera recursiva)
 countAtoms :: [[a]] -> Int
 countAtoms [] = 0
-countAtoms list = (length (head list)) + (countAtoms (tail list))
+countAtoms (x:xs) = (length x) + (countAtoms xs)
 
 
 -- Ejercicio Nº 12: Calcular el producto de una matriz por un vector.

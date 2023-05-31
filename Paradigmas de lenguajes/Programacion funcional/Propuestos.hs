@@ -1,9 +1,9 @@
 -- Ejercicio Nº 14 Dada una lista ordenada y un átomo escribir una función que inserte el átomo en el lugar correspondiente
 insertar :: (Integral a) => a -> [a] -> [a]
 insertar x [] = [x]
-insertar x lista
-  | ((head lista) > x) = [x, head lista] ++ (tail lista)
-  | otherwise = [head lista] ++ (insertar x (tail lista))
+insertar x x2:xs
+  | (x2 > x) = [x, x2] ++ xs
+  | otherwise = [x2] ++ (insertar x xs)
 
 
 -- Ejercicio Nº 15 Defina una función que, aplicada a una lista de listas, permita obtener una lista de un solo nivel.

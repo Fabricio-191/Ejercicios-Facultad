@@ -21,4 +21,27 @@ sumarI list = [sum ([head x | x <- list]), sum ([last x | x <- list])]
 -- Ejercicio Nº18: Escriba un programa que recibiendo como argumento una lista de listas donde cada sublista contiene nombre del docente, dedicación y carrera donde trabaja; entregue como resultado una lista con los nombres de los docentes que cobrarán un plus considerando que los cobrarán aquellos docentes que tenga solamente un cargo con dedicación simple.
 -- [["Ana", "Exclusivo", "LSI"], ["Mary", "Semi", "LCC"], ["Jose", "Simple", "LSI"], ["Mary", "Simple", "LSI"], ["Raul", "Exclusivo", "LCC"], ["Pepe", "Simple", "LSI"]]
 plus :: [[[Char]]] -> [[Char]]
-plus lista = [head x | x <- lista, (x !! 1) == "Simple"]
+
+cant nom xs = length [x | x <- xs, (x !! 0) == nom]
+plus xs = [head x | x <- xs, (x !! 1 == "Simple") && (cant (x !! 0) xs) == 1]
+
+
+-- Parcial (2022) definir funcion enlace que reciba como argumento dos listas de pares de elementos y construya una nueva lista de la siguiente manera:
+
+-- enlace [[1, 2], [5, 6], [20, 8]] [[6, 100], [1, 200], [3, 300], [2, 400], [8, 500]]   ->  [[1, 400], [5, 100], ...]
+
+buscar :: (Eq a) => a -> [[a]] -> a
+buscar x [] = []
+buscar x (y:ys)
+  | (x == (y !! 0)) = y !! 1
+  | otherwise = buscar x ys
+
+enlace :: (Eq a) => [[a]] -> [[a]] -> [[a]]
+enlace [] lote = []
+enlace (x:xs) lote = [x !! 0, buscar (x !! 1) lote] ++ enlace xs lote
+
+enlace2 lista1 lote = [[x !! 0, (head [(y !! 1) | y <- lote, (y !! 0) == (x !! 1)])] | x <- lista1]
+
+enlace3 [] lote = []
+enlace3 (x:xs) lote = [x !! 0, (head [(y !! 1) | y <- lote, (y !! 0) == (x !! 1)])] : enlace3 xs lote
+

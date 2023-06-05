@@ -8,50 +8,41 @@ CREATE TABLE IF NOT EXISTS vehiculo (
     marca TEXT NOT NULL,
     seguro TEXT NOT NULL,
     tipo TIPO_VEHICULO NOT NULL,
-)
+);
 
-CREATE TABLE IF NOT EXISTS camiones {
+CREATE TABLE IF NOT EXISTS camiones (
     patente TEXT PRIMARY KEY REFERENCES vehiculo(patente),
     valor INT NOT NULL CHECK (valor > 0),
     kilometraje INT NOT NULL CHECK (kilometraje > 0),
-}
+);
 
-CREATE TABLE IF NOT EXISTS persona {
+CREATE TABLE IF NOT EXISTS persona (
     cuil TEXT PRIMARY KEY,
     nombreyapellido TEXT NOT NULL,
     fecha_nacimiento DATE NOT NULL,
-}
+);
 
 CREATE TABLE IF NOT EXISTS chofer (
     cuil TEXT PRIMARY KEY,
     antiguedad INT NOT NULL CHECK (antiguedad > 0),
     sueldo REAL NOT NULL CHECK (sueldo > 0),
-)
+);
 
 CREATE TABLE IF NOT EXISTS choferes_camiones (
     cuil TEXT NOT NULL REFERENCES chofer(cuil),
     patente TEXT NOT NULL REFERENCES camiones(patente)
     PRIMARY KEY (cuil, patente)
-)
+);
 
 CREATE TABLE IF NOT EXISTS provincia (
     nombre TEXT PRIMARY KEY
-)
+);
 
 CREATE TABLE IF NOT EXISTS localidad (
     codigo INT PRIMARY KEY,
     nombre TEXT NOT NULL,
     provincia TEXT NOT NULL REFERENCES provincia(nombre)
-)
-
-CREATE TABLE IF NOT EXISTS actaChoque (
-    numero INT,
-    provincia TEXT NOT NULL  REFERENCES provincia(nombre),
-    fecha DATE NOT NULL CHECK (fecha < CURRENT_DATE),
-    costo REAL NOT NULL CHECK (costo > 0),
-    descripcion TEXT NOT NULL,
-	PRIMARY KEY (numero, provincia)
-)
+);
 
 CREATE TABLE IF NOT EXISTS viaje (
     numero INT PRIMARY KEY,
@@ -60,10 +51,17 @@ CREATE TABLE IF NOT EXISTS viaje (
     kilometros REAL NOT NULL CHECK (kilometros > 0),
     fechaInicio DATE NOT NULL,
     fechaFin DATE NOT NULL CHECK (fechaFin > fechaInicio),
-)
+);
+
+CREATE TABLE IF NOT EXISTS viajeRecorrio (
+    codigoLocalidad INT REFERENCES localidad(codigo),
+    codigoViaje INT REFERENCES viaje(numero),
+    PRIMARY KEY (codigoLocalidad, codigoViaje)
+);
 
 CREATE TABLE IF NOT EXISTS paquete (
     numero INT PRIMARY KEY,
+    numViaje INT NOT NULL REFERENCES viaje(numero),
     valor REAL NOT NULL CHECK (valor > 0),
     precioTranslado REAL NOT NULL CHECK (precioTranslado > 0),
     destinatarioCUIL TEXT NOT NULL,
@@ -71,29 +69,29 @@ CREATE TABLE IF NOT EXISTS paquete (
     codigoLocalidadEntrega INT NOT NULL REFERENCES localidad(codigo),
     calleDireccionEntrega TEXT NOT NULL,
     orientacionDireccionEntrega TEXT NOT NULL,
-    numeroDireccionEntrega INT NOT NULL,
-    numViaje INT NOT NULL REFERENCES viaje(numero)
-)
+    numeroDireccionEntrega INT NOT NULL
+);
 
-CREATE TABLE IF NOT EXISTS viajeRecorrio (
-    codigoLocalidad INT REFERENCES localidad(codigo),
-    codigoViaje INT REFERENCES viaje(numero),
-    PRIMARY KEY (codigoLocalidad, codigoViaje)
-)
+CREATE TABLE IF NOT EXISTS actaChoque (
+    numero INT,
+    provincia TEXT NOT NULL  REFERENCES provincia(nombre),
+    fecha DATE NOT NULL CHECK (fecha < CURRENT_DATE),
+    costo REAL NOT NULL CHECK (costo > 0),
+    descripcion TEXT NOT NULL,
+	PRIMARY KEY (numero, provincia)
+);
 
 CREATE TABLE IF NOT EXISTS participoChoque (
     numeroChoque INT REFERENCES actaChoque(numero),
     patenteVehiculo TEXT REFERENCES vehiculo(patente),
     PRIMARY KEY (numeroChoque, patenteVehiculo)
-)
+);
 
 CREATE TABLE IF NOT EXISTS viajeChoque (
     numeroChoque INT REFERENCES actaChoque(numero),
     codigoViaje INT REFERENCES viaje(numero)
     PRIMARY KEY (numeroChoque, codigoViaje)
-)
-
--- generate a dataset
+);
 
 INSERT INTO provincia(nombre) VALUES
     ('Buenos Aires'),
@@ -194,6 +192,18 @@ INSERT INTO localidad(nombre, provincia) VALUES
 	('Localidad 70', 'Tucumán'),
 	('Localidad 71', 'Tucumán'),
 	('Localidad 72', 'Tucumán');
+
+INSERT INTO persona(cuil, nombreyapellido, fecha_nacimiento) VALUES
+	('20-10000000-01', 'Juan Perez',      '1990-05-15'),
+	('20-20000000-02', 'Maria Rodriguez', '1985-12-03'),
+	('20-30000000-03', 'Pedro Gomez',     '1995-02-28'),
+	('20-40000000-04', 'Ana Fernandez',   '1998-09-20'),
+	('20-50000000-05', 'Lucas Martinez',  '1980-07-10');
+
+INSERT INTO chofer(cuil, antiguedad, sueldo) VALUES
+	('20-10000000-01', 5,  20000),
+	('20-20000000-02', 10, 30000),
+	('20-30000000-03', 2,  15000);
 	
 INSERT INTO vehiculo(patente, modelo, marca, seguro, tipo) VALUES
 	('ABC123', 'Fiesta',   'Ford',          'Allianz',    'Auto'),
@@ -207,24 +217,21 @@ INSERT INTO camiones(patente, valor, kilometraje) VALUES
     ('DEF456', 75000,  80000),
     ('JKL012', 90000,  120000);
 
-INSERT INTO persona(cuil, nombreyapellido, fecha_nacimiento) VALUES
-	('20-10000000-01', 'Juan Perez',      '1990-05-15'),
-	('20-20000000-02', 'Maria Rodriguez', '1985-12-03'),
-	('20-30000000-03', 'Pedro Gomez',     '1995-02-28'),
-	('20-40000000-04', 'Ana Fernandez',   '1998-09-20'),
-	('20-50000000-05', 'Lucas Martinez',  '1980-07-10');
-
-INSERT INTO chofer(cuil, antiguedad, sueldo) VALUES
-	('20-10000000-01', 5,  20000),
-	('20-20000000-02', 10, 30000),
-	('20-30000000-03', 2,  15000);
-
 INSERT INTO choferes_camiones(cuil, patente) VALUES
 	('20-10000000-01', 'DEF456'),
 	('20-20000000-02', 'DEF456'),
 	('20-20000000-02', 'JKL012');
 
-INSERT INTO actaChoque(provincia, fecha, costo, descripcion) VALUES
-	('Buenos Aires', '2019-01-01', 10000, 'Choque en la ruta 1'),
-	('Buenos Aires', '2020-02-02', 20000, 'Choque en la ruta 2'),
-	('Buenos Aires', '2021-03-03', 30000, 'Choque en la ruta 3')
+INSERT INTO viaje(numero, patenteCamion, cuilChofer, kilometros, fechaInicio, fechaFin) VALUES
+	();
+
+INSERT INTO viajeRecorrio(codigoLocalidad, codigoViaje) VALUES
+	();
+
+INSERT INTO paquete(
+	numero, numViaje, valor, precioTranslado, 
+	destinatarioCUIL, remitenteCUIL,
+	codigoLocalidadEntrega, calleDireccionEntrega, orientacionDireccionEntrega, numeroDireccionEntrega
+) VALUES 
+	();
+

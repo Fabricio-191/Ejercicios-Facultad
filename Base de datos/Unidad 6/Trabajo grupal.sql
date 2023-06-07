@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS vehiculo (
 );
 
 CREATE TABLE IF NOT EXISTS camiones (
-    patente TEXT PRIMARY KEY REFERENCES vehiculo(patente),
+    patente TEXT PRIMARY KEY REFERENCES vehiculo(patente) ON DELETE CASCADE ON UPDATE CASCADE,
     valor INT NOT NULL CHECK (valor > 0),
     kilometraje INT NOT NULL CHECK (kilometraje > 0)
 );
@@ -29,8 +29,8 @@ CREATE TABLE IF NOT EXISTS chofer (
 );
 
 CREATE TABLE IF NOT EXISTS choferes_camiones (
-    cuil TEXT NOT NULL REFERENCES chofer(cuil),
-    patente TEXT NOT NULL REFERENCES camiones(patente),
+    cuil TEXT NOT NULL REFERENCES chofer(cuil) ON DELETE CASCADE ON UPDATE CASCADE,
+    patente TEXT NOT NULL REFERENCES camiones(patente) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (cuil, patente)
 );
 
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS provincia (
 CREATE TABLE IF NOT EXISTS localidad (
     codigo SERIAL PRIMARY KEY,
     nombre TEXT NOT NULL,
-    provincia TEXT NOT NULL REFERENCES provincia(nombre)
+    provincia TEXT NOT NULL REFERENCES provincia(nombre) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS viaje (
@@ -61,12 +61,12 @@ CREATE TABLE IF NOT EXISTS viajeRecorrio (
 
 CREATE TABLE IF NOT EXISTS paquete (
     numero INT PRIMARY KEY,
-    numViaje INT NOT NULL REFERENCES viaje(numero),
+    numViaje INT NOT NULL REFERENCES viaje(numero) ON DELETE CASCADE ON UPDATE CASCADE,
     valor REAL NOT NULL CHECK (valor > 0),
     precioTranslado REAL NOT NULL CHECK (precioTranslado > 0),
     destinatarioCUIL TEXT NOT NULL,
     remitenteCUIL TEXT NOT NULL REFERENCES persona(cuil) ON DELETE CASCADE ON UPDATE CASCADE,
-    codigoLocalidadEntrega INT NOT NULL REFERENCES localidad(codigo),
+    codigoLocalidadEntrega INT NOT NULL REFERENCES localidad(codigo) ON DELETE CASCADE ON UPDATE CASCADE,
     calleDireccionEntrega TEXT NOT NULL,
     orientacionDireccionEntrega TEXT NOT NULL,
     numeroDireccionEntrega INT NOT NULL
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS paquete (
 
 CREATE TABLE IF NOT EXISTS actaChoque (
     numero INT,
-    provincia TEXT NOT NULL REFERENCES provincia(nombre),
+    provincia TEXT NOT NULL REFERENCES provincia(nombre) ON DELETE CASCADE ON UPDATE CASCADE,
     fecha DATE NOT NULL CHECK (fecha < CURRENT_DATE),
     costo REAL NOT NULL CHECK (costo > 0),
     descripcion TEXT NOT NULL,
@@ -83,18 +83,18 @@ CREATE TABLE IF NOT EXISTS actaChoque (
 
 CREATE TABLE IF NOT EXISTS participoChoque (
     numeroChoque INT,
-    provincia TEXT NOT NULL REFERENCES provincia(nombre),
-    patenteVehiculo TEXT REFERENCES vehiculo(patente),
+    provincia TEXT NOT NULL REFERENCES provincia(nombre) ON DELETE CASCADE ON UPDATE CASCADE,
+    patenteVehiculo TEXT REFERENCES vehiculo(patente) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (numeroChoque, patenteVehiculo),
-	FOREIGN KEY (numeroChoque, provincia) REFERENCES actaChoque(numero, provincia)
+	FOREIGN KEY (numeroChoque, provincia) REFERENCES actaChoque(numero, provincia) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS viajeChoque (
     numeroChoque INT,
-    provincia TEXT NOT NULL REFERENCES provincia(nombre),
-    codigoViaje INT REFERENCES viaje(numero),
+    provincia TEXT NOT NULL REFERENCES provincia(nombre) ON DELETE CASCADE ON UPDATE CASCADE,
+    codigoViaje INT REFERENCES viaje(numero) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (numeroChoque, codigoViaje),
-	FOREIGN KEY (numeroChoque, provincia) REFERENCES actaChoque(numero, provincia)
+	FOREIGN KEY (numeroChoque, provincia) REFERENCES actaChoque(numero, provincia) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 INSERT INTO provincia(nombre) VALUES
@@ -243,16 +243,24 @@ INSERT INTO paquete(
 	
 */
 
+-- USUARIOS
+-- DBA: Debe tener acceso de lectura y escritura a toda la base de datos.
 CREATE USER DBA WITH ENCRYPTED PASSWORD '1234';
-CREATE USER GERENTE WITH ENCRYPTED PASSWORD '12345';
-CREATE USER JEFE_LOGISTICA WITH ENCRYPTED PASSWORD '12345678';
-
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA PUBLIC TO DBA;
+
+-- Gerente de la Empresa: Debe tener acceso de lectura a toda la base de datos.
+CREATE USER GERENTE WITH ENCRYPTED PASSWORD '12345';
 GRANT SELECT ON ALL TABLES IN SCHEMA PUBLIC TO GERENTE;
+
+-- Jefe de Logís
+CREATE USER JEFE_LOGISTICA WITH ENCRYPTED PASSWORD '12345678';
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE camiones, chofer, choferes_camiones, viaje, paquete, viajerecorrio TO JEFE_LOGISTICA;
 
--- 1. Paquetes (todos sus datos) ordenados por precio.
+-- CONSULTA PRIORITARIA (tenerla en cuenta para el diseño fisico de la BD)
+-- Listado de paquetes (todos sus datos) ordenado por precio.
 CREATE VIEW paquetes_ordenados AS (SELECT * FROM paquete ORDER BY valor);
+
+-- 1. Paquetes (todos sus datos) ordenados por precio.
 SELECT * FROM paquetes_ordenados;
 
 -- 2. Choferes (todos los datos) que entregaron paquetes en Liniers (Buenos Aires).
@@ -300,6 +308,17 @@ WHERE EXISTS (
 )
 
 -- 4. Localidades a las que no se hicieron envíos durante 2022.
+SELECT * FROM localidad
+WHERE NOT EXISTS (
+	SELECT * FROM viaje
+	WHERE EXISTS (
+		SELECT * FROM viajerecorrio
+		WHERE viajerecorrio.codigoviaje = viaje.numero AND
+			viajerecorrio.codigolocalidad = localidad.codigo AND
+			year(viaje.fechainicio) = 2022
+	)
+)
+
 -- 5. Choferes (todos los datos) que realizaron más viajes.
 SELECT cuilchofer FROM viaje
 GROUP BY cuilchofer

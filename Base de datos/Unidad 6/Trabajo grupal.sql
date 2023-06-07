@@ -7,30 +7,30 @@ CREATE TABLE IF NOT EXISTS vehiculo (
     modelo TEXT NOT NULL,
     marca TEXT NOT NULL,
     seguro TEXT NOT NULL,
-    tipo TIPO_VEHICULO NOT NULL,
+    tipo TIPO_VEHICULO NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS camiones (
     patente TEXT PRIMARY KEY REFERENCES vehiculo(patente),
     valor INT NOT NULL CHECK (valor > 0),
-    kilometraje INT NOT NULL CHECK (kilometraje > 0),
+    kilometraje INT NOT NULL CHECK (kilometraje > 0)
 );
 
 CREATE TABLE IF NOT EXISTS persona (
     cuil TEXT PRIMARY KEY,
     nombreyapellido TEXT NOT NULL,
-    fecha_nacimiento DATE NOT NULL,
+    fecha_nacimiento DATE NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS chofer (
     cuil TEXT PRIMARY KEY,
     antiguedad INT NOT NULL CHECK (antiguedad > 0),
-    sueldo REAL NOT NULL CHECK (sueldo > 0),
+    sueldo REAL NOT NULL CHECK (sueldo > 0)
 );
 
 CREATE TABLE IF NOT EXISTS choferes_camiones (
     cuil TEXT NOT NULL REFERENCES chofer(cuil),
-    patente TEXT NOT NULL REFERENCES camiones(patente)
+    patente TEXT NOT NULL REFERENCES camiones(patente),
     PRIMARY KEY (cuil, patente)
 );
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS provincia (
 );
 
 CREATE TABLE IF NOT EXISTS localidad (
-    codigo INT PRIMARY KEY,
+    codigo SERIAL PRIMARY KEY,
     nombre TEXT NOT NULL,
     provincia TEXT NOT NULL REFERENCES provincia(nombre)
 );
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS viaje (
     cuilChofer TEXT NOT NULL REFERENCES chofer(cuil),
     kilometros REAL NOT NULL CHECK (kilometros > 0),
     fechaInicio DATE NOT NULL,
-    fechaFin DATE NOT NULL CHECK (fechaFin > fechaInicio),
+    fechaFin DATE NOT NULL CHECK (fechaFin > fechaInicio)
 );
 
 CREATE TABLE IF NOT EXISTS viajeRecorrio (
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS paquete (
 
 CREATE TABLE IF NOT EXISTS actaChoque (
     numero INT,
-    provincia TEXT NOT NULL  REFERENCES provincia(nombre),
+    provincia TEXT NOT NULL REFERENCES provincia(nombre),
     fecha DATE NOT NULL CHECK (fecha < CURRENT_DATE),
     costo REAL NOT NULL CHECK (costo > 0),
     descripcion TEXT NOT NULL,
@@ -82,15 +82,19 @@ CREATE TABLE IF NOT EXISTS actaChoque (
 );
 
 CREATE TABLE IF NOT EXISTS participoChoque (
-    numeroChoque INT REFERENCES actaChoque(numero),
+    numeroChoque INT,
+    provincia TEXT NOT NULL REFERENCES provincia(nombre),
     patenteVehiculo TEXT REFERENCES vehiculo(patente),
-    PRIMARY KEY (numeroChoque, patenteVehiculo)
+    PRIMARY KEY (numeroChoque, patenteVehiculo),
+	FOREIGN KEY (numeroChoque, provincia) REFERENCES actaChoque(numero, provincia)
 );
 
 CREATE TABLE IF NOT EXISTS viajeChoque (
-    numeroChoque INT REFERENCES actaChoque(numero),
-    codigoViaje INT REFERENCES viaje(numero)
-    PRIMARY KEY (numeroChoque, codigoViaje)
+    numeroChoque INT,
+    provincia TEXT NOT NULL REFERENCES provincia(nombre),
+    codigoViaje INT REFERENCES viaje(numero),
+    PRIMARY KEY (numeroChoque, codigoViaje),
+	FOREIGN KEY (numeroChoque, provincia) REFERENCES actaChoque(numero, provincia)
 );
 
 INSERT INTO provincia(nombre) VALUES
@@ -222,6 +226,8 @@ INSERT INTO choferes_camiones(cuil, patente) VALUES
 	('20-20000000-02', 'DEF456'),
 	('20-20000000-02', 'JKL012');
 
+
+/*
 INSERT INTO viaje(numero, patenteCamion, cuilChofer, kilometros, fechaInicio, fechaFin) VALUES
 	();
 
@@ -234,4 +240,85 @@ INSERT INTO paquete(
 	codigoLocalidadEntrega, calleDireccionEntrega, orientacionDireccionEntrega, numeroDireccionEntrega
 ) VALUES 
 	();
+	
+*/
 
+CREATE USER DBA WITH ENCRYPTED PASSWORD '1234';
+CREATE USER GERENTE WITH ENCRYPTED PASSWORD '12345';
+CREATE USER JEFE_LOGISTICA WITH ENCRYPTED PASSWORD '12345678';
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA PUBLIC TO DBA;
+GRANT SELECT ON ALL TABLES IN SCHEMA PUBLIC TO GERENTE;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE camiones, chofer, choferes_camiones, viaje, paquete, viajerecorrio TO JEFE_LOGISTICA;
+
+-- 1. Paquetes (todos sus datos) ordenados por precio.
+CREATE VIEW paquetes_ordenados AS (SELECT * FROM paquete ORDER BY valor);
+SELECT * FROM paquetes_ordenados;
+
+-- 2. Choferes (todos los datos) que entregaron paquetes en Liniers (Buenos Aires).
+SELECT * FROM chofer 
+WHERE EXISTS (
+	SELECT * FROM viaje
+	WHERE viaje.cuilchofer=chofer.cuil AND
+		EXISTS (
+			SELECT * FROM viajerecorrio
+			WHERE viajerecorrio.codigoviaje=viaje.numero AND
+				EXISTS (
+					SELECT * FROM localidad
+					WHERE localidad.codigo=viajerecorrio.codigolocalidad AND
+						localidad.nombre = 'Liniers' AND
+						localidad.provincia = 'Buenos Aires'
+				)
+		)
+)
+
+SELECT chofer.* FROM chofer, viaje, viajerecorrio, localidad WHERE
+	chofer.cuil = viaje.cuilchofer AND
+	viajerecorrio.codigoviaje = viaje.numero AND 
+	localidad.codigo = viajerecorrio.codigolocalidad AND
+	localidad.nombre = 'Liniers' AND
+	localidad.provincia = 'Buenos Aires';
+
+-- 3. Choferes (todos los datos) que participaron en accidentes en el año 2022 y también en el 2023.
+SELECT * FROM chofer
+WHERE EXISTS (
+	(SELECT numero, provincia FROM actachoque WHERE year(fecha) = 2022)
+	INTERSECT
+	(SELECT numero, provincia FROM viajeChoque WHERE EXISTS (
+		SELECT * FROM viaje
+		WHERE viaje.numero =viajeChoque.codigoviaje AND
+			viaje.cuilchofer=chofer.cuil
+	))
+) AND EXISTS (
+	(SELECT numero, provincia FROM actachoque WHERE year(fecha) = 2023)
+	INTERSECT
+	(SELECT numero, provincia FROM viajeChoque WHERE EXISTS (
+		SELECT * FROM viaje
+		WHERE viaje.numero =viajeChoque.codigoviaje AND
+			viaje.cuilchofer=chofer.cuil
+	))
+)
+
+-- 4. Localidades a las que no se hicieron envíos durante 2022.
+-- 5. Choferes (todos los datos) que realizaron más viajes.
+SELECT cuilchofer FROM viaje
+GROUP BY cuilchofer
+HAVING COUNT(*)=(
+	SELECT COUNT() FROM viaje GROUP BY cuilchofer ORDER BY COUNT() LIMIT 1
+)
+
+-- 6. Camiones (todos los datos) que fueron (entregaron paquetes) a todas las localidades de Buenos Aires.
+SELECT * FROM camiones
+WHERE NOT EXISTS (
+	SELECT * FROM localidad
+	WHERE provincia = 'Buenos Aires' AND
+		NOT EXISTS (
+			SELECT * FROM viaje
+			WHERE viaje.patentecamion = camiones.patente AND
+				EXISTS (
+					SELECT * FROM viajerecorrio
+					WHERE viajerecorrio.codigoviaje = viaje.numero AND
+						viajerecorrio.codigolocalidad = localidad.codigo
+				)
+		)
+)

@@ -1,6 +1,7 @@
 -- SPRT2022
 
 CREATE TYPE TIPO_VEHICULO AS ENUM ('Camion', 'Auto', 'Moto');
+CREATE TYPE ORIENTACION AS ENUM ('N', 'S', 'E', 'O');
 
 CREATE TABLE IF NOT EXISTS vehiculo (
     patente TEXT PRIMARY KEY,
@@ -8,6 +9,7 @@ CREATE TABLE IF NOT EXISTS vehiculo (
     marca TEXT NOT NULL,
     seguro TEXT NOT NULL,
     tipo TIPO_VEHICULO NOT NULL
+	-- tipo TEXT NOT NULL CHECK(tipo IN ('Camion', 'Auto', 'Moto'))
 );
 
 CREATE TABLE IF NOT EXISTS camiones (
@@ -60,16 +62,16 @@ CREATE TABLE IF NOT EXISTS viajeRecorrio (
 );
 
 CREATE TABLE IF NOT EXISTS paquete (
-    numero INT PRIMARY KEY,
+    numero SERIAL PRIMARY KEY,
     numViaje INT NOT NULL REFERENCES viaje(numero) ON DELETE CASCADE ON UPDATE CASCADE,
     valor REAL NOT NULL CHECK (valor > 0),
     precioTranslado REAL NOT NULL CHECK (precioTranslado > 0),
     destinatarioCUIL TEXT NOT NULL,
     remitenteCUIL TEXT NOT NULL REFERENCES persona(cuil) ON DELETE CASCADE ON UPDATE CASCADE,
-    codigoLocalidadEntrega INT NOT NULL REFERENCES localidad(codigo) ON DELETE CASCADE ON UPDATE CASCADE,
-    calleDireccionEntrega TEXT NOT NULL,
-    orientacionDireccionEntrega TEXT NOT NULL,
-    numeroDireccionEntrega INT NOT NULL
+    entrega_localidad_codigo INT NOT NULL REFERENCES localidad(codigo) ON DELETE CASCADE ON UPDATE CASCADE,
+    entrega_direccion_calle TEXT NOT NULL,
+    entrega_direccion_orientacion ORIENTACION NOT NULL,
+    entrega_direccion_numero INT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS actaChoque (
@@ -125,7 +127,7 @@ INSERT INTO provincia(nombre) VALUES
 
 INSERT INTO localidad(nombre, provincia) VALUES
 	('Localidad 1', 'Buenos Aires'),
-	('Localidad 2', 'Buenos Aires'),
+	('Liniers', 'Buenos Aires'),
 	('Localidad 3', 'Buenos Aires'),
 	('Localidad 4', 'Ciudad Autónoma de Buenos Aires'),
 	('Localidad 5', 'Ciudad Autónoma de Buenos Aires'),
@@ -226,22 +228,32 @@ INSERT INTO choferes_camiones(cuil, patente) VALUES
 	('20-20000000-02', 'DEF456'),
 	('20-20000000-02', 'JKL012');
 
-
-/*
 INSERT INTO viaje(numero, patenteCamion, cuilChofer, kilometros, fechaInicio, fechaFin) VALUES
-	();
+	(1, 'DEF456', '20-10000000-01', 300, TO_DATE('01-01-2017', 'DD-MM-YYYY'), TO_DATE('01-01-2023', 'DD-MM-YYYY'));
 
-INSERT INTO viajeRecorrio(codigoLocalidad, codigoViaje) VALUES
-	();
+INSERT INTO viajeRecorrio(codigoViaje, codigoLocalidad) VALUES
+	(1, 'Liniers'), 
+	(1, 'Localidad 1'), 
+	(1, 'Localidad 3'), 
+	(1, 'Localidad 5'), 
+	(1, 'Localidad 24');
 
 INSERT INTO paquete(
-	numero, numViaje, valor, precioTranslado, 
+	numViaje, valor, precioTranslado, 
 	destinatarioCUIL, remitenteCUIL,
-	codigoLocalidadEntrega, calleDireccionEntrega, orientacionDireccionEntrega, numeroDireccionEntrega
-) VALUES 
+	entrega_localidad_codigo,
+	entrega_direccion_calle,
+	entrega_direccion_orientacion,
+	entrega_direccion_numero
+) VALUES
+	(1, 300000, 5000, '20-30000000-01', '20-40000000-04', 1, 'Calle a', 'E', 3000); 
+
+INSERT INTO viajeChoque(numeroChoque, provincia, codigoViaje) VALUES 
 	();
-	
-*/
+
+INSERT INTO participoChoque(numeroChoque, provincia, patenteVehiculo) VALUES 
+	();
+
 
 -- USUARIOS
 -- DBA: Debe tener acceso de lectura y escritura a toda la base de datos.
@@ -305,6 +317,34 @@ WHERE EXISTS (
 		WHERE viaje.numero =viajeChoque.codigoviaje AND
 			viaje.cuilchofer=chofer.cuil
 	))
+)
+
+-- another solution
+SELECT * FROM chofer
+WHERE EXISTS (
+	SELECT * FROM viaje
+	WHERE viaje.cuilchofer=chofer.cuil AND
+		EXISTS (
+			SELECT * FROM viajechoque
+			WHERE viajechoque.codigoviaje=viaje.numero AND
+				EXISTS (
+					SELECT * FROM actachoque
+					WHERE actachoque.numero=viajechoque.numero AND
+						year(actachoque.fecha) = 2022
+				)
+		)
+) AND EXISTS (
+	SELECT * FROM viaje
+	WHERE viaje.cuilchofer=chofer.cuil AND
+		EXISTS (
+			SELECT * FROM viajechoque
+			WHERE viajechoque.codigoviaje=viaje.numero AND
+				EXISTS (
+					SELECT * FROM actachoque
+					WHERE actachoque.numero=viajechoque.numero AND
+						year(actachoque.fecha) = 2023
+				)
+		)
 )
 
 -- 4. Localidades a las que no se hicieron envíos durante 2022.

@@ -232,11 +232,11 @@ INSERT INTO viaje(numero, patenteCamion, cuilChofer, kilometros, fechaInicio, fe
 	(1, 'DEF456', '20-10000000-01', 300, TO_DATE('01-01-2017', 'DD-MM-YYYY'), TO_DATE('01-01-2023', 'DD-MM-YYYY'));
 
 INSERT INTO viajeRecorrio(codigoViaje, codigoLocalidad) VALUES
-	(1, 'Liniers'), 
-	(1, 'Localidad 1'), 
-	(1, 'Localidad 3'), 
-	(1, 'Localidad 5'), 
-	(1, 'Localidad 24');
+	(1, 1), 
+	(1, 2), 
+	(1, 3), 
+	(1, 5), 
+	(1, 25);
 
 INSERT INTO paquete(
 	numViaje, valor, precioTranslado, 
@@ -251,6 +251,13 @@ INSERT INTO paquete(
 	(1, 1000, 2000, '20-20000000-02', '20-40000000-04', 3, 'Calle c', 'S', 100),
 	(1, 20000, 3000, '20-30000000-03', '20-40000000-04', 4, 'Calle d', 'O', 200),
 	(1, 400, 4000, '20-40000000-04', '20-40000000-04', 5, 'Calle e', 'E', 300);
+
+INSERT INTO actaChoque(numero, provincia, fecha, costo, descripcion) VALUES 
+	(1, 'Buenos Aires', TO_DATE('01-01-2018', 'DD-MM-YYYY'), 30000, ''),
+	(2, 'Buenos Aires', TO_DATE('01-06-2018', 'DD-MM-YYYY'), 40000, ''),
+	(3, 'Buenos Aires', TO_DATE('01-01-2019', 'DD-MM-YYYY'), 50000, ''),
+	(4, 'Buenos Aires', TO_DATE('01-06-2019', 'DD-MM-YYYY'), 60000, ''),
+	(5, 'Buenos Aires', TO_DATE('01-01-2020', 'DD-MM-YYYY'), 70000, ''),
 
 INSERT INTO viajeChoque(numeroChoque, provincia, codigoViaje) VALUES 
 	(1, 'Buenos Aires', 1),

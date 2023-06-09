@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS participoChoque (
     numeroChoque INT,
     provincia TEXT NOT NULL REFERENCES provincia(nombre) ON DELETE CASCADE ON UPDATE CASCADE,
     patenteVehiculo TEXT REFERENCES vehiculo(patente) ON DELETE CASCADE ON UPDATE CASCADE,
-    PRIMARY KEY (numeroChoque, patenteVehiculo),
+    PRIMARY KEY (numeroChoque, provincia, patenteVehiculo),
 	FOREIGN KEY (numeroChoque, provincia) REFERENCES actaChoque(numero, provincia) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS viajeChoque (
     numeroChoque INT,
     provincia TEXT NOT NULL REFERENCES provincia(nombre) ON DELETE CASCADE ON UPDATE CASCADE,
     codigoViaje INT REFERENCES viaje(numero) ON DELETE CASCADE ON UPDATE CASCADE,
-    PRIMARY KEY (numeroChoque, codigoViaje),
+    PRIMARY KEY (numeroChoque, provincia, codigoViaje),
 	FOREIGN KEY (numeroChoque, provincia) REFERENCES actaChoque(numero, provincia) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -252,7 +252,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA PUBLIC TO DBA;
 CREATE USER GERENTE WITH ENCRYPTED PASSWORD '12345';
 GRANT SELECT ON ALL TABLES IN SCHEMA PUBLIC TO GERENTE;
 
--- Jefe de Logís
+-- Jefe de Logística
 CREATE USER JEFE_LOGISTICA WITH ENCRYPTED PASSWORD '12345678';
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE camiones, chofer, choferes_camiones, viaje, paquete, viajerecorrio TO JEFE_LOGISTICA;
 

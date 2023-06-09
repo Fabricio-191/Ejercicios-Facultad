@@ -257,7 +257,7 @@ INSERT INTO actaChoque(numero, provincia, fecha, costo, descripcion) VALUES
 	(2, 'Buenos Aires', TO_DATE('01-06-2018', 'DD-MM-YYYY'), 40000, ''),
 	(3, 'Buenos Aires', TO_DATE('01-01-2019', 'DD-MM-YYYY'), 50000, ''),
 	(4, 'Buenos Aires', TO_DATE('01-06-2019', 'DD-MM-YYYY'), 60000, ''),
-	(5, 'Buenos Aires', TO_DATE('01-01-2020', 'DD-MM-YYYY'), 70000, ''),
+	(5, 'Buenos Aires', TO_DATE('01-01-2020', 'DD-MM-YYYY'), 70000, '');
 
 INSERT INTO viajeChoque(numeroChoque, provincia, codigoViaje) VALUES 
 	(1, 'Buenos Aires', 1),
@@ -381,7 +381,7 @@ WHERE NOT EXISTS (
 SELECT cuilchofer FROM viaje
 GROUP BY cuilchofer
 HAVING COUNT(*)=(
-	SELECT COUNT() FROM viaje GROUP BY cuilchofer ORDER BY COUNT() LIMIT 1
+	SELECT COUNT(*) FROM viaje GROUP BY cuilchofer ORDER BY COUNT(*) LIMIT 1
 )
 
 -- 6. Camiones (todos los datos) que fueron (entregaron paquetes) a todas las localidades de Buenos Aires.

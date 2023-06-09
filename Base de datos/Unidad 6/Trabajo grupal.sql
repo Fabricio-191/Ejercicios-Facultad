@@ -246,14 +246,25 @@ INSERT INTO paquete(
 	entrega_direccion_orientacion,
 	entrega_direccion_numero
 ) VALUES
-	(1, 300000, 5000, '20-30000000-01', '20-40000000-04', 1, 'Calle a', 'E', 3000); 
+	(1, 3000, 5000, '20-30000000-01', '20-40000000-04', 1, 'Calle a', 'E', 3000),
+	(1, 500000, 10000, '20-10000000-01', '20-40000000-04', 2, 'Calle b', 'N', 60),
+	(1, 1000, 2000, '20-20000000-02', '20-40000000-04', 3, 'Calle c', 'S', 100),
+	(1, 20000, 3000, '20-30000000-03', '20-40000000-04', 4, 'Calle d', 'O', 200),
+	(1, 400, 4000, '20-40000000-04', '20-40000000-04', 5, 'Calle e', 'E', 300);
 
 INSERT INTO viajeChoque(numeroChoque, provincia, codigoViaje) VALUES 
-	();
+	(1, 'Buenos Aires', 1),
+	(2, 'Buenos Aires', 1),
+	(3, 'Buenos Aires', 1),
+	(4, 'Buenos Aires', 1),
+	(5, 'Buenos Aires', 1);
 
-INSERT INTO participoChoque(numeroChoque, provincia, patenteVehiculo) VALUES 
-	();
-
+INSERT INTO participoChoque(numeroChoque, provincia, patenteVehiculo) VALUES
+	(1, 'Buenos Aires', 'DEF456'),
+	(2, 'Buenos Aires', 'DEF456'),
+	(3, 'Buenos Aires', 'DEF456'),
+	(4, 'Buenos Aires', 'DEF456'),
+	(5, 'Buenos Aires', 'DEF456');
 
 -- USUARIOS
 -- DBA: Debe tener acceso de lectura y escritura a toda la base de datos.

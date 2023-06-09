@@ -320,7 +320,7 @@ SELECT chofer.* FROM chofer, viaje, viajerecorrio, localidad WHERE
 -- 3. Choferes (todos los datos) que participaron en accidentes en el año 2022 y también en el 2023.
 SELECT * FROM chofer
 WHERE EXISTS (
-	(SELECT numero, provincia FROM actachoque WHERE year(fecha) = 2022)
+	(SELECT numero, provincia FROM actachoque WHERE EXTRACT('year' FROM viaje.fechainicio) = 2022)
 	INTERSECT
 	(SELECT numero, provincia FROM viajeChoque WHERE EXISTS (
 		SELECT * FROM viaje
@@ -328,41 +328,13 @@ WHERE EXISTS (
 			viaje.cuilchofer=chofer.cuil
 	))
 ) AND EXISTS (
-	(SELECT numero, provincia FROM actachoque WHERE year(fecha) = 2023)
+	(SELECT numero, provincia FROM actachoque WHERE EXTRACT('year' FROM viaje.fechainicio) = 2023)
 	INTERSECT
 	(SELECT numero, provincia FROM viajeChoque WHERE EXISTS (
 		SELECT * FROM viaje
 		WHERE viaje.numero =viajeChoque.codigoviaje AND
 			viaje.cuilchofer=chofer.cuil
 	))
-)
-
--- another solution
-SELECT * FROM chofer
-WHERE EXISTS (
-	SELECT * FROM viaje
-	WHERE viaje.cuilchofer=chofer.cuil AND
-		EXISTS (
-			SELECT * FROM viajechoque
-			WHERE viajechoque.codigoviaje=viaje.numero AND
-				EXISTS (
-					SELECT * FROM actachoque
-					WHERE actachoque.numero=viajechoque.numero AND
-						year(actachoque.fecha) = 2022
-				)
-		)
-) AND EXISTS (
-	SELECT * FROM viaje
-	WHERE viaje.cuilchofer=chofer.cuil AND
-		EXISTS (
-			SELECT * FROM viajechoque
-			WHERE viajechoque.codigoviaje=viaje.numero AND
-				EXISTS (
-					SELECT * FROM actachoque
-					WHERE actachoque.numero=viajechoque.numero AND
-						year(actachoque.fecha) = 2023
-				)
-		)
 )
 
 -- 4. Localidades a las que no se hicieron envíos durante 2022.
@@ -373,7 +345,7 @@ WHERE NOT EXISTS (
 		SELECT * FROM viajerecorrio
 		WHERE viajerecorrio.codigoviaje = viaje.numero AND
 			viajerecorrio.codigolocalidad = localidad.codigo AND
-			year(viaje.fechainicio) = 2022
+			EXTRACT('year' FROM viaje.fechainicio) = 2022
 	)
 )
 

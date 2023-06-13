@@ -1,9 +1,9 @@
 -- SPRT2022
-DROP SCHEMA public CASCADE;
-CREATE SCHEMA public;
 DROP USER IF EXISTS DBA;
 DROP USER IF EXISTS GERENTE;
 DROP USER IF EXISTS JEFE_LOGISTICA;
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
 
 
 CREATE TYPE TIPO_VEHICULO AS ENUM ('Camion', 'Auto', 'Moto');
@@ -84,6 +84,9 @@ CREATE TABLE IF NOT EXISTS paquete (
     entrega_direccion_calle TEXT NOT NULL,
     entrega_direccion_orientacion ORIENTACION NOT NULL,
     entrega_direccion_numero INT NOT NULL
+    -- FOREIGN KEY (codigo_viaje, entrega_localidad_codigo) REFERENCES viaje_recorrio(codigo_viaje, codigo_localidad)
+    --     ON DELETE CASCADE
+    --     ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS choque (

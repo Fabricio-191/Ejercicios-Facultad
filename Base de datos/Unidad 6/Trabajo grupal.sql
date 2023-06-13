@@ -352,6 +352,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE camiones, chofer, choferes_camione
 -- CONSULTA PRIORITARIA (tenerla en cuenta para el diseño fisico de la BD)
 -- Listado de paquetes (todos sus datos) ordenado por precio.
 CREATE VIEW paquetes_ordenados AS (SELECT * FROM paquete ORDER BY valor DESC);
+
 SELECT * FROM paquetes_ordenados;
 
 -- 2. Choferes (todos los datos) que entregaron paquetes en Liniers (Buenos Aires).
@@ -406,16 +407,16 @@ WHERE EXISTS (
 )
 
 -- 4. Localidades a las que no se hicieron envíos durante 2022.
-SELECT * FROM localidad NATURAL JOIN (
-    SELECT entrega_localidad_codigo AS codigo FROM paquete WHERE EXISTS (
+SELECT * FROM localidad WHERE NOT EXISTS (
+    SELECT * FROM paquete WHERE localidad.codigo = paquete.entrega_localidad_codigo AND EXISTS (
         SELECT * FROM viaje WHERE viaje.numero = paquete.codigo_viaje AND EXISTS (
             SELECT * FROM viaje_recorrio WHERE
                 viaje_recorrio.codigo_viaje = viaje.numero AND
-                viaje_recorrio.codigo_localidad = paquete.entrega_localidad_codigo AND
+                viaje_recorrio.codigo_localidad = localidad.codigo AND
                 EXTRACT(YEAR FROM viaje_recorrio.fecha_hora) = 2022
         )
     )
-) AS localidades_2022;
+);
 
 -- 5. Choferes (todos los datos) que realizaron más viajes.
 SELECT * FROM persona NATURAL JOIN (

@@ -10,8 +10,8 @@ DROP USER IF EXISTS JEFE_LOGISTICA;
 CREATE TYPE TIPO_VEHICULO AS ENUM ('Camion', 'Auto', 'Moto');
 CREATE TYPE ORIENTACION AS ENUM ('N', 'S', 'E', 'O');
 
-CREATE DOMAIN PATENTE as TEXT CHECK (value ~ '^[A-Z]{3}[0-9]{3}$' OR value ~ '^[A-Z]{2}[0-9]{3}[A-Z]{2}$');
-CREATE DOMAIN CUIL as TEXT CHECK (value ~ '^[0-9]{2}-[0-9]{1,9}-[0-9]{1,2}$');
+CREATE DOMAIN PATENTE AS TEXT CHECK (value ~ '^[A-Z]{3}[0-9]{3}$' OR value ~ '^[A-Z]{2}[0-9]{3}[A-Z]{2}$');
+CREATE DOMAIN CUIL AS TEXT CHECK (value ~ '^[0-9]{2}-[0-9]{1,9}-[0-9]{1,2}$');
 
 CREATE TABLE IF NOT EXISTS vehiculo (
     patente PATENTE PRIMARY KEY,
@@ -47,9 +47,7 @@ CREATE TABLE IF NOT EXISTS choferes_camiones (
     PRIMARY KEY (cuil, patente)
 );
 
-CREATE TABLE IF NOT EXISTS provincia (
-    nombre TEXT PRIMARY KEY
-);
+CREATE TABLE IF NOT EXISTS provincia (nombre TEXT PRIMARY KEY);
 
 CREATE TABLE IF NOT EXISTS localidad (
     codigo SERIAL PRIMARY KEY,

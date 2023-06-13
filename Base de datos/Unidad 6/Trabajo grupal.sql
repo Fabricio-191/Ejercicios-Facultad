@@ -60,7 +60,10 @@ CREATE TABLE IF NOT EXISTS viaje (
     cuil_chofer CUIL NOT NULL REFERENCES chofer(cuil) ON DELETE CASCADE ON UPDATE CASCADE,
     kilometros REAL NOT NULL CHECK (kilometros > 0),
     fecha_inicio DATE NOT NULL,
-    fecha_fin DATE NOT NULL CHECK (fecha_inicio < fecha_fin)
+    fecha_fin DATE NOT NULL CHECK (fecha_inicio < fecha_fin),
+	FOREIGN KEY (patente_camion, cuil_chofer) REFERENCES choferes_camiones(patente, cuil)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS viaje_recorrio (

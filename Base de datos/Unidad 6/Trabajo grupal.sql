@@ -23,9 +23,7 @@ CREATE TABLE IF NOT EXISTS vehiculo (
 );
 
 CREATE TABLE IF NOT EXISTS camiones (
-    patente TEXT PRIMARY KEY REFERENCES vehiculo(patente)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE,
+    patente PATENTE PRIMARY KEY REFERENCES vehiculo(patente) ON DELETE CASCADE ON UPDATE CASCADE,
     valor INT NOT NULL CHECK (valor > 0),
     kilometraje INT NOT NULL CHECK (kilometraje > 0)
 );
@@ -33,7 +31,8 @@ CREATE TABLE IF NOT EXISTS camiones (
 CREATE TABLE IF NOT EXISTS persona (
     cuil CUIL PRIMARY KEY,
     nombre_apellido TEXT NOT NULL CHECK (nombre_apellido != ''),
-    fecha_nacimiento DATE NOT NULL CHECK (fecha_nacimiento < CURRENT_DATE AND fecha_nacimiento > '1900-01-01')
+	domicilio TEXT NOT NULL CHECK (domicilio != '')
+    -- fecha_nacimiento DATE NOT NULL CHECK (fecha_nacimiento < CURRENT_DATE AND fecha_nacimiento > '1900-01-01')
 );
 
 CREATE TABLE IF NOT EXISTS chofer (
@@ -43,12 +42,8 @@ CREATE TABLE IF NOT EXISTS chofer (
 );
 
 CREATE TABLE IF NOT EXISTS choferes_camiones (
-    cuil CUIL NOT NULL REFERENCES chofer(cuil)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE,
-    patente TEXT NOT NULL REFERENCES camiones(patente)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE,
+    cuil CUIL NOT NULL REFERENCES chofer(cuil) ON DELETE CASCADE ON UPDATE CASCADE,
+    patente TEXT NOT NULL REFERENCES camiones(patente) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (cuil, patente)
 );
 
@@ -59,84 +54,62 @@ CREATE TABLE IF NOT EXISTS provincia (
 CREATE TABLE IF NOT EXISTS localidad (
     codigo SERIAL PRIMARY KEY,
     nombre TEXT NOT NULL,
-    provincia TEXT NOT NULL REFERENCES provincia(nombre)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE
+    provincia TEXT NOT NULL REFERENCES provincia(nombre) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS viaje (
     numero INT PRIMARY KEY,
-    patenteCamion TEXT NOT NULL REFERENCES camiones(patente)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE,
-    cuilChofer CUIL NOT NULL REFERENCES chofer(cuil)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE,
+    patente_camion TEXT NOT NULL REFERENCES camiones(patente) ON DELETE CASCADE ON UPDATE CASCADE,
+    cuil_chofer CUIL NOT NULL REFERENCES chofer(cuil) ON DELETE CASCADE ON UPDATE CASCADE,
     kilometros REAL NOT NULL CHECK (kilometros > 0),
-    fechaInicio DATE NOT NULL,
-    fechaFin DATE NOT NULL CHECK (fechaInicio < fechaFin)
+    fecha_inicio DATE NOT NULL,
+    fecha_fin DATE NOT NULL CHECK (fecha_inicio < fecha_fin)
 );
 
-CREATE TABLE IF NOT EXISTS viajeRecorrio (
-    codigoLocalidad INT REFERENCES localidad(codigo),
-    codigoViaje INT REFERENCES viaje(numero),
-    PRIMARY KEY (codigoLocalidad, codigoViaje)
+CREATE TABLE IF NOT EXISTS viaje_recorrio (
+    codigo_localidad INT REFERENCES localidad(codigo),
+    codigo_viaje INT REFERENCES viaje(numero),
+    PRIMARY KEY (codigo_localidad, codigo_viaje)
 );
 
 CREATE TABLE IF NOT EXISTS paquete (
     numero SERIAL PRIMARY KEY,
-    numViaje INT NOT NULL REFERENCES viaje(numero)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE,
+    codigo_viaje INT NOT NULL REFERENCES viaje(numero) ON DELETE CASCADE ON UPDATE CASCADE,
     valor REAL NOT NULL CHECK (valor > 0),
-    precioTranslado REAL NOT NULL CHECK (precioTranslado > 0),
-    destinatarioCUIL CUIL NOT NULL,
-    remitenteCUIL CUIL NOT NULL REFERENCES persona(cuil)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE,
-    entrega_localidad_codigo INT NOT NULL REFERENCES localidad(codigo)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE,
+    precio_translado REAL NOT NULL CHECK (precioTranslado > 0),
+    destinatario_CUIL CUIL NOT NULL,
+    remitente_CUIL CUIL NOT NULL REFERENCES persona(cuil) ON DELETE CASCADE ON UPDATE CASCADE,
+    entrega_localidad_codigo INT NOT NULL REFERENCES localidad(codigo) ON DELETE CASCADE ON UPDATE CASCADE,
     entrega_direccion_calle TEXT NOT NULL,
     entrega_direccion_orientacion ORIENTACION NOT NULL,
     entrega_direccion_numero INT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS actaChoque (
+CREATE TABLE IF NOT EXISTS choque (
     numero INT,
-    provincia TEXT NOT NULL REFERENCES provincia(nombre)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE,
+    provincia TEXT NOT NULL REFERENCES provincia(nombre) ON DELETE CASCADE ON UPDATE CASCADE,
     fecha DATE NOT NULL CHECK (fecha < CURRENT_DATE),
     costo REAL NOT NULL CHECK (costo > 0),
     descripcion TEXT NOT NULL,
 	PRIMARY KEY (numero, provincia)
 );
 
-CREATE TABLE IF NOT EXISTS participoChoque (
-    numeroChoque INT,
-    provincia TEXT NOT NULL REFERENCES provincia(nombre)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE,
-    patenteVehiculo PATENTE REFERENCES vehiculo(patente)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE,
-    PRIMARY KEY (numeroChoque, provincia, patenteVehiculo),
-	FOREIGN KEY (numeroChoque, provincia) REFERENCES actaChoque(numero, provincia)
+CREATE TABLE IF NOT EXISTS participo_choque (
+    numero_choque INT,
+    provincia_choque TEXT NOT NULL REFERENCES provincia(nombre) ON DELETE CASCADE ON UPDATE CASCADE,
+    patenteVehiculo PATENTE REFERENCES vehiculo(patente) ON DELETE CASCADE ON UPDATE CASCADE,
+    PRIMARY KEY (numero_choque, provincia_choque, patenteVehiculo),
+	FOREIGN KEY (numero_choque, provincia_choque) REFERENCES choque(numero, provincia_choque)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS viajeChoque (
-    numeroChoque INT,
-    provincia TEXT NOT NULL REFERENCES provincia(nombre)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE,
-    codigoViaje INT REFERENCES viaje(numero)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE,
-    PRIMARY KEY (numeroChoque, provincia, codigoViaje),
-	FOREIGN KEY (numeroChoque, provincia) REFERENCES actaChoque(numero, provincia)
+CREATE TABLE IF NOT EXISTS viaje_choque (
+    numero_choque INT,
+    provincia_choque TEXT NOT NULL REFERENCES provincia(nombre) ON DELETE CASCADE ON UPDATE CASCADE,
+    codigo_viaje INT REFERENCES viaje(numero) ON DELETE CASCADE ON UPDATE CASCADE,
+    PRIMARY KEY (numero_choque, provincia_choque, codigo_viaje),
+	FOREIGN KEY (numero_choque, provincia_choque) REFERENCES choque(numero, provincia_choque)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
 );
@@ -270,10 +243,10 @@ INSERT INTO choferes_camiones(cuil, patente) VALUES
 	('20-20000000-02', 'DEF456'),
 	('20-20000000-02', 'JKL012');
 
-INSERT INTO viaje(numero, patenteCamion, cuilChofer, kilometros, fechaInicio, fechaFin) VALUES
+INSERT INTO viaje(numero, patente_camion, cuil_chofer, kilometros, fecha_inicio, fecha_fin) VALUES
 	(1, 'DEF456', '20-10000000-01', 300, TO_DATE('01-01-2017', 'DD-MM-YYYY'), TO_DATE('01-01-2023', 'DD-MM-YYYY'));
 
-INSERT INTO viajeRecorrio(codigoViaje, codigoLocalidad) VALUES
+INSERT INTO viaje_recorrio(codigo_viaje, codigo_localidad) VALUES
 	(1, 1), 
 	(1, 2), 
 	(1, 3), 
@@ -281,7 +254,7 @@ INSERT INTO viajeRecorrio(codigoViaje, codigoLocalidad) VALUES
 	(1, 25);
 
 INSERT INTO paquete(
-	numViaje, valor, precioTranslado, 
+	codigo_viaje, valor, precioTranslado, 
 	destinatarioCUIL, remitenteCUIL,
 	entrega_localidad_codigo,
 	entrega_direccion_calle,
@@ -294,21 +267,21 @@ INSERT INTO paquete(
 	(1, 20000, 3000, '20-30000000-03', '20-40000000-04', 4, 'Calle d', 'O', 200),
 	(1, 400, 4000, '20-40000000-04', '20-40000000-04', 5, 'Calle e', 'E', 300);
 
-INSERT INTO actaChoque(numero, provincia, fecha, costo, descripcion) VALUES 
+INSERT INTO choque(numero, provincia, fecha, costo, descripcion) VALUES 
 	(1, 'Buenos Aires', TO_DATE('01-01-2018', 'DD-MM-YYYY'), 30000, ''),
 	(2, 'Buenos Aires', TO_DATE('01-06-2018', 'DD-MM-YYYY'), 40000, ''),
 	(3, 'Buenos Aires', TO_DATE('01-01-2019', 'DD-MM-YYYY'), 50000, ''),
 	(4, 'Buenos Aires', TO_DATE('01-06-2019', 'DD-MM-YYYY'), 60000, ''),
 	(5, 'Buenos Aires', TO_DATE('01-01-2020', 'DD-MM-YYYY'), 70000, '');
 
-INSERT INTO viajeChoque(numeroChoque, provincia, codigoViaje) VALUES 
+INSERT INTO viaje_choque(numero_choque, provincia, codigo_viaje) VALUES 
 	(1, 'Buenos Aires', 1),
 	(2, 'Buenos Aires', 1),
 	(3, 'Buenos Aires', 1),
 	(4, 'Buenos Aires', 1),
 	(5, 'Buenos Aires', 1);
 
-INSERT INTO participoChoque(numeroChoque, provincia, patenteVehiculo) VALUES
+INSERT INTO participo_choque(numero_choque, provincia, patenteVehiculo) VALUES
 	(1, 'Buenos Aires', 'DEF456'),
 	(2, 'Buenos Aires', 'DEF456'),
 	(3, 'Buenos Aires', 'DEF456'),
@@ -326,7 +299,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA PUBLIC TO GERENTE;
 
 -- Jefe de Logística
 CREATE USER JEFE_LOGISTICA WITH ENCRYPTED PASSWORD '12345678';
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE camiones, chofer, choferes_camiones, viaje, paquete, viajerecorrio TO JEFE_LOGISTICA;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE camiones, chofer, choferes_camiones, viaje, paquete, viaje_recorrio TO JEFE_LOGISTICA;
 
 -- CONSULTA PRIORITARIA (tenerla en cuenta para el diseño fisico de la BD)
 -- Listado de paquetes (todos sus datos) ordenado por precio.
@@ -343,41 +316,41 @@ SELECT * FROM paquetes_ordenados;
 SELECT * FROM chofer 
 WHERE EXISTS (
 	SELECT * FROM viaje
-	WHERE viaje.cuilchofer=chofer.cuil AND EXISTS (
-		SELECT * FROM viajerecorrio
-		WHERE viajerecorrio.codigoviaje=viaje.numero AND EXISTS (
+	WHERE viaje.cuil_chofer=chofer.cuil AND EXISTS (
+		SELECT * FROM viaje_recorrio
+		WHERE viaje_recorrio.codigo_viaje=viaje.numero AND EXISTS (
 			SELECT * FROM localidad
-			WHERE localidad.codigo=viajerecorrio.codigolocalidad AND
+			WHERE localidad.codigo=viaje_recorrio.codigo_localidad AND
 				localidad.nombre = 'Liniers' AND
 				localidad.provincia = 'Buenos Aires'
 		)
 	)
 )
 
-SELECT chofer.* FROM chofer, viaje, viajerecorrio, localidad WHERE
-	chofer.cuil = viaje.cuilchofer AND
-	viajerecorrio.codigoviaje = viaje.numero AND 
-	localidad.codigo = viajerecorrio.codigolocalidad AND
+SELECT chofer.* FROM chofer, viaje, viaje_recorrio, localidad WHERE
+	chofer.cuil = viaje.cuil_chofer AND
+	viaje_recorrio.codigo_viaje = viaje.numero AND 
+	localidad.codigo = viaje_recorrio.codigo_localidad AND
 	localidad.nombre = 'Liniers' AND
 	localidad.provincia = 'Buenos Aires';
 
 -- 3. Choferes (todos los datos) que participaron en accidentes en el año 2022 y también en el 2023.
 SELECT * FROM chofer
 WHERE EXISTS (
-	(SELECT numero, provincia FROM actachoque WHERE EXTRACT('year' FROM viaje.fechainicio) = 2022)
+	(SELECT numero, provincia FROM choque WHERE EXTRACT('year' FROM viaje.fecha_inicio) = 2022)
 	INTERSECT
-	(SELECT numero, provincia FROM viajeChoque WHERE EXISTS (
+	(SELECT numero, provincia FROM viaje_choque WHERE EXISTS (
 		SELECT * FROM viaje
-		WHERE viaje.numero =viajeChoque.codigoviaje AND
-			viaje.cuilchofer=chofer.cuil
+		WHERE viaje.numero =viaje_choque.codigo_viaje AND
+			viaje.cuil_chofer=chofer.cuil
 	))
 ) AND EXISTS (
-	(SELECT numero, provincia FROM actachoque WHERE EXTRACT('year' FROM viaje.fechainicio) = 2023)
+	(SELECT numero, provincia FROM choque WHERE EXTRACT('year' FROM viaje.fecha_inicio) = 2023)
 	INTERSECT
-	(SELECT numero, provincia FROM viajeChoque WHERE EXISTS (
+	(SELECT numero, provincia FROM viaje_choque WHERE EXISTS (
 		SELECT * FROM viaje
-		WHERE viaje.numero =viajeChoque.codigoviaje AND
-			viaje.cuilchofer=chofer.cuil
+		WHERE viaje.numero =viaje_choque.codigo_viaje AND
+			viaje.cuil_chofer=chofer.cuil
 	))
 )
 
@@ -386,18 +359,18 @@ SELECT * FROM localidad
 WHERE NOT EXISTS (
 	SELECT * FROM viaje
 	WHERE EXISTS (
-		SELECT * FROM viajerecorrio
-		WHERE viajerecorrio.codigoviaje = viaje.numero AND
-			viajerecorrio.codigolocalidad = localidad.codigo AND
-			EXTRACT('year' FROM viaje.fechainicio) = 2022
+		SELECT * FROM viaje_recorrio
+		WHERE viaje_recorrio.codigo_viaje = viaje.numero AND
+			viaje_recorrio.codigo_localidad = localidad.codigo AND
+			EXTRACT('year' FROM viaje.fecha_inicio) = 2022
 	)
 )
 
 -- 5. Choferes (todos los datos) que realizaron más viajes.
-SELECT cuilchofer FROM viaje
-GROUP BY cuilchofer
+SELECT cuil_chofer FROM viaje
+GROUP BY cuil_chofer
 HAVING COUNT(*)=(
-	SELECT COUNT(*) FROM viaje GROUP BY cuilchofer ORDER BY COUNT(*) LIMIT 1
+	SELECT COUNT(*) FROM viaje GROUP BY cuil_chofer ORDER BY COUNT(*) LIMIT 1
 )
 
 -- 6. Camiones (todos los datos) que fueron (entregaron paquetes) a todas las localidades de Buenos Aires.
@@ -405,9 +378,9 @@ HAVING COUNT(*)=(
 SELECT * FROM camiones WHERE NOT EXISTS (
 	SELECT * FROM localidad WHERE provincia = 'Buenos Aires' AND NOT EXISTS (
 		-- viajes hechos por el camion
-		SELECT * FROM viaje WHERE viaje.patentecamion = camiones.patente AND EXISTS (
+		SELECT * FROM viaje WHERE viaje.patente_camion = camiones.patente AND EXISTS (
 			 -- localidades recorridas por el viaje
-			SELECT * FROM viajerecorrio WHERE viajerecorrio.codigoviaje = viaje.numero AND  viajerecorrio.codigolocalidad = localidad.codigo
+			SELECT * FROM viaje_recorrio WHERE viaje_recorrio.codigo_viaje = viaje.numero AND  viaje_recorrio.codigo_localidad = localidad.codigo
 		)
 	)
 )

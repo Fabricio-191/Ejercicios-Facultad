@@ -69,7 +69,8 @@ CREATE TABLE IF NOT EXISTS viaje (
 CREATE TABLE IF NOT EXISTS viaje_recorrio (
     codigo_localidad INT REFERENCES localidad(codigo),
     codigo_viaje INT REFERENCES viaje(numero),
-    PRIMARY KEY (codigo_localidad, codigo_viaje)
+	fecha_hora TIMESTAMP NOT NULL CHECK (fecha_hora < CURRENT_TIMESTAMP),
+    PRIMARY KEY (codigo_localidad, codigo_viaje, fecha_hora)
 );
 
 CREATE TABLE IF NOT EXISTS paquete (

@@ -1,9 +1,9 @@
 -- SPRT2022
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
 DROP USER IF EXISTS DBA;
 DROP USER IF EXISTS GERENTE;
 DROP USER IF EXISTS JEFE_LOGISTICA;
-DROP SCHEMA public CASCADE;
-CREATE SCHEMA public;
 
 
 CREATE TYPE TIPO_VEHICULO AS ENUM ('Camion', 'Auto', 'Moto');
@@ -14,35 +14,35 @@ CREATE DOMAIN CUIL AS TEXT CHECK (value ~ '^[0-9]{2}-[0-9]{1,9}-[0-9]{1,2}$');
 
 CREATE TABLE IF NOT EXISTS vehiculos (
     patente PATENTE PRIMARY KEY,
-    modelo TEXT NOT NULL CHECK (modelo != ''),
-    marca  TEXT NOT NULL CHECK (marca  != ''),
-    seguro TEXT NOT NULL CHECK (seguro != ''),
+    modelo TEXT NOT NULL,
+    marca  TEXT NOT NULL,
+    seguro TEXT NOT NULL,
     tipo TIPO_VEHICULO NOT NULL
     -- tipo TEXT NOT NULL CHECK(tipo IN ('Camion', 'Auto', 'Moto'))
 );
 
 CREATE TABLE IF NOT EXISTS camiones (
     patente PATENTE PRIMARY KEY REFERENCES vehiculos(patente) ON DELETE CASCADE ON UPDATE CASCADE,
-    valor INT NOT NULL CHECK (valor > 0),
-    kilometraje INT NOT NULL CHECK (kilometraje > 0)
+    valor INT NOT NULL CHECK (valor >= 0),
+    kilometraje INT NOT NULL CHECK (kilometraje >= 0)
 );
 
 CREATE TABLE IF NOT EXISTS personas (
     cuil CUIL PRIMARY KEY,
-    nombre_apellido TEXT NOT NULL CHECK (nombre_apellido != ''),
-    domicilio TEXT NOT NULL CHECK (domicilio != '')
+    nombre_apellido TEXT NOT NULL,
+    domicilio TEXT NOT NULL
     -- fecha_nacimiento DATE NOT NULL CHECK (fecha_nacimiento < CURRENT_DATE AND fecha_nacimiento > '1900-01-01')
 );
 
 CREATE TABLE IF NOT EXISTS choferes (
     cuil CUIL PRIMARY KEY,
-    antiguedad INT NOT NULL CHECK (antiguedad > 0),
-    sueldo REAL NOT NULL CHECK (sueldo > 0)
+    antiguedad INT NOT NULL CHECK (antiguedad >= 0),
+    sueldo REAL NOT NULL CHECK (sueldo >= 0)
 );
 
 CREATE TABLE IF NOT EXISTS choferes_camiones (
-    cuil CUIL NOT NULL REFERENCES choferes(cuil) ON DELETE CASCADE ON UPDATE CASCADE,
-    patente TEXT NOT NULL REFERENCES camiones(patente) ON DELETE CASCADE ON UPDATE CASCADE,
+    cuil CUIL REFERENCES choferes(cuil) ON DELETE CASCADE ON UPDATE CASCADE,
+    patente TEXT REFERENCES camiones(patente) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (cuil, patente)
 );
 
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS provincias (nombre TEXT PRIMARY KEY);
 CREATE TABLE IF NOT EXISTS localidades (
     codigo SERIAL PRIMARY KEY,
     nombre TEXT NOT NULL,
-    provincias TEXT NOT NULL REFERENCES provincias(nombre) ON DELETE CASCADE ON UPDATE CASCADE
+    provincia TEXT NOT NULL REFERENCES provincias(nombre) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS viaje (
@@ -87,33 +87,34 @@ CREATE TABLE IF NOT EXISTS paquetes (
     -- FOREIGN KEY (codigo_viaje, entrega_localidad_codigo) REFERENCES viaje_recorrio(codigo_viaje, codigo_localidad)
     --     ON DELETE CASCADE
     --     ON UPDATE CASCADE
+	-- Esa clave foranea no la pudimos agregar dado que puede repetirse varias veces el codigo_viaje y el codigo_localidad en la tabla viaje_recorrio con distinta fecha_hora
 );
 
 CREATE TABLE IF NOT EXISTS choques (
-    numero INT     NOT NULL,
-    provincias TEXT NOT NULL REFERENCES provincias(nombre) ON DELETE CASCADE ON UPDATE CASCADE,
+    numero    INT  NOT NULL,
+    provincia TEXT NOT NULL REFERENCES provincias(nombre) ON DELETE CASCADE ON UPDATE CASCADE,
     fecha     DATE NOT NULL CHECK (fecha < CURRENT_DATE),
     costo     REAL NOT NULL CHECK (costo > 0),
     descripcion TEXT NOT NULL,
-    PRIMARY KEY (numero, provincias)
+    PRIMARY KEY (numero, provincia)
 );
 
 CREATE TABLE IF NOT EXISTS participo_choque (
-    numero_choque INT        NOT NULL,
+    numero_choque    INT     NOT NULL,
     provincia_choque TEXT    NOT NULL REFERENCES provincias(nombre) ON DELETE CASCADE ON UPDATE CASCADE,
     patente_vehiculo PATENTE NOT NULL REFERENCES vehiculos(patente) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (numero_choque, provincia_choque, patente_vehiculo),
-    FOREIGN KEY (numero_choque, provincia_choque) REFERENCES choques(numero, provincias)
+    FOREIGN KEY (numero_choque, provincia_choque) REFERENCES choques(numero, provincia)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS viaje_choque (
-    numero_choque INT,
+    numero_choque INT NOT NULL,
     provincia_choque TEXT NOT NULL REFERENCES provincias(nombre) ON DELETE CASCADE ON UPDATE CASCADE,
     codigo_viaje INT REFERENCES viaje(numero) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (numero_choque, provincia_choque, codigo_viaje),
-    FOREIGN KEY (numero_choque, provincia_choque) REFERENCES choques(numero, provincias)
+    FOREIGN KEY (numero_choque, provincia_choque) REFERENCES choques(numero, provincia)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
@@ -144,79 +145,79 @@ INSERT INTO provincias(nombre) VALUES
     ('Tierra del Fuego, Antártida e Islas del Atlántico Sur'),
     ('Tucumán');
 
-INSERT INTO localidades(nombre, provincias) VALUES
-    ('localidades 1' , 'Buenos Aires'                                         ),
-    ('Liniers'     , 'Buenos Aires'                                         ),
-    ('localidades 3' , 'Buenos Aires'                                         ),
-    ('localidades 4' , 'Ciudad Autónoma de Buenos Aires'                      ),
-    ('localidades 5' , 'Ciudad Autónoma de Buenos Aires'                      ),
-    ('localidades 6' , 'Ciudad Autónoma de Buenos Aires'                      ),
-    ('localidades 7' , 'Catamarca'                                            ),
-    ('localidades 8' , 'Catamarca'                                            ),
-    ('localidades 9' , 'Catamarca'                                            ),
-    ('localidades 10', 'Chaco'                                                ),
-    ('localidades 11', 'Chaco'                                                ),
-    ('localidades 12', 'Chaco'                                                ),
-    ('localidades 13', 'Chubut'                                               ),
-    ('localidades 14', 'Chubut'                                               ),
-    ('localidades 15', 'Chubut'                                               ),
-    ('localidades 16', 'Córdoba'                                              ),
-    ('localidades 17', 'Córdoba'                                              ),
-    ('localidades 18', 'Córdoba'                                              ),
-    ('localidades 19', 'Corrientes'                                           ),
-    ('localidades 20', 'Corrientes'                                           ),
-    ('localidades 21', 'Corrientes'                                           ),
-    ('localidades 22', 'Entre Ríos'                                           ),
-    ('localidades 23', 'Entre Ríos'                                           ),
-    ('localidades 24', 'Entre Ríos'                                           ),
-    ('localidades 25', 'Formosa'                                              ),
-    ('localidades 26', 'Formosa'                                              ),
-    ('localidades 27', 'Formosa'                                              ),
-    ('localidades 28', 'Jujuy'                                                ),
-    ('localidades 29', 'Jujuy'                                                ),
-    ('localidades 30', 'Jujuy'                                                ),
-    ('localidades 31', 'La Pampa'                                             ),
-    ('localidades 32', 'La Pampa'                                             ),
-    ('localidades 33', 'La Pampa'                                             ),
-    ('localidades 34', 'La Rioja'                                             ),
-    ('localidades 35', 'La Rioja'                                             ),
-    ('localidades 36', 'La Rioja'                                             ),
-    ('localidades 37', 'Mendoza'                                              ),
-    ('localidades 38', 'Mendoza'                                              ),
-    ('localidades 39', 'Mendoza'                                              ),
-    ('localidades 40', 'Misiones'                                             ),
-    ('localidades 41', 'Misiones'                                             ),
-    ('localidades 42', 'Misiones'                                             ),
-    ('localidades 43', 'Neuquén'                                              ),
-    ('localidades 44', 'Neuquén'                                              ),
-    ('localidades 45', 'Neuquén'                                              ),
-    ('localidades 46', 'Río Negro'                                            ),
-    ('localidades 47', 'Río Negro'                                            ),
-    ('localidades 48', 'Río Negro'                                            ),
-    ('localidades 49', 'Salta'                                                ),
-    ('localidades 50', 'Salta'                                                ),
-    ('localidades 51', 'Salta'                                                ),
-    ('localidades 52', 'San Juan'                                             ),
-    ('localidades 53', 'San Juan'                                             ),
-    ('localidades 54', 'San Juan'                                             ),
-    ('localidades 55', 'San Luis'                                             ),
-    ('localidades 56', 'San Luis'                                             ),
-    ('localidades 57', 'San Luis'                                             ),
-    ('localidades 58', 'Santa Cruz'                                           ),
-    ('localidades 59', 'Santa Cruz'                                           ),
-    ('localidades 60', 'Santa Cruz'                                           ),
-    ('localidades 61', 'Santa Fe'                                             ),
-    ('localidades 62', 'Santa Fe'                                             ),
-    ('localidades 63', 'Santa Fe'                                             ),
-    ('localidades 64', 'Santiago del Estero'                                  ),
-    ('localidades 65', 'Santiago del Estero'                                  ),
-    ('localidades 66', 'Santiago del Estero'                                  ),
+INSERT INTO localidades(nombre, provincia) VALUES
+    ('localidades 1' , 'Buenos Aires'                   ),
+    ('Liniers'       , 'Buenos Aires'                   ),
+    ('localidades 3' , 'Buenos Aires'                   ),
+    ('localidades 4' , 'Ciudad Autónoma de Buenos Aires'),
+    ('localidades 5' , 'Ciudad Autónoma de Buenos Aires'),
+    ('localidades 6' , 'Ciudad Autónoma de Buenos Aires'),
+    ('localidades 7' , 'Catamarca'),
+    ('localidades 8' , 'Catamarca'),
+    ('localidades 9' , 'Catamarca'),
+    ('localidades 10', 'Chaco'),
+    ('localidades 11', 'Chaco'),
+    ('localidades 12', 'Chaco'),
+    ('localidades 13', 'Chubut'),
+    ('localidades 14', 'Chubut'),
+    ('localidades 15', 'Chubut'),
+    ('localidades 16', 'Córdoba'),
+    ('localidades 17', 'Córdoba'),
+    ('localidades 18', 'Córdoba'),
+    ('localidades 19', 'Corrientes'),
+    ('localidades 20', 'Corrientes'),
+    ('localidades 21', 'Corrientes'),
+    ('localidades 22', 'Entre Ríos'),
+    ('localidades 23', 'Entre Ríos'),
+    ('localidades 24', 'Entre Ríos'),
+    ('localidades 25', 'Formosa'),
+    ('localidades 26', 'Formosa'),
+    ('localidades 27', 'Formosa'),
+    ('localidades 28', 'Jujuy'),
+    ('localidades 29', 'Jujuy'),
+    ('localidades 30', 'Jujuy'),
+    ('localidades 31', 'La Pampa'),
+    ('localidades 32', 'La Pampa'),
+    ('localidades 33', 'La Pampa'),
+    ('localidades 34', 'La Rioja'),
+    ('localidades 35', 'La Rioja'),
+    ('localidades 36', 'La Rioja'),
+    ('localidades 37', 'Mendoza'),
+    ('localidades 38', 'Mendoza'),
+    ('localidades 39', 'Mendoza'),
+    ('localidades 40', 'Misiones'),
+    ('localidades 41', 'Misiones'),
+    ('localidades 42', 'Misiones'),
+    ('localidades 43', 'Neuquén'),
+    ('localidades 44', 'Neuquén'),
+    ('localidades 45', 'Neuquén'),
+    ('localidades 46', 'Río Negro'),
+    ('localidades 47', 'Río Negro'),
+    ('localidades 48', 'Río Negro'),
+    ('localidades 49', 'Salta'),
+    ('localidades 50', 'Salta'),
+    ('localidades 51', 'Salta'),
+    ('localidades 52', 'San Juan'),
+    ('localidades 53', 'San Juan'),
+    ('localidades 54', 'San Juan'),
+    ('localidades 55', 'San Luis'),
+    ('localidades 56', 'San Luis'),
+    ('localidades 57', 'San Luis'),
+    ('localidades 58', 'Santa Cruz'),
+    ('localidades 59', 'Santa Cruz'),
+    ('localidades 60', 'Santa Cruz'),
+    ('localidades 61', 'Santa Fe'),
+    ('localidades 62', 'Santa Fe'),
+    ('localidades 63', 'Santa Fe'),
+    ('localidades 64', 'Santiago del Estero'),
+    ('localidades 65', 'Santiago del Estero'),
+    ('localidades 66', 'Santiago del Estero'),
     ('localidades 67', 'Tierra del Fuego, Antártida e Islas del Atlántico Sur'),
     ('localidades 68', 'Tierra del Fuego, Antártida e Islas del Atlántico Sur'),
     ('localidades 69', 'Tierra del Fuego, Antártida e Islas del Atlántico Sur'),
-    ('localidades 70', 'Tucumán'                                              ),
-    ('localidades 71', 'Tucumán'                                              ),
-    ('localidades 72', 'Tucumán'                                              );
+    ('localidades 70', 'Tucumán'),
+    ('localidades 71', 'Tucumán'),
+    ('localidades 72', 'Tucumán');
 
 INSERT INTO personas(cuil, nombre_apellido, domicilio) VALUES
     ('20-10000000-01', 'Juan Perez',        'A'),
@@ -248,14 +249,14 @@ INSERT INTO vehiculos(patente, modelo, marca, seguro, tipo) VALUES
     ('LPQ310', 'Tornado',       'Chevrolet',     'Sancor',     'Camion'),
     ('REP120', 'Tornado',       'Chevrolet',     'Sancor',     'Camion'),
     ('MIL210', 'Tornado',       'Chevrolet',     'Sancor',     'Camion'),
-    ('PQR678', 'FZ16',          'Yamaha',        'provincias',  'Camion'),
+    ('PQR678', 'FZ16',          'Yamaha',        'Provincia',  'Camion'),
     ('STU901', 'Corolla',       'Toyota',        'La Segunda', 'Camion'),
     ('VWX234', 'CBR1000',       'Honda',         'Allianz',    'Camion'),
     ('QPR310', 'CBR1000',       'Honda',         'Allianz',    'Camion'),
     ('GHI789', 'CBR600',        'Honda',         'Sancor',     'Moto'  ),
     ('MLO456', 'Civic',         'Honda',         'La Segunda', 'Auto'  ),
     ('MNO345', 'Constellation', 'Volkswagen',    'Mapfre',     'Camion'),
-    ('IOE450', 'R1',            'Yamaha',        'provincias',  'Moto'  );
+    ('IOE450', 'R1',            'Yamaha',        'Provincia',  'Moto'  );
 
 INSERT INTO camiones(patente, valor, kilometraje) VALUES
     ('DEF456', 75000,  80000 ),
@@ -265,7 +266,6 @@ INSERT INTO camiones(patente, valor, kilometraje) VALUES
     ('STU901', 150000, 150000),
     ('VWX234', 200000, 200000);
 
-
 INSERT INTO choferes_camiones(cuil, patente) VALUES
     ('20-10000000-01', 'DEF456'),
     ('20-20000000-02', 'MNO345'),
@@ -274,22 +274,22 @@ INSERT INTO choferes_camiones(cuil, patente) VALUES
     ('20-50000000-05', 'PQR678');
 
 INSERT INTO viaje(numero, patente_camion, cuil_chofer, kilometros, fecha_inicio, fecha_fin) VALUES
-	(1, 'DEF456', '20-10000000-01', 1000, TO_DATE('01-01-2022', 'DD-MM-YYYY'), TO_DATE('05-02-2022', 'DD-MM-YYYY')),
-	(2, 'MNO345', '20-20000000-02', 4000, TO_DATE('02-02-2022', 'DD-MM-YYYY'), TO_DATE('30-03-2022', 'DD-MM-YYYY')),
-	(3, 'VWX234', '20-40000000-04', 3000, TO_DATE('15-03-2022', 'DD-MM-YYYY'), TO_DATE('02-08-2022', 'DD-MM-YYYY')),
-	(4, 'DEF456', '20-10000000-01', 2000, TO_DATE('20-04-2023', 'DD-MM-YYYY'), TO_DATE('04-05-2023', 'DD-MM-YYYY')),
-	(5, 'MNO345', '20-20000000-02', 5000, TO_DATE('01-05-2023', 'DD-MM-YYYY'), TO_DATE('13-06-2023', 'DD-MM-YYYY'));
+    (1, 'DEF456', '20-10000000-01', 1000, TO_DATE('01-01-2022', 'DD-MM-YYYY'), TO_DATE('05-02-2022', 'DD-MM-YYYY')),
+    (2, 'MNO345', '20-20000000-02', 4000, TO_DATE('02-02-2022', 'DD-MM-YYYY'), TO_DATE('30-03-2022', 'DD-MM-YYYY')),
+    (3, 'VWX234', '20-40000000-04', 3000, TO_DATE('15-03-2022', 'DD-MM-YYYY'), TO_DATE('02-08-2022', 'DD-MM-YYYY')),
+    (4, 'DEF456', '20-10000000-01', 2000, TO_DATE('20-04-2023', 'DD-MM-YYYY'), TO_DATE('04-05-2023', 'DD-MM-YYYY')),
+    (5, 'MNO345', '20-20000000-02', 5000, TO_DATE('01-05-2023', 'DD-MM-YYYY'), TO_DATE('13-06-2023', 'DD-MM-YYYY'));
 
 INSERT INTO viaje_recorrio(codigo_viaje, codigo_localidad, fecha_hora) VALUES
-	(1, 1,  TO_DATE('08-01-2022', 'DD-MM-YYYY')), 
-	(1, 2,  TO_DATE('12-01-2022', 'DD-MM-YYYY')), 
-	(1, 3,  TO_DATE('16-01-2022', 'DD-MM-YYYY')), 
-	(1, 4,  TO_DATE('21-01-2022', 'DD-MM-YYYY')), 
-	(2, 5,  TO_DATE('14-02-2022', 'DD-MM-YYYY')), 
-	(2, 6,  TO_DATE('18-03-2022', 'DD-MM-YYYY')),
-	(3, 15, TO_DATE('02-05-2022', 'DD-MM-YYYY')),
-	(4, 25, TO_DATE('26-04-2023', 'DD-MM-YYYY')),
-	(5, 35, TO_DATE('15-05-2023', 'DD-MM-YYYY'));
+    (1, 1,  TO_DATE('08-01-2022', 'DD-MM-YYYY')), 
+    (1, 2,  TO_DATE('12-01-2022', 'DD-MM-YYYY')), 
+    (1, 3,  TO_DATE('16-01-2022', 'DD-MM-YYYY')), 
+    (1, 4,  TO_DATE('21-01-2022', 'DD-MM-YYYY')), 
+    (2, 5,  TO_DATE('14-02-2022', 'DD-MM-YYYY')), 
+    (2, 6,  TO_DATE('18-03-2022', 'DD-MM-YYYY')),
+    (3, 15, TO_DATE('02-05-2022', 'DD-MM-YYYY')),
+    (4, 25, TO_DATE('26-04-2023', 'DD-MM-YYYY')),
+    (5, 35, TO_DATE('15-05-2023', 'DD-MM-YYYY'));
 
 INSERT INTO paquetes(
     codigo_viaje, valor, precio_translado, 
@@ -309,14 +309,14 @@ INSERT INTO paquetes(
     (4, 50000,  4000,  '20-12000000-12', '20-13000000-13', 25, 'Calle h', 'S', 500 ),
     (5, 3000,   4000,  '20-13000000-13', '20-11000000-11', 35, 'Calle i', 'N', 600 );
 
-INSERT INTO choques(numero, provincias, fecha, costo, descripcion) VALUES 
-	(1, 'Buenos Aires', TO_DATE('01-02-2022', 'DD-MM-YYYY'), 30000, '-'),
-	(2, 'Buenos Aires', TO_DATE('02-02-2022', 'DD-MM-YYYY'), 40000, '-'),
-	(1, 'San Juan',     TO_DATE('03-03-2022', 'DD-MM-YYYY'), 50000, '-'),
-	(1, 'San Luis',     TO_DATE('04-03-2022', 'DD-MM-YYYY'), 60000, '-'),
-	(1, 'La Rioja',     TO_DATE('01-01-2023', 'DD-MM-YYYY'), 70000, '-'),
-	(1, 'Mendoza',      TO_DATE('23-04-2023', 'DD-MM-YYYY'), 70000, '-'),
-	(1, 'Córdoba',      TO_DATE('03-03-2023', 'DD-MM-YYYY'), 70000, '-');
+INSERT INTO choques(numero, provincia, fecha, costo, descripcion) VALUES 
+    (1, 'Buenos Aires', TO_DATE('01-02-2022', 'DD-MM-YYYY'), 30000, '-'),
+    (2, 'Buenos Aires', TO_DATE('02-02-2022', 'DD-MM-YYYY'), 40000, '-'),
+    (1, 'San Juan',     TO_DATE('03-03-2022', 'DD-MM-YYYY'), 50000, '-'),
+    (1, 'San Luis',     TO_DATE('04-03-2022', 'DD-MM-YYYY'), 60000, '-'),
+    (1, 'La Rioja',     TO_DATE('01-01-2023', 'DD-MM-YYYY'), 70000, '-'),
+    (1, 'Mendoza',      TO_DATE('23-04-2023', 'DD-MM-YYYY'), 70000, '-'),
+    (1, 'Córdoba',      TO_DATE('03-03-2023', 'DD-MM-YYYY'), 70000, '-');
 
 INSERT INTO viaje_choque(numero_choque, provincia_choque, codigo_viaje) VALUES 
     (1, 'Buenos Aires', 1),
@@ -334,18 +334,15 @@ INSERT INTO participo_choque(numero_choque, provincia_choque, patente_vehiculo) 
 
 -- USUARIOS
 
--- DBA: Debe tener acceso de lectura y escritura a toda la base de datos.
 CREATE USER DBA WITH ENCRYPTED PASSWORD '1234';
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA PUBLIC TO DBA;
 
--- Gerente de la Empresa: Debe tener acceso de lectura a toda la base de datos.
 CREATE USER GERENTE WITH ENCRYPTED PASSWORD '12345';
 GRANT SELECT ON ALL TABLES IN SCHEMA PUBLIC TO GERENTE;
 
--- Jefe de Logística
 CREATE USER JEFE_LOGISTICA WITH ENCRYPTED PASSWORD '12345678';
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE camiones, choferes, choferes_camiones, viaje, paquetes, viaje_recorrio TO JEFE_LOGISTICA;
--- Deben tener acceso de lectura y escritura a todos los datos relativos a los camioneros, camiones y viajes.
+-- Jefe de Logística: Debe tener acceso de lectura y escritura a todos los datos relativos a los camioneros, camiones y viajes.
 -- Esto obviamente incluye las tablas camiones, choferes, choferes_camiones, viaje
 -- Pero consideramos que tambien debia tener acceso a las tablas paquetes y viaje_recorrio dado que estan muy relacionadas a las otras, ademas de que es justamente el jefe de logistica
 
@@ -365,7 +362,7 @@ WHERE EXISTS (
     WHERE viaje.cuil_chofer=choferes.cuil AND EXISTS (
         SELECT * FROM localidades
         WHERE localidades.nombre = 'Liniers' AND
-            localidades.provincias = 'Buenos Aires' AND
+            localidades.provincia = 'Buenos Aires' AND
             EXISTS (
                 SELECT * FROM paquetes
                 WHERE paquetes.codigo_viaje=viaje.numero AND
@@ -381,7 +378,7 @@ SELECT * FROM personas NATURAL JOIN (
         paquetes.codigo_viaje = viaje.numero AND
         paquetes.entrega_localidad_codigo = localidades.codigo AND
         localidades.nombre = 'Liniers' AND
-        localidades.provincias = 'Buenos Aires'
+        localidades.provincia = 'Buenos Aires'
 ) AS choferes_liniers
 
 -- 3. Choferes (todos los datos) que participaron en accidentes en el año 2022 y también en el 2023.
@@ -394,7 +391,7 @@ WHERE EXISTS (
         WHERE viaje_choque.codigo_viaje = viaje.numero AND EXISTS (
             SELECT * FROM choques
             WHERE choques.numero = viaje_choque.numero_choque AND
-                choques.provincias = viaje_choque.provincia_choque AND
+                choques.provincia = viaje_choque.provincia_choque AND
                 EXTRACT(YEAR FROM choques.fecha) = 2022
         )
     )
@@ -405,7 +402,7 @@ WHERE EXISTS (
         WHERE viaje_choque.codigo_viaje = viaje.numero AND EXISTS (
             SELECT * FROM choques
             WHERE choques.numero = viaje_choque.numero_choque AND
-                choques.provincias = viaje_choque.provincia_choque AND
+                choques.provincia = viaje_choque.provincia_choque AND
                 EXTRACT(YEAR FROM choques.fecha) = 2023
         )
     )
@@ -422,9 +419,11 @@ SELECT * FROM localidades WHERE NOT EXISTS (
         )
     )
 );
+-- usamos viaje_recorrio en vez de la fecha donde se inicio el viaje para mayor precisión
 
 -- 5. Choferes (todos los datos) que realizaron más viajes.
-SELECT * FROM personas NATURAL JOIN (
+SELECT *
+FROM personas NATURAL JOIN choferes NATURAL JOIN (
     SELECT cuil_chofer AS cuil
     FROM viaje
     GROUP BY cuil_chofer
@@ -434,9 +433,10 @@ SELECT * FROM personas NATURAL JOIN (
 ) AS choferes_mas_viajes;
 
 -- 6. Camiones (todos los datos) que fueron (entregaron paquetes) a todas las localidades de Buenos Aires.
-SELECT * FROM camiones WHERE NOT EXISTS (
+SELECT * FROM camiones NATURAL JOIN vehiculos
+WHERE NOT EXISTS (
     SELECT * FROM localidades
-    WHERE provincias = 'Buenos Aires' AND NOT EXISTS (
+    WHERE provincia = 'Buenos Aires' AND NOT EXISTS (
         SELECT * FROM viaje
         WHERE viaje.patente_camion = camiones.patente AND EXISTS (
             SELECT * FROM paquetes
@@ -444,4 +444,4 @@ SELECT * FROM camiones WHERE NOT EXISTS (
                 paquetes.entrega_localidad_codigo = localidades.codigo
         )
     )
-)
+);

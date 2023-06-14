@@ -333,14 +333,13 @@ INSERT INTO participo_choque(numero_choque, provincia_choque, patente_vehiculo) 
     (1, 'Córdoba',      'IOE450');
 
 -- USUARIOS
-
-CREATE USER DBA WITH ENCRYPTED PASSWORD '1234';
+CREATE USER DBA WITH ENCRYPTED PASSWORD '9yJXiIREMGVbDQHfsmhWk8BGJ';
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA PUBLIC TO DBA;
 
-CREATE USER GERENTE WITH ENCRYPTED PASSWORD '12345';
+CREATE USER GERENTE WITH ENCRYPTED PASSWORD 'QTreNZm23DJZ7hM';
 GRANT SELECT ON ALL TABLES IN SCHEMA PUBLIC TO GERENTE;
 
-CREATE USER JEFE_LOGISTICA WITH ENCRYPTED PASSWORD '12345678';
+CREATE USER JEFE_LOGISTICA WITH ENCRYPTED PASSWORD 'zzRSf9l7TaOU48sFMowM';
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE camiones, choferes, choferes_camiones, viaje, paquetes, viaje_recorrio TO JEFE_LOGISTICA;
 -- Jefe de Logística: Debe tener acceso de lectura y escritura a todos los datos relativos a los camioneros, camiones y viajes.
 -- Esto obviamente incluye las tablas camiones, choferes, choferes_camiones, viaje

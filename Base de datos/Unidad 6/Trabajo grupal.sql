@@ -353,6 +353,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE camiones, choferes, choferes_camio
 -- Listado de paquetes (todos sus datos) ordenado por precio.
 CREATE VIEW paquetes_ordenados AS (SELECT * FROM paquetes ORDER BY valor DESC);
 
+-- 1. Listado de paquetes (todos sus datos) ordenado por precio.
 SELECT * FROM paquetes_ordenados;
 
 -- 2. Choferes (todos los datos) que entregaron paquetes en Liniers (Buenos Aires).

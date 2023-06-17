@@ -21,7 +21,7 @@ public class Pareja implements IDeporte {
     public void mostrar() {
         System.out.println("Pareja: " + this.deportista1.getNombre() + " y " + this.deportista2.getNombre());
     }
-    
+
     @Override
     public void numeroDeportista() {
         System.out.println("Numero de deportista: " + this.deportista1.getNumeroJugador() + " y " + this.deportista2.getNumeroJugador());

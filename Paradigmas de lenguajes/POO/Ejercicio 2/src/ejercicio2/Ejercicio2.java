@@ -25,7 +25,9 @@ public class Ejercicio2 {
             System.out.println(e.getMessage());
         } finally {
             // Cierro el buffer de lectura
-            if (bufferLectura != null) bufferLectura.close();
+            if (bufferLectura != null) {
+                bufferLectura.close();
+            }
         }
 
         return datos;
@@ -39,17 +41,17 @@ public class Ejercicio2 {
      * @return una lista de equipos
      */
     public static List<IDeporte> creaEquipos(List<Deportista> datos, int cantidadJugadores) {
-		List<IDeporte> equipos = new ArrayList<>();
-		int i = 0;
+        List<IDeporte> equipos = new ArrayList<>();
+        int i = 0;
 
-		while (i < datos.size()) {
-			Equipo e = new Equipo("Equipo " + i);
-			e.conformar(datos.subList(i, i + cantidadJugadores));
-			equipos.add(e);
-			i += cantidadJugadores;
-		}
+        while (i < datos.size()) {
+            Equipo e = new Equipo("Equipo " + i);
+            e.conformar(datos.subList(i, i + cantidadJugadores));
+            equipos.add(e);
+            i += cantidadJugadores;
+        }
 
-		return equipos;
+        return equipos;
     }
 
     /**
@@ -59,18 +61,18 @@ public class Ejercicio2 {
      * @return una lista de Parejas formadas
      */
     public static List<IDeporte> creaParejas(List<Deportista> datos) {
-		List<IDeporte> parejas = new ArrayList<>();
-		int i = 0;
+        List<IDeporte> parejas = new ArrayList<>();
+        int i = 0;
 
-		while (i < datos.size()) {
-			Pareja p = new Pareja();
-			p.conformar(datos.subList(i, i + 2));
-			parejas.add(p);
-			i += 2;
-		}
+        while (i < datos.size()) {
+            Pareja p = new Pareja();
+            p.conformar(datos.subList(i, i + 2));
+            parejas.add(p);
+            i += 2;
+        }
 
-		return parejas;
-	}
+        return parejas;
+    }
 
     /**
      * Numera cada integrante del equipo o de la pareja
@@ -78,7 +80,9 @@ public class Ejercicio2 {
      * @param datos
      */
     public static void numerar(List<IDeporte> datos) {
-		for(IDeporte d : datos) d.numeroDeportista();
+        for (IDeporte d : datos) {
+            d.numeroDeportista();
+        }
     }
 
     /**
@@ -87,9 +91,11 @@ public class Ejercicio2 {
      * @param datos
      */
     public static void mostrar(List<IDeporte> datos) {
-		for(IDeporte d : datos) d.mostrar();
+        for (IDeporte d : datos) {
+            d.mostrar();
+        }
     }
-	
+
     public static void main(String[] args) throws IOException {
         int cantidadJugadoresFutbol = 5;
 
@@ -98,11 +104,11 @@ public class Ejercicio2 {
 
         List<IDeporte> equiposFutbol = creaEquipos(datosFutbol, cantidadJugadoresFutbol);
         List<IDeporte> parejasPinPon = creaParejas(datosPinPon);
-		
-		numerar(equiposFutbol);
-		numerar(parejasPinPon);
 
-		mostrar(equiposFutbol);
-		mostrar(parejasPinPon);
+        numerar(equiposFutbol);
+        numerar(parejasPinPon);
+
+        mostrar(equiposFutbol);
+        mostrar(parejasPinPon);
     }
 }

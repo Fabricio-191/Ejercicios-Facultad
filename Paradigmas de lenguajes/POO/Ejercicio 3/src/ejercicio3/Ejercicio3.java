@@ -18,6 +18,15 @@ public class Ejercicio3 {
             while ((linea = bufferLectura.readLine()) != null) {
                 // Sepapar la linea leída con el separador definido previamente
                 String[] campos = linea.split(SEPARADOR);
+
+				if(campos[0].equals("")){
+					throw new IOException("El archivo contiene un deportista sin DNI");
+				}
+
+				if(campos[1].equals("")){
+					throw new IOException("El archivo contiene un deportista sin nombre");
+				}
+				
                 Deportista d = new Deportista(campos[0], campos[1]);
                 datos.add(d);
             }
@@ -38,7 +47,11 @@ public class Ejercicio3 {
      * @param cantidadJugadores cantidad de jugadores que conforman un equipo
      * @return una lista de equipos
      */
-    public static List<IDeporte> creaEquipos(List<Deportista> datos, int cantidadJugadores) {
+    public static List<IDeporte> creaEquipos(List<Deportista> datos, int cantidadJugadores) throws IllegalArgumentException {
+		if(datos.size() % cantidadJugadores != 0){
+			throw new IllegalArgumentException("La cantidad de deportistas no es múltiplo de la cantidad de jugadores por equipo");
+		}
+
 		List<IDeporte> equipos = new ArrayList<>();
 		int i = 0;
 
@@ -58,7 +71,9 @@ public class Ejercicio3 {
      * @param datos es una lista con todos los deportitas inscriptos
      * @return una lista de Parejas formadas
      */
-    public static List<IDeporte> creaParejas(List<Deportista> datos) {
+    public static List<IDeporte> creaParejas(List<Deportista> datos) throws IllegalArgumentException {
+		if(datos.size() % 2 != 0) throw new IllegalArgumentException("La cantidad de deportistas debe ser par");
+
 		List<IDeporte> parejas = new ArrayList<>();
 		int i = 0;
 
@@ -93,8 +108,8 @@ public class Ejercicio3 {
     public static void main(String[] args) throws IOException {
         int cantidadJugadoresFutbol = 5;
 
-        List<Deportista> datosFutbol = leerArchivo("E:\\Programacion\\Ejercicios-Facultad\\Paradigmas de lenguajes\\POO\\Ejercicio 2\\src\\ejercicio3\\datos\\inscriptosFutbol.csv");
-        List<Deportista> datosPinPon = leerArchivo("E:\\Programacion\\Ejercicios-Facultad\\Paradigmas de lenguajes\\POO\\Ejercicio 2\\src\\ejercicio3\\datos\\inscriptosPinPon.csv");
+        List<Deportista> datosFutbol = leerArchivo("E:\\Programacion\\Ejercicios-Facultad\\Paradigmas de lenguajes\\POO\\Ejercicio 3\\src\\ejercicio3\\datos\\inscriptosFutbol.csv");
+        List<Deportista> datosPinPon = leerArchivo("E:\\Programacion\\Ejercicios-Facultad\\Paradigmas de lenguajes\\POO\\Ejercicio 3\\src\\ejercicio3\\datos\\inscriptosPinPon.csv");
 
         List<IDeporte> equiposFutbol = creaEquipos(datosFutbol, cantidadJugadoresFutbol);
         List<IDeporte> parejasPinPon = creaParejas(datosPinPon);

@@ -1,13 +1,13 @@
-package javaapplication1;
+package ejercicio1;
 
-public class Viajero {
+public class ViajeroFrecuente {
     private Integer num;
     private String dni;
     private String nombre;
     private String apellido;
     private Integer millas;
     
-    public Viajero(Integer num, String dni, String nombre, String apellido, Integer millas){
+    public ViajeroFrecuente(Integer num, String dni, String nombre, String apellido, Integer millas){
         this.num = num;	
         this.dni = dni;
         this.nombre = nombre;
@@ -33,6 +33,10 @@ public class Viajero {
             return this.millas;
         }
     }
+
+	public Integer getNum(){
+		return this.num;
+	}
     
     public String getDNI(){
         return this.dni;

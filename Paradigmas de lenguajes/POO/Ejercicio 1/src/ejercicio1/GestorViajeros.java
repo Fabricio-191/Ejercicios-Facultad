@@ -1,20 +1,20 @@
-package javaapplication1;
+package ejercicio1;
 
 public class GestorViajeros {
     private Integer index;
-    private Viajero[] viajeros;
+    private ViajeroFrecuente[] viajeros;
     
     public GestorViajeros(Integer cant){
         this.index = 0;
-        this.viajeros = new Viajero[cant];
+        this.viajeros = new ViajeroFrecuente[cant];
     }
     
-    public void agregar(Viajero viajero){
+    public void agregar(ViajeroFrecuente viajero){
        this.viajeros[this.index] = viajero;
        this.index++;
     }
     
-    public Viajero getByDNI(String dni){
+    public ViajeroFrecuente getByDNI(String dni){
         for(int i = 0; i < this.index; i++){
             if(this.viajeros[i].getDNI().equals(dni)){
                 return this.viajeros[i];
@@ -24,7 +24,7 @@ public class GestorViajeros {
         return null;
     }
     
-    public Viajero MejorViajero(){
+    public ViajeroFrecuente mejorViajero(){
         if(this.index == 0) return null;
         
         var max = this.viajeros[0];

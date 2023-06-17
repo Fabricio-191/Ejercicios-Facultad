@@ -1,16 +1,3 @@
-/*
-Ejercicio 1: Viajeros
-Objetivos:
-- Repasar conceptos del paradigma orientado a objetos
-- Conocer el lenguaje y el entorno de desarrollos implementando una aplicación sencilla.
-Descripción General: En una aerolínea ofrece una promoción a sus viajeros frecuentes que consiste en acumular millas por los viajes que realizan, pudiendo luego recibir beneficios a través del canje de millas.
-Usted trabaja en el área de sistemas de la aerolínea y le han solicitado la implementación de un sistema capaz de gestionar la promoción. Respetando el siguiente diseño de clase:
-
-1. Las clases dadas en el diagrama. La clase gestor se basa en un arreglo.
-2. Un programa que presente un menú con las siguientes funcionalidades:
- */
-
-
 package ejercicio1;
 
 import java.util.Scanner;

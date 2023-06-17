@@ -109,5 +109,7 @@ public class Ejercicio1 {
             System.out.println("6. Mostrar el viajero e mas millas");
             opcion = in.nextInt();
         }
+
+		in.close();
     }
 }

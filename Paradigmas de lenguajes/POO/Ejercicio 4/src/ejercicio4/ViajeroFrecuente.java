@@ -47,6 +47,18 @@ public class ViajeroFrecuente {
         return this.millas;
     }
 
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public String getApellido() {
+		return this.apellido;
+	}
+
+	public String getNyA() {
+		return this.nombre + " " + this.apellido;
+	}
+
     @Override
     public String toString() {
         return "ID: " + this.num + "\n"

@@ -1,4 +1,4 @@
-package ejercicio1;
+package ejercicio.pkg1;
 
 public class GestorViajeros {
 

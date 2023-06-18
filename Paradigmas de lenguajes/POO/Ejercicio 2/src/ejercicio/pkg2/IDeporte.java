@@ -1,4 +1,4 @@
-package ejercicio3;
+package ejercicio.pkg2;
 
 import java.util.List;
 

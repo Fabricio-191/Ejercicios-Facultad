@@ -1,4 +1,8 @@
-package ejercicio4;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package ejercicio.pkg4;
 
 import java.util.Scanner;
 import java.util.List;
@@ -8,19 +12,8 @@ public class Ejercicio4 {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
-        System.out.print("Ingrese la cantidad de viajeros: ");
         var gestor = new GestorViajeros();
 
-
-        /*
-Considerando la clase Viajero trabajada en el Ejericio 1 se pide que cree una aplicación que responda a los siguientes requerimientos:
-1- Implemente una clase gestor basada en una lista.
-2- Desarrolle una aplicación que usando Streams proporcione las siguientes funcionalidades:
-	a. Agregar viajeros al gestor.
-	b. Mostrar los datos de los viajeros ordenados por la cantidad de millas.
-	c. Mostrar los nombres de los viajeros que tienen más de 200 millas.
-	d. Obtener el viajero que tiene más millas.
-         */
         System.out.println("Opciones:");
         System.out.println("0. Salir");
         System.out.println("1. Registrar un nuevo viajero");

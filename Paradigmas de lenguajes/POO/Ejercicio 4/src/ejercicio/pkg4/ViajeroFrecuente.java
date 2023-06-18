@@ -1,4 +1,4 @@
-package ejercicio4;
+package ejercicio.pkg4;
 
 public class ViajeroFrecuente {
 

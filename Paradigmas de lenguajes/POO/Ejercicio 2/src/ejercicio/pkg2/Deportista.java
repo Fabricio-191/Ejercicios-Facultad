@@ -1,4 +1,4 @@
-package ejercicio2;
+package ejercicio.pkg2;
 
 public class Deportista {
 

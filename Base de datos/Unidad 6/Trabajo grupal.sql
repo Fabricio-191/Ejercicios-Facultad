@@ -25,8 +25,8 @@ CREATE TABLE IF NOT EXISTS vehiculos (
 
 CREATE TABLE IF NOT EXISTS camiones (
     patente PATENTE PRIMARY KEY REFERENCES vehiculos(patente) ON DELETE CASCADE ON UPDATE CASCADE,
-    valor INT NOT NULL CHECK (valor >= 0),
-    kilometraje INT NOT NULL CHECK (kilometraje >= 0)
+    valor REAL NOT NULL CHECK (valor >= 0),
+    kilometraje REAL NOT NULL CHECK (kilometraje >= 0)
 );
 
 CREATE TABLE IF NOT EXISTS personas (
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS personas (
 
 CREATE TABLE IF NOT EXISTS choferes (
     cuil CUIL PRIMARY KEY,
-    antiguedad INT NOT NULL CHECK (antiguedad >= 0),
+    antiguedad REAL NOT NULL CHECK (antiguedad >= 0),
     sueldo REAL NOT NULL CHECK (sueldo >= 0)
 );
 
@@ -58,8 +58,8 @@ CREATE TABLE IF NOT EXISTS localidades (
 
 CREATE TABLE IF NOT EXISTS viaje (
     numero INT PRIMARY KEY,
-    patente_camion TEXT NOT NULL REFERENCES camiones(patente) ON DELETE CASCADE ON UPDATE CASCADE,
-    cuil_chofer CUIL NOT NULL REFERENCES choferes(cuil) ON DELETE CASCADE ON UPDATE CASCADE,
+    patente_camion TEXT NOT NULL,
+    cuil_chofer CUIL NOT NULL,
     kilometros REAL NOT NULL CHECK (kilometros > 0),
     fecha_inicio DATE NOT NULL,
     fecha_fin DATE NOT NULL CHECK (fecha_inicio < fecha_fin),
@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS choques (
 
 CREATE TABLE IF NOT EXISTS participo_choque (
     numero_choque    INT     NOT NULL,
-    provincia_choque TEXT    NOT NULL REFERENCES provincias(nombre) ON DELETE CASCADE ON UPDATE CASCADE,
+    provincia_choque TEXT    NOT NULL,
     patente_vehiculo PATENTE NOT NULL REFERENCES vehiculos(patente) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (numero_choque, provincia_choque, patente_vehiculo),
     FOREIGN KEY (numero_choque, provincia_choque) REFERENCES choques(numero, provincia)
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS participo_choque (
 
 CREATE TABLE IF NOT EXISTS viaje_choque (
     numero_choque INT NOT NULL,
-    provincia_choque TEXT NOT NULL REFERENCES provincias(nombre) ON DELETE CASCADE ON UPDATE CASCADE,
+    provincia_choque TEXT NOT NULL,
     codigo_viaje INT REFERENCES viaje(numero) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (numero_choque, provincia_choque, codigo_viaje),
     FOREIGN KEY (numero_choque, provincia_choque) REFERENCES choques(numero, provincia)
@@ -352,75 +352,52 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE camiones, choferes, choferes_camio
 
 -- CONSULTA PRIORITARIA (tenerla en cuenta para el diseño fisico de la BD)
 -- Listado de paquetes (todos sus datos) ordenado por precio.
-CREATE VIEW paquetes_ordenados AS (SELECT * FROM paquetes ORDER BY valor DESC);
+
+CREATE INDEX paquetes_ordenados_valor ON paquetes(valor DESC);
 
 -- 1. Listado de paquetes (todos sus datos) ordenado por precio.
 SELECT * FROM paquetes_ordenados;
 
 -- 2. Choferes (todos los datos) que entregaron paquetes en Liniers (Buenos Aires).
-SELECT * FROM choferes NATURAL JOIN personas
-WHERE EXISTS (
-    SELECT * FROM viaje
-    WHERE viaje.cuil_chofer=choferes.cuil AND EXISTS (
-        SELECT * FROM localidades
-        WHERE localidades.nombre = 'Liniers' AND
-            localidades.provincia = 'Buenos Aires' AND
-            EXISTS (
-                SELECT * FROM paquetes
-                WHERE paquetes.codigo_viaje=viaje.numero AND
-                    paquetes.entrega_localidad_codigo=localidades.codigo
-        )
-    )
-)
 
--- Otra forma de hacerlo:
 SELECT * FROM personas NATURAL JOIN (
-    SELECT choferes.* FROM choferes, viaje, localidades, paquetes WHERE
-        choferes.cuil = viaje.cuil_chofer AND 
-        paquetes.codigo_viaje = viaje.numero AND
-        paquetes.entrega_localidad_codigo = localidades.codigo AND
-        localidades.nombre = 'Liniers' AND
-        localidades.provincia = 'Buenos Aires'
-) AS choferes_liniers
+	SELECT choferes.*
+	FROM choferes
+		JOIN viaje ON choferes.cuil = viaje.cuil_chofer
+		JOIN paquetes ON paquetes.codigo_viaje = viaje.numero
+		JOIN localidades ON paquetes.entrega_localidad_codigo = localidades.codigo
+	WHERE localidades.nombre = 'Liniers' AND localidades.provincia = 'Buenos Aires'
+)AS choferes_liniers
+
 
 -- 3. Choferes (todos los datos) que participaron en accidentes en el año 2022 y también en el 2023.
-SELECT * 
-FROM choferes NATURAL JOIN personas
-WHERE EXISTS (
-    SELECT * FROM viaje
-    WHERE viaje.cuil_chofer=choferes.cuil AND EXISTS (
-        SELECT * FROM viaje_choque
-        WHERE viaje_choque.codigo_viaje = viaje.numero AND EXISTS (
-            SELECT * FROM choques
-            WHERE choques.numero = viaje_choque.numero_choque AND
-                choques.provincia = viaje_choque.provincia_choque AND
-                EXTRACT(YEAR FROM choques.fecha) = 2022
-        )
-    )
-) AND EXISTS (
-    SELECT * FROM viaje
-    WHERE viaje.cuil_chofer=choferes.cuil AND EXISTS (
-        SELECT * FROM viaje_choque
-        WHERE viaje_choque.codigo_viaje = viaje.numero AND EXISTS (
-            SELECT * FROM choques
-            WHERE choques.numero = viaje_choque.numero_choque AND
-                choques.provincia = viaje_choque.provincia_choque AND
-                EXTRACT(YEAR FROM choques.fecha) = 2023
-        )
-    )
-)
+
+
+SELECT *
+FROM choferes NATURAL JOIN personas NATURAL JOIN (
+	SELECT choferes.cuil
+	FROM choferes
+		JOIN viaje ON choferes.cuil = viaje.cuil_chofer
+		JOIN viaje_choque ON viaje_choque.codigo_viaje = viaje.numero
+		JOIN choques ON choques.numero = viaje_choque.numero_choque AND choques.provincia = viaje_choque.provincia_choque
+	WHERE EXTRACT(YEAR FROM choques.fecha) = 2022
+) AS choferes_2022 NATURAL JOIN (
+	SELECT choferes.cuil
+	FROM choferes
+		JOIN viaje ON choferes.cuil = viaje.cuil_chofer
+		JOIN viaje_choque ON viaje_choque.codigo_viaje = viaje.numero
+		JOIN choques ON choques.numero = viaje_choque.numero_choque AND choques.provincia = viaje_choque.provincia_choque
+	WHERE EXTRACT(YEAR FROM choques.fecha) = 2023
+) AS choferes_2023
+
 
 -- 4. Localidades a las que no se hicieron envíos durante 2022.
+
 SELECT * FROM localidades WHERE NOT EXISTS (
-    SELECT * FROM paquetes WHERE localidades.codigo = paquetes.entrega_localidad_codigo AND EXISTS (
-        SELECT * FROM viaje WHERE viaje.numero = paquetes.codigo_viaje AND EXISTS (
-            SELECT * FROM viaje_recorrio WHERE
-                viaje_recorrio.codigo_viaje = viaje.numero AND
-                viaje_recorrio.codigo_localidad = localidades.codigo AND
-                EXTRACT(YEAR FROM viaje_recorrio.fecha_hora) = 2022
-        )
-    )
+	SELECT * FROM viaje_recorrio WHERE viaje_recorrio.codigo_localidad = localidades.codigo AND
+		EXTRACT(YEAR FROM viaje_recorrio.fecha_hora) = 2022
 );
+
 -- usamos viaje_recorrio en vez de la fecha donde se inicio el viaje para mayor precisión
 
 -- 5. Choferes (todos los datos) que realizaron más viajes.
@@ -430,7 +407,7 @@ FROM personas NATURAL JOIN choferes NATURAL JOIN (
     FROM viaje
     GROUP BY cuil_chofer
     HAVING COUNT(*) = (
-        SELECT COUNT(*) FROM viaje GROUP BY cuil_chofer ORDER BY COUNT(*) DESC LIMIT 1
+        SELECT COUNT() FROM viaje GROUP BY cuil_chofer ORDER BY COUNT() DESC LIMIT 1
     )
 ) AS choferes_mas_viajes;
 
@@ -439,11 +416,9 @@ SELECT * FROM camiones NATURAL JOIN vehiculos
 WHERE NOT EXISTS (
     SELECT * FROM localidades
     WHERE provincia = 'Buenos Aires' AND NOT EXISTS (
-        SELECT * FROM viaje
-        WHERE viaje.patente_camion = camiones.patente AND EXISTS (
-            SELECT * FROM paquetes
-            WHERE paquetes.codigo_viaje = viaje.numero AND
-                paquetes.entrega_localidad_codigo = localidades.codigo
-        )
+        SELECT *
+		FROM viaje JOIN paquetes ON paquetes.codigo_viaje = viaje.numero
+        WHERE viaje.patente_camion = camiones.patente AND
+			paquetes.entrega_localidad_codigo = localidades.codigo
     )
-);
+)

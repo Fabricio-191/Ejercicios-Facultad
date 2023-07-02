@@ -289,6 +289,7 @@ INSERT INTO viaje_recorrio(codigo_viaje, codigo_localidad, fecha_hora) VALUES
     (1, 4,  TO_DATE('21-01-2022', 'DD-MM-YYYY')), 
     (2, 5,  TO_DATE('14-02-2022', 'DD-MM-YYYY')), 
     (2, 6,  TO_DATE('18-03-2022', 'DD-MM-YYYY')),
+    (2, 7,  TO_DATE('19-03-2022', 'DD-MM-YYYY')),
     (3, 15, TO_DATE('02-05-2022', 'DD-MM-YYYY')),
     (4, 25, TO_DATE('26-04-2023', 'DD-MM-YYYY')),
     (5, 35, TO_DATE('15-05-2023', 'DD-MM-YYYY'));
@@ -353,10 +354,10 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE camiones, choferes, choferes_camio
 -- CONSULTA PRIORITARIA (tenerla en cuenta para el diseño fisico de la BD)
 -- Listado de paquetes (todos sus datos) ordenado por precio.
 
-CREATE INDEX paquetes_ordenados_valor ON paquetes(valor DESC);
+CREATE INDEX IF NOT EXISTS paquetes_ordenados_valor ON paquetes(valor DESC);
 
 -- 1. Listado de paquetes (todos sus datos) ordenado por precio.
-SELECT * FROM paquetes_ordenados;
+SELECT * FROM paquetes ORDER BY valor DESC;
 
 -- 2. Choferes (todos los datos) que entregaron paquetes en Liniers (Buenos Aires).
 
@@ -367,7 +368,7 @@ SELECT * FROM personas NATURAL JOIN (
 		JOIN paquetes ON paquetes.codigo_viaje = viaje.numero
 		JOIN localidades ON paquetes.entrega_localidad_codigo = localidades.codigo
 	WHERE localidades.nombre = 'Liniers' AND localidades.provincia = 'Buenos Aires'
-)AS choferes_liniers
+) AS choferes_liniers
 
 
 -- 3. Choferes (todos los datos) que participaron en accidentes en el año 2022 y también en el 2023.
@@ -392,13 +393,12 @@ FROM choferes NATURAL JOIN personas NATURAL JOIN (
 
 
 -- 4. Localidades a las que no se hicieron envíos durante 2022.
-
 SELECT * FROM localidades WHERE NOT EXISTS (
-	SELECT * FROM viaje_recorrio WHERE viaje_recorrio.codigo_localidad = localidades.codigo AND
+	SELECT *
+	FROM paquetes JOIN viaje_recorrio ON paquetes.codigo_viaje = viaje_recorrio.codigo_viaje
+	WHERE paquetes.entrega_localidad_codigo = localidades.codigo AND
 		EXTRACT(YEAR FROM viaje_recorrio.fecha_hora) = 2022
 );
-
--- usamos viaje_recorrio en vez de la fecha donde se inicio el viaje para mayor precisión
 
 -- 5. Choferes (todos los datos) que realizaron más viajes.
 SELECT *

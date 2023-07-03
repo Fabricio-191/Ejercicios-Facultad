@@ -32,7 +32,9 @@ CREATE TABLE IF NOT EXISTS camiones (
 CREATE TABLE IF NOT EXISTS personas (
     cuil CUIL PRIMARY KEY,
     nombre_apellido TEXT NOT NULL,
-    domicilio TEXT NOT NULL
+    domicilio_calle TEXT NOT NULL,
+	domicilio_orientacion ORIENTACION NOT NULL,
+	domicilio_numero INT NOT NULL
     -- fecha_nacimiento DATE NOT NULL CHECK (fecha_nacimiento < CURRENT_DATE AND fecha_nacimiento > '1900-01-01')
 );
 
@@ -98,6 +100,7 @@ CREATE TABLE IF NOT EXISTS choques (
     fecha     DATE NOT NULL CHECK (fecha < CURRENT_DATE),
     costo     REAL NOT NULL CHECK (costo > 0),
     descripcion TEXT NOT NULL,
+	viaje INT REFERENCES viaje(numero) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (numero, provincia)
 );
 
@@ -106,16 +109,6 @@ CREATE TABLE IF NOT EXISTS participo_choque (
     provincia_choque TEXT    NOT NULL,
     patente_vehiculo PATENTE NOT NULL REFERENCES vehiculos(patente) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (numero_choque, provincia_choque, patente_vehiculo),
-    FOREIGN KEY (numero_choque, provincia_choque) REFERENCES choques(numero, provincia)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS viaje_choque (
-    numero_choque INT NOT NULL,
-    provincia_choque TEXT NOT NULL,
-    codigo_viaje INT REFERENCES viaje(numero) ON DELETE CASCADE ON UPDATE CASCADE,
-    PRIMARY KEY (numero_choque, provincia_choque, codigo_viaje),
     FOREIGN KEY (numero_choque, provincia_choque) REFERENCES choques(numero, provincia)
         ON DELETE CASCADE
         ON UPDATE CASCADE
@@ -221,20 +214,20 @@ INSERT INTO localidades(nombre, provincia) VALUES
     ('localidades 71', 'Tucumán'),
     ('localidades 72', 'Tucumán');
 
-INSERT INTO personas(cuil, nombre_apellido, domicilio) VALUES
-    ('20-10000000-01', 'Juan Perez',        'A'),
-    ('20-20000000-02', 'Maria Rodriguez',   'B'),
-    ('20-30000000-03', 'Pedro Gomez',       'C'),
-    ('20-40000000-04', 'Ana Fernandez',     'D'),
-    ('20-50000000-05', 'Lucas Martinez',    'E'),
-    ('20-60000000-06', 'Carla Sanchez',     'F'),
-    ('20-70000000-07', 'Jose Gonzalez',     'G'),
-    ('20-80000000-08', 'Sofia Lopez',       'H'),
-    ('20-90000000-09', 'Carlos Diaz',       'I'),
-    ('20-10000000-10', 'Florencia Perez',   'J'),
-    ('20-11000000-11', 'Martin Rodriguez',  'K'),
-    ('20-12000000-12', 'Valentina Gomez',   'L'),
-    ('20-13000000-13', 'Agustin Fernandez', 'M');
+INSERT INTO personas(cuil, nombre_apellido, domicilio_calle, domicilio_orientacion, domicilio_numero) VALUES
+    ('20-10000000-01', 'Juan Perez',        'A', 'O', 123),
+    ('20-20000000-02', 'Maria Rodriguez',   'B', 'N', 781),
+    ('20-30000000-03', 'Pedro Gomez',       'C', 'S', 456),
+    ('20-40000000-04', 'Ana Fernandez',     'D', 'E', 8241),
+    ('20-50000000-05', 'Lucas Martinez',    'E', 'N', 23),
+    ('20-60000000-06', 'Carla Sanchez',     'F', 'N', 504),
+    ('20-70000000-07', 'Jose Gonzalez',     'G', 'O', 612),
+    ('20-80000000-08', 'Sofia Lopez',       'H', 'S', 72),
+    ('20-90000000-09', 'Carlos Diaz',       'I', 'S', 585),
+    ('20-10000000-10', 'Florencia Perez',   'J', 'E', 813),
+    ('20-11000000-11', 'Martin Rodriguez',  'K', 'O', 1153),
+    ('20-12000000-12', 'Valentina Gomez',   'L', 'O', 13),
+    ('20-13000000-13', 'Agustin Fernandez', 'M', 'O', 941);
 
 INSERT INTO choferes(cuil, antiguedad, sueldo) VALUES
     ('20-10000000-01', 5,  20000),
@@ -312,28 +305,20 @@ INSERT INTO paquetes(
     (4, 50000,  4000,  '20-12000000-12', '20-13000000-13', 25, 'Calle h', 'S', 500 ),
     (5, 3000,   4000,  '20-13000000-13', '20-11000000-11', 35, 'Calle i', 'N', 600 );
 
-INSERT INTO choques(numero, provincia, fecha, costo, descripcion) VALUES 
-    (1, 'Buenos Aires', TO_DATE('01-02-2022', 'DD-MM-YYYY'), 30000, '-'),
-    (2, 'Buenos Aires', TO_DATE('02-02-2022', 'DD-MM-YYYY'), 40000, '-'),
-    (1, 'San Juan',     TO_DATE('03-03-2022', 'DD-MM-YYYY'), 50000, '-'),
-    (1, 'San Luis',     TO_DATE('04-03-2022', 'DD-MM-YYYY'), 60000, '-'),
-    (1, 'La Rioja',     TO_DATE('01-01-2023', 'DD-MM-YYYY'), 70000, '-'),
-    (1, 'Mendoza',      TO_DATE('23-04-2023', 'DD-MM-YYYY'), 70000, '-'),
-    (1, 'Córdoba',      TO_DATE('03-03-2023', 'DD-MM-YYYY'), 70000, '-');
-
-INSERT INTO viaje_choque(numero_choque, provincia_choque, codigo_viaje) VALUES 
-    (1, 'Buenos Aires', 1),
-    (1, 'San Juan',     2),
-    (1, 'Mendoza',      4);
+INSERT INTO choques(numero, provincia, fecha, costo, descripcion, viaje) VALUES 
+    (1, 'Buenos Aires', TO_DATE('01-02-2022', 'DD-MM-YYYY'), 30000, '-', 1),
+    (2, 'Buenos Aires', TO_DATE('02-02-2022', 'DD-MM-YYYY'), 40000, '-', 2),
+    (1, 'Mendoza',      TO_DATE('23-04-2023', 'DD-MM-YYYY'), 70000, '-', 4);
 
 INSERT INTO participo_choque(numero_choque, provincia_choque, patente_vehiculo) VALUES
     (1, 'Buenos Aires', 'DEF456'),
+    (1, 'Buenos Aires', 'REP120'),
+    (2, 'Buenos Aires', 'MNO345'),
     (2, 'Buenos Aires', 'JKL012'),
-    (1, 'San Juan',     'MNO345'),
-    (1, 'San Luis',     'REP120'),
-    (1, 'La Rioja',     'GHI789'),
+    (2, 'Buenos Aires', 'GHI789'),
+    (1, 'Mendoza',      'DEF456'),
     (1, 'Mendoza',      'PQR678'),
-    (1, 'Córdoba',      'IOE450');
+    (1, 'Mendoza',      'IOE450');
 
 -- USUARIOS
 CREATE USER DBA WITH ENCRYPTED PASSWORD '9yJXiIREMGVbDQHfsmhWk8BGJ';
@@ -374,20 +359,19 @@ SELECT * FROM personas NATURAL JOIN (
 -- 3. Choferes (todos los datos) que participaron en accidentes en el año 2022 y también en el 2023.
 
 
+
 SELECT *
 FROM choferes NATURAL JOIN personas NATURAL JOIN (
 	SELECT choferes.cuil
 	FROM choferes
 		JOIN viaje ON choferes.cuil = viaje.cuil_chofer
-		JOIN viaje_choque ON viaje_choque.codigo_viaje = viaje.numero
-		JOIN choques ON choques.numero = viaje_choque.numero_choque AND choques.provincia = viaje_choque.provincia_choque
+		JOIN choques ON choques.viaje = viaje.numero
 	WHERE EXTRACT(YEAR FROM choques.fecha) = 2022
 ) AS choferes_2022 NATURAL JOIN (
 	SELECT choferes.cuil
 	FROM choferes
 		JOIN viaje ON choferes.cuil = viaje.cuil_chofer
-		JOIN viaje_choque ON viaje_choque.codigo_viaje = viaje.numero
-		JOIN choques ON choques.numero = viaje_choque.numero_choque AND choques.provincia = viaje_choque.provincia_choque
+		JOIN choques ON choques.viaje = viaje.numero
 	WHERE EXTRACT(YEAR FROM choques.fecha) = 2023
 ) AS choferes_2023
 
@@ -407,7 +391,7 @@ FROM personas NATURAL JOIN choferes NATURAL JOIN (
     FROM viaje
     GROUP BY cuil_chofer
     HAVING COUNT(*) = (
-        SELECT COUNT() FROM viaje GROUP BY cuil_chofer ORDER BY COUNT() DESC LIMIT 1
+        SELECT COUNT(*) FROM viaje GROUP BY cuil_chofer ORDER BY COUNT(*) DESC LIMIT 1
     )
 ) AS choferes_mas_viajes;
 

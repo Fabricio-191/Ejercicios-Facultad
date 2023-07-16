@@ -1,7 +1,6 @@
 import pandas as pd
 import scipy.stats as st 
 import matplotlib.pyplot as plt
-import numpy as np
 import math 
 
 def calcChiSquare(expected, observed, degreesOfFreedom):
@@ -27,9 +26,8 @@ alpha = 0.05
 
 # read csv games.csv as list of dictionaries
 # data = pd.read_csv('C:/Users/Fabricio/Desktop/Programacion/Ejercicios-Facultad/Probabilidad y estadistica/Trabajo final/games.csv')
-data = pd.DataFrame({ 'price': st.norm.rvs(5, 0.75, size=300000) })
-
-#data = pd.DataFrame({ 'price': st.poisson.rvs(5, size=300000) })
+data = pd.DataFrame({ 'price': st.norm.rvs(5, math.sqrt(3), size=300) })
+# data = pd.DataFrame({ 'price': st.poisson.rvs(5, size=300000) })
 
 # set the number of intervals
 size = len(data)
@@ -44,14 +42,14 @@ plt.hist(data, k, density=True, color='lightblue', edgecolor='black', linewidth=
 
 mean = data.mean()
 std = data.std()
-max_value = data.max()
-min_value = data.min()
+max = data.max()
+min = data.min()
 
 # create the intervals
-intervalsize = (max_value.price - min_value.price) / k
+intervalsize = (max.price - min.price) / k
 intervals = []
 for i in range(k + 1):
-	left = min_value.price + i * intervalsize
+	left = min.price + i * intervalsize
 	right = left + intervalsize
 
 	intervals.append({
@@ -63,11 +61,13 @@ for i in range(k + 1):
 # add the max value to the last interval
 intervals[k - 1] = {
 	'left': intervals[k - 1]['left'],
-	'right': max_value.price,
+	'right': max.price,
 	'observed': intervals[k - 1]['observed'] + 1
 }
 
 observed = [intervals[i]['observed'] for i in range(k)]
+
+x = [intervals[i]['left'] + (intervals[i]['right'] - intervals[i]['left']) / 2 for i in range(k)]
 
 
 
@@ -97,10 +97,40 @@ if p_value > alpha:
 else:
 	print('The price does not follow a normal distribution')
 
+# plot the normal distribution
+y = [st.norm.pdf(x[i], mean.price, std.price) for i in range(k)]
+plt.plot(x, y, color='green', linewidth=3)
+
+
+print()
+
+# interval estimation
+# calculate the confidence interval for the mean (unknown variance)
+t = st.t.ppf(1 - alpha / 2, size - 1)
+err = t * std.price / math.sqrt(size)
+print('Confidence interval for the mean (unknown variance): ', mean.price - err, mean.price + err)
+
+interval = st.t.interval(1 - alpha, size - 1)
+err_left = interval[0] * std.price / math.sqrt(size)
+err_right = interval[1] * std.price / math.sqrt(size)
+print('Confidence interval for the mean (unknown variance): ', mean.price + err_left, mean.price + err_right)
+
+# calculate the confidence interval for the variance
+chi_square_left = st.chi2.ppf(1 - alpha / 2, size - 1)
+chi_square_right = st.chi2.ppf(alpha / 2, size - 1)
+left = (size - 1) * std.price ** 2 / chi_square_left
+right = (size - 1) * std.price ** 2 / chi_square_right
+print('Confidence interval for the variance: ', left, right)
+
+interval = st.chi2.interval(1 - alpha, size - 1)
+left = (size - 1) * std.price ** 2 / interval[1]
+right = (size - 1) * std.price ** 2 / interval[0]
+print('Confidence interval for the variance: ', left, right)
 
 print()
 
 
+"""
 # check if the price follows a poisson distribution using chi-square test
 # calculate the expected values
 expected = []
@@ -126,103 +156,10 @@ if p_value > alpha:
 else:
 	print('The price does not follow a poisson distribution')
 
-
-
-x = [intervals[i]['left'] + (intervals[i]['right'] - intervals[i]['left']) / 2 for i in range(k)]
-
-# plot the normal distribution
-y = [st.norm.pdf(x[i], mean.price, std.price) for i in range(k)]
-plt.plot(x, y, color='green', linewidth=3)
-
 # plot the poisson distribution
 y = [st.poisson.pmf(x[i], mean.price) for i in range(k)]
 plt.plot(x, y, color='red', linewidth=3)
-
+"""
 
 # show the plot
-#plt.show()
-
-
-# test for mean with var unknown
-# H0: mean = 3
-# H1: mean > 3
-
-vp = st.t.cdf((mean.price-3)/(std.price/math.sqrt(size)),size-1)
-ec = st.t.ppf(1-alpha,size-1)
-p_value = 1 - st.t.cdf(vp,size-1) 
-
-print("P value:",p_value)
-if vp > ec:
-	print('Rechazo H0')
-else:
-	print('No rechazo H0, u1')
-
-#H0: mean = 7
-#H1: mean < 7
-vp = st.t.cdf((mean.price-7)/(std.price/math.sqrt(size)),size-1)
-ec = st.t.ppf(alpha,size-1)
-p_value = st.t.cdf(vp,size-1) 
-
-print("P value:",p_value)
-if vp < ec:
-	print('Rechazo H0')
-else:
-	print('No rechazo H0,u2')
-
-#H0: mean = 5
-#H1: mean != 5
-vp = st.t.cdf((mean.price-7)/(std.price/math.sqrt(size)),size-1)
-
-ec_left = st.t.ppf(alpha/2,size-1)
-ec_right = st.t.ppf(1-(alpha/2),size-1)
-
-pder = p_value = 1 - st.t.cdf(vp,size-1) 
-pizq = p_value = st.t.cdf(vp,size-1) 
-p_value = 2 * min(pder,pizq)
-
-print("P value:",p_value)
-if vp < ec_left or vp > ec_right:
-	print("Rechazo H0")
-else:
-	print("No rechazo H0,u3")
-
-#H0: var = 0.5
-#H1: var > 0.5
-vp = st.chi2.cdf((((size-1)*(std.price**2))/0.5),size-1)
-ec = st.chi2.ppf(1-alpha,size-1)
-p_value = 1 - st.chi2.cdf(vp,size-1)
-
-print(p_value)
-if vp > ec:
-	print('Rechazo H0')
-else:
-	print("No rechazo H0,o1")
-
-#H0: var = 1
-#H1: var < 1
-vp = st.chi2.cdf((((size-1)*(std.price**2))),size-1)
-ec = st.chi2.ppf(alpha,size-1)
-p_value = st.chi2.cdf(vp,size-1)
-
-print(p_value)
-if vp < ec:
-	print('Rechazo H0')
-else:
-	print("No rechazo H0,o2")
-
-#H0: var = 0.75
-#H1: var != 0.75
-vp = st.chi2.cdf((((size-1)*(std.price**2))/0.75),size-1)
-
-ec_left = st.chi2.ppf(alpha/2,size-1)
-ec_right = st.chi2.ppf(1-(alpha/2),size-1)
-
-pder = p_value = 1 - st.chi2.cdf(vp,size-1) 
-pizq = p_value = st.chi2.cdf(vp,size-1) 
-p_value = 2 * min(pder, pizq)
-
-print("P value:",p_value)
-if vp < ec_left or vp > ec_right:
-	print("Rechazo H0")
-else:
-	print("No rechazo H0,o3")
+plt.show()

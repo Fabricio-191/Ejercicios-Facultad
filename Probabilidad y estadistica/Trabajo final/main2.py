@@ -1,7 +1,10 @@
 import pandas as pd
 import scipy.stats as st 
+import numpy as np
+import math
+import seaborn as sns 
 import matplotlib.pyplot as plt
-import math 
+sns.get_dataset_names()
 
 def calcChiSquare(expected, observed, degreesOfFreedom):
 	if(len(expected) != len(observed)):
@@ -22,62 +25,63 @@ def calcChiSquare(expected, observed, degreesOfFreedom):
 	return chi_square, critical_value, p_value
 
 # set the significance level
-alpha = 0.05
+alpha = 0.1
 
-# read csv games.csv as list of dictionaries
 # data = pd.read_csv('C:/Users/Fabricio/Desktop/Programacion/Ejercicios-Facultad/Probabilidad y estadistica/Trabajo final/games.csv')
-data = pd.DataFrame({ 'price': st.norm.rvs(5, math.sqrt(3), size=300) })
-# data = pd.DataFrame({ 'price': st.poisson.rvs(5, size=300000) })
+# data = pd.DataFrame({ 'price': st.norm.rvs(5, 0.75, size=300000) })
+#data = pd.DataFrame({ 'price': st.poisson.rvs(5, size=300000) })
+
+key = 'Weight'
+file = 'SOCR-HeightWeight.csv'
+# data = sns.load_dataset('exercise') [[key]]
+data = pd.read_csv(f'C:/Users/Fabricio/Desktop/Programacion/Ejercicios-Facultad/Probabilidad y estadistica/Trabajo final/{file}') [[key]]
 
 # set the number of intervals
 size = len(data)
 k = round(1 + 3.3 * math.log10(size))
 
 print(data.describe())
-print('  k        ', k)
+print('k', k)
 print()
-
-# plot the histogram
-plt.hist(data, k, density=True, color='lightblue', edgecolor='black', linewidth=1.2)
 
 mean = data.mean()
 std = data.std()
-max = data.max()
-min = data.min()
+var = data.var()
+max_value = data.max()
+min_value = data.min()
 
 # create the intervals
-intervalsize = (max.price - min.price) / k
+intervalsize = (max_value[key] - min_value[key]) / k
 intervals = []
 for i in range(k + 1):
-	left = min.price + i * intervalsize
+	left = min_value[key] + i * intervalsize
 	right = left + intervalsize
 
 	intervals.append({
 		'left': left,
 		'right': right,
-		'observed': len(data[data.price.between(left, right, inclusive='left')]) # left <= num < right
+		'observed': len(data[data[key].between(left, right, inclusive='left')]) # left <= num < right
 	})
 
 # add the max value to the last interval
 intervals[k - 1] = {
 	'left': intervals[k - 1]['left'],
-	'right': max.price,
+	'right': max_value[key],
 	'observed': intervals[k - 1]['observed'] + 1
 }
 
 observed = [intervals[i]['observed'] for i in range(k)]
 
-x = [intervals[i]['left'] + (intervals[i]['right'] - intervals[i]['left']) / 2 for i in range(k)]
 
 
 
-
-# check if the price follows a normal distribution using chi-square test
+# check if the ... follows a normal distribution using chi-square test
 # calculate the expected values
 expected = []
 for i in range(k):
 	expected.append(size * (
-		st.norm.cdf(intervals[i]['right'], mean.price, std.price) - st.norm.cdf(intervals[i]['left'], mean.price, std.price)
+		st.norm.cdf(intervals[i]['right'], mean[key], std[key]) -
+		st.norm.cdf(intervals[i]['left'],  mean[key], std[key])
 	))
 
 # calculate the chi-square statistic
@@ -87,79 +91,122 @@ print('Chi-square statistic: ', chi_square)
 print('Critical value: ', critical_value)
 print('P-value: ', p_value)
 
-if chi_square < critical_value:
-	print('The price follows a normal distribution')
+if chi_square < critical_value and p_value > alpha:
+	print('The ... follows a normal distribution')
+elif chi_square > critical_value and p_value < alpha:
+	print('The ... does not follow a normal distribution')
 else:
-	print('The price does not follow a normal distribution')
+	print('The test is inconclusive')
 
-if p_value > alpha:
-	print('The price follows a normal distribution')
+
+print()
+
+
+# check if the ... follows a poisson distribution using chi-square test
+# calculate the expected values
+expected = []
+for i in range(k):
+	expected.append(size * (
+		st.poisson.cdf(intervals[i]['right'], mean[key]) -
+		st.poisson.cdf(intervals[i]['left'],  mean[key])
+	))
+
+# calculate the chi-square statistic
+chi_square, critical_value, p_value = calcChiSquare(expected, observed, k - 2)
+
+print('Chi-square statistic: ', chi_square)
+print('Critical value: ', critical_value)
+print('P-value: ', p_value)
+
+if chi_square < critical_value and p_value > alpha:
+	print('The ... follows a poisson distribution')
+elif chi_square > critical_value and p_value < alpha:
+	print('The ... does not follow a poisson distribution')
 else:
-	print('The price does not follow a normal distribution')
+	print('The test is inconclusive')
+
+print(st.normaltest(data[key]))
+
+
+print(st.ttest_1samp(data[key], 7, alternative="less")) # H0: mean = 7, H1: mean < 7
+print(st.ttest_1samp(data[key], 3, alternative="greater")) # H0: mean = 3, H1: mean > 3
+print(st.ttest_1samp(data[key], 5)) # H0: mean = 5, H1: mean != 5
+
+def var_test(data, var, direccion = "diff", alpha = 0.05):
+	rejected = False
+	n = len(data)
+	vp = (n - 1) * np.var(data) / var
+	if direccion == "less":
+		ec = st.chi2.ppf(alpha, n - 1)
+		p_value = st.chi2.cdf(vp, n - 1)
+	
+		if vp < ec:
+			rejected = True
+	elif direccion == "greater":
+		ec = st.chi2.ppf(1 - alpha, n - 1)
+		p_value = 1-st.chi2.cdf(vp, n - 1)
+		
+		if vp > ec:
+			rejected = True
+	else:
+		ec_left = st.chi2.ppf(alpha / 2, n - 1)
+		ec_right =st.chi2.ppf(1 - (alpha / 2), n - 1)
+		p_izq = st.chi2.cdf(vp, n - 1)
+		p_der = 1 - st.chi2.cdf(vp, n - 1)
+		p_value = 2 * min(p_der, p_izq)
+		
+		if vp < ec_left or vp > ec_right:
+			rejected = True
+	
+	if rejected:
+		return("H0 rejected")
+	else:
+		return("H0 not rejected")
+
+
+
+print(var_test(data[key], 1, "less"))
+print(var_test(data[key], 0.5, "greater"))
+print(var_test(data[key], 0.75, "diff"))
+
+# linear regression
+
+"""
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import linregress
+
+x = np.array([[-3.0, -2.2, -1.4, -0.6, 0.2 , 1.0, 1.8 , 2.6 , 3.4 , 4.2 , 5.0],
+              [-10.77, -10.12,  -5.90, -4.8,  -0.61, 2.67, 3.34, 6.25, 11.16, 12.12, 12.19]])
+
+
+result = linregress(x)
+slope = result.slope
+intercept = result.intercept
+y_hat = slope*x[0] + intercept
+
+plt.scatter(x[0],x[1],color="green")
+plt.plot(x[0],y_hat,color="red")
+plt.xlabel("x [0]")
+plt.ylabel("x [1]")
+plt.title("Linear Regression")
+plt.show()
+"""
+
+# plot everything
+
+# plot histogram
+sns.histplot(data[key], bins=k, stat='density', color='blue', edgecolor='black', alpha=0.5)
 
 # plot the normal distribution
-y = [st.norm.pdf(x[i], mean.price, std.price) for i in range(k)]
-plt.plot(x, y, color='green', linewidth=3)
-
-
-print()
-
-# interval estimation
-# calculate the confidence interval for the mean (unknown variance)
-t = st.t.ppf(1 - alpha / 2, size - 1)
-err = t * std.price / math.sqrt(size)
-print('Confidence interval for the mean (unknown variance): ', mean.price - err, mean.price + err)
-
-interval = st.t.interval(1 - alpha, size - 1)
-err_left = interval[0] * std.price / math.sqrt(size)
-err_right = interval[1] * std.price / math.sqrt(size)
-print('Confidence interval for the mean (unknown variance): ', mean.price + err_left, mean.price + err_right)
-
-# calculate the confidence interval for the variance
-chi_square_left = st.chi2.ppf(1 - alpha / 2, size - 1)
-chi_square_right = st.chi2.ppf(alpha / 2, size - 1)
-left = (size - 1) * std.price ** 2 / chi_square_left
-right = (size - 1) * std.price ** 2 / chi_square_right
-print('Confidence interval for the variance: ', left, right)
-
-interval = st.chi2.interval(1 - alpha, size - 1)
-left = (size - 1) * std.price ** 2 / interval[1]
-right = (size - 1) * std.price ** 2 / interval[0]
-print('Confidence interval for the variance: ', left, right)
-
-print()
-
-
-"""
-# check if the price follows a poisson distribution using chi-square test
-# calculate the expected values
-expected = []
-for i in range(k):
-	expected.append(size * (
-		st.poisson.cdf(intervals[i]['right'], mean.price) - st.poisson.cdf(intervals[i]['left'], mean.price)
-	))
-
-# calculate the chi-square statistic
-chi_square, critical_value, p_value = calcChiSquare(expected, observed, k - 3)
-
-print('Chi-square statistic: ', chi_square)
-print('Critical value: ', critical_value)
-print('P-value: ', p_value)
-
-if chi_square < critical_value:
-	print('The price follows a poisson distribution')
-else:
-	print('The price does not follow a poisson distribution')
-
-if p_value > alpha:
-	print('The price follows a poisson distribution')
-else:
-	print('The price does not follow a poisson distribution')
+x = np.linspace(min_value[key], max_value[key], 1000)
+y = st.norm.pdf(x, mean[key], std[key])
+plt.plot(x, y, color='red', label='Normal distribution')
 
 # plot the poisson distribution
-y = [st.poisson.pmf(x[i], mean.price) for i in range(k)]
-plt.plot(x, y, color='red', linewidth=3)
-"""
+x = np.linspace(min_value[key], max_value[key], 1000)
+y = st.poisson.pmf(x, mean[key])
+plt.plot(x, y, color='green', label='Poisson distribution')
 
-# show the plot
+plt.legend()
 plt.show()

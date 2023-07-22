@@ -1,110 +1,52 @@
 import pandas as pd
 import scipy.stats as st 
 import matplotlib.pyplot as plt
-import numpy as np
 import math 
 import seaborn as sb
+import os
+import numpy as np
 
-def calcChiSquare(expected, observed, degreesOfFreedom):
-	if(len(expected) != len(observed)):
-		raise Exception('The expected and observed values must have the same length')
-	
-	chi_square = 0
-	for i in range(k):
-		if expected[i] != 0:
-			chi_square += ((observed[i] - expected[i]) ** 2) / expected[i]
-		# else: print('Expected value is 0')
+__dirname = os.path.dirname(__file__) + '/'
 
-	# calculate the critical value
-	critical_value = st.chi2.ppf(1 - alpha, degreesOfFreedom)
+# cdf: cumulative distribution function (area under the curve) (number -> probability)
+# ppf: percent point function (inverse of cdf — percentiles) (probability -> number)
+# pdf: probability density function (not cumulative)
 
-	# calculate the p-value
-	p_value = 1 - st.chi2.cdf(chi_square, degreesOfFreedom)
-
-	return chi_square, critical_value, p_value
-
-def var_test(data,var,direccion="diff",alpha=0.05):
-	rejected = False
-	n = len(data)
-	vp = (n-1) * np.var(data) / var
-	if direccion == "less":
-		ec = st.chi2.ppf(alpha,n-1)
-		p_value = st.chi2.cdf(vp,n-1)
-	
-		if vp < ec:
-			rejected = True
-	elif direccion == "greater":
-		ec = st.chi2.ppf(1-alpha,n-1)
-		p_value = 1-st.chi2.cdf(vp,n-1)
-		
-		if vp > ec:
-			rejected = True
-	else:
-		ec_left = st.chi2.ppf(alpha/2,n-1)
-		ec_right =st.chi2.ppf(1-(alpha/2),n-1)
-		p_izq = st.chi2.cdf(vp,n-1)
-		p_der = 1-st.chi2.cdf(vp,n-1)
-		p_value = 2*min(p_der,p_izq)
-		
-		if vp < ec_left or vp > ec_right:
-			rejected = True
-	print("Var test: vp:",vp,"p_value:",p_value)
-	if rejected:
-		return("H0 rejected")
-	else:
-		return("H0 not rejected")
-
-def mean_test(data,mean0,direccion='two-sided',alpha = 0.05):
-	rejected = False
-	result=st.ttest_1samp(data,mean0,alternative=direccion)
-	print(result)
-	if result.pvalue <= alpha:
-		rejected = True
-	if rejected == True:
-		print("H0 rejected")
-	else:
-		print("H0 not rejected")
-
-# set the significance level
 alpha = 0.05
 
-key = 'length'
+key = 'Height'
+dataframe = pd.read_csv(__dirname + 'PesoAltura.csv') # .head(200) 
 
-# read csv fly.csv as list of dictionaries
-data = pd.read_csv('C:/Users/Fabricio/Desktop/Programacion/Ejercicios-Facultad/Probabilidad y estadistica/Trabajo final/fly.csv')
-#data = pd.DataFrame({ 'price': st.norm.rvs(5, 0.75, size=300000) })
-#data = pd.DataFrame({ 'price': st.poisson.rvs(5, size=300000) })
-
-# set the number of intervals
-size = len(data)
+# numero de intervalos
+size = len(dataframe)
 k = round(3.3 * math.log10(size) + 1)
 
-print(data.describe())
-print('k', k)
+print()
+print('Descripcion de los datos: ')
+print(dataframe.describe())
+print('Cantidad de intervalos: ', k)
 print()
 
-# plot the histogram
-plt.hist(data, k, density=True, color='lightblue', edgecolor='black', linewidth=1.2)
-mean = data.mean()
-std = data.std()
-var = data.var()
-max_value = data.max()
-min_value = data.min()
+mean = dataframe.mean()
+std = dataframe.std()
+var = dataframe.var()
+max_value = dataframe.max()
+min_value = dataframe.min()
 
-# create the intervals
-intervalsize = (max_value[key] - min_value[key]) / k
+# crear los intervalos
+interval_size = (max_value[key] - min_value[key]) / k
 intervals = []
 for i in range(k + 1):
-	left = min_value[key] + i * intervalsize
-	right = left + intervalsize
+	left = min_value[key] + i * interval_size
+	right = left + interval_size
 
 	intervals.append({
 		'left': left,
 		'right': right,
-		'observed': len(data[data[key].between(left, right, inclusive='left')]) # left <= num < right
+		'observed': len(dataframe[dataframe[key].between(left, right, inclusive='left')]) # left <= num < right
 	})
 
-# add the max value to the last interval
+# agregar el valor maximo al ultimo intervalo
 intervals[k - 1] = {
 	'left': intervals[k - 1]['left'],
 	'right': max_value[key],
@@ -115,110 +57,88 @@ observed = [intervals[i]['observed'] for i in range(k)]
 
 
 
-# check if the length follows a normal distribution using chi-square test
-# calculate the expected values
-expected = []
-for i in range(k):
-	expected.append(size * (
-		st.norm.cdf(intervals[i]['right'], mean[key], std[key]) -
-		st.norm.cdf(intervals[i]['left'],  mean[key], std[key])
-	))
+print('Test de bondad de ajuste con distribucion normal:')
+print('H0: sigue una distribucion normal')
+print('H1: no sigue una distribucion normal')
 
-# calculate the chi-square statistic
-chi_square, critical_value, p_value = calcChiSquare(expected, observed, k - 3)
+normal_test = st.normaltest(dataframe[key])
 
-print('Chi-square statistic: ', chi_square)
-print('Critical value: ', critical_value)
-print('P-value: ', p_value)
-
-if chi_square < critical_value and p_value > alpha:
-	print('The price follows a normal distribution')
-elif chi_square > critical_value and p_value <= alpha:
-	print('The price does not follow a normal distribution')
+if normal_test.pvalue > alpha:
+	print('No se rechaza H0')
 else:
-	print('???')
+	print('Se rechaza H0')
 
 print()
 
-# check if the length follows a poisson distribution using chi-square test
-# calculate the expected values
-expected = []
-for i in range(k):
-	expected.append(size * (
-		st.poisson.cdf(intervals[i]['right'], mean[key]) -
-		st.poisson.cdf(intervals[i]['left'], mean[key])
-	))
+def mean_test(dataframe, mean0, direccion = 'two-sided'):
+	result = st.ttest_1samp(dataframe, mean0, alternative=direccion)
 
-# calculate the chi-square statistic
-chi_square, critical_value, p_value = calcChiSquare(expected, observed, k - 2)
+	# return (result.pvalue <= alpha, result)
+	if result.pvalue <= alpha: # type: ignore
+		return 'Se rechaza H0'
+	else:
+		return 'No se rechaza H0'
 
-print('Chi-square statistic: ', chi_square)
-print('Critical value: ', critical_value)
-print('P-value: ', p_value)
-
-if chi_square < critical_value and p_value > alpha:
-	print('The price follows a poisson distribution')
-elif chi_square > critical_value and p_value <= alpha:
-	print('The price does not follow a poisson distribution')
-else:
-	print('???')
+print('Test de hipotesis para la media: ')
+print('H0: mean = 60, H1: mean < 60   ', mean_test(dataframe[key], 60, "less"))
+print('H0: mean = 20, H1: mean > 20   ', mean_test(dataframe[key], 20, "greater"))
+print('H0: mean = 45, H1: mean != 45  ', mean_test(dataframe[key], 45))
 
 print()
 
-#another way trought function
-result = st.normaltest(data[key])
-print(result)
-if result.pvalue > alpha:
-	print("It follows a normal distribution")
-else:
-	print("It does not follows a normal distribution")
+def variance_test(var0, direccion = "two-sided"):
+	vp = (size - 1) * var[key] / var0
 
+	if direccion == "less":
+		ec = st.chi2.ppf(alpha, size - 1)
+		p_value = st.chi2.cdf(vp, size - 1)
+	
+		# return (vp < ec, { 'vp': vp, 'ec': ec, 'p_value': p_value })
+		if vp < ec:
+			return 'Se rechaza H0'
+	elif direccion == "greater":
+		ec = st.chi2.ppf(1 - alpha, size - 1)
+		p_value = 1 - st.chi2.cdf(vp, size - 1)
+		
+		# return (vp > ec, { 'vp': vp, 'ec': ec, 'p_value': p_value })
+		if vp > ec:
+			return 'Se rechaza H0'
+	elif direccion == "two-sided":
+		ec_left = st.chi2.ppf(alpha / 2, size - 1)
+		ec_right = st.chi2.ppf(1 - (alpha / 2), size - 1)
+		p_izq = st.chi2.cdf(vp, size - 1)
+		p_der = 1 - st.chi2.cdf(vp, size - 1)
+		p_value = 2 * min(p_der, p_izq) # type: ignore
+		
+		# return (vp < ec_left or vp > ec_right, { 'vp': vp, 'ec_left': ec_left, 'ec_right': ec_right, 'p_value': p_value })
+		if vp < ec_left or vp > ec_right:
+			return 'Se rechaza H0'
+	else:
+		raise Exception("Direccion no valida")
+	
+	return 'No se rechaza H0'
 
-x = [intervals[i]['left'] + (intervals[i]['right'] - intervals[i]['left']) / 2 for i in range(k)]
+print('Test de hipotesis para la varianza: ')
+print('H0: var = 20, H1: var < 20     ', variance_test(20, "less"))
+print('H0: var = 10, H1: var > 10     ', variance_test(10, "greater"))
+print('H0: var = 15, H1: var != 15    ', variance_test(15))
 
-# plot the normal distribution
-y = [st.norm.pdf(x[i], mean[key], std[key]) for i in range(k)]
-plt.plot(x, y, color='green', linewidth=3)
+print()
 
-# plot the poisson distribution
-y = [st.poisson.pmf(x[i], mean[key]) for i in range(k)]
-plt.plot(x, y, color='red', linewidth=3)
-
-
-# show the plot
-plt.show()
-plt.figure().clear()
-plt.cla()
-plt.clf()
-
-#Hyphtoesis test for mean
-mean_test(data[key], 60, "less", alpha) # H0: mean = 60, H1: mean < 60
-mean_test(data[key], 20, "greater", alpha) # H0: mean = 20, H1: mean > 20
-mean_test(data[key], 45, alpha=alpha) # H0: mean = 45, H1: mean != 45
-
-
-#Hyphtoesis test for var
-print(var_test(data[key], 20, "less")) # H0: var = 20, H1: var < 20
-print(var_test(data[key], 10, "greater")) # H0: var = 10, H1: var > 10
-print(var_test(data[key], 15, "diff")) # H0: var = 15, H1: var != 15
-
-# interval estimation
-# calculate the confidence interval for the mean (unknown variance)
+print('Intervalos de confianza: ')
 t = st.t.ppf(1 - alpha / 2, size - 1)
 err = t * std[key] / math.sqrt(size)
-print('Confidence interval for the mean (unknown variance): ', mean[key] - err, mean[key] + err)
+print('Intervalo de confianza para la media (varianza desconocida): ({:.3f}, {:.3f})'.format(mean[key] - err, mean[key] + err))
 
 # interval = st.t.interval(1 - alpha, size - 1)
 # err_left = interval[0] * std[key] / math.sqrt(size)
 # err_right = interval[1] * std[key] / math.sqrt(size)
 # print('Confidence interval for the mean (unknown variance): ', mean[key] + err_left, mean[key] + err_right)
 
-# calculate the confidence interval for the variance
-
 interval = st.chi2.interval(1 - alpha, size - 1)
 left = (size - 1) * std[key] ** 2 / interval[1]
 right = (size - 1) * std[key] ** 2 / interval[0]
-print('Confidence interval for the variance: ', left, right)
+print('Intervalo de confianza para la varianza: ({:.3f}, {:.3f})'.format(left, right))
 
 # chi_square_left = st.chi2.ppf(1 - alpha / 2, size - 1)
 # chi_square_right = st.chi2.ppf(alpha / 2, size - 1)
@@ -228,33 +148,56 @@ print('Confidence interval for the variance: ', left, right)
 
 print()
 
-#Indenpendance test
-# H0: sex and smoker are independent, sex and smoker are not independent
-tips = sb.load_dataset("tips")
-tips = pd.crosstab(tips.sex, tips.smoker)
+print('Test de independencia: ')
+print('H0: la altura y el peso son independientes')
+print('H1: la altura y el peso no son independientes')
 
-print(tips)
+contingency_table = pd.crosstab(dataframe.Weight.astype(int), dataframe.Height.astype(int), margins = True)
 
-result = st.chi2_contingency(tips)
+# guardamos la tabla de contingencia en un excel
+# instalar openpyxl es necesario para que funcione (pip3 install openpyxl)
 
-print(result)
+if os.path.exists(__dirname + 'contingency_table.csv'):
+	os.remove(__dirname + 'contingency_table.csv')
 
-if result.pvalue > alpha:
-	print("H0 not rejected")
+contingency_table.to_excel(__dirname + 'contingency_table.xlsx')
+
+result = st.chi2_contingency(contingency_table)
+
+if result.pvalue > alpha:  # type: ignore
+	print('No se rechaza H0')
 else:
-	print("H0 rejected")
+	print('Se rechaza H0')
+
+print()
 
 # regresion lineal
-data = pd.read_csv('C:/Users/Fabricio/Desktop/Programacion/Ejercicios-Facultad/Probabilidad y estadistica/Trabajo final/SOCR-HeightWeight.csv')
-x=[data["Height"], data["Weight"]]
+result = st.linregress([dataframe.Height, dataframe.Weight])
+y_hat = result.slope * dataframe.Height + result.intercept # type: ignore
 
 
-result = st.linregress(x)
-y_hat = result.slope * x[0] + result.intercept
+# plot everything with subplots
+fig, axs = plt.subplots(2, 2)
 
-plt.scatter(x[0], x[1], color="green", s =0.5)
-plt.plot(x[0], y_hat, color="red")
-plt.xlabel("x [0]")
-plt.ylabel("x [1]")
-plt.title("Linear Regression")
+# plot the histogram
+axs[0, 0].set_title('Histograma')
+axs[0, 0].hist(dataframe[key], bins = k, color = 'blue', edgecolor = 'black', alpha = 0.5)
+
+x = np.linspace(min_value[key], max_value[key], 1000)
+y = st.norm.pdf(x, mean[key], std[key]) * size * interval_size
+axs[0, 0].plot(x, y, color = 'red', label = 'Distribucion normal')
+
+
+# plot lineal regression
+axs[0, 1].set_title('Regresion lineal, dispersion y tabla de contingencia')
+axs[0, 1].scatter(dataframe.Height, dataframe.Weight, s=0.1)
+axs[0, 1].plot(dataframe.Height, y_hat, color = 'red')
+
+# plot mean intervals in ax[1, 0]
+axs[1, 0].set_title('Intervalos de confianza para la media')
+axs[1, 0].scatter(dataframe.index, dataframe[key], s=0.1)
+axs[1, 0].plot(dataframe.index, [mean[key]] * size, color = 'red', label = 'Media')
+axs[1, 0].plot(dataframe.index, [mean[key] + err] * size, color = 'green', label = 'Media + error')
+axs[1, 0].plot(dataframe.index, [mean[key] - err] * size, color = 'green', label = 'Media - error')
+
 plt.show()

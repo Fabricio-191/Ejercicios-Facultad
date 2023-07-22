@@ -28,11 +28,15 @@ print()
 print('Cantidad de intervalos: ', k)
 print()
 
+
+
 mean = dataframe.mean()
 std = dataframe.std()
 var = dataframe.var()
 max_value = dataframe.max()
 min_value = dataframe.min()
+
+
 
 # crear los intervalos
 interval_size = (max_value[key] - min_value[key]) / k
@@ -71,6 +75,8 @@ else:
 
 print()
 
+
+
 def mean_test(dataframe, mean0, direccion = 'two-sided'):
 	result = st.ttest_1samp(dataframe, mean0, alternative=direccion)
 
@@ -86,6 +92,8 @@ print('H0: mean = 20, H1: mean > 20   ', mean_test(dataframe[key], 20, "greater"
 print('H0: mean = 45, H1: mean != 45  ', mean_test(dataframe[key], 45))
 
 print()
+
+
 
 def variance_test(var0, direccion = "two-sided"):
 	vp = (size - 1) * var[key] / var0
@@ -126,6 +134,8 @@ print('H0: var = 15, H1: var != 15    ', variance_test(15))
 
 print()
 
+
+
 print('Intervalos de confianza: ')
 t = st.t.ppf(1 - alpha / 2, size - 1)
 err = t * std[key] / math.sqrt(size)
@@ -149,6 +159,8 @@ print('Intervalo de confianza para la varianza: ({:.3f}, {:.3f})'.format(left, r
 
 print()
 
+
+
 print('Test de independencia: ')
 print('H0: la altura y el peso son independientes')
 print('H1: la altura y el peso no son independientes')
@@ -170,11 +182,14 @@ if result.pvalue > alpha:  # type: ignore
 else:
 	print('Se rechaza H0')
 
+
+
 print()
 
 # regresion lineal
 result = st.linregress([dataframe.Height, dataframe.Weight])
 y_hat = result.slope * dataframe.Height + result.intercept # type: ignore
+
 
 
 # plot everything with subplots
@@ -190,12 +205,12 @@ axs[0, 0].plot(x, y, color = 'red', label = 'Distribucion normal')
 
 
 axs[0, 1].set_title('Regresion lineal')
-axs[0, 1].scatter(dataframe.Height, dataframe.Weight, s=0.1)
+axs[0, 1].scatter(dataframe.Height, dataframe.Weight, s = 0.1)
 axs[0, 1].plot(dataframe.Height, y_hat, color = 'red')
 
 
 axs[1, 0].set_title('Intervalos de confianza para la media (hacer zoom)')
-axs[1, 0].scatter(dataframe.index, dataframe[key], s=0.1)
+axs[1, 0].scatter(dataframe.index, dataframe[key], s = 0.1)
 axs[1, 0].plot(dataframe.index, [mean[key]] * size, color = 'red', label = 'Media')
 axs[1, 0].plot(dataframe.index, [mean[key] + err] * size, color = 'green', label = 'Media + error')
 axs[1, 0].plot(dataframe.index, [mean[key] - err] * size, color = 'green', label = 'Media - error')

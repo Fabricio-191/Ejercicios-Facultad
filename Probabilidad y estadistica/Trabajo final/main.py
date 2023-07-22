@@ -24,6 +24,7 @@ k = round(3.3 * math.log10(size) + 1)
 print()
 print('Descripcion de los datos: ')
 print(dataframe.describe())
+print()
 print('Cantidad de intervalos: ', k)
 print()
 
@@ -152,7 +153,7 @@ print('Test de independencia: ')
 print('H0: la altura y el peso son independientes')
 print('H1: la altura y el peso no son independientes')
 
-contingency_table = pd.crosstab(dataframe.Weight.astype(int), dataframe.Height.astype(int), margins = True)
+contingency_table = pd.crosstab(dataframe.Weight.astype(int), dataframe.Height.astype(int))
 
 # guardamos la tabla de contingencia en un excel
 # instalar openpyxl es necesario para que funcione (pip3 install openpyxl)
@@ -179,7 +180,7 @@ y_hat = result.slope * dataframe.Height + result.intercept # type: ignore
 # plot everything with subplots
 fig, axs = plt.subplots(2, 2)
 
-# plot the histogram
+
 axs[0, 0].set_title('Histograma')
 axs[0, 0].hist(dataframe[key], bins = k, color = 'blue', edgecolor = 'black', alpha = 0.5)
 
@@ -188,16 +189,22 @@ y = st.norm.pdf(x, mean[key], std[key]) * size * interval_size
 axs[0, 0].plot(x, y, color = 'red', label = 'Distribucion normal')
 
 
-# plot lineal regression
-axs[0, 1].set_title('Regresion lineal, dispersion y tabla de contingencia')
+axs[0, 1].set_title('Regresion lineal')
 axs[0, 1].scatter(dataframe.Height, dataframe.Weight, s=0.1)
 axs[0, 1].plot(dataframe.Height, y_hat, color = 'red')
 
-# plot mean intervals in ax[1, 0]
-axs[1, 0].set_title('Intervalos de confianza para la media')
+
+axs[1, 0].set_title('Intervalos de confianza para la media (hacer zoom)')
 axs[1, 0].scatter(dataframe.index, dataframe[key], s=0.1)
 axs[1, 0].plot(dataframe.index, [mean[key]] * size, color = 'red', label = 'Media')
 axs[1, 0].plot(dataframe.index, [mean[key] + err] * size, color = 'green', label = 'Media + error')
 axs[1, 0].plot(dataframe.index, [mean[key] - err] * size, color = 'green', label = 'Media - error')
+
+
+axs[1, 1].set_title('Test de independencia')
+sb.heatmap(contingency_table, ax=axs[1, 1], robust=True).invert_yaxis()
+
+
+
 
 plt.show()

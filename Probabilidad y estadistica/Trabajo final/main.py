@@ -30,26 +30,34 @@ min_value = dataframe.min()
 
 
 # mostrar datos
+padding_size = 15
+significant_numbers = 3
+def a(x, padding = True):
+	if type(x) == np.float64:
+		x = round(x, significant_numbers)
+
+	return str(x).ljust(padding_size) if padding else str(x)
+
 print()
-print('Tamaño de la muestra:       ', size                                          )
-print('Cantidad de intervalos:     ', k                                             )
+print('Tamaño de la muestra:     ', size)
+print('Cantidad de intervalos:   ', k   )
 print()
-print('                            ', key1)
-print('Media:                      ', mean[key1]                                    )
-print('Mediana:                    ', dataframe.median()[key1]                      )
-print('Moda:                       ', dataframe.mode()[key1][0]                     )
-print('Desviacion estandar:        ', std[key1]                                     )
-print('Maximo:                     ', max_value[key1]                               )
-print('Minimo:                     ', min_value[key1]                               )
-print('Rango:                      ', max_value[key1] - min_value[key1]             )
-print('Coeficiente de variacion:   ', dataframe.std()[key1] / dataframe.mean()[key1])
-print('Coeficiente de asimetria:   ', dataframe.skew()[key1]                        )
-print('Coeficiente de curtosis:    ', dataframe.kurtosis()[key1]                    )
-print('P - 0.25:                   ', dataframe.quantile(0.25)[key1]                )
-print('P - 0.50:                   ', dataframe.quantile(0.5)[key1]                 )
-print('P - 0.75:                   ', dataframe.quantile(0.75)[key1]                )
+print('                      ', a(key1)                             , a(key2)                             )
+print('Media:                ', a(mean[key1])                       , a(mean[key2])                       )
+print('Mediana:              ', a(dataframe.median()[key1])         , a(dataframe.median()[key2])         )
+print('Moda:                 ', a(dataframe.mode()[key1][0])        , a(dataframe.mode()[key2][0])        )
+print('Desviacion estandar:  ', a(std[key1])                        , a(std[key2])                        )
+print('Maximo:               ', a(max_value[key1])                  , a(max_value[key2])                  )
+print('Minimo:               ', a(min_value[key1])                  , a(min_value[key2])                  )
+print('Rango:                ', a(max_value[key1] - min_value[key1]), a(max_value[key2] - min_value[key2]))
+print('Coef. de variacion:   ', a(std[key1] / mean[key1])           , a(std[key2] / mean[key2])           )
+print('Coef. de asimetria:   ', a(dataframe.skew()[key1])           , a(dataframe.skew()[key2])           )
+print('Coef. de curtosis:    ', a(dataframe.kurtosis()[key1])       , a(dataframe.kurtosis()[key2])       )
+print('P - 0.25:             ', a(dataframe.quantile(0.25)[key1])   , a(dataframe.quantile(0.25)[key2])   )
+print('P - 0.50:             ', a(dataframe.quantile(0.5)[key1])    , a(dataframe.quantile(0.5)[key2])    )
+print('P - 0.75:             ', a(dataframe.quantile(0.75)[key1])   , a(dataframe.quantile(0.75)[key2])   )
 print()
-print('Coeficiente de correlacion: ', dataframe.corr()[key1][key2]                  )
+print('Coeficiente de correlacion: ', a(dataframe.corr()[key1][key2]))
 print()
 
 
@@ -103,9 +111,9 @@ def mean_test(dataframe, mean0, direccion = 'two-sided'):
 		return 'No se rechaza H0'
 
 print('Test de hipotesis para la media: ')
-print('H0: mean = 60, H1: mean < 60   ', mean_test(dataframe[key1], 60, "less"))
-print('H0: mean = 20, H1: mean > 20   ', mean_test(dataframe[key1], 20, "greater"))
-print('H0: mean = 45, H1: mean != 45  ', mean_test(dataframe[key1], 45))
+print('H0: media = 60, H1: media < 60   ', mean_test(dataframe[key1], 60, "less"))
+print('H0: media = 20, H1: media > 20   ', mean_test(dataframe[key1], 20, "greater"))
+print('H0: media = 45, H1: media != 45  ', mean_test(dataframe[key1], 45))
 
 print()
 
@@ -155,7 +163,10 @@ print()
 print('Intervalos de confianza: ')
 t = st.t.ppf(1 - alpha / 2, size - 1)
 err = t * std[key1] / math.sqrt(size)
-print('Intervalo de confianza para la media (varianza desconocida): ({:.3f}, {:.3f})'.format(mean[key1] - err, mean[key1] + err))
+print(
+	'Intervalo de confianza para la media (varianza desconocida): ({}, {})'
+    .format(a(mean[key1] - err, False), a(mean[key1] + err, False))
+)
 
 # interval = st.t.interval(1 - alpha, size - 1)
 # err_left = interval[0] * std[key1] / math.sqrt(size)
@@ -165,7 +176,7 @@ print('Intervalo de confianza para la media (varianza desconocida): ({:.3f}, {:.
 interval = st.chi2.interval(1 - alpha, size - 1)
 left = (size - 1) * std[key1] ** 2 / interval[1]
 right = (size - 1) * std[key1] ** 2 / interval[0]
-print('Intervalo de confianza para la varianza: ({:.3f}, {:.3f})'.format(left, right))
+print('Intervalo de confianza para la varianza: ({}, {})'.format(a(left, False), a(right, False)))
 
 # chi_square_left = st.chi2.ppf(1 - alpha / 2, size - 1)
 # chi_square_right = st.chi2.ppf(alpha / 2, size - 1)
@@ -181,14 +192,11 @@ print('Test de independencia: ')
 print('H0: la altura y el peso son independientes')
 print('H1: la altura y el peso no son independientes')
 
+
+if os.path.exists(__dirname + 'contingency_table.xlsx'):
+	os.remove(__dirname + 'contingency_table.xlsx')
+
 contingency_table = pd.crosstab(dataframe[key2].astype(int), dataframe[key1].astype(int))
-
-# guardamos la tabla de contingencia en un excel
-# instalar openpyxl es necesario para que funcione (pip3 install openpyxl)
-
-if os.path.exists(__dirname + 'contingency_table.csv'):
-	os.remove(__dirname + 'contingency_table.csv')
-
 contingency_table.to_excel(__dirname + 'contingency_table.xlsx')
 
 result = st.chi2_contingency(contingency_table)

@@ -14,11 +14,9 @@ __dirname = os.path.dirname(__file__) + '/'
 
 alpha = 0.05
 
-key1 = 'Height'
-key2 = 'Weight'
-dataframe = pd.read_csv(__dirname + 'PesoAltura.csv') # .head(200) 
-
-# filter atypical values
+key1 = 'altura'
+key2 = 'peso'
+dataframe = pd.read_csv(__dirname + 'PesoAltura.csv') [[key1, key2]] # .head(200) 
 
 
 size = len(dataframe)
@@ -236,8 +234,6 @@ axs[1, 0].plot(dataframe.index, [mean[key1] - err] * size, color = 'green', labe
 
 axs[1, 1].set_title('Test de independencia')
 sb.heatmap(contingency_table, ax=axs[1, 1], robust=True).invert_yaxis()
-
-
 
 
 plt.show()

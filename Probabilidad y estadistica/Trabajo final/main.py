@@ -137,7 +137,7 @@ print()
 print('Intervalos de confianza: ')
 
 interval = st.t.interval(1 - alpha, size - 1, mean.altura, std.altura / math.sqrt(size))
-print('Intervalo de confianza para la media (varianza desconocida):  ({:.3f}, {:.3f})'.format(interval[0], interval[1]))
+print('Intervalo de confianza para la media:  ({:.3f}, {:.3f})'.format(interval[0], interval[1]))
 
 interval = st.chi2.interval(1 - alpha, size - 1)
 left = ((size - 1) * var.altura) / interval[1]
@@ -148,9 +148,15 @@ print('Intervalo de confianza para la desviacion estandar:  ({:.3f}, {:.3f})'.fo
 print()
 
 
+
 print('Test de independencia: ')
 print('H0: la altura y el peso son independientes')
 print('H1: la altura y el peso no son independientes')
+
+
+result = st.pearsonr(dataframe.altura, dataframe.peso)
+print('No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0') # type: ignore
+
 
 contingency_table = pandas.crosstab(dataframe.altura.astype(int), dataframe.peso.astype(int))
 result = st.chi2_contingency(contingency_table)
@@ -158,31 +164,61 @@ result = st.chi2_contingency(contingency_table)
 print('No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0') # type: ignore
 
 
+contingency_table = pandas.crosstab(dataframe.altura.astype(int) // 10, dataframe.peso.astype(int) // 10)
+result = st.chi2_contingency(contingency_table)
+
+print('No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0') # type: ignore
+
 print()
 
-# regresion lineal
+print('Test de homogeneidad: ')
+print('H0: la altura y el peso son homogeneos')
+print('H1: la altura y el peso no son homogeneos')
+
+contingency_table = pandas.crosstab(dataframe.altura.astype(int) // 10, dataframe.peso.astype(int) // 10)
+result = st.chi2_contingency(contingency_table)
+
+print('No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0') # type: ignore
+
+
+print()
+
+print('Regresion lineal: ')
 result = st.linregress([dataframe.altura, dataframe.peso])
 y_hat = result.slope * dataframe.altura + result.intercept # type: ignore
+y_hat_max = (result.slope + result.stderr) * dataframe.altura + result.intercept + result.intercept_stderr # type: ignore
+y_hat_min = (result.slope - result.stderr) * dataframe.altura + result.intercept - result.intercept_stderr # type: ignore
+
+print('({:.3f} ± {:.3f}) * x + ({:.3f} ± {:.3f})'.format(result.slope, result.stderr, result.intercept, result.intercept_stderr))
+
+print()
 
 
+# +- symbol (emoji to copy and paste): ±  
 
 # plot everything with subplots
 fig, axs = plt.subplots(2, 3)
 
 
-axs[0, 0].set_title('Histograma')
+axs[0, 0].set_title('Histograma de la altura')
 axs[0, 0].hist(dataframe.altura, bins = k, color = 'blue', edgecolor = 'black', alpha = 0.5)
 
-x = numpy.linspace(min_value.altura, max_value.altura, 1000)
+x = numpy.linspace(min_value.altura, max_value.altura, size)
 y = st.norm.pdf(x, mean.altura, std.altura) * size * interval_size
 axs[0, 0].plot(x, y, color = 'red', label = 'Distribucion normal')
 
 
-axs[0, 1].set_title('Regresion lineal')
-axs[0, 1].scatter(dataframe.altura, dataframe.peso, s = 0.1)
-axs[0, 1].plot(dataframe.altura, y_hat, color = 'red')
-# with error range
+st.probplot(dataframe.altura, dist='norm', plot=axs[0, 1])
+axs[0, 1].set_title('QQ plot')
+axs[0, 1].set_xlabel('')
+axs[0, 1].set_ylabel('')
 
+
+axs[0, 2].set_title('Regresion lineal de la altura')
+axs[0, 2].scatter(dataframe.altura, dataframe.peso, s = 0.1)
+axs[0, 2].plot(dataframe.altura, y_hat, color = 'red')
+axs[0, 2].plot(dataframe.altura, y_hat_max, color = 'green', linestyle = 'dashed')
+axs[0, 2].plot(dataframe.altura, y_hat_min, color = 'green', linestyle = 'dashed')
 
 
 axs[1, 0].set_title('Intervalos de confianza para la media (hacer zoom)')
@@ -192,20 +228,20 @@ axs[1, 0].plot(dataframe.index, [mean.altura] * size, color = 'red', label = 'Me
 axs[1, 0].plot(dataframe.index, [interval[0]] * size, color = 'green', label = 'Intervalo de confianza')
 axs[1, 0].plot(dataframe.index, [interval[1]] * size, color = 'green')
 
-# axs[1, 0].plot(dataframe.index, [mean.altura + 2] * size, color = 'green', label = 'Media + error')
-# axs[1, 0].plot(dataframe.index, [mean.altura - 2] * size, color = 'green', label = 'Media - error')
 
 axs[1, 1].set_title('Test de independencia')
 seaborn.heatmap(contingency_table, ax=axs[1, 1], robust=True).invert_yaxis()
 
-# qq plot
-axs[0, 2].set_title('QQ plot')
-st.probplot(dataframe.altura, dist='norm', plot=axs[0, 2])
 
-# box plot
-axs[1, 2].set_title('Box plot')
-axs[1, 2].boxplot(dataframe.altura, vert=False)
+axs[1, 2].set_title('Altura')
+axs[1, 2].boxplot([dataframe.altura], vert=False, labels=[''])
 
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+divider = make_axes_locatable(axs[1, 2])
+extraAx = divider.append_axes("bottom", size="100%", pad=0.55)
+
+extraAx.set_title('Peso')
+extraAx.boxplot([dataframe.peso], vert=False, labels=[''])
 
 
 plt.show()

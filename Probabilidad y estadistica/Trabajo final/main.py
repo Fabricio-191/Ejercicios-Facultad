@@ -8,9 +8,9 @@ import numpy
 
 __dirname = os.path.dirname(__file__) + '/'
 
-# cdf: cumulative distribution function (area under the curve) (number -> probability)
-# ppf: percent point function (inverse of cdf — percentiles) (probability -> number)
-# pdf: probability density function (not cumulative)
+# cdf: cumulative distribution function (area under the curve) (number -> cumulative probability)
+# ppf: percent point function (inverse of cdf — percentiles) (cumulative probability -> number)
+# pdf: probability density function (not cumulative) (number -> probability)
 
 alpha = 0.05
 dataframe = pandas.read_csv(__dirname + 'PesoAltura.csv') # .head(200) 
@@ -46,6 +46,7 @@ print('                      ', a('altura'                           ), a('peso'
 print('Media:                ', a(mean.altura                        ), a(mean.peso                      ))
 print('Mediana:              ', a(dataframe.altura.median()          ), a(dataframe.peso.median()        ))
 print('Moda/s:               ', a(dataframe.altura.mode()            ), a(dataframe.peso.mode()          ))
+print('Varianza:             ', a(var.altura                         ), a(var.peso                       ))
 print('Desviacion estandar:  ', a(std.altura                         ), a(std.peso                       ))
 print('Maximo:               ', a(max_value.altura                   ), a(max_value.peso                 ))
 print('Minimo:               ', a(min_value.altura                   ), a(min_value.peso                 ))
@@ -87,7 +88,7 @@ print('Test de bondad de ajuste con distribucion normal:')
 print('H0: sigue una distribucion normal')
 print('H1: no sigue una distribucion normal')
 
-normal_test = st.normaltest(dataframe.altura)
+normal_test = st.normaltest(dataframe.altura) # Averiguar que hace
 print('No se rechaza H0' if normal_test.pvalue > alpha else 'Se rechaza H0')
 
 print()
@@ -100,9 +101,9 @@ def mean_test(dataframe, mean0, direccion = 'two-sided'):
 	return 'No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0' # type: ignore
 
 print('Test de hipotesis para la media: ')
-print('H0: media = 60, H1: media < 60   ', mean_test(dataframe.altura, 60, "less"))
-print('H0: media = 20, H1: media > 20   ', mean_test(dataframe.altura, 20, "greater"))
-print('H0: media = 45, H1: media != 45  ', mean_test(dataframe.altura, 45))
+print('H0: media = 160, H1: media < 160   ', mean_test(dataframe.altura, 60, "less"))
+print('H0: media = 170, H1: media > 170   ', mean_test(dataframe.altura, 20, "greater"))
+print('H0: media = 180, H1: media != 180  ', mean_test(dataframe.altura, 45))
 
 print()
 
@@ -126,9 +127,9 @@ def variance_test(var0, direccion = "two-sided"):
 	return 'No se rechaza H0' if p_value > alpha else 'Se rechaza H0'
 
 print('Test de hipotesis para la varianza: ')
-print('H0: var = 20, H1: var < 20     ', variance_test(20, "less"))
-print('H0: var = 10, H1: var > 10     ', variance_test(10, "greater"))
-print('H0: var = 15, H1: var != 15    ', variance_test(15))
+print('H0: var = 25, H1: var < 25     ', variance_test(25, "less"))
+print('H0: var = 25, H1: var > 25     ', variance_test(25, "greater"))
+print('H0: var = 23.5, H1: var != 23.5    ', variance_test(23.5))
 
 print()
 
@@ -153,28 +154,26 @@ print('Test de independencia: ')
 print('H0: la altura y el peso son independientes')
 print('H1: la altura y el peso no son independientes')
 
-
-result = st.pearsonr(dataframe.altura, dataframe.peso)
+# test de independencia usando el coeficiente de correlacion de Pearson
+result = st.pearsonr(dataframe.altura, dataframe.peso) # Averiguar que hace
 print('No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0') # type: ignore
 
-
-contingency_table = pandas.crosstab(dataframe.altura.astype(int), dataframe.peso.astype(int))
-result = st.chi2_contingency(contingency_table)
-
-print('No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0') # type: ignore
-
-
-contingency_table = pandas.crosstab((dataframe.altura.astype(int) // 10) * 10, (dataframe.peso.astype(int) // 10) * 10)
-result = st.chi2_contingency(contingency_table, correction=True)
-
-print('No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0') # type: ignore
-
+# test de independencia usando el coeficiente de correlacion de Spearman usando 5 intervalos de igual tamaño
 contingency_table = pandas.crosstab(
 	pandas.cut(dataframe.altura, bins = 5, labels = ['Muy bajo', 'Bajo', 'Normal', 'Alto', 'Muy alto']),
 	pandas.cut(dataframe.peso, bins = 5, labels = ['Muy bajo', 'Bajo', 'Normal', 'Alto', 'Muy alto'])
 )
 result = st.chi2_contingency(contingency_table)
+print('No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0') # type: ignore
 
+# test de independencia usando el coeficiente de correlacion de Spearman usando intervalos de 10 en 10
+contingency_table = pandas.crosstab((dataframe.altura.astype(int) // 10) * 10, (dataframe.peso.astype(int) // 10) * 10)
+result = st.chi2_contingency(contingency_table, correction=True)
+print('No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0') # type: ignore
+
+# test de independencia usando el coeficiente de correlacion de Spearman usando intervalos de 1 en 1
+contingency_table = pandas.crosstab(dataframe.altura.astype(int), dataframe.peso.astype(int))
+result = st.chi2_contingency(contingency_table)
 print('No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0') # type: ignore
 
 
@@ -192,9 +191,8 @@ print('y = ({:.3f} ± {:.3f}) * x + ({:.3f} ± {:.3f})'.format(result.slope, res
 print()
 
 
-# +- symbol (emoji to copy and paste): ±  
 
-# plot everything with subplots
+
 fig, axs = plt.subplots(2, 3)
 
 

@@ -175,7 +175,7 @@ contingency_table = pandas.crosstab(
 )
 result = st.chi2_contingency(contingency_table)
 
-print('No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0')
+print('No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0') # type: ignore
 
 
 
@@ -187,7 +187,7 @@ y_hat = result.slope * dataframe.altura + result.intercept # type: ignore
 y_hat_max = (result.slope + result.stderr) * dataframe.altura + result.intercept + result.intercept_stderr # type: ignore
 y_hat_min = (result.slope - result.stderr) * dataframe.altura + result.intercept - result.intercept_stderr # type: ignore
 
-print('y = ({:.3f} ± {:.3f}) * x + ({:.3f} ± {:.3f})'.format(result.slope, result.stderr, result.intercept, result.intercept_stderr))
+print('y = ({:.3f} ± {:.3f}) * x + ({:.3f} ± {:.3f})'.format(result.slope, result.stderr, result.intercept, result.intercept_stderr)) # type: ignore
 
 print()
 

@@ -164,21 +164,19 @@ result = st.chi2_contingency(contingency_table)
 print('No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0') # type: ignore
 
 
-contingency_table = pandas.crosstab(dataframe.altura.astype(int) // 10, dataframe.peso.astype(int) // 10)
-result = st.chi2_contingency(contingency_table)
+contingency_table = pandas.crosstab((dataframe.altura.astype(int) // 10) * 10, (dataframe.peso.astype(int) // 10) * 10)
+result = st.chi2_contingency(contingency_table, correction=True)
 
 print('No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0') # type: ignore
 
-print()
-
-print('Test de homogeneidad: ')
-print('H0: la altura y el peso son homogeneos')
-print('H1: la altura y el peso no son homogeneos')
-
-contingency_table = pandas.crosstab(dataframe.altura.astype(int) // 10, dataframe.peso.astype(int) // 10)
+contingency_table = pandas.crosstab(
+	pandas.cut(dataframe.altura, bins = 5, labels = ['Muy bajo', 'Bajo', 'Normal', 'Alto', 'Muy alto']),
+	pandas.cut(dataframe.peso, bins = 5, labels = ['Muy bajo', 'Bajo', 'Normal', 'Alto', 'Muy alto'])
+)
 result = st.chi2_contingency(contingency_table)
 
-print('No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0') # type: ignore
+print('No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0')
+
 
 
 print()
@@ -189,7 +187,7 @@ y_hat = result.slope * dataframe.altura + result.intercept # type: ignore
 y_hat_max = (result.slope + result.stderr) * dataframe.altura + result.intercept + result.intercept_stderr # type: ignore
 y_hat_min = (result.slope - result.stderr) * dataframe.altura + result.intercept - result.intercept_stderr # type: ignore
 
-print('({:.3f} ± {:.3f}) * x + ({:.3f} ± {:.3f})'.format(result.slope, result.stderr, result.intercept, result.intercept_stderr))
+print('y = ({:.3f} ± {:.3f}) * x + ({:.3f} ± {:.3f})'.format(result.slope, result.stderr, result.intercept, result.intercept_stderr))
 
 print()
 

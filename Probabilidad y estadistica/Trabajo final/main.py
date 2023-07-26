@@ -84,6 +84,21 @@ observed = [intervals[i]['observed'] for i in range(k)]
 
 
 
+print('Intervalos de confianza: ')
+
+interval = st.t.interval(1 - alpha, size - 1, mean.altura, std.altura / math.sqrt(size))
+print('Intervalo de confianza para la media:  ({:.3f}, {:.3f})'.format(interval[0], interval[1]))
+
+interval = st.chi2.interval(1 - alpha, size - 1)
+left = ((size - 1) * var.altura) / interval[1]
+right = ((size - 1) * var.altura) / interval[0]
+print('Intervalo de confianza para la varianza: ({:.3f}, {:.3f})'.format(left, right))
+print('Intervalo de confianza para la desviacion estandar:  ({:.3f}, {:.3f})'.format(math.sqrt(left), math.sqrt(right)))
+
+print()
+
+
+
 print('Test de bondad de ajuste con distribucion normal:')
 print('H0: sigue una distribucion normal')
 print('H1: no sigue una distribucion normal')
@@ -130,21 +145,6 @@ print('Test de hipotesis para la varianza: ')
 print('H0: var = 25, H1: var < 25     ', variance_test(25, "less"))
 print('H0: var = 25, H1: var > 25     ', variance_test(25, "greater"))
 print('H0: var = 23.5, H1: var != 23.5    ', variance_test(23.5))
-
-print()
-
-
-
-print('Intervalos de confianza: ')
-
-interval = st.t.interval(1 - alpha, size - 1, mean.altura, std.altura / math.sqrt(size))
-print('Intervalo de confianza para la media:  ({:.3f}, {:.3f})'.format(interval[0], interval[1]))
-
-interval = st.chi2.interval(1 - alpha, size - 1)
-left = ((size - 1) * var.altura) / interval[1]
-right = ((size - 1) * var.altura) / interval[0]
-print('Intervalo de confianza para la varianza: ({:.3f}, {:.3f})'.format(left, right))
-print('Intervalo de confianza para la desviacion estandar:  ({:.3f}, {:.3f})'.format(math.sqrt(left), math.sqrt(right)))
 
 print()
 

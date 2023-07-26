@@ -15,6 +15,18 @@ __dirname = os.path.dirname(__file__) + '/'
 alpha = 0.05
 dataframe = pandas.read_csv(__dirname + 'PesoAltura.csv') # .head(200) 
 
+# IQR = dataframe.altura.quantile(0.75) - dataframe.altura.quantile(0.25)
+# dataframe = dataframe[dataframe.altura.between(
+# 	dataframe.altura.quantile(0.25) - 1.5 * IQR,
+# 	dataframe.altura.quantile(0.75) + 1.5 * IQR
+# )]
+# 
+# IQR = dataframe.peso.quantile(0.75) - dataframe.peso.quantile(0.25)
+# dataframe = dataframe[dataframe.peso.between(
+# 	dataframe.peso.quantile(0.25) - 1.5 * IQR,
+# 	dataframe.peso.quantile(0.75) + 1.5 * IQR
+# )]
+
 size = len(dataframe)
 k = round(3.3 * math.log10(size) + 1)
 
@@ -48,10 +60,12 @@ print('Mediana:              ', a(dataframe.altura.median()          ), a(datafr
 print('Moda/s:               ', a(dataframe.altura.mode()            ), a(dataframe.peso.mode()          ))
 print('Varianza:             ', a(var.altura                         ), a(var.peso                       ))
 print('Desviacion estandar:  ', a(std.altura                         ), a(std.peso                       ))
+print('Coef. de variacion:   ', a(std.altura / mean.altura           ), a(std.peso / mean.peso           ))
 print('Maximo:               ', a(max_value.altura                   ), a(max_value.peso                 ))
 print('Minimo:               ', a(min_value.altura                   ), a(min_value.peso                 ))
 print('Rango:                ', a(max_value.altura - min_value.altura), a(max_value.peso - min_value.peso))
-print('Coef. de variacion:   ', a(std.altura / mean.altura           ), a(std.peso / mean.peso           ))
+print()
+print('                      ', a('altura'                           ), a('peso'                         ))
 print('Coef. de asimetria:   ', a(dataframe.altura.skew()            ), a(dataframe.peso.skew()          ))
 print('Coef. de curtosis:    ', a(dataframe.altura.kurtosis()        ), a(dataframe.peso.kurtosis()      ))
 print('P - 0.25:             ', a(dataframe.altura.quantile(0.25)    ), a(dataframe.peso.quantile(0.25)  ))
@@ -84,6 +98,17 @@ observed = [intervals[i]['observed'] for i in range(k)]
 
 
 
+print('Test de bondad de ajuste con distribucion normal:')
+print('H0: sigue una distribucion normal')
+print('H1: no sigue una distribucion normal')
+
+normal_test = st.normaltest(dataframe.altura) # Averiguar que hace
+print('No se rechaza H0' if normal_test.pvalue > alpha else 'Se rechaza H0')
+
+print()
+
+
+
 print('Intervalos de confianza: ')
 
 interval = st.t.interval(1 - alpha, size - 1, mean.altura, std.altura / math.sqrt(size))
@@ -94,17 +119,6 @@ left = ((size - 1) * var.altura) / interval[1]
 right = ((size - 1) * var.altura) / interval[0]
 print('Intervalo de confianza para la varianza: ({:.3f}, {:.3f})'.format(left, right))
 print('Intervalo de confianza para la desviacion estandar:  ({:.3f}, {:.3f})'.format(math.sqrt(left), math.sqrt(right)))
-
-print()
-
-
-
-print('Test de bondad de ajuste con distribucion normal:')
-print('H0: sigue una distribucion normal')
-print('H1: no sigue una distribucion normal')
-
-normal_test = st.normaltest(dataframe.altura) # Averiguar que hace
-print('No se rechaza H0' if normal_test.pvalue > alpha else 'Se rechaza H0')
 
 print()
 
@@ -142,9 +156,9 @@ def variance_test(var0, direccion = "two-sided"):
 	return 'No se rechaza H0' if p_value > alpha else 'Se rechaza H0'
 
 print('Test de hipotesis para la varianza: ')
-print('H0: var = 25, H1: var < 25     ', variance_test(25, "less"))
-print('H0: var = 25, H1: var > 25     ', variance_test(25, "greater"))
-print('H0: var = 23.5, H1: var != 23.5    ', variance_test(23.5))
+print('H0: var = 25,   H1: var < 25      ', variance_test(25, "less"))
+print('H0: var = 25,   H1: var > 25      ', variance_test(25, "greater"))
+print('H0: var = 23.5, H1: var != 23.5   ', variance_test(23.5))
 
 print()
 
@@ -224,20 +238,28 @@ axs[1, 0].plot(dataframe.index, [mean.altura] * size, color = 'red', label = 'Me
 axs[1, 0].plot(dataframe.index, [interval[0]] * size, color = 'green', label = 'Intervalo de confianza')
 axs[1, 0].plot(dataframe.index, [interval[1]] * size, color = 'green')
 
+# draw line for outliers
+IQR = dataframe.altura.quantile(0.75) - dataframe.altura.quantile(0.25)
+axs[1, 0].plot(dataframe.index, [dataframe.altura.quantile(0.25) - 1.5 * IQR] * size, color = 'orange', linestyle = 'dashed', label = 'Outliers')
+axs[1, 0].plot(dataframe.index, [dataframe.altura.quantile(0.75) + 1.5 * IQR] * size, color = 'orange', linestyle = 'dashed')
 
-axs[1, 1].set_title('Test de independencia')
-seaborn.heatmap(contingency_table, ax=axs[1, 1], robust=True).invert_yaxis()
+# draw line for IQR
+axs[1, 0].plot(dataframe.index, [dataframe.altura.quantile(0.25)] * size, color = 'blue', linestyle = 'dashed', label = 'IQR')
+axs[1, 0].plot(dataframe.index, [dataframe.altura.quantile(0.75)] * size, color = 'blue', linestyle = 'dashed')
 
 
-axs[1, 2].set_title('Altura')
-axs[1, 2].boxplot([dataframe.altura], vert=False, labels=[''])
+axs[1, 1].set_title('Altura')
+axs[1, 1].boxplot([dataframe.altura], vert=True, labels=[''])
 
 from mpl_toolkits.axes_grid1 import make_axes_locatable
-divider = make_axes_locatable(axs[1, 2])
-extraAx = divider.append_axes("bottom", size="100%", pad=0.55)
+divider = make_axes_locatable(axs[1, 1])
+extraAx = divider.append_axes("right", size="100%", pad=0.55)
 
 extraAx.set_title('Peso')
-extraAx.boxplot([dataframe.peso], vert=False, labels=[''])
+extraAx.boxplot([dataframe.peso], vert=True, labels=[''])
+
+axs[1, 2].set_title('Test de independencia')
+seaborn.heatmap(contingency_table, ax=axs[1, 2], robust=True).invert_yaxis()
 
 
 plt.show()

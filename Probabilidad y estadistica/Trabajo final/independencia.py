@@ -8,7 +8,7 @@ import numpy
 
 
 alpha = 0.01
-fig, axs = plt.subplots(2, 3)
+fig, axs = plt.subplots(2, 2)
 
 
 dataframe = pandas.read_csv(os.path.dirname(__file__) + '/PesoAltura.csv') # .head(200)

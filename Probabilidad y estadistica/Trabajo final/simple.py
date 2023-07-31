@@ -10,7 +10,7 @@ import numpy
 # ppf: percent point function (inverse of cdf — percentiles) (cumulative probability -> number)
 
 alpha = 0.00000000000001 # 99.99999999999999% de confianza
-# alpha = 0.01
+alpha = 0.01
 dataframe = pandas.read_csv(os.path.dirname(__file__) + '/PesoAltura.csv') # .head(2000) 
 
 

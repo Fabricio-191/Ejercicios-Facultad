@@ -10,8 +10,8 @@ import numpy
 # ppf: percent point function (inverse of cdf — percentiles) (cumulative probability -> number)
 
 alpha = 0.00000000000001 # 99.99999999999999% de confianza
-alpha = 0.01
-dataframe = pandas.read_csv(os.path.dirname(__file__) + '/PesoAltura.csv') # .head(200) 
+# alpha = 0.01
+dataframe = pandas.read_csv(os.path.dirname(__file__) + '/PesoAltura.csv') # .head(2000) 
 
 
 size = len(dataframe)
@@ -22,12 +22,11 @@ max_value = dataframe.max()
 min_value = dataframe.min()
 k = round(3.3 * math.log10(size) + 1)
 
-# mostrar datos
+
 print()
 print('Tamaño de la muestra:     ', size)
 print('Cantidad de intervalos:   ', k   )
 print()
-print('                      ', 'altura')
 print('Media:                ', mean.altura)
 print('Mediana:              ', dataframe.altura.median())
 print('Moda/s:               ', ', '.join([str(i) for i in dataframe.altura.mode()]))
@@ -46,12 +45,14 @@ print()
 print('Coeficiente de correlacion: ', dataframe.corr().altura.peso)
 print()
 
+
 print('Test de bondad de ajuste con distribucion normal:')
 print('H0: la altura sigue una distribucion normal')
 print('H1: la altura no sigue una distribucion normal')
-normal_test = st.normaltest(dataframe.altura) # Averiguar que hace
+normal_test = st.normaltest(dataframe.altura)
 print('No se rechaza H0' if normal_test.pvalue > alpha else 'Se rechaza H0')
 print()
+
 
 print('Intervalos de confianza para la altura: ')
 interval = st.t.interval(1 - alpha, size - 1, mean.altura, std.altura / math.sqrt(size))
@@ -91,14 +92,6 @@ def variance_test(var0, direccion):
 		result_right = st.chi2.ppf(1 - alpha / 2, size - 1)
 		return 'Se rechaza H0' if vp < result_left or vp > result_right else 'No se rechaza H0'
 
-	vp = ((size - 1) * var.altura) / var0
-	p_value = st.chi2.cdf(vp, size - 1)
-
-	if direccion == 'greater' or (direccion == 'two-sided' and p_value > 0.5):
-		p_value = 1 - p_value
-		
-	return 'No se rechaza H0' if p_value > alpha else 'Se rechaza H0'
-
 print('Test de hipotesis para la varianza de la altura: ')
 print('H0: var = 25,   H1: var > 25      ', variance_test(25, 'greater'))
 print('H0: var = 25,   H1: var < 25      ', variance_test(25, 'less'))
@@ -115,7 +108,11 @@ contingency_table = pandas.crosstab(
 )
 result = st.chi2_contingency(contingency_table)
 print('No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0') # type: ignore
+
+result = st.pearsonr(dataframe.altura, dataframe.peso) # Averiguar que hace
+print('No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0') # type: ignore
 print()
+
 
 
 print('Regresion lineal: ')
@@ -143,7 +140,7 @@ y = st.norm.pdf(x, mean.altura, std.altura) * size * (max_value.altura - min_val
 axs[0, 0].plot(x, y, color = 'red', label = 'Distribucion normal')
 
 
-st.probplot(dataframe.altura, dist='norm', plot=axs[0, 1])
+st.probplot(dataframe.altura, dist='norm', sparams=(mean.altura, std.altura), plot=axs[0, 1])
 axs[0, 1].set_title('QQ plot')
 axs[0, 1].set_xlabel('')
 axs[0, 1].set_ylabel('')
@@ -188,3 +185,5 @@ seaborn.heatmap(contingency_table, ax=axs[1, 2], robust=True).invert_yaxis()
 
 
 plt.show()
+
+

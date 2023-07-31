@@ -11,7 +11,7 @@ import numpy
 
 alpha = 0.05
 filterOutliers = False
-dataset = 1
+dataset = 2
 k = None
 
 if dataset == 1:
@@ -97,6 +97,7 @@ print('P - 0.75:             ', a(dataframe.altura.quantile(0.75)    ), a(datafr
 print()
 print('Coeficiente de correlacion: ', a(dataframe.corr().altura.peso))
 print()
+
 
 print('Test de bondad de ajuste con distribucion normal:')
 print('H0: la altura sigue una distribucion normal')
@@ -286,3 +287,4 @@ seaborn.heatmap(contingency_table, ax=axs[1, 2], robust=True).invert_yaxis()
 
 
 plt.show()
+

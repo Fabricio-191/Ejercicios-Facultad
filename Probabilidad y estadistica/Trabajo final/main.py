@@ -9,9 +9,9 @@ import numpy
 # cdf: cumulative distribution function (area under the curve) (number -> cumulative probability)
 # ppf: percent point function (inverse of cdf — percentiles) (cumulative probability -> number)
 
-alpha = 0.05
+alpha = 0.01
 filterOutliers = False
-dataset = 2
+dataset = 3
 k = None
 
 if dataset == 1:

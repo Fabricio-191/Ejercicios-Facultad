@@ -4,11 +4,11 @@
 # the socket recieves a byte array with the following format: [number of service, ...data]
 
 # number of service 1 = equation solve
-# recieved: [ID, 1, ecuation, variable]
+# recieved: 1, ecuation, variable
 # number of service 2 = derivative solving
-# recieved: [ID, 2, ecuation, variable, point?]
+# recieved: [2, ecuation, variable, point?]
 # number of service 3 = integral definite or indefinite
-# recieved: [ID, 3, ecuation, variable, (limit1, limit2)?
+# recieved: [3, ecuation, variable, (limit1, limit2)?
 
 import socket
 import sympy
@@ -28,13 +28,12 @@ def handle_request(conn):
 		result = sympy.diff(equation, variable)
 		if len(data) > 0: result = result.subs(variable, data[0])
 	elif service == '3':
-		if len(data) > 1:
+		if len(data) >= 2:
 			result = sympy.integrate(equation, (variable, data[0], data[1]))
 		else:
 			result = sympy.integrate(equation, variable)
 	else:
 		result = 'Invalid service number'
-
 
 	conn.sendall(str(result).encode('utf-8'))
 

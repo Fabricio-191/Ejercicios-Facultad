@@ -21,7 +21,7 @@ response = query_socket(f'2;{equation};x')
 print(f"The derivative of '{equation}' is {response}")
 print()
 
-response = query_socket('2;{equation};x;7')
+response = query_socket(f'2;{equation};x;7')
 print(f"The derivative of '{equation}' at x=7 is {response}")
 print()
 
@@ -30,8 +30,8 @@ print(f"The integral of '4' from 1 to 3 is {response}")
 print()
 
 
-equation = 'ln(x)'
-response = query_socket(f'3;{equation};x')
+equation = 'log(x)'
+response = query_socket(f'3;{equation};y')
 print(f"The integral of '{equation}' is {response}")
 print()
 

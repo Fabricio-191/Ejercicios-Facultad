@@ -1,25 +1,25 @@
 
-I = [1 0 0; 0 1 0; 0 0 1]; // matriz identidad
-I1 = [1; 0; 0];            // primera columna de la matriz identidad
-I2 = [0; 1; 0];            // segunda columna de la matriz identidad
-I3 = [0; 0; 1];            // tercera columna de la matriz identidad
+I = [1 0 0; 0 1 0; 0 0 1]; // Matriz identidad
+I1 = [1; 0; 0];            // Primera columna de la matriz identidad
+I2 = [0; 1; 0];            // Segunda columna de la matriz identidad
+I3 = [0; 0; 1];            // Tercera columna de la matriz identidad
 
 A'                // A traspuesta
-inv(A)            // matriz inversa de A
-det(A)            // determinante de A
-spec(A)           // autovalores de A
-norm(A, normType) // norma de A, normType = 1, 2, %inf
-cond(A, normType) // numero de condicion de A, normType = 1, 2, %inf
+inv(A)            // Matriz inversa de A
+det(A)            // Determinante de A
+spec(A)           // Autovalores de A
+norm(A, normType) // Norma de A, normType = 1, 2, %inf
+cond(A, normType) // Numero de condicion de A, normType = 1, 2, %inf
 
 
-A \ b          // resuelve el sistema Ax = b
-A \ I  	       // encuentra la inversa de A
-A \ I1         // primera columna de la inversa de A
-A \ I2         // segunda columna de la inversa de A
-A \ I3         // tercera columna de la inversa de A
+A \ b          // Resuelve el sistema Ax = b
+A \ I  	       // Encuentra la inversa de A
+A \ I1         // Primera columna de la inversa de A
+A \ I2         // Segunda columna de la inversa de A
+A \ I3         // Tercera columna de la inversa de A
 
 
-[L, U] = lu(A) // descomposicion LU de A
+[L, U] = lu(A) // Descomposicion LU de A
 A == L * U     // Revisar que la descomposicion LU es correcta
 U \ (L \ b)    // Resuelve el sistema L * (U * x) = b
 

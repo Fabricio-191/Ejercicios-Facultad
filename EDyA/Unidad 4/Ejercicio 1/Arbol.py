@@ -12,6 +12,47 @@ class Arbol:
 		else:
 			self.__root.insertar(dato)
 
+	def insertar2(self, dato):
+		if self.__root == None:
+			self.__root = Nodo(dato)
+		else:
+			subarbol = self.__root
+
+			while subarbol is not None:
+				if dato < subarbol.getDato():
+					if subarbol.getIzq() is None:
+						subarbol.setIzq(Nodo(dato))
+						return
+					else:
+						subarbol = subarbol.getIzq()
+				else:
+					if subarbol.getDer() is None:
+						subarbol.setDer(Nodo(dato))
+						return
+					else:
+						subarbol = subarbol.getDer()
+
+	def insertar3(self, dato):
+		if self.__root == None:
+			self.__root = Nodo(dato)
+		else:
+			self.__insertar3(dato, self.__root)
+
+	def __insertar3(self, dato, nodo):
+		if dato == nodo.getDato():
+			raise Exception('Dato duplicado')
+		elif dato < nodo.getDato():
+			if nodo.getIzq() is None:
+				nodo.setIzq(Nodo(dato))
+			else:
+				self.__insertar3(dato, nodo.getIzq())
+		else:
+			if nodo.getDer() is None:
+				nodo.setDer(Nodo(dato))
+			else:
+				self.__insertar3(dato, nodo.getDer())
+			
+
 	def suprimir(self, dato):
 		if self.__root is None:
 			raise Exception('Arbol vacio')

@@ -1,37 +1,14 @@
 /*
-function IntegracionSimpson1_3 (X, Y, h)
+function IntegracionSimpson1_3 (X, Y)
     n = length(X);
 	suma = 0;
+	h = X(2) - X(1);
 	
 	for i=1 : 2 : n-2
 		suma = suma + Y(i) + 4 * Y(i+1) + Y(i + 2);
 	end
 
 	suma = suma * h / 3;
-	
-	printf('El valor de la integral es: %f\n', suma);
-end
-
-function IntegracionSimpson3_8 (X, Y, h)
-	n = length(X);
-	
-	if length(X) ~= length(Y)
-		printf('Error: X e Y deben tener la misma longitud\n');
-		return;
-	end
-
-	if mod(n, 3) ~= 1
-		printf('Error: n debe ser multiplo de 3\n');
-		return;
-	end
-
-	suma = 0;
-	
-	for i=1 : 3 : n-3
-		suma = suma + Y(i) + 3*Y(i+1) + 3*Y(i+2) + Y(i+3);
-	end
-
-	suma = suma * 3 * h / 8;
 	
 	printf('El valor de la integral es: %f\n', suma);
 end
@@ -68,15 +45,7 @@ function IntegracionSimpson3_8 ()
 		Y(i) = input('');
 	end
 
-	suma = 0;
-
-	for i=1 : 3 : n-3
-		suma = suma + Y(i) + 3*Y(i+1) + 3*Y(i+2) + Y(i+3);
-	end
-
-	suma = suma * 3 * h / 8;
-	
-	printf('El valor de la integral es: %f\n', suma);
+	IntegracionSimpson3_8_2(X, Y)
 end
 
 function IntegracionSimpson3_8_2 (X, Y)
@@ -99,6 +68,24 @@ function IntegracionSimpson3_8_2 (X, Y)
 			end
 		end
 	end
+	
+	suma = 0;
+
+	for i=1 : 3 : n-3
+		suma = suma + Y(i) + 3*Y(i+1) + 3*Y(i+2) + Y(i+3);
+	end
+
+	suma = suma * 3 * h / 8;
+	
+	printf('El valor de la integral es: %f\n', suma);
+end
+
+
+function IntegracionSimpson3_8_2 (X, Y)
+	disp('    Integracion Simpson 3/8');
+	n = length(X);
+	x0 = X(1);
+	h = X(2) - X(1);
 	
 	suma = 0;
 

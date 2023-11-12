@@ -1,4 +1,5 @@
 function metodoBiseccion(a, b, error)
+	e = 0
     prev_e = 0
     err = 9999999999999
 
@@ -67,5 +68,5 @@ function metodoRegulaFalsi(x_1, x_2, error)
 endfunction
 
 function a = f(x)
-    a = exp(3 * x) - 4
+    a = 
 endfunction

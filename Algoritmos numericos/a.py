@@ -30,3 +30,42 @@ valor2 /= h ** 2
 
 print(f"Valor de la derivada segunda en x = {a}")
 print(valor2)
+
+
+"""
+
+ABS:
+* ActivarABS()
+* DesactivarABS()
+* VerificarSensores()
+* VisualizarEstado() <<implementado por>> PANTALLA
+
+Subsistemas:
+
+SENSOR_DE_VELOCIDAD:
+* LeerVelocidad()
+
+CENTRALITA_(ECU):
+* ProcesarSensores() <<usa>> SENSOR_DE_VELOCIDAD
+* EnviarInstruccionesModulador()
+
+MODULADOR_DE_PRESIÓN:
+* AplicarPresion()
+* LiberarPresion()
+* Subsistemas:
+	* BOMBA_DE_FRENO:
+		* ActivarBomba()
+		* DesactivarBomba()
+	* VÁLVULA_DE_LIBERACIÓN/RETENCIÓN_DE_PRESIÓN:
+		* AbrirValvula()
+		* CerrarValvula()
+
+REGISTRO:
+* RegistrarVariablesSensor()
+* RegistrarVariablesECU()
+* RegistrarVariablesModulador()
+
+PANTALLA:
+* VisualizarEstado()
+
+"""

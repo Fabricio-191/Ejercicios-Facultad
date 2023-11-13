@@ -32,7 +32,7 @@ function IntegracionSimpson3_8 ()
 	suma = suma * 3 * h / 8;
 
 	printf('   i    X(i)    Y(i)\n');
-	for i = 1 : n
+	for i = 1 : n + 1
 		printf('%4d  %7.5f  %7.5f\n', i, X(i), Y(i));
 	end
 	
@@ -76,7 +76,7 @@ function IntegracionSimpson3_8_2 ()
 	suma = suma * 3 * h / 8;
 
 	printf('   i    X(i)    Y(i)\n');
-	for i = 1 : n
+	for i = 1 : n + 1
 		printf('%4d  %7.5f  %7.5f\n', i, X(i), Y(i));
 	end
 	

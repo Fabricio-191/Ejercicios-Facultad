@@ -4,7 +4,7 @@ function IntegracionSimpson3_8 ()
 	n = input('');
 
 	if n < 3 || modulo(n, 3) ~= 0
-		disp('Error: la cantidad de puntos es invalida\n');
+		disp('Error: la cantidad de intervalos es invalida\n');
 		return;
 	end
 	
@@ -45,7 +45,7 @@ function IntegracionSimpson3_8_2 ()
 	n = input('');
 
 	if n < 3 || modulo(n, 3) ~= 0
-		disp('Error: la cantidad de puntos es invalida\n');
+		disp('Error: la cantidad de intervalos es invalida\n');
 		return;
 	end
 	

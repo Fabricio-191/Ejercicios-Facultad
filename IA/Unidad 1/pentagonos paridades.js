@@ -28,7 +28,6 @@ function* range(start, end, size, triangular = false){
 	}
 }
 
-
 let solutions = 0;
 for(const i of range(0, 1, 21)){ // 0 = odd, 1 = even
 	if(i.filter(a => a === 1).length !== 5) continue; // si la cantidad de numeros pares no es 5, no es una solucion

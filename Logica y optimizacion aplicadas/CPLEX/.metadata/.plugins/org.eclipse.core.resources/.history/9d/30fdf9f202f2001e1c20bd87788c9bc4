@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ASCII"?><project>
+    	
+    <version>1.0</version>
+    	
+    <configs>
+        		
+        <config default="true" name="config1" category="opl">
+            			
+            <ref name="version1.mod" type="model">
+			</ref>
+            		
+        </config>
+        		
+        <config default="false" name="config2" category="opl">
+            			
+            <ref name="SegundaVersion.mod" type="model">
+			</ref>
+            		
+        </config>
+        		
+        <config default="false" name="config3" category="opl">
+            			
+            <ref name="TerceraVersion.mod" type="model">
+			</ref>
+            			
+            <ref name="version2.mod" type="model">
+			</ref>
+            		
+        </config>
+        		
+        <config default="false" name="config4" category="opl">
+            			
+            <ref name="CuartaVersion.mod" type="model">
+			</ref>
+            			
+            <ref name="CuartaVersion.dat" type="data">
+			</ref>
+            		
+        </config>
+        	
+    </configs>
+    	
+
+</project>

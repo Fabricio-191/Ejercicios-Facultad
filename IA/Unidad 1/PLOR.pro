@@ -22,8 +22,9 @@ solucion(Estado, Visitados, [NuevoEstado|Pasos]) :-
     solucion(NuevoEstado, [NuevoEstado|Visitados], Pasos).
 
 
-main :- 
+main([EstadoInicial|Pasos]) :- 
     estadoInicial(EstadoInicial),
-    solucion(EstadoInicial, [EstadoInicial], Pasos),
-    writeln([EstadoInicial|Pasos]).
+    solucion(EstadoInicial, [EstadoInicial], Pasos).
+
+% main(Pasos), writeln(Pasos).
 

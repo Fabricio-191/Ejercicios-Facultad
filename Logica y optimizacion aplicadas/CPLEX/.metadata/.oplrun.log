@@ -1,0 +1,792 @@
+!SESSION 2024-04-03 13:49:30.047 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 13:49:30.047
+!MESSAGE Run pregunta1 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/problemaEnClase
+!SESSION 2024-04-03 18:12:24.094 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:12:24.094
+!MESSAGE Run pregunta1 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/problemaEnClase
+!SESSION 2024-04-03 18:15:21.076 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:15:21.076
+!MESSAGE Run Configuración 1 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+
+!ENTRY ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:15:21.116
+!MESSAGE load failed
+!STACK 1
+org.eclipse.core.runtime.CoreException: load failed
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:146)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: ilog.concert.IloException: Run configuration "Configuración 1" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	... 3 more
+!SUBENTRY 1 ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:15:21.116
+!MESSAGE load failed
+!STACK 0
+ilog.concert.IloException: Run configuration "Configuración 1" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2024-04-03 18:15:36.746 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:15:36.747
+!MESSAGE Run Configuración 1 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+
+!ENTRY ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:15:36.802
+!MESSAGE load failed
+!STACK 1
+org.eclipse.core.runtime.CoreException: load failed
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:146)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: ilog.concert.IloException: Run configuration "Configuración 1" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	... 3 more
+!SUBENTRY 1 ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:15:36.806
+!MESSAGE load failed
+!STACK 0
+ilog.concert.IloException: Run configuration "Configuración 1" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2024-04-03 18:17:59.751 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:17:59.751
+!MESSAGE Run Configuración 1 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+
+!ENTRY ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:17:59.790
+!MESSAGE load failed
+!STACK 1
+org.eclipse.core.runtime.CoreException: load failed
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:146)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: ilog.concert.IloException: Run configuration "Configuración 1" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	... 3 more
+!SUBENTRY 1 ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:17:59.791
+!MESSAGE load failed
+!STACK 0
+ilog.concert.IloException: Run configuration "Configuración 1" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2024-04-03 18:18:24.546 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:18:24.546
+!MESSAGE Run Configuración 1 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+
+!ENTRY ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:18:24.586
+!MESSAGE load failed
+!STACK 1
+org.eclipse.core.runtime.CoreException: load failed
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:146)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: ilog.concert.IloException: Run configuration "Configuración 1" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	... 3 more
+!SUBENTRY 1 ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:18:24.587
+!MESSAGE load failed
+!STACK 0
+ilog.concert.IloException: Run configuration "Configuración 1" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2024-04-03 18:20:13.865 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:20:13.865
+!MESSAGE Run Configuración 2 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+
+!ENTRY ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:20:13.907
+!MESSAGE load failed
+!STACK 1
+org.eclipse.core.runtime.CoreException: load failed
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:146)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: ilog.concert.IloException: Run configuration "Configuración 2" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	... 3 more
+!SUBENTRY 1 ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:20:13.911
+!MESSAGE load failed
+!STACK 0
+ilog.concert.IloException: Run configuration "Configuración 2" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2024-04-03 18:20:29.326 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:20:29.326
+!MESSAGE Run Configuración 2 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+
+!ENTRY ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:20:29.366
+!MESSAGE load failed
+!STACK 1
+org.eclipse.core.runtime.CoreException: load failed
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:146)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: ilog.concert.IloException: Run configuration "Configuración 2" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	... 3 more
+!SUBENTRY 1 ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:20:29.367
+!MESSAGE load failed
+!STACK 0
+ilog.concert.IloException: Run configuration "Configuración 2" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2024-04-03 18:20:41.774 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:20:41.774
+!MESSAGE Run Configuración 2 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+
+!ENTRY ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:20:41.825
+!MESSAGE load failed
+!STACK 1
+org.eclipse.core.runtime.CoreException: load failed
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:146)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: ilog.concert.IloException: Run configuration "Configuración 2" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	... 3 more
+!SUBENTRY 1 ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:20:41.825
+!MESSAGE load failed
+!STACK 0
+ilog.concert.IloException: Run configuration "Configuración 2" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2024-04-03 18:21:07.597 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:21:07.597
+!MESSAGE Run Configuración 2 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+
+!ENTRY ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:21:07.652
+!MESSAGE load failed
+!STACK 1
+org.eclipse.core.runtime.CoreException: load failed
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:146)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: ilog.concert.IloException: Run configuration "Configuración 2" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	... 3 more
+!SUBENTRY 1 ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:21:07.652
+!MESSAGE load failed
+!STACK 0
+ilog.concert.IloException: Run configuration "Configuración 2" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2024-04-03 18:23:17.098 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:23:17.098
+!MESSAGE Run Configuración 2 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+
+!ENTRY ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:23:17.148
+!MESSAGE load failed
+!STACK 1
+org.eclipse.core.runtime.CoreException: load failed
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:146)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: ilog.concert.IloException: Run configuration "Configuración 2" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	... 3 more
+!SUBENTRY 1 ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:23:17.148
+!MESSAGE load failed
+!STACK 0
+ilog.concert.IloException: Run configuration "Configuración 2" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2024-04-03 18:23:35.437 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:23:35.437
+!MESSAGE Run Configuración 1 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+
+!ENTRY ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:23:35.489
+!MESSAGE load failed
+!STACK 1
+org.eclipse.core.runtime.CoreException: load failed
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:146)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: ilog.concert.IloException: Run configuration "Configuración 1" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	... 3 more
+!SUBENTRY 1 ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:23:35.490
+!MESSAGE load failed
+!STACK 0
+ilog.concert.IloException: Run configuration "Configuración 1" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2024-04-03 18:23:38.089 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:23:38.089
+!MESSAGE Run Configuración 1 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+
+!ENTRY ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:23:38.131
+!MESSAGE load failed
+!STACK 1
+org.eclipse.core.runtime.CoreException: load failed
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:146)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: ilog.concert.IloException: Run configuration "Configuración 1" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	... 3 more
+!SUBENTRY 1 ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:23:38.132
+!MESSAGE load failed
+!STACK 0
+ilog.concert.IloException: Run configuration "Configuración 1" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2024-04-03 18:23:43.460 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:23:43.460
+!MESSAGE Run Configuración 1 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+
+!ENTRY ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:23:43.500
+!MESSAGE load failed
+!STACK 1
+org.eclipse.core.runtime.CoreException: load failed
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:146)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: ilog.concert.IloException: Run configuration "Configuración 1" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	... 3 more
+!SUBENTRY 1 ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:23:43.500
+!MESSAGE load failed
+!STACK 0
+ilog.concert.IloException: Run configuration "Configuración 1" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2024-04-03 18:24:47.671 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:24:47.671
+!MESSAGE Run Configuración 1 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+
+!ENTRY ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:24:47.716
+!MESSAGE load failed
+!STACK 1
+org.eclipse.core.runtime.CoreException: load failed
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:146)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: ilog.concert.IloException: Run configuration "Configuración 1" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	... 3 more
+!SUBENTRY 1 ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:24:47.717
+!MESSAGE load failed
+!STACK 0
+ilog.concert.IloException: Run configuration "Configuración 1" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2024-04-03 18:26:08.819 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:26:08.819
+!MESSAGE Run Configuración 1 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+
+!ENTRY ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:26:08.863
+!MESSAGE load failed
+!STACK 1
+org.eclipse.core.runtime.CoreException: load failed
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:146)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: ilog.concert.IloException: Run configuration "Configuración 1" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	... 3 more
+!SUBENTRY 1 ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:26:08.863
+!MESSAGE load failed
+!STACK 0
+ilog.concert.IloException: Run configuration "Configuración 1" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2024-04-03 18:26:17.371 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:26:17.371
+!MESSAGE Run Configuración 1 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+
+!ENTRY ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:26:17.413
+!MESSAGE load failed
+!STACK 1
+org.eclipse.core.runtime.CoreException: load failed
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:146)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: ilog.concert.IloException: Run configuration "Configuración 1" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	... 3 more
+!SUBENTRY 1 ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:26:17.413
+!MESSAGE load failed
+!STACK 0
+ilog.concert.IloException: Run configuration "Configuración 1" does not exist.
+	at ilog.opl.opl_lang_wrapJNI.IloOplRunConfiguration_getCppOplModel(Native Method)
+	at ilog.opl.IloOplRunConfiguration.getCppOplModel(IloOplRunConfiguration.java:240)
+	at ilog.opl.IloOplRunConfiguration.getOplModel(IloOplRunConfiguration.java:139)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doSetUpModel(IloOplRunConfigRunner.java:140)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:374)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2024-04-03 18:26:38.788 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:26:38.788
+!MESSAGE Run config1 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+
+!ENTRY ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:26:38.874
+!MESSAGE No solution available, cannot process.
+!STACK 0
+ilog.concert.IloException: No solution available, cannot process.
+	at ilog.opl.opl_lang_wrapJNI.IloOplModel_postProcess(Native Method)
+	at ilog.opl.IloOplModel.postProcess(IloOplModel.java:747)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell.postProcess(IloAbstractRunShell.java:1968)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell.sendSolution(IloAbstractRunShell.java:1826)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell.processSolution(IloAbstractRunShell.java:1880)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doProcessModel(IloOplRunConfigRunner.java:165)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:377)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2024-04-03 18:31:34.334 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:31:34.335
+!MESSAGE Run config2 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+!SESSION 2024-04-03 18:32:33.233 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:32:33.233
+!MESSAGE Run config2 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+!SESSION 2024-04-03 18:33:00.446 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:33:00.446
+!MESSAGE Run config2 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+
+!ENTRY ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:33:00.528
+!MESSAGE No solution available, cannot process.
+!STACK 0
+ilog.concert.IloException: No solution available, cannot process.
+	at ilog.opl.opl_lang_wrapJNI.IloOplModel_postProcess(Native Method)
+	at ilog.opl.IloOplModel.postProcess(IloOplModel.java:747)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell.postProcess(IloAbstractRunShell.java:1968)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell.sendSolution(IloAbstractRunShell.java:1826)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell.processSolution(IloAbstractRunShell.java:1880)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doProcessModel(IloOplRunConfigRunner.java:165)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:377)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2024-04-03 18:37:41.037 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:37:41.037
+!MESSAGE Run config2 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+
+!ENTRY ilog.odms.ide.opllang.remote 4 0 2024-04-03 18:37:41.115
+!MESSAGE No solution available, cannot process.
+!STACK 0
+ilog.concert.IloException: No solution available, cannot process.
+	at ilog.opl.opl_lang_wrapJNI.IloOplModel_postProcess(Native Method)
+	at ilog.opl.IloOplModel.postProcess(IloOplModel.java:747)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell.postProcess(IloAbstractRunShell.java:1968)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell.sendSolution(IloAbstractRunShell.java:1826)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell.processSolution(IloAbstractRunShell.java:1880)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doProcessModel(IloOplRunConfigRunner.java:165)
+	at ilog.odms.ide.opllang.remote.IloOplRunConfigRunner.doRun(IloOplRunConfigRunner.java:377)
+	at ilog.odms.ide.opllang.run.IloAbstractRunShell$2.run(IloAbstractRunShell.java:1605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2024-04-03 18:38:11.512 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:38:11.513
+!MESSAGE Run config3 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+!SESSION 2024-04-03 18:38:20.579 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:38:20.579
+!MESSAGE Run config1 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+!SESSION 2024-04-03 18:38:25.431 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:38:25.431
+!MESSAGE Run config2 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+!SESSION 2024-04-03 18:38:29.801 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:38:29.801
+!MESSAGE Run config3 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+!SESSION 2024-04-03 18:41:03.506 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:41:03.506
+!MESSAGE Run config4 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+!SESSION 2024-04-03 18:42:48.912 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:42:48.912
+!MESSAGE Run config1 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+!SESSION 2024-04-03 18:42:53.548 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:42:53.548
+!MESSAGE Run config2 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema
+!SESSION 2024-04-03 18:42:57.800 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.13+8
+JRE 11 Windows 10 amd64-64-Bit Compressed References 20211022_218 (JIT enabled, AOT enabled)
+OpenJ9   - e1e72c497
+OMR      - 299b6a2d2
+JCL      - 2d83aa3b76 based on jdk-11.0.13+8
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_AR
+Command-line arguments:  -clean -nl es_AR -configuration D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX\.metadata\workspace_oplrun
+
+!ENTRY ilog.odms.ide.opllang.remote 1 0 2024-04-03 18:42:57.800
+!MESSAGE Run config3 in D:/Programacion/Ejercicios-Facultad/Logica y optimizacion aplicadas/CPLEX/PrimerProblema

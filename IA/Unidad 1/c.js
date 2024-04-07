@@ -60,7 +60,6 @@ for(const i of range(0, 1, 21)){ // 0 = odd, 1 = even
 		console.log()
 		console.log(' ', ...description.slice(5, 9));
 	}
-
 }
 
 console.log()

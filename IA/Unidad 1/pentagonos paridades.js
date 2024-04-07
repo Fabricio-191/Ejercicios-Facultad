@@ -65,13 +65,18 @@ console.log()
 console.log(solutions)
 
 /*
-Cada cumulo de numeros representa una solucion, representan la distribucion de los numeros pares e impares, siendo esta:
-v1   v2   v3   v4   v5   
-v1   v6   v7   v8   v9   
-v1  v10  v11  v12  v13
-v1  v14  v15  v16  v17
-v1  v18  v19  v20  v21
+Esto:
 
+1 0 0 0 0   1
+1 0 0 0 0   1
+1 0 0 0 0   1
+1 0 0 0 0   1
+1 1 1 1 1   5
+
+  1 1 1 1
+
+Representa la distribucion de los numeros pares e impares, en el sistema de ecuaciones.
+El numero 0 representa un numero impar y el numero 1 representa un numero par
 El numero a la derecha de cada fila indica los numeros pares en esa fila y el numero abajo de las columnas indica los numeros pares en esa columna
 
 1 0 0 0 0   1

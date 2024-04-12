@@ -7,12 +7,10 @@ const differentValues = (...values) => new Set(values).size === values.length;
 
 /*
 for(let i = 0; i < nums.length; i++){
-	for(let j = 0; j < nums.length; j++){
-		for(let k = 0; k < nums.length; k++){
-			for(let l = 0; l < nums.length; l++){
-				for(let m = 0; m < nums.length; m++){
-					if(!differentValues(nums[i], nums[j], nums[k], nums[l], nums[m])) continue;
-
+	for(let j = i + 1; j < nums.length; j++){
+		for(let k = j + 1; k < nums.length; k++){
+			for(let l = k + 1; l < nums.length; l++){
+				for(let m = l + 1; m < nums.length; m++){
 					if(nums[i] + nums[j] + nums[k] + nums[l] + nums[m] === 100){
 						combinations.push([nums[i], nums[j], nums[k], nums[l], nums[m]]);
 					}
@@ -23,28 +21,25 @@ for(let i = 0; i < nums.length; i++){
 }
 */
 
-for(const [i, j, k, l, m] of range(0, nums.length - 1, 5, false)){
-	if(!differentValues(nums[i], nums[j], nums[k], nums[l], nums[m])) continue;
+for(const [i, j, k, l, m] of range(0, nums.length - 1, 5, true)){
+	if(!differentValues(i, j, k, l, m)) continue;
 
 	if(nums[i] + nums[j] + nums[k] + nums[l] + nums[m] === 100){
 		combinations.push([nums[i], nums[j], nums[k], nums[l], nums[m]]);
 	}
 }
 
-// find combinations of 5 numbers that add up to 100 and have 3 even numbers
-const even = nums.filter(a => a % 2 === 0);
-const countEven = (...values) => values.filter(a => even.includes(a)).length;
+console.log(combinations.length);
 
-const evenCombinations = [];
+const frequencies = {};
 
 for(const combination of combinations){
-	if(countEven(...combination) === 3) evenCombinations.push(combination);
+	for(const num of combination){
+		frequencies[num] = (frequencies[num] || 0) + 1;
+	}
 }
 
-console.log(combinations.length);
-console.log(evenCombinations.length);
-
-
+console.log(frequencies);
 
 function* range(start, end, size, triangular = false){
 	const range = Array(size).fill(start);

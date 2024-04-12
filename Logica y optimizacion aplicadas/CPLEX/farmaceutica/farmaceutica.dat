@@ -1,0 +1,19 @@
+/*********************************************
+ * OPL 22.1.1.0 Data
+ * Author: NotebookExo
+ * Creation Date: 8 abr. 2024 at 16:10:25
+ 
+ Una multinacional farmacéutica desea fabricar un compuesto nutritivo a base de dos productos A y B. El producto A contiene 30% de proteínas, un 1 % de grasas y un 10% de azúcares. El producto B contiene un 5% de proteínas, un 7% de grasas y un 10% de azúcares.
+El compuesto tiene que tener, al menos, 25g de proteínas, 6g de grasas y 30g de azúcares. El coste del producto A es de 0.6 uss/g. y el de B es de 0.2 uss/g.
+
+¿Cuántos gramos de cada producto debe tener el compuesto para que el coste total sea mínimo?
+ 
+ *********************************************/
+Productos = {"A", "B"};
+Componentes = {"proteinas", "grasas", "azucares"};
+
+costo = [0.6, 0.2];
+porcentaje = [[0.3, 0.01, 0.1], [0.05, 0.07, 0.1]];
+cantidad = [25, 6, 30];
+
+

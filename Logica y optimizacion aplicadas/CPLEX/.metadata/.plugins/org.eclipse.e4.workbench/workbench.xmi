@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_lSasIeyBEe64Y8ICTnuy_A" elementId="org.eclipse.e4.legacy.ide.application" contributorURI="platform:/plugin/org.eclipse.ui.workbench" selectedElement="_lSasIuyBEe64Y8ICTnuy_A" bindingContexts="_lSbTMuyBEe64Y8ICTnuy_A">
-  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.DataEditor&quot; name=&quot;version4.dat&quot; tooltip=&quot;PrimerProblema/version4.dat&quot;>&#xD;&#xA;&lt;persistable path=&quot;/PrimerProblema/version4.dat&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;version4.mod&quot; tooltip=&quot;PrimerProblema/version4.mod&quot;>&#xD;&#xA;&lt;persistable path=&quot;/PrimerProblema/version4.mod&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;version1.mod&quot; tooltip=&quot;PrimerProblema/version1.mod&quot;>&#xD;&#xA;&lt;persistable path=&quot;/PrimerProblema/version1.mod&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;CuartaVersion.mod&quot; tooltip=&quot;PrimerProblema/CuartaVersion.mod&quot;>&#xD;&#xA;&lt;persistable path=&quot;/PrimerProblema/CuartaVersion.mod&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.DataEditor&quot; name=&quot;CuartaVersion.dat&quot; tooltip=&quot;PrimerProblema/CuartaVersion.dat&quot;>&#xD;&#xA;&lt;persistable path=&quot;/PrimerProblema/CuartaVersion.dat&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;TerceraVersion.mod&quot; tooltip=&quot;PrimerProblema/TerceraVersion.mod&quot;>&#xD;&#xA;&lt;persistable path=&quot;/PrimerProblema/TerceraVersion.mod&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;SegundaVersion.mod&quot; tooltip=&quot;PrimerProblema/SegundaVersion.mod&quot;>&#xD;&#xA;&lt;persistable path=&quot;/PrimerProblema/SegundaVersion.mod&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;PrimerProblema.mod&quot; tooltip=&quot;PrimerProblema/PrimerProblema.mod&quot;>&#xD;&#xA;&lt;persistable path=&quot;/PrimerProblema/PrimerProblema.mod&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.DataEditor&quot; name=&quot;PrimerProblema.dat&quot; tooltip=&quot;PrimerProblema/PrimerProblema.dat&quot;>&#xD;&#xA;&lt;persistable path=&quot;/PrimerProblema/PrimerProblema.dat&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;problemaEnClase.mod&quot; tooltip=&quot;problemaEnClase/problemaEnClase.mod&quot;>&#xD;&#xA;&lt;persistable path=&quot;/problemaEnClase/problemaEnClase.mod&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;main.mod&quot; tooltip=&quot;PrimerProblema2/main.mod&quot;>&#xD;&#xA;&lt;persistable path=&quot;/PrimerProblema2/main.mod&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.LPEditor&quot; name=&quot;pregunta1.lp&quot; tooltip=&quot;problemaEnClase/pregunta1.lp&quot;>&#xD;&#xA;&lt;persistable path=&quot;/problemaEnClase/pregunta1.lp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
+  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;asd.mod&quot; tooltip=&quot;asd/asd.mod&quot;>&#xD;&#xA;&lt;persistable path=&quot;/asd/asd.mod&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;problema_verduras.mod&quot; tooltip=&quot;problema verduras/problema_verduras.mod&quot;>&#xD;&#xA;&lt;persistable path=&quot;/problema verduras/problema_verduras.mod&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.DataEditor&quot; name=&quot;asd.dat&quot; tooltip=&quot;asd/asd.dat&quot;>&#xD;&#xA;&lt;persistable path=&quot;/asd/asd.dat&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.DataEditor&quot; name=&quot;version4.dat&quot; tooltip=&quot;PrimerProblema/version4.dat&quot;>&#xD;&#xA;&lt;persistable path=&quot;/PrimerProblema/version4.dat&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;version4.mod&quot; tooltip=&quot;PrimerProblema/version4.mod&quot;>&#xD;&#xA;&lt;persistable path=&quot;/PrimerProblema/version4.mod&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;version1.mod&quot; tooltip=&quot;PrimerProblema/version1.mod&quot;>&#xD;&#xA;&lt;persistable path=&quot;/PrimerProblema/version1.mod&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;CuartaVersion.mod&quot; tooltip=&quot;PrimerProblema/CuartaVersion.mod&quot;>&#xD;&#xA;&lt;persistable path=&quot;/PrimerProblema/CuartaVersion.mod&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.DataEditor&quot; name=&quot;CuartaVersion.dat&quot; tooltip=&quot;PrimerProblema/CuartaVersion.dat&quot;>&#xD;&#xA;&lt;persistable path=&quot;/PrimerProblema/CuartaVersion.dat&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;TerceraVersion.mod&quot; tooltip=&quot;PrimerProblema/TerceraVersion.mod&quot;>&#xD;&#xA;&lt;persistable path=&quot;/PrimerProblema/TerceraVersion.mod&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;SegundaVersion.mod&quot; tooltip=&quot;PrimerProblema/SegundaVersion.mod&quot;>&#xD;&#xA;&lt;persistable path=&quot;/PrimerProblema/SegundaVersion.mod&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;PrimerProblema.mod&quot; tooltip=&quot;PrimerProblema/PrimerProblema.mod&quot;>&#xD;&#xA;&lt;persistable path=&quot;/PrimerProblema/PrimerProblema.mod&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.DataEditor&quot; name=&quot;PrimerProblema.dat&quot; tooltip=&quot;PrimerProblema/PrimerProblema.dat&quot;>&#xD;&#xA;&lt;persistable path=&quot;/PrimerProblema/PrimerProblema.dat&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;problemaEnClase.mod&quot; tooltip=&quot;problemaEnClase/problemaEnClase.mod&quot;>&#xD;&#xA;&lt;persistable path=&quot;/problemaEnClase/problemaEnClase.mod&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;main.mod&quot; tooltip=&quot;PrimerProblema2/main.mod&quot;>&#xD;&#xA;&lt;persistable path=&quot;/PrimerProblema2/main.mod&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;ilog.odms.ide.ui.editors.LPEditor&quot; name=&quot;pregunta1.lp&quot; tooltip=&quot;problemaEnClase/pregunta1.lp&quot;>&#xD;&#xA;&lt;persistable path=&quot;/problemaEnClase/pregunta1.lp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
   <tags>activeSchemeId:org.eclipse.ui.defaultAcceleratorConfiguration</tags>
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_lSasIuyBEe64Y8ICTnuy_A" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.ui.workbench" selectedElement="_lbmdUuyBEe64Y8ICTnuy_A" x="-135" y="-20" width="3200" height="1080">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_lSasIuyBEe64Y8ICTnuy_A" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.ui.workbench" selectedElement="_lbmdUuyBEe64Y8ICTnuy_A" x="0" y="0" width="3200" height="1080">
     <persistedState key="coolBarVisible" value="true"/>
     <persistedState key="perspectiveBarVisible" value="true"/>
     <persistedState key="isRestored" value="true"/>
@@ -13,7 +13,7 @@
     <tags>shellMaximized</tags>
     <children xsi:type="basic:PartSashContainer" xmi:id="_lbmdUuyBEe64Y8ICTnuy_A" selectedElement="_lbmdU-yBEe64Y8ICTnuy_A" horizontal="true">
       <children xsi:type="advanced:PerspectiveStack" xmi:id="_lbmdU-yBEe64Y8ICTnuy_A" elementId="org.eclipse.ui.ide.perspectivestack" containerData="7500" selectedElement="_lfk-YOyBEe64Y8ICTnuy_A">
-        <children xsi:type="advanced:Perspective" xmi:id="_lfk-YOyBEe64Y8ICTnuy_A" elementId="ilog.odms.ide.ui.perspective" selectedElement="_lfk-YeyBEe64Y8ICTnuy_A" label="OPL" iconURI="platform:/plugin/ilog.odms.ide.ui/$nl$/icons/full/eview16/odmsperspective.png">
+        <children xsi:type="advanced:Perspective" xmi:id="_lfk-YOyBEe64Y8ICTnuy_A" elementId="ilog.odms.ide.ui.perspective" selectedElement="_qYDUQPd5Ee6ZA7dsjEUwrw" label="OPL" iconURI="platform:/plugin/ilog.odms.ide.ui/$nl$/icons/full/eview16/odmsperspective.png">
           <persistedState key="persp.hiddenItems" value="persp.hideToolbarSC:print,persp.hideToolbarSC:org.eclipse.ui.edit.undo,persp.hideToolbarSC:org.eclipse.ui.edit.redo,persp.hideToolbarSC:org.eclipse.ui.edit.text.toggleShowSelectedElementOnly,persp.hideToolbarSC:org.eclipse.debug.ui.commands.RunToLine,"/>
           <tags>persp.actionSet:ilog.odms.ide.ui.file.actionSet</tags>
           <tags>persp.actionSet:org.eclipse.ui.OpenOPLSearchSet</tags>
@@ -47,97 +47,98 @@
           <tags>persp.viewSC:ilog.odms.ide.wml.ui.WmlView</tags>
           <tags>persp.actionSet:org.eclipse.ui.edit.text.actionSet.convertLineDelimitersTo</tags>
           <tags>persp.actionSet:org.eclipse.ui.actionSet.openFiles</tags>
-          <children xsi:type="basic:PartSashContainer" xmi:id="_lfk-YeyBEe64Y8ICTnuy_A" selectedElement="_lfk-bOyBEe64Y8ICTnuy_A" horizontal="true">
-            <children xsi:type="basic:PartSashContainer" xmi:id="_lfk-YuyBEe64Y8ICTnuy_A" containerData="2500" selectedElement="_lfk-Y-yBEe64Y8ICTnuy_A">
-              <children xsi:type="basic:PartStack" xmi:id="_lfk-Y-yBEe64Y8ICTnuy_A" elementId="topLeft" containerData="5000" selectedElement="_lfk-ZOyBEe64Y8ICTnuy_A">
-                <children xsi:type="advanced:Placeholder" xmi:id="_lfk-ZOyBEe64Y8ICTnuy_A" elementId="ilog.odms.ide.ui.navigator.OplProjectExplorer" ref="_lfeQsOyBEe64Y8ICTnuy_A" closeable="true">
+          <children xsi:type="basic:PartSashContainer" xmi:id="_qYDUQPd5Ee6ZA7dsjEUwrw" selectedElement="_qYDUS_d5Ee6ZA7dsjEUwrw" horizontal="true">
+            <children xsi:type="basic:PartSashContainer" xmi:id="_qYDUQfd5Ee6ZA7dsjEUwrw" containerData="2500" selectedElement="_qYDUR_d5Ee6ZA7dsjEUwrw">
+              <children xsi:type="basic:PartStack" xmi:id="_qYDUQvd5Ee6ZA7dsjEUwrw" elementId="topLeft" containerData="5000" selectedElement="_qYDUQ_d5Ee6ZA7dsjEUwrw">
+                <children xsi:type="advanced:Placeholder" xmi:id="_qYDUQ_d5Ee6ZA7dsjEUwrw" elementId="ilog.odms.ide.ui.navigator.OplProjectExplorer" ref="_lfeQsOyBEe64Y8ICTnuy_A" closeable="true">
                   <tags>View</tags>
                   <tags>categoryTag:OPL</tags>
                 </children>
-                <children xsi:type="advanced:Placeholder" xmi:id="_lfk-ZeyBEe64Y8ICTnuy_A" elementId="org.eclipse.ui.navigator.ProjectExplorer" toBeRendered="false" ref="_lffe0OyBEe64Y8ICTnuy_A" closeable="true">
+                <children xsi:type="advanced:Placeholder" xmi:id="_qYDURPd5Ee6ZA7dsjEUwrw" elementId="org.eclipse.ui.navigator.ProjectExplorer" toBeRendered="false" ref="_lffe0OyBEe64Y8ICTnuy_A" closeable="true">
                   <tags>View</tags>
                   <tags>categoryTag:General</tags>
                 </children>
-                <children xsi:type="advanced:Placeholder" xmi:id="_lfk-ZuyBEe64Y8ICTnuy_A" elementId="org.eclipse.ui.views.ResourceNavigator" toBeRendered="false" ref="_lffe0eyBEe64Y8ICTnuy_A" closeable="true">
+                <children xsi:type="advanced:Placeholder" xmi:id="_qYDURfd5Ee6ZA7dsjEUwrw" elementId="org.eclipse.ui.views.ResourceNavigator" toBeRendered="false" ref="_lffe0eyBEe64Y8ICTnuy_A" closeable="true">
                   <tags>View</tags>
                   <tags>categoryTag:General</tags>
                 </children>
-                <children xsi:type="advanced:Placeholder" xmi:id="_lfk-Z-yBEe64Y8ICTnuy_A" elementId="org.eclipse.debug.ui.DebugView" ref="_lfiiIeyBEe64Y8ICTnuy_A" closeable="true">
+                <children xsi:type="advanced:Placeholder" xmi:id="_qYDURvd5Ee6ZA7dsjEUwrw" elementId="org.eclipse.debug.ui.DebugView" ref="_lfiiIeyBEe64Y8ICTnuy_A" closeable="true">
                   <tags>View</tags>
                   <tags>categoryTag:Depurar</tags>
                 </children>
               </children>
-              <children xsi:type="basic:PartStack" xmi:id="_lfk-aOyBEe64Y8ICTnuy_A" elementId="projBrowser" containerData="5000" selectedElement="_lfk-aeyBEe64Y8ICTnuy_A">
-                <children xsi:type="advanced:Placeholder" xmi:id="_lfk-aeyBEe64Y8ICTnuy_A" elementId="ilog.odms.ide.ui.views.ProblemBrowserView" ref="_lfgF4OyBEe64Y8ICTnuy_A" closeable="true">
+              <children xsi:type="basic:PartStack" xmi:id="_qYDUR_d5Ee6ZA7dsjEUwrw" elementId="projBrowser" containerData="5000" selectedElement="_qYDUSPd5Ee6ZA7dsjEUwrw">
+                <children xsi:type="advanced:Placeholder" xmi:id="_qYDUSPd5Ee6ZA7dsjEUwrw" elementId="ilog.odms.ide.ui.views.ProblemBrowserView" ref="_lfgF4OyBEe64Y8ICTnuy_A" closeable="true">
                   <tags>View</tags>
                   <tags>categoryTag:OPL</tags>
                 </children>
-                <children xsi:type="advanced:Placeholder" xmi:id="_lfk-auyBEe64Y8ICTnuy_A" elementId="org.eclipse.debug.ui.VariableView" ref="_lfiiIuyBEe64Y8ICTnuy_A" closeable="true">
+                <children xsi:type="advanced:Placeholder" xmi:id="_qYDUSfd5Ee6ZA7dsjEUwrw" elementId="org.eclipse.debug.ui.VariableView" ref="_lfiiIuyBEe64Y8ICTnuy_A" closeable="true">
                   <tags>View</tags>
                   <tags>categoryTag:Depurar</tags>
                 </children>
-                <children xsi:type="advanced:Placeholder" xmi:id="_lfk-a-yBEe64Y8ICTnuy_A" elementId="org.eclipse.debug.ui.BreakpointView" ref="_lfjJMOyBEe64Y8ICTnuy_A" closeable="true">
+                <children xsi:type="advanced:Placeholder" xmi:id="_qYDUSvd5Ee6ZA7dsjEUwrw" elementId="org.eclipse.debug.ui.BreakpointView" ref="_lfjJMOyBEe64Y8ICTnuy_A" closeable="true">
                   <tags>View</tags>
                   <tags>categoryTag:Depurar</tags>
                 </children>
               </children>
             </children>
-            <children xsi:type="basic:PartSashContainer" xmi:id="_lfk-bOyBEe64Y8ICTnuy_A" containerData="7500" selectedElement="_lfk-beyBEe64Y8ICTnuy_A">
-              <children xsi:type="basic:PartSashContainer" xmi:id="_lfk-beyBEe64Y8ICTnuy_A" containerData="7500" selectedElement="_lfk-buyBEe64Y8ICTnuy_A" horizontal="true">
-                <children xsi:type="advanced:Placeholder" xmi:id="_lfk-buyBEe64Y8ICTnuy_A" elementId="org.eclipse.ui.editorss" containerData="7500" ref="_lfdpoOyBEe64Y8ICTnuy_A"/>
-                <children xsi:type="basic:PartSashContainer" xmi:id="_lfk-b-yBEe64Y8ICTnuy_A" containerData="2500">
-                  <children xsi:type="basic:PartStack" xmi:id="_lfk-cOyBEe64Y8ICTnuy_A" elementId="topRight" containerData="8000" selectedElement="_lfk-ceyBEe64Y8ICTnuy_A">
-                    <children xsi:type="advanced:Placeholder" xmi:id="_lfk-ceyBEe64Y8ICTnuy_A" elementId="org.eclipse.ui.views.ContentOutline" ref="_lffe0uyBEe64Y8ICTnuy_A" closeable="true">
+            <children xsi:type="basic:PartSashContainer" xmi:id="_qYDUS_d5Ee6ZA7dsjEUwrw" containerData="7500" selectedElement="_qYDUTPd5Ee6ZA7dsjEUwrw">
+              <children xsi:type="basic:PartSashContainer" xmi:id="_qYDUTPd5Ee6ZA7dsjEUwrw" containerData="7500" selectedElement="_qYDUTfd5Ee6ZA7dsjEUwrw" horizontal="true">
+                <children xsi:type="advanced:Placeholder" xmi:id="_qYDUTfd5Ee6ZA7dsjEUwrw" elementId="org.eclipse.ui.editorss" containerData="7500" ref="_lfdpoOyBEe64Y8ICTnuy_A"/>
+                <children xsi:type="basic:PartSashContainer" xmi:id="_qYDUTvd5Ee6ZA7dsjEUwrw" containerData="2500" selectedElement="_qYDUT_d5Ee6ZA7dsjEUwrw">
+                  <children xsi:type="basic:PartStack" xmi:id="_qYDUT_d5Ee6ZA7dsjEUwrw" elementId="topRight" containerData="8000" selectedElement="_qYDUUPd5Ee6ZA7dsjEUwrw">
+                    <children xsi:type="advanced:Placeholder" xmi:id="_qYDUUPd5Ee6ZA7dsjEUwrw" elementId="org.eclipse.ui.views.ContentOutline" ref="_lffe0uyBEe64Y8ICTnuy_A" closeable="true">
                       <tags>View</tags>
                       <tags>categoryTag:General</tags>
                     </children>
-                    <children xsi:type="advanced:Placeholder" xmi:id="_lfk-cuyBEe64Y8ICTnuy_A" elementId="org.eclipse.ui.views.minimap.MinimapView" toBeRendered="false" ref="_lfjwQOyBEe64Y8ICTnuy_A" closeable="true">
+                    <children xsi:type="advanced:Placeholder" xmi:id="_qYDUUfd5Ee6ZA7dsjEUwrw" elementId="org.eclipse.ui.views.minimap.MinimapView" toBeRendered="false" ref="_lfjwQOyBEe64Y8ICTnuy_A" closeable="true">
                       <tags>View</tags>
                       <tags>categoryTag:General</tags>
                     </children>
                   </children>
-                  <children xsi:type="basic:PartStack" xmi:id="_lfk-c-yBEe64Y8ICTnuy_A" elementId="projerties" containerData="2000" selectedElement="_lfk-dOyBEe64Y8ICTnuy_A">
-                    <children xsi:type="advanced:Placeholder" xmi:id="_lfk-dOyBEe64Y8ICTnuy_A" elementId="org.eclipse.ui.views.PropertySheet" ref="_lffe0-yBEe64Y8ICTnuy_A" closeable="true">
+                  <children xsi:type="basic:PartStack" xmi:id="_qYDUUvd5Ee6ZA7dsjEUwrw" elementId="projerties" containerData="2000" selectedElement="_qYDUU_d5Ee6ZA7dsjEUwrw">
+                    <children xsi:type="advanced:Placeholder" xmi:id="_qYDUU_d5Ee6ZA7dsjEUwrw" elementId="org.eclipse.ui.views.PropertySheet" ref="_lffe0-yBEe64Y8ICTnuy_A" closeable="true">
                       <tags>View</tags>
                       <tags>categoryTag:General</tags>
                     </children>
                   </children>
                 </children>
               </children>
-              <children xsi:type="basic:PartStack" xmi:id="_lfk-deyBEe64Y8ICTnuy_A" elementId="bottomRight" containerData="2500" selectedElement="_lfk-eOyBEe64Y8ICTnuy_A">
-                <children xsi:type="advanced:Placeholder" xmi:id="_lfk-duyBEe64Y8ICTnuy_A" elementId="org.eclipse.ui.views.ProblemView" ref="_lfgF4eyBEe64Y8ICTnuy_A" closeable="true">
+              <children xsi:type="basic:PartStack" xmi:id="_qYDUVPd5Ee6ZA7dsjEUwrw" elementId="bottomRight" containerData="2500" selectedElement="_qYDUV_d5Ee6ZA7dsjEUwrw">
+                <children xsi:type="advanced:Placeholder" xmi:id="_qYDUVfd5Ee6ZA7dsjEUwrw" elementId="org.eclipse.ui.views.ProblemView" ref="_lfgF4eyBEe64Y8ICTnuy_A" closeable="true">
                   <tags>View</tags>
                   <tags>categoryTag:General</tags>
                 </children>
-                <children xsi:type="advanced:Placeholder" xmi:id="_lfk-d-yBEe64Y8ICTnuy_A" elementId="ilog.odms.ide.ui.views.ScriptLogView" ref="_lfhUAOyBEe64Y8ICTnuy_A" closeable="true">
+                <children xsi:type="advanced:Placeholder" xmi:id="_qYDUVvd5Ee6ZA7dsjEUwrw" elementId="ilog.odms.ide.ui.views.ScriptLogView" ref="_lfhUAOyBEe64Y8ICTnuy_A" closeable="true">
                   <tags>View</tags>
                   <tags>categoryTag:OPL</tags>
                 </children>
-                <children xsi:type="advanced:Placeholder" xmi:id="_lfk-eOyBEe64Y8ICTnuy_A" elementId="ilog.odms.ide.ui.views.SolutionsView" ref="_lfhUAeyBEe64Y8ICTnuy_A" closeable="true">
+                <children xsi:type="advanced:Placeholder" xmi:id="_qYDUV_d5Ee6ZA7dsjEUwrw" elementId="ilog.odms.ide.ui.views.SolutionsView" ref="_lfhUAeyBEe64Y8ICTnuy_A" closeable="true">
+                  <tags>View</tags>
+                  <tags>categoryTag:OPL</tags>
+                  <tags>active</tags>
+                </children>
+                <children xsi:type="advanced:Placeholder" xmi:id="_qYDUWPd5Ee6ZA7dsjEUwrw" elementId="ilog.odms.ide.ui.views.ConflictsView" ref="_lfh7EOyBEe64Y8ICTnuy_A" closeable="true">
                   <tags>View</tags>
                   <tags>categoryTag:OPL</tags>
                 </children>
-                <children xsi:type="advanced:Placeholder" xmi:id="_lfk-eeyBEe64Y8ICTnuy_A" elementId="ilog.odms.ide.ui.views.ConflictsView" ref="_lfh7EOyBEe64Y8ICTnuy_A" closeable="true">
+                <children xsi:type="advanced:Placeholder" xmi:id="_qYDUWfd5Ee6ZA7dsjEUwrw" elementId="ilog.odms.ide.ui.views.RelaxationsView" ref="_lfh7EeyBEe64Y8ICTnuy_A" closeable="true">
                   <tags>View</tags>
                   <tags>categoryTag:OPL</tags>
                 </children>
-                <children xsi:type="advanced:Placeholder" xmi:id="_lfk-euyBEe64Y8ICTnuy_A" elementId="ilog.odms.ide.ui.views.RelaxationsView" ref="_lfh7EeyBEe64Y8ICTnuy_A" closeable="true">
+                <children xsi:type="advanced:Placeholder" xmi:id="_qYDUWvd5Ee6ZA7dsjEUwrw" elementId="ilog.odms.ide.ui.views.EngineLogView" ref="_lfh7EuyBEe64Y8ICTnuy_A" closeable="true">
                   <tags>View</tags>
                   <tags>categoryTag:OPL</tags>
                 </children>
-                <children xsi:type="advanced:Placeholder" xmi:id="_lfk-e-yBEe64Y8ICTnuy_A" elementId="ilog.odms.ide.ui.views.EngineLogView" ref="_lfh7EuyBEe64Y8ICTnuy_A" closeable="true">
+                <children xsi:type="advanced:Placeholder" xmi:id="_qYDUW_d5Ee6ZA7dsjEUwrw" elementId="ilog.odms.ide.ui.views.StatisticsView" ref="_lfh7E-yBEe64Y8ICTnuy_A" closeable="true">
                   <tags>View</tags>
                   <tags>categoryTag:OPL</tags>
                 </children>
-                <children xsi:type="advanced:Placeholder" xmi:id="_lfk-fOyBEe64Y8ICTnuy_A" elementId="ilog.odms.ide.ui.views.StatisticsView" ref="_lfh7E-yBEe64Y8ICTnuy_A" closeable="true">
+                <children xsi:type="advanced:Placeholder" xmi:id="_qYDUXPd5Ee6ZA7dsjEUwrw" elementId="ilog.odms.ide.ui.views.ProfilerView" ref="_lfiiIOyBEe64Y8ICTnuy_A" closeable="true">
                   <tags>View</tags>
                   <tags>categoryTag:OPL</tags>
                 </children>
-                <children xsi:type="advanced:Placeholder" xmi:id="_lfk-feyBEe64Y8ICTnuy_A" elementId="ilog.odms.ide.ui.views.ProfilerView" ref="_lfiiIOyBEe64Y8ICTnuy_A" closeable="true">
-                  <tags>View</tags>
-                  <tags>categoryTag:OPL</tags>
-                </children>
-                <children xsi:type="advanced:Placeholder" xmi:id="_lfk-fuyBEe64Y8ICTnuy_A" elementId="ilog.odms.ide.wml.ui.WmlView" ref="_lfkXUOyBEe64Y8ICTnuy_A" closeable="true">
+                <children xsi:type="advanced:Placeholder" xmi:id="_qYDUXfd5Ee6ZA7dsjEUwrw" elementId="ilog.odms.ide.wml.ui.WmlView" ref="_lfkXUOyBEe64Y8ICTnuy_A" closeable="true">
                   <tags>View</tags>
                   <tags>categoryTag:OPL</tags>
                 </children>
@@ -186,39 +187,15 @@
       <tags>categoryTag:Ayuda</tags>
     </sharedElements>
     <sharedElements xsi:type="advanced:Area" xmi:id="_lfdpoOyBEe64Y8ICTnuy_A" elementId="org.eclipse.ui.editorss" selectedElement="_lfdpoeyBEe64Y8ICTnuy_A">
-      <children xsi:type="basic:PartStack" xmi:id="_lfdpoeyBEe64Y8ICTnuy_A" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_tDjF4PICEe6I5LMKoWsX6Q">
+      <children xsi:type="basic:PartStack" xmi:id="_lfdpoeyBEe64Y8ICTnuy_A" elementId="PartStack@967cd0fb" selectedElement="_hcV9gPd5Ee6ZA7dsjEUwrw">
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
         <tags>active</tags>
-        <children xsi:type="basic:Part" xmi:id="_oMeJkPH_Ee6I5LMKoWsX6Q" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="version1.mod" iconURI="platform:/plugin/ilog.odms.ide.ui/icons/full/obj16/model.png" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;version1.mod&quot; partName=&quot;version1.mod&quot; title=&quot;version1.mod&quot; tooltip=&quot;PrimerProblema/version1.mod&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/PrimerProblema/version1.mod&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;313&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+        <children xsi:type="basic:Part" xmi:id="_hcV9gPd5Ee6ZA7dsjEUwrw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="asd.mod" iconURI="platform:/plugin/ilog.odms.ide.ui/icons/full/obj16/model.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;asd.mod&quot; partName=&quot;asd.mod&quot; title=&quot;asd.mod&quot; tooltip=&quot;asd/asd.mod&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/asd/asd.mod&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;2414&quot; selectionTopPixel=&quot;306&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>removeOnHide</tags>
           <tags>ilog.odms.ide.ui.editors.ModelEditor</tags>
-        </children>
-        <children xsi:type="basic:Part" xmi:id="_VFcjcPIBEe6I5LMKoWsX6Q" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="version2.mod" iconURI="platform:/plugin/ilog.odms.ide.ui/icons/full/obj16/model.png" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;version2.mod&quot; partName=&quot;version2.mod&quot; title=&quot;version2.mod&quot; tooltip=&quot;PrimerProblema/version2.mod&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/PrimerProblema/version2.mod&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;594&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>removeOnHide</tags>
-          <tags>ilog.odms.ide.ui.editors.ModelEditor</tags>
-        </children>
-        <children xsi:type="basic:Part" xmi:id="_FappEPICEe6I5LMKoWsX6Q" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="version3.mod" iconURI="platform:/plugin/ilog.odms.ide.ui/icons/full/obj16/model.png" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;version3.mod&quot; partName=&quot;version3.mod&quot; title=&quot;version3.mod&quot; tooltip=&quot;PrimerProblema/version3.mod&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/PrimerProblema/version3.mod&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;716&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>removeOnHide</tags>
-          <tags>ilog.odms.ide.ui.editors.ModelEditor</tags>
-        </children>
-        <children xsi:type="basic:Part" xmi:id="_pGpLcPICEe6I5LMKoWsX6Q" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="version4.mod" iconURI="platform:/plugin/ilog.odms.ide.ui/icons/full/obj16/model.png" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;ilog.odms.ide.ui.editors.ModelEditor&quot; name=&quot;version4.mod&quot; partName=&quot;version4.mod&quot; title=&quot;version4.mod&quot; tooltip=&quot;PrimerProblema/version4.mod&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/PrimerProblema/version4.mod&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;660&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>removeOnHide</tags>
-          <tags>ilog.odms.ide.ui.editors.ModelEditor</tags>
-        </children>
-        <children xsi:type="basic:Part" xmi:id="_tDjF4PICEe6I5LMKoWsX6Q" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="version4.dat" iconURI="platform:/plugin/ilog.odms.ide.ui/icons/full/obj16/data.png" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;ilog.odms.ide.ui.editors.DataEditor&quot; name=&quot;version4.dat&quot; partName=&quot;version4.dat&quot; title=&quot;version4.dat&quot; tooltip=&quot;PrimerProblema/version4.dat&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/PrimerProblema/version4.dat&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;276&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>removeOnHide</tags>
-          <tags>ilog.odms.ide.ui.editors.DataEditor</tags>
           <tags>active</tags>
           <tags>activeOnClose</tags>
         </children>
@@ -227,7 +204,7 @@
     <sharedElements xsi:type="basic:Part" xmi:id="_lfeQsOyBEe64Y8ICTnuy_A" elementId="ilog.odms.ide.ui.navigator.OplProjectExplorer" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Proyectos OPL" iconURI="platform:/plugin/ilog.odms.ide.ui/icons/full/eview16/oplprojectexplorer.png" tooltip="" closeable="true">
       <persistedState key="originalCompatibilityViewClass" value="ilog.odms.ide.ui.navigator.IloProjectNavigator"/>
       <persistedState key="originalCompatibilityViewBundle" value="ilog.odms.ide.ui"/>
-      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view CommonNavigator.LINKING_ENABLED=&quot;0&quot;>&#xD;&#xA;&lt;expanded>&#xD;&#xA;&lt;element identifier=&quot;=P\rime\rP\roblema&quot;/>&#xD;&#xA;&lt;element identifier=&quot;=P\rime\rP\roblemaRCon\figu\raciones de ejecuci&#xf3;n&quot;/>&#xD;&#xA;&lt;/expanded>&#xD;&#xA;&lt;selection>&#xD;&#xA;&lt;element identifier=&quot;=P\rime\rP\roblemafve\rsion4.dat&quot;/>&#xD;&#xA;&lt;/selection>&#xD;&#xA;&lt;lastRecentlyUsedFilters/>&#xD;&#xA;&lt;/view>"/>
+      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view CommonNavigator.LINKING_ENABLED=&quot;0&quot;>&#xD;&#xA;&lt;expanded>&#xD;&#xA;&lt;element identifier=&quot;=asd&quot;/>&#xD;&#xA;&lt;element identifier=&quot;=asdRCon\figu\raciones de ejecuci&#xf3;n&quot;/>&#xD;&#xA;&lt;element identifier=&quot;=asdRCon\figu\raciones de ejecuci&#xf3;nrCon\figu\racion1&quot;/>&#xD;&#xA;&lt;element identifier=&quot;=p\roblema ve\rdu\ras&quot;/>&#xD;&#xA;&lt;/expanded>&#xD;&#xA;&lt;selection>&#xD;&#xA;&lt;element identifier=&quot;=asdfasd.mod&quot;/>&#xD;&#xA;&lt;/selection>&#xD;&#xA;&lt;lastRecentlyUsedFilters/>&#xD;&#xA;&lt;/view>"/>
       <tags>View</tags>
       <tags>categoryTag:OPL</tags>
       <menus xmi:id="_lhjUUOyBEe64Y8ICTnuy_A" elementId="ilog.odms.ide.ui.navigator.OplProjectExplorer">
@@ -287,7 +264,7 @@
     <sharedElements xsi:type="basic:Part" xmi:id="_lfgF4eyBEe64Y8ICTnuy_A" elementId="org.eclipse.ui.views.ProblemView" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Problemas" iconURI="platform:/plugin/org.eclipse.ui.ide/icons/full/eview16/problems_view.png" tooltip="" closeable="true">
       <persistedState key="originalCompatibilityViewClass" value="org.eclipse.ui.internal.views.markers.ProblemsView"/>
       <persistedState key="originalCompatibilityViewBundle" value="org.eclipse.ui.ide"/>
-      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view PRIMARY_SORT_FIELD=&quot;org.eclipse.ui.ide.severityAndDescriptionField&quot; categoryGroup=&quot;org.eclipse.ui.ide.severity&quot; markerContentGenerator=&quot;org.eclipse.ui.ide.problemsGenerator&quot; partName=&quot;Problemas&quot;>&#xD;&#xA;&lt;expanded>&#xD;&#xA;&lt;category IMemento.internal.id=&quot;Errores&quot;/>&#xD;&#xA;&lt;category IMemento.internal.id=&quot;Avisos&quot;/>&#xD;&#xA;&lt;category IMemento.internal.id=&quot;Avisos (1 elemento)&quot;/>&#xD;&#xA;&lt;/expanded>&#xD;&#xA;&lt;columnWidths org.eclipse.ui.ide.locationField=&quot;153&quot; org.eclipse.ui.ide.markerType=&quot;266&quot; org.eclipse.ui.ide.pathField=&quot;120&quot; org.eclipse.ui.ide.resourceField=&quot;183&quot; org.eclipse.ui.ide.severityAndDescriptionField=&quot;460&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.severityAndDescriptionField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.resourceField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.pathField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.locationField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.markerType&quot;/>&#xD;&#xA;&lt;/view>"/>
+      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view PRIMARY_SORT_FIELD=&quot;org.eclipse.ui.ide.severityAndDescriptionField&quot; categoryGroup=&quot;org.eclipse.ui.ide.severity&quot; markerContentGenerator=&quot;org.eclipse.ui.ide.problemsGenerator&quot; partName=&quot;Problemas&quot;>&#xD;&#xA;&lt;expanded>&#xD;&#xA;&lt;category IMemento.internal.id=&quot;Errores (3 elementos)&quot;/>&#xD;&#xA;&lt;/expanded>&#xD;&#xA;&lt;columnWidths org.eclipse.ui.ide.locationField=&quot;153&quot; org.eclipse.ui.ide.markerType=&quot;266&quot; org.eclipse.ui.ide.pathField=&quot;120&quot; org.eclipse.ui.ide.resourceField=&quot;183&quot; org.eclipse.ui.ide.severityAndDescriptionField=&quot;593&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.severityAndDescriptionField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.resourceField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.pathField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.locationField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.markerType&quot;/>&#xD;&#xA;&lt;/view>"/>
       <tags>View</tags>
       <tags>categoryTag:General</tags>
       <tags>highlighted</tags>
@@ -300,7 +277,7 @@
     <sharedElements xsi:type="basic:Part" xmi:id="_lfhUAOyBEe64Y8ICTnuy_A" elementId="ilog.odms.ide.ui.views.ScriptLogView" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Registro de scripts" iconURI="platform:/plugin/ilog.odms.ide.ui/icons/full/eview16/console.png" tooltip="" closeable="true">
       <persistedState key="originalCompatibilityViewClass" value="ilog.odms.ide.ui.views.consoles.IloScriptLogView"/>
       <persistedState key="originalCompatibilityViewBundle" value="ilog.odms.ide.ui"/>
-      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view sashLeft=&quot;250&quot; sashRight=&quot;750&quot; sashVisible=&quot;false&quot; scrapContents=&quot;&quot;/>"/>
+      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view sashLeft=&quot;250&quot; sashRight=&quot;750&quot; sashVisible=&quot;false&quot; scrapContents=&quot;display sensitivity obj *&amp;#x0D;&amp;#x0A;&quot;/>"/>
       <tags>View</tags>
       <tags>categoryTag:OPL</tags>
       <menus xmi:id="_mB92UPH-Ee6I5LMKoWsX6Q" elementId="ilog.odms.ide.ui.views.ScriptLogView">
@@ -417,8 +394,14 @@
     <sharedElements xsi:type="basic:Part" xmi:id="_lfkXUOyBEe64Y8ICTnuy_A" elementId="ilog.odms.ide.wml.ui.WmlView" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Watson Machine Learning" iconURI="platform:/plugin/ilog.odms.ide.wml.ui/icons/full/obj16/servers.png" tooltip="" closeable="true">
       <persistedState key="originalCompatibilityViewClass" value="ilog.odms.ide.wml.ui.views.WmlView"/>
       <persistedState key="originalCompatibilityViewBundle" value="ilog.odms.ide.wml.ui"/>
+      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view/>"/>
       <tags>View</tags>
       <tags>categoryTag:OPL</tags>
+      <menus xmi:id="_nI20YPd5Ee6ZA7dsjEUwrw" elementId="ilog.odms.ide.wml.ui.WmlView">
+        <tags>ViewMenu</tags>
+        <tags>menuContribution:menu</tags>
+      </menus>
+      <toolbar xmi:id="_nI20Yfd5Ee6ZA7dsjEUwrw" elementId="ilog.odms.ide.wml.ui.WmlView" visible="false"/>
     </sharedElements>
     <trimBars xmi:id="_lSasI-yBEe64Y8ICTnuy_A" elementId="org.eclipse.ui.main.toolbar" contributorURI="platform:/plugin/org.eclipse.ui.workbench">
       <children xsi:type="menu:ToolBar" xmi:id="_lcTA4OyBEe64Y8ICTnuy_A" elementId="group.file" toBeRendered="false">
@@ -468,7 +451,7 @@
         <tags>Draggable</tags>
       </children>
     </trimBars>
-    <trimBars xmi:id="_lSbTMOyBEe64Y8ICTnuy_A" elementId="org.eclipse.ui.trim.vertical2" contributorURI="platform:/plugin/org.eclipse.ui.workbench" side="Right"/>
+    <trimBars xmi:id="_lSbTMOyBEe64Y8ICTnuy_A" elementId="org.eclipse.ui.trim.vertical2" contributorURI="platform:/plugin/org.eclipse.ui.workbench" toBeRendered="false" side="Right"/>
   </children>
   <bindingTables xmi:id="_lSbTMeyBEe64Y8ICTnuy_A" contributorURI="platform:/plugin/org.eclipse.ui.workbench" bindingContext="_lSbTMuyBEe64Y8ICTnuy_A">
     <bindings xmi:id="_lS7piOyBEe64Y8ICTnuy_A" keySequence="CTRL+F10" command="_lStADeyBEe64Y8ICTnuy_A"/>
@@ -1564,7 +1547,7 @@
   <addons xmi:id="_lSbTPuyBEe64Y8ICTnuy_A" elementId="MinMax Addon" contributorURI="platform:/plugin/org.eclipse.ui.workbench" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.MinMaxAddon"/>
   <addons xmi:id="_lSbTP-yBEe64Y8ICTnuy_A" elementId="org.eclipse.ui.workbench.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.workbench" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
   <addons xmi:id="_lSgLsOyBEe64Y8ICTnuy_A" elementId="SplitterAddon" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.splitteraddon.SplitterAddon"/>
-  <addons xmi:id="_IYS0IKimEeS11vbz3f9ezw" elementId="org.eclipse.ui.ide.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
+  <addons xmi:id="_HpQyQfd_Ee6KgtM2JZWMCQ" elementId="org.eclipse.ui.ide.addon.0" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
   <addons xmi:id="_dz0JgGOlEeSMMaPQU2nlzw" elementId="org.eclipse.ui.ide.application.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" contributionURI="bundleclass://org.eclipse.ui.ide.application/org.eclipse.ui.internal.ide.application.addons.ModelCleanupAddon"/>
   <categories xmi:id="_lSrK0OyBEe64Y8ICTnuy_A" elementId="org.eclipse.team.ui.category.team" name="Control de versiones (Colaboraci&#xf3;n)" description="Acciones aplicables cuando se trabaja con un sistema de control de versiones"/>
   <categories xmi:id="_lSrK0eyBEe64Y8ICTnuy_A" elementId="org.eclipse.ui.category.views" name="Vistas" description="Comandos de apertura de vistas"/>

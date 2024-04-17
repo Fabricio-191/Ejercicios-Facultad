@@ -48,23 +48,23 @@ subject to {
 // Performing sensitivity analysis
 execute {
 	if(cplex.getCplexStatus() == 1){
-	  
-		// dual/shadow
-		writeln("precio sombra de C1: ", C1.dual);
-		writeln("precio sombra de C2: ", C2.dual);
-		writeln("precio sombra de C3: ", C3.dual);
-		// slack
-		writeln("slack de C1: ", C1.slack);
-		writeln("slack de C2: ", C2.slack);
-		writeln("slack de C3: ", C3.slack);
+	  	
+	  	writeln("constraints")
+		writeln("        dual    slack     upper bound    lower bound")
+		writeln("C1: ", C1.dual, '  ', C1.slack, '  ', C1.UB, '  ', C1.LB);
+		writeln("C2: ", C2.dual, '  ', C2.slack, '  ', C2.UB, '  ', C2.LB);
+		writeln("C3: ", C3.dual, '  ', C3.slack, '  ', C3.UB, '  ', C3.LB);
 		
+		// for all constraint in the model write the dual value, slack, upper bound and lower bound
+		
+	  	writeln("dvars")
+		writeln("        priority    reduced cost    solution value     upper bound    lower bound")
 		writeln("costos oportunidad de X1: ", acres['Tomates'].reducedCost);
 		writeln("costos oportunidad de X2: ", acres['Pimientos'].reducedCost);
 		writeln("costos oportunidad de X3: ", acres['Espinacas'].reducedCost);
 		
 		writeln("si produzo un acre de tomates el beneficio deberia ser: ", cplex.getObjValue() + acres['Tomates'].reducedCost);
-		writeln("Para producir tomates el precio debe ser superior a: ", ((-1) * (acres['Tomates'].reducedCost - 6)));
+		writeln("Para producir tomates el precio debe ser superior a: ", 6 - acres['Tomates'].reducedCost);
 	}
 }
 
-El front end aqui seria el que se encarga de sacar los datos de todos los inputs y checkboxes y enviarlos al backend, en este caso el backend sera quien realizara los calculos para encontrar la solucion optima y demas. Luego el front end se encarga de mostrar los resultados en la interfaz.

@@ -45,6 +45,13 @@ contar([ [_, E] | COLA], A, B, C) :- cat(E, infantil), contar(COLA, A1, B, C), A
 contar([ [_, E] | COLA], A, B, C) :- cat(E, juvenil),  contar(COLA, A, B1, C), B is B1 + 1.
 contar([ [_, E] | COLA], A, B, C) :- cat(E, mayor),    contar(COLA, A, B, C1), C is C1 + 1.
 
-genera(LISTA, [[infantil, A], [juvenil, B], [mayor, C]]) :- contar(LISTA, A, B, C), !
+genera(LISTA, [[infantil, A], [juvenil, B], [mayor, C]]) :- contar(LISTA, A, B, C), !.
 
-genera([[juana, 13], [ana, 10], [gema, 6]], R).
+contar2([], _, 0).
+contar2([ [_, E] | COLA], Cat, A) :- cat(E, Cat), contar2(COLA, Cat, A1), A is A1 + 1, !.
+contar2([ _ | COLA], Cat, A) :- contar2(COLA, Cat, A).
+
+genera2(LISTA, [[infantil, A], [juvenil, B], [mayor, C]]) :-
+	contar2(LISTA, infantil, A), 
+	contar2(LISTA, juvenil, B), 
+	contar2(LISTA, mayor, C), !.

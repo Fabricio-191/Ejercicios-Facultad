@@ -28,36 +28,43 @@ de tomate, cuál sería la nueva solución óptima.
 5. Determinar a partir de que precio del acre de tomate, combiene comenzar a producir, y cual
 es la solución que arroja al insertar en el modelo dicho precio,
 */
-
 {string} cultivos = {"Tomates", "Pimientos", "Espinacas"};
 int diasHombre[cultivos] = [5, 8, 13];
 int costePreparacion[cultivos] = [12, 18, 14];
 int beneficio[cultivos] = [6, 12, 10];
 
-dvar int+ acres[cultivos];
+dvar float+ acres[cultivos];
+// dvar boolean contratarAyuda;
 
 maximize sum(i in cultivos) beneficio[i] * acres[i];
 
 subject to {
   C1: sum(i in cultivos) diasHombre[i] * acres[i] <= 4000;
   C2: sum(i in cultivos) costePreparacion[i] * acres[i] <= 6000;
-  // C3: acres["Tomates"] >= 200;
-  C4: sum(i in cultivos) acres[i] <= 600;
+  C3: sum(i in cultivos) acres[i] <= 600;
+  // C4: acres["Tomates"] >= 200;
 }
 
 // Performing sensitivity analysis
 execute {
 	if(cplex.getCplexStatus() == 1){
-		for(var i in cultivos){
-			writeln("Coste reducido de ", i, ": ", acres[i].reducedCost);
-		}
+	  
 		// dual/shadow
-		writeln("días hombre: ", C1.dual);
-		writeln("coste de preparación: ", C2.dual);
-		writeln("restricción de acres: ", C4.dual);
+		writeln("precio sombra de C1: ", C1.dual);
+		writeln("precio sombra de C2: ", C2.dual);
+		writeln("precio sombra de C3: ", C3.dual);
 		// slack
-		writeln("días hombre: ", C1.slack);
-		writeln("coste de preparación: ", C2.slack);
-		writeln("restricción de acres: ", C4.slack);
+		writeln("slack de C1: ", C1.slack);
+		writeln("slack de C2: ", C2.slack);
+		writeln("slack de C3: ", C3.slack);
+		
+		writeln("costos oportunidad de X1: ", acres['Tomates'].reducedCost);
+		writeln("costos oportunidad de X2: ", acres['Pimientos'].reducedCost);
+		writeln("costos oportunidad de X3: ", acres['Espinacas'].reducedCost);
+		
+		writeln("si produzo un acre de tomates el beneficio deberia ser: ", cplex.getObjValue() + acres['Tomates'].reducedCost);
+		writeln("Para producir tomates el precio debe ser superior a: ", ((-1) * (acres['Tomates'].reducedCost - 6)));
 	}
 }
+
+El front end aqui seria el que se encarga de sacar los datos de todos los inputs y checkboxes y enviarlos al backend, en este caso el backend sera quien realizara los calculos para encontrar la solucion optima y demas. Luego el front end se encarga de mostrar los resultados en la interfaz.

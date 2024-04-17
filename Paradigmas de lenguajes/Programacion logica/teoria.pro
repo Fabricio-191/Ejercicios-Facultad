@@ -26,7 +26,6 @@ sum([ELEM | COLA], X) :- ELEM >= 0, sum(COLA, A), X is A + ELEM.
 
 
 
-
 % Definir un predicado que ante la consulta:
 % cons(1, [2,3], Z)  ->  Z=[1,2,3]
 

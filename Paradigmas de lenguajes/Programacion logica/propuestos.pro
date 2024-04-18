@@ -55,3 +55,10 @@ genera2(LISTA, [[infantil, A], [juvenil, B], [mayor, C]]) :-
 	contar2(LISTA, infantil, A), 
 	contar2(LISTA, juvenil, B), 
 	contar2(LISTA, mayor, C), !.
+
+
+arma([], []).
+arma([A | Y], [A | Z]) :- arma(Y, Z).
+arma([_ | Y], Z) :- arma(Y, Z).
+
+arma([4, 6, 2], X).

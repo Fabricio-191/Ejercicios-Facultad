@@ -1,0 +1,61 @@
+(defrule Personas
+  =>
+  (printout t "A = 1seg; B = 3seg; C = 6seg; D = 8seg; E = 12seg;" t)
+  (assert (Tiempo 1)
+          (Tiempo 3)
+          (Tiempo 6)
+		  (Tiempo 8)
+		  (Tiempo 12)
+		  (Vuelta 1)
+		  (Vuelta 3)		  
+		  (Posic P)
+		  (Posic S)
+		  (Posic T)
+		  (Posic C)
+	)
+ )
+ 
+(defrule Combinaciones
+  (Posic ?x)
+  (Tiempo ?y)
+  (Tiempo ?Vuelta)
+  (Vuelta ?w)
+  =>
+  (assert (Combina ?x ?y ?Vuelta ?w)))
+
+(defrule Solucion
+ (Combina P ?a ?o ?y)
+ (test(and(> ?a ?o)
+          (eq ?y ?o)
+		  (eq ?a 3)
+		  ))
+ 
+ (Combina S ?b ?p ?w)
+ (test(and(> ?b ?p)
+          (or(eq ?w ?a) (eq ?w ?b)(eq ?w ?p))
+		  ))
+ 
+ (Combina T ?c ?q ?x)
+ (test(and(> ?c ?q)
+          (or(eq ?x ?a) (eq ?x ?b)(eq ?x ?p)(eq ?x ?q))
+		  ))
+ 
+ (Combina C ?d ?r ?z)
+ (test (> ?d ?r))
+ (test (and(eq ?a ?d)(eq ?o ?r)))
+ (test(not (eq ?d ?c ?b)))
+ (test (or(eq ?b 6)(eq ?c 6)(eq ?p 6)(eq ?q 6)))
+ (test (or(eq ?b 12)(eq ?c 12)(eq ?p 12)(eq ?q 12)))
+ (test (or(eq ?p 8)(eq ?q 8)))
+ (test (eq 29 (+ ?a ?b ?c ?d ?y ?w ?x)))
+ =>
+ (printout t "Sumatoria: " (+ ?a ?b ?c ?d ?y ?w ?x) t)
+ (printout t" Solucion:" t)
+ (printout t"  Primero:" ?a " " ?o t)
+ (printout t"      -> VueltauelVueltae: " ?y t)
+ (printout t"   Segundo:" ?b " " ?p t) 
+ (printout t"      -> VueltauelVueltae: " ?w t)
+ (printout t"   Tercero:" ?c " " ?q t)
+ (printout t"      -> VueltauelVueltae: " ?x t)
+ (printout t"   Cuarto:"  ?d " " ?r t) 
+)

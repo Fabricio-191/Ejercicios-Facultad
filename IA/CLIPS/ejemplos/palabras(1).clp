@@ -1,0 +1,60 @@
+(defrule r1
+  (initial-fact)
+  =>
+  (assert (combination S 1))
+  (assert (combination M 9))
+  (assert (combination P 0)))
+
+(defrule startup
+  =>
+  (printout t t "The problem is" t t)
+  (printout t "     NBA" t)
+  (printout t " +  MANU" t)
+  (printout t "   -----" t)
+  (printout t " = SPURS" t t)
+  (assert (number 2)
+          (number 3)
+          (number 4)
+          (number 5)
+          (number 6)
+          (number 7)
+          (number 8)
+          (letter N)
+          (letter B)
+          (letter A)
+          (letter U)
+          (letter R)))
+
+(defrule generate-combinations
+  (number ?x)
+  (letter ?w)
+  =>
+  (assert (combination ?w ?x)))
+
+(defrule find-solution
+  (combination U ?u)
+  (combination A ?a&~?u)
+  (combination S ?s&~?u&~?a)
+  (test (= (mod (+ ?a ?u) 10) ?s))
+  (combination N ?n&~?u&~?s&~?a)
+  (combination R ?r&~?u&~?s&~?n&~?a)
+  (combination B ?b&~?r&~?u&~?s&~?n&~?a)
+  (test (= (mod (+ ?a ?u (* 10 ?b) (* 10 ?n)) 100) (+ (* 10 ?r) ?s)))
+  (combination M ?m&~?b&~?r&~?u&~?s&~?n&~?a)
+  (combination P ?p&~?m&~?b&~?r&~?u&~?s&~?n&~?a)
+  (test (= (+ (* 1000 ?m) (* 100 ?n) (* 100 ?a) (* 10 ?b) (* 10 ?n) ?a ?u) (+ (* 10000 ?s) (* 1000 ?p) (* 100 ?u) (* 10 ?r) ?s)))
+  =>
+  (printout t "A la solucion es:" t t)
+  (printout t "  N = " ?n t)
+  (printout t "  B = " ?b t)
+  (printout t "  A = " ?a t)
+  (printout t "  M = " ?m t)
+  (printout t "  U = " ?u t)
+  (printout t "  S = " ?s t)
+  (printout t "  P = " ?p t)
+  (printout t "  R = " ?r t)
+  (printout t t)
+  (printout t "     " ?n ?b ?a t)
+  (printout t " +  " ?m ?a ?n ?u t) 
+  (printout t "   " "-----" t)
+  (printout t " = " ?s ?p ?u ?r ?s t t)) 

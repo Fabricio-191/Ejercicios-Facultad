@@ -16,6 +16,8 @@ XYZW
  AGUA
 SALUD
 
+//
+
 Suma de 3 numeros con acarreo, 9 + 9 + 9 + 9 = 36, acarreo maximo = 3
 X,Y,X,W = {0, 3}
 
@@ -51,4 +53,5 @@ Z + 3G = L + 10Y
 
 X = S = 1 (X = 1, S = 1)
 Y + 3A = A + 10X
-Y + 2A = 10
+Y + 2A = 10   // {0, 1, 2, 3} {2, 3, 4, 5, 6, 7, 8, 9}
+

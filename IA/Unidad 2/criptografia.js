@@ -4,7 +4,7 @@
 
 function isSolution(A, G, U, S, L, D) {
 	return (new Set([A, G, U, S, L, D])).size === 6 && (
-		A * 3000 + G * 300 + U * 30 + A * 3 === S * 10000 + A * 1000 + L * 100 + U * 10 + D
+		A * 2000 + G * 300 + U * 20 + A * 3 === S * 10000 + L * 100 + D
 	)
 }
 

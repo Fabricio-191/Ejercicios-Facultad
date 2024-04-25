@@ -27,12 +27,12 @@ cónyuges tenían un hijo cada uno antes del matrimonio, Agustín y Santiago res
 
 
 (defrule hermanos "2) Mostrar los nombres de los hermanos hijos del matrimonio y agregar los hechos (hermano <Nombre> <Nombre>) a la MT."
+	(marido-de ?padre1 ?padre2) 
 	(hijx-de ?hijo1 ?padre1)
 	(hijx-de ?hijo2 ?padre1)
 	(hijx-de ?hijo1 ?padre2)
 	(hijx-de ?hijo2 ?padre2)
 	(test (neq ?hijo1 ?hijo2))
-	(test (neq ?padre1 ?padre2))
 	=>
 	(printout t ?hijo1 " y " ?hijo2 " son hermanos y pertenecen al matrimonio" crlf))  
 	(assert (hermano ?hijo1 ?hijo2))

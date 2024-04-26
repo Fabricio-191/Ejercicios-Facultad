@@ -1,17 +1,5 @@
 __pycache__/
-/Paradigmas de lenguajes/POO/Ejercicio 1/nbproject/private/
-/Paradigmas de lenguajes/POO/JavaApplication2/nbproject/private/
-/Paradigmas de lenguajes/POO/Ejercicio 7/nbproject/private/
-/Paradigmas de lenguajes/POO/Ejercicio 1/build/
-/Paradigmas de lenguajes/POO/Ejercicio 4/nbproject/private/
-/Paradigmas de lenguajes/POO/Ejercicio3/nbproject/private/
-/Paradigmas de lenguajes/POO/Ejercicio2/nbproject/private/
-/Paradigmas de lenguajes/POO/Ejercicio 2/nbproject/private/
-/Paradigmas de lenguajes/POO/Ejercicio 3/nbproject/private/
-/Paradigmas de lenguajes/POO/Ejercicio 2/build/
-/Paradigmas de lenguajes/POO/Ejercicio 4/build/
-/Paradigmas de lenguajes/POO/Ejercicio 3/build/
-/Paradigmas de lenguajes/POO/Test/nbproject/private/
-/Paradigmas de lenguajes/POO/Test/build/
-/Paradigmas de lenguajes/POO/Test/dist/
+nbproject/
+build/
+dist/
 .metadata

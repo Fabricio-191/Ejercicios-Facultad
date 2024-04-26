@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Borrar el recurso «PrimerProblema2»." deleteContents="false" description="Borrar el recurso «PrimerProblema2»." element1="/PrimerProblema2" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1712178913596"/>&#x0A;<refactoring comment="Borrar el recurso «PrimerProblema»." deleteContents="true" description="Borrar el recurso «PrimerProblema»." element1="/PrimerProblema" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1712179058346"/>
-</session>

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<section name="Workbench">
-	<section name="IloNewOplProjectWizard">
-		<item key="IloNewOplProjectWizard.STORE_ROOT_DIRECTORY" value="D:\Programacion\Ejercicios-Facultad\Logica y optimizacion aplicadas\CPLEX"/>
-	</section>
-	<section name="IloNewRunConfigWizard">
-		<item key="IloNewRunConfigWizard.STORE_SET_AS_DEFAULT" value="false"/>
-	</section>
-</section>

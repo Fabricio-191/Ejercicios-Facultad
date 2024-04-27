@@ -120,9 +120,7 @@ C = π Cuil σ Codd='D10' PRAC
 
 
 -- 11. Cuil y nombre de las personas que no practican deportes en Ausonia.
-A = π Cuil,Nom,Sexo,Edad,Dir,Tel,Zona σ Nomc='Ausonia' (PERS ⨝ PRAC ⨝ (π Codc,Nomc CLUB))
-
-π Cuil,Nom (PERS - A)
+(π Cuil,Nom PERS ) - π Cuil,Nom (PERS ⨝ PRAC ⨝ (π Codc (σ Nomc='Ausonia' CLUB))
 
 
 -- 12. Cuil de las personas que practican deportes en Ausonia o bien practican en la UVT.

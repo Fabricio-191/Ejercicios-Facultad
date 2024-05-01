@@ -33,23 +33,3 @@
 	(assert (contenido $?contenidos))
 )
 
-(defrule vaciarJarra
-	(numero ?jarra)
-	(contenido $?contenidos)
-	=>
-	(bind ?contenido (nth$ ?jarra ?contenidos))
-	(test (> ?contenido 0))
-	(bind ?contenidos (replace$ ?contenidos ?jarra ?jarra 0))
-	(assert (contenido $?contenidos))
-)
-
-(defrule llenarJarra
-	(numero ?jarra)
-	(contenido $?contenidos)
-	=>
-	(bind ?contenido (nth$ ?jarra ?contenidos))
-	(bind ?capacidad (nth$ ?jarra ?*capacidades*))
-	(test (< ?contenido ?capacidad))
-	(bind ?contenidos (replace$ ?contenidos ?jarra ?jarra ?capacidad))
-	(assert (contenido $?contenidos))
-)

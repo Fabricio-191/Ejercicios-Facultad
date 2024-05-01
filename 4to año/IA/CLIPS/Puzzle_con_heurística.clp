@@ -2,22 +2,24 @@
    (multislot estado) 
    (multislot camino) 
    (slot heuristica) 
-   (slot clase (default abierto)))
+   (slot clase (default abierto))
+)
 
 (defglobal MAIN 
    ?*estado-inicial* = (create$ 1 2 3 4 5 6 7 8 H ) 
    ?*estado-final* = (create$ 4 H 2 3 5 7 8 1 6  )
 )
 
-;HeurÃstica
+;Heurï¿½stica
 (deffunction MAIN::heuristica ($?estado) 
-   (bind ?res 0) 
-   (loop-for-count (?i 1 9) 
-    (if (neq (nth ?i $?estado) (nth ?i ?*estado-final*)) 
-         then (bind ?res (+ ?res 1)) 
-     ) 
-    ) 
-   ?res)
+	(bind ?res 0) 
+	(loop-for-count (?i 1 9) 
+		(if (neq (nth ?i $?estado) (nth ?i ?*estado-final*))
+			then (bind ?res (+ ?res 1))
+		)
+	)
+	?res
+)
 
 
 ;Estado inicial
@@ -104,7 +106,7 @@
 )
 
 
-;SoluciÃ³n (se encuentra al tener la heurÃstica con valor 0)
+;SoluciÃ³n (se encuentra al tener la heurï¿½stica con valor 0)
 (defrule MAIN::encuentra-solucion 
    (declare (auto-focus TRUE)) 
    ?nodo <- (nodo (heuristica 0) 
@@ -116,8 +118,17 @@
 
 
 (defrule MAIN::escribe-solucion 
-   (solucion $?estado) 
-  => 
-   (printout t "Solucion: 4 H 2 3 5 7 8 1 6" crlf)
- (halt) 
+   	(solucion $?estado) 
+  	=> 
+   	(printout t "Solucion: 4 H 2 3 5 7 8 1 6" crlf)
+ 	(halt) 
 ) 
+
+(assert (estado 0 1 2 3))
+
+(defrule asd
+	(estado $?x)
+	=> 
+	(printout t "Hola" crlf)
+	(printout t (nth$ 1 ?x) crlf)
+)

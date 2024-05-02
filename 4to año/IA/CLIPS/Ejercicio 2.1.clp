@@ -6,7 +6,7 @@
 	(numero 4)
 )
 
-(defglobal ?*capacidades* = (create$ 24 13 11 8))
+(defglobal ?*capacidades* = (create$ 24 13 11 5))
 
 (defrule estadoFinal
 	(declare (salience 1000))
@@ -17,6 +17,7 @@
 )
 
 (defrule moverDeJarraEnJarra
+	(declare (salience 10))
 	(numero ?jarraOrigen)
 	(numero ?jarraDestino)
 	(test (neq ?jarraOrigen ?jarraDestino))
@@ -33,23 +34,29 @@
 	(assert (contenido $?contenidos))
 )
 
-(defrule vaciarJarra
-	(numero ?jarra)
-	(contenido $?contenidos)
-	=>
-	(bind ?contenido (nth$ ?jarra ?contenidos))
-	(test (> ?contenido 0))
-	(bind ?contenidos (replace$ ?contenidos ?jarra ?jarra 0))
-	(assert (contenido $?contenidos))
-)
+; (defrule vaciarJarra
+; 	(numero ?jarra)
+; 	(contenido $?contenidos)
+; 	(test (< 0 (nth$ ?jarra ?contenidos)))
+; 	=>
+; 	(bind ?contenidos (replace$ ?contenidos ?jarra ?jarra 0))
+; 	(assert (contenido $?contenidos))
+; )
+; 
+; (defrule llenarJarra
+; 	(numero ?jarra)
+; 	(contenido $?contenidos)
+; 	(test (< (nth$ ?jarra ?contenidos) (nth$ ?jarra ?*capacidades*)))
+; 	=>
+; 	(bind ?capacidad (nth$ ?jarra ?*capacidades*))
+; 	(bind ?contenidos (replace$ ?contenidos ?jarra ?jarra ?capacidad))
+; 	(assert (contenido $?contenidos))
+; )
 
-(defrule llenarJarra
-	(numero ?jarra)
-	(contenido $?contenidos)
-	=>
-	(bind ?contenido (nth$ ?jarra ?contenidos))
-	(bind ?capacidad (nth$ ?jarra ?*capacidades*))
-	(test (< ?contenido ?capacidad))
-	(bind ?contenidos (replace$ ?contenidos ?jarra ?jarra ?capacidad))
-	(assert (contenido $?contenidos))
-)
+; con reglas de llenar y vaciar
+; ==> Activation 1000   estadoFinal: f-1345
+; FIRE 11354 estadoFinal: f-1345
+
+; sin reglas de llenar y vaciar
+; ==> Activation 1000   estadoFinal: f-156
+; FIRE 1106 estadoFinal: f-156

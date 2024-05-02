@@ -84,51 +84,30 @@
 
 
 (defrule MAIN::pasa-el-mejor-a-cerrado 
-   (declare (salience -10)) 
-   ?nodo <- (nodo (clase abierto) 
-                  (heuristica ?h1)) 
-   (not (nodo (clase abierto) 
-              (heuristica ?h2&:(< ?h2 ?h1)))) 
-=> 
-   (modify ?nodo (clase cerrado))
+	(declare (salience -10)) 
+	?nodo <- (nodo (clase abierto) (heuristica ?h1)) 
+	(not (nodo (clase abierto) (heuristica ?h2&:(< ?h2 ?h1)))) 
+	=> 
+	(modify ?nodo (clase cerrado))
 )
 
 
 ;Restricciones 
 (defrule MAIN::repeticiones-de-nodo 
-   (declare (auto-focus TRUE)) 
-   (nodo (estado $?actual) 
-         (camino $?movimientos-1)) 
-   ?nodo <- (nodo (estado $?actual) 
-                  (camino $?movimientos-1 ? $?)) 
- => 
-   (retract ?nodo)
+	(declare (auto-focus TRUE)) 
+	(nodo (estado $?actual) (camino $?movimientos-1)) 
+	?nodo <- (nodo (estado $?actual) (camino $?movimientos-1 ? $?)) 
+	=> 
+	(retract ?nodo)
 )
 
 
 ;Solución (se encuentra al tener la heur�stica con valor 0)
 (defrule MAIN::encuentra-solucion 
-   (declare (auto-focus TRUE)) 
-   ?nodo <- (nodo (heuristica 0) 
-               (camino $?movimientos)) 
- => 
-   (retract ?nodo) 
-   (assert (solucion $?movimientos))
-)
-
-
-(defrule MAIN::escribe-solucion 
-   	(solucion $?estado) 
-  	=> 
-   	(printout t "Solucion: 4 H 2 3 5 7 8 1 6" crlf)
- 	(halt) 
-) 
-
-(assert (estado 0 1 2 3))
-
-(defrule asd
-	(estado $?x)
+	(declare (auto-focus TRUE))
+	?nodo <- (nodo (heuristica 0) (camino $?movimientos)) 
 	=> 
-	(printout t "Hola" crlf)
-	(printout t (nth$ 1 ?x) crlf)
+	(retract ?nodo) 
+	(printout t "Solucion: 4 H 2 3 5 7 8 1 6" crlf)
+	(halt) 
 )

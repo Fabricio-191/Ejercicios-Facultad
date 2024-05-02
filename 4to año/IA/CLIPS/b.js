@@ -52,3 +52,15 @@ function solve2(start, goal, visited) { // breadth first search
 }
 
 console.log(solve2(start, goal, [start]))
+
+/*
+[
+  [ 24, 0, 0, 0 ],
+  [ 13, 0, 11, 0 ],
+  [ 8, 0, 11, 5 ],
+  [ 8, 5, 11, 0 ],
+  [ 8, 13, 3, 0 ],
+  [ 8, 8, 3, 5 ],
+  [ 8, 8, 8, 0 ]
+]
+*/

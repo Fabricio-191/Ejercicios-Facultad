@@ -1,36 +1,22 @@
 (deftemplate jarras
 	(multislot contenido (type INTEGER) (range 0 24) (cardinality 4 4))
 	(slot heuristica (type INTEGER))
-	(slot estado (type SYMBOL) (allowed-values nuevo en_uso usado))
+	(slot estado (type SYMBOL) (allowed-values nuevo en_uso usado no_usar))
 )
 
 (defglobal ?*capacidades* = (create$ 24 13 11 5))
 
+
 (deffunction calcularHeuristica (?contenidos)
-	(+ 	(abs (- (nth$ 1 ?contenidos) 8))
-		(abs (- (nth$ 2 ?contenidos) 8))
-		(abs (- (nth$ 3 ?contenidos) 8))
-		(abs (- (nth$ 4 ?contenidos) 0))
+	(bind ?c1 (- 8 (nth$ 1 ?contenidos)))
+	(bind ?c2 (- 8 (nth$ 2 ?contenidos)))
+	(bind ?c3 (- 8 (nth$ 3 ?contenidos)))
+	(+
+		(if (> ?c1 8) then (* (- ?c1 8) 2) else (- 8 ?c1))
+		(if (> ?c2 8) then (* (- ?c2 8) 2) else (- 8 ?c2))
+		(if (> ?c3 8) then (* (- ?c3 8) 2) else (- 8 ?c3))
 	)
 )
-
-;	(deffunction calcularHeuristica (?contenidos)
-;		(+ 	(abs (- (nth$ 1 ?contenidos) 8))
-;			(abs (- (nth$ 2 ?contenidos) 8))
-;			(abs (- (nth$ 3 ?contenidos) 8))
-;		)
-;	)
-
-;	(deffunction calcularHeuristica (?contenidos)
-;		(bind ?c1 (- 8 (nth$ 1 ?contenidos)))
-;		(bind ?c2 (- 8 (nth$ 2 ?contenidos)))
-;		(bind ?c3 (- 8 (nth$ 3 ?contenidos)))
-;		(+
-;			(if (> ?c1 8) then (* (- ?c1 8) 2) else (- 8 ?c1))
-;			(if (> ?c2 8) then (* (- ?c2 8) 2) else (- 8 ?c2))
-;			(if (> ?c3 8) then (* (- ?c3 8) 2) else (- 8 ?c3))
-;		)
-;	)
 
 
 (defrule inicio
@@ -48,6 +34,14 @@
 	=>
 	(printout t "Estado Final" crlf)
 	(halt)
+)
+
+(defrule eliminarRepetidos
+	(declare (salience 1000))
+	(jarras (contenido $?contenidos) (estado~nuevo))
+	?fact <- (jarras (contenido $?contenidos) (estado nuevo))
+	=>
+	(retract ?fact)
 )
 
 (defrule moverDeJarraEnJarra
@@ -82,17 +76,23 @@
 	?fact <- (jarras (heuristica ?h2) (estado nuevo))
 	(test (< ?h1 ?h2))
 	=>
-	(retract ?fact)
+	(modify ?fact (estado no_usar))
 )
 
 (defrule seleccionarMenorHeuristica
-	(declare (salience -15))
+	(not (jarras (estado en_uso)))
 	?jarras <- (jarras (contenido $?contenidos) (heuristica ?h) (estado nuevo))
 	(not (jarras (heuristica ?h2&:(< ?h2 ?h)) (estado nuevo)))
-	(not (jarras (contenido $?contenidos) (estado usado)))
+	; (not (jarras (contenido $?contenidos) (estado usado)))
 	=>
 	(printout t "Contenido de las jarras: " ?contenidos crlf)
 	(modify ?jarras (estado en_uso))
 )
 
-
+;  24   0   0   0
+;  13   0  11   0
+;   8   0  11   5
+;   8   5  11   0
+;   8  13   3   0
+;   8   8   3   5
+;   8   8   8   0

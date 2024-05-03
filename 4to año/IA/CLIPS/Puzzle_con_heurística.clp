@@ -6,8 +6,8 @@
 )
 
 (defglobal MAIN 
-   ?*estado-inicial* = (create$ 1 2 3 4 5 6 7 8 H ) 
-   ?*estado-final* = (create$ 4 H 2 3 5 7 8 1 6  )
+   ?*estado-inicial* = (create$ 1 2 3 4 5 6 7 8 H) 
+   ?*estado-final*   = (create$ 4 H 2 3 5 7 8 1 6)
 )
 
 ;Heur�stica
@@ -46,40 +46,27 @@
 
 
 (defrule MAIN::abajo 
-   (nodo (estado $?a H ?b ?c ?d  $?e) 
-          (camino $?movimientos) 
-          (clase cerrado)) 
-=> 
-   (bind $?nuevo-estado (create$ $?a ?d ?b ?c H $?e)) 
-   (assert (nodo (estado $?nuevo-estado) 
-                 (camino $?movimientos) 
-                 (heuristica (heuristica $?nuevo-estado))))
+	(nodo (estado $?a H ?b ?c ?d  $?e) 
+			(camino $?movimientos) 
+			(clase cerrado)) 
+	=> 
+	(bind $?nuevo-estado (create$ $?a ?d ?b ?c H $?e)) 
+	(assert (nodo (estado $?nuevo-estado) (camino $?movimientos) (heuristica (heuristica $?nuevo-estado))))
 )
 
-
 (defrule MAIN::derecha 
-   (nodo (estado $?a H ?b 
-                 $?c&:(neq (mod (length $?c) 3) 2)) 
-          (camino $?movimientos) 
-          (clase cerrado)) 
+   (nodo (estado $?a H ?b $?c&:(neq (mod (length $?c) 3) 2)) (camino $?movimientos) (clase cerrado)) 
  => 
    (bind $?nuevo-estado (create$ $?a ?b H $?c)) 
-   (assert (nodo (estado $?nuevo-estado) 
-                 (camino $?movimientos) 
-                 (heuristica (heuristica $?nuevo-estado))))
+   (assert (nodo (estado $?nuevo-estado) (camino $?movimientos) (heuristica (heuristica $?nuevo-estado))))
 )
 
 
 (defrule MAIN::izquierda 
-   (nodo (estado $?a&:(neq (mod (length $?a) 3) 2) 
-                   ?b H $?c) 
-          (camino $?movimientos) 
-          (clase cerrado)) 
+   (nodo (estado $?a&:(neq (mod (length $?a) 3) 2) ?b H $?c) (camino $?movimientos) (clase cerrado))
 => 
    (bind $?nuevo-estado (create$ $?a H ?b $?c)) 
-   (assert (nodo (estado $?nuevo-estado) 
-                 (camino $?movimientos) 
-                 (heuristica (heuristica $?nuevo-estado))))
+   (assert (nodo (estado $?nuevo-estado) (camino $?movimientos) (heuristica (heuristica $?nuevo-estado))))
 )
 
 

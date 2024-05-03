@@ -41,22 +41,19 @@
 )
 
 (defrule moverDeJarraEnJarra
-	(numero ?jarraOrigen)
-	(numero ?jarraDestino)
-	(test (neq ?jarraOrigen ?jarraDestino))
+	(numero ?origen)
+	(numero ?destino)
+	(test (neq ?origen ?destino))
 	(jarras (contenido $?contenidos) (heuristica ?heu))
 	(not (jarras (heuristica ?h2&:(< ?h2 ?heu))))
 	=>
-	(bind ?contenidoOrigen (nth$ ?jarraOrigen ?contenidos))
-	(bind ?capacidadDestino (nth$ ?jarraDestino ?*capacidades*))
-	(bind ?contenidoDestino (nth$ ?jarraDestino ?contenidos))
-	(bind ?litros (min ?contenidoOrigen (- ?capacidadDestino ?contenidoDestino)))
-	(bind ?contenidos (replace$ ?contenidos ?jarraOrigen ?jarraOrigen (- ?contenidoOrigen ?litros)))
-	(bind ?contenidos (replace$ ?contenidos ?jarraDestino ?jarraDestino (+ ?contenidoDestino ?litros)))
-	(assert (jarras
-		(contenido ?contenidos)
-		(heuristica (calcularHeuristica ?contenidos))
-	))
+	(bind ?conOrigen (nth$ ?origen ?contenidos))
+	(bind ?capDestino (nth$ ?destino ?*capacidades*))
+	(bind ?conDestino (nth$ ?destino ?contenidos))
+	(bind ?litros (min ?conOrigen (- ?capDestino ?conDestino)))
+	(bind ?contenidos (replace$ ?contenidos ?origen  ?origen  (- ?conOrigen  ?litros)))
+	(bind ?contenidos (replace$ ?contenidos ?destino ?destino (+ ?conDestino ?litros)))
+	(assert (jarras (contenido ?contenidos) (heuristica (calcularHeuristica ?contenidos)) ))
 )
 
 (defrule eliminarEstadosSinSalida
@@ -68,10 +65,10 @@
 	(assert (estadoSinSalida ?contenido))
 )
 
-; 24 0 0 0
-; 13 0 11 0
-; 8 0 11 5
-; 8 5 11 0
-; 8 13 3 0
-; 8 8 3 5
-; 8 8 8 0
+;  24  0   0   0
+;  13  0   11  0
+;  8   0   11  5
+;  8   5   11  0
+;  8   13  3   0
+;  8   8   3   5
+;  8   8   8   0

@@ -49,13 +49,9 @@
 	(movimiento ?diff)
 	(estado (contenido $?contenidos) (heuristica ?heu))
 	(not (estado (heuristica ?h2&:(< ?h2 ?heu))))
+	
 	=>
-	(bind ?contenidoOrigen (nth$ ?jarraOrigen ?contenidos))
-	(bind ?capacidadDestino (nth$ ?jarraDestino ?*capacidades*))
-	(bind ?contenidoDestino (nth$ ?jarraDestino ?contenidos))
-	(bind ?litros (min ?contenidoOrigen (- ?capacidadDestino ?contenidoDestino)))
-	(bind ?contenidos (replace$ ?contenidos ?jarraOrigen ?jarraOrigen (- ?contenidoOrigen ?litros)))
-	(bind ?contenidos (replace$ ?contenidos ?jarraDestino ?jarraDestino (+ ?contenidoDestino ?litros)))
+	
 	(assert (estado
 		(contenido ?contenidos)
 		(heuristica (calcularHeuristica ?contenidos))

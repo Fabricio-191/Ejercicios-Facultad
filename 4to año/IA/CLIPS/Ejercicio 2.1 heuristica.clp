@@ -46,6 +46,7 @@
 	(test (neq ?origen ?destino))
 	(jarras (contenido $?contenidos) (heuristica ?heu))
 	(not (jarras (heuristica ?h2&:(< ?h2 ?heu))))
+	(not (estadoSinSalida ?contenido))
 	=>
 	(bind ?conOrigen (nth$ ?origen ?contenidos))
 	(bind ?capDestino (nth$ ?destino ?*capacidades*))

@@ -16,24 +16,8 @@ function moveWater(jars, i, j) {
 	return jars;
 }
 
-function solve1(start, goal, visited) { // deep first search
-	if(start.join('') == goal.join('')) return visited;
-
-	for(let i = 0; i < capacities.length; i++) {
-		for(let j = 0; j < capacities.length; j++) {
-			if(i != j) {
-				const next = moveWater(start, i, j);
-				if(!visited.some(v => v.join('') == next.join(''))) {
-					const solution = solve(next, goal, [...visited, next]);
-					if(solution) return solution;
-				}
-			}
-		}
-	}
-}
-
 let i = 0;
-function solve2(start, goal, visited) { // breadth first search
+function solve(start, goal, visited) { // breadth first search
 	const queue = [[start, visited]];
 	while(queue.length) {
 		const [current, visited] = queue.shift();
@@ -55,7 +39,7 @@ function solve2(start, goal, visited) { // breadth first search
 	}
 }
 
-console.log(solve2(start, goal, [start]))
+console.log(solve(start, goal, [start]))
 
 /*
 [

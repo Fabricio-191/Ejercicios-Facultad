@@ -1,3 +1,4 @@
+% ruta(X, Y).: Define las conexiones directas entre puntos X e Y.
 ruta(a, b).
 ruta(a, c).
 ruta(b, f).
@@ -49,12 +50,12 @@ ruta(q, k).
 ruta(r, o).
 ruta(r, q).
 
-camino(A, A, _, []).
-camino(A, B, Visited, [C|D]) :- ruta(A, C), not(member(C, Visited)), camino(C, B, [C|Visited], D).
-camino(A, B, [A|X]) :- camino(A, B, [A], X).
+camino(A, A, _, []). % Define el caso base de la recursión. Cuando el punto de partida y el punto de llegada son el mismo, el camino es una lista vacía.
+camino(A, B, Visited, [C|D]) :- ruta(A, C), not(member(C, Visited)), camino(C, B, [C|Visited], D). % Esta regla define el caso recursivo para encontrar un camino. Busca todos los puntos C conectados a A (que podrían ser B o acercarnos a él), y llama a camino(C, B, [C|Visited], D) para encontrar un camino desde C a B. La lista Visited se utiliza para evitar ciclos en el grafo.
+camino(A, B, [A|X]) :- camino(A, B, [A], X). % Esta regla proporciona una interfaz simple para la consulta. Es decir, permite llamar a camino(A, B, Visited, [C|D]) (la regla anterior) sin especificar la lista de nodos visitados inicialmente.
 
 
-camino(a, r, X). % consulta
+camino(a, r, X). % consulta: busca un camino desde el punto a al punto r, y devuelve el camino en la variable X.
 
 % X = [a, b, f, g, h, i, j, m, n, o, r]
 % X = [a, b, f, g, h, i, j, m, n, o, k, q, r]
@@ -116,3 +117,5 @@ camino(a, r, X). % consulta
 % X = [a, c, d, b, f, k, h, g, i, j, m, n, p, r]
 % X = [a, c, d, b, f, k, h, g, i, l, n, o, r]
 % X = [a, c, d, b, f, k, h, g, i, l, n, p, r]
+
+% en caso de querer ejecutarlo uno mismo https://swish.swi-prolog.org/

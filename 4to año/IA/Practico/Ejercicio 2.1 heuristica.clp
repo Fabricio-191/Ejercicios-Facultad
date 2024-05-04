@@ -13,9 +13,9 @@
 		(nth$ 4 ?contenidos)
 	)
 	; (+
-	; (if (> ?c1 8) then (* (- ?c1 8) 2) else (- 8 ?c1))
-	; (if (> ?c2 8) then (* (- ?c2 8) 2) else (- 8 ?c2))
-	; (if (> ?c3 8) then (* (- ?c3 8) 2) else (- 8 ?c3))
+	; 	(if (> ?c1 8) then (* (- ?c1 8) 2) else (- 8 ?c1))
+	; 	(if (> ?c2 8) then (* (- ?c2 8) 2) else (- 8 ?c2))
+	; 	(if (> ?c3 8) then (* (- ?c3 8) 2) else (- 8 ?c3))
 	; )
 )
 

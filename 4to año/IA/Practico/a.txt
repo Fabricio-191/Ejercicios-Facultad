@@ -1,0 +1,16 @@
+Regla 1:  [Mover contenido de 1 a 2] = [A, B, C, D] / A > 0, B < 13, Z = min {A, 13 - B} --> [A - Z, B + Z, C, D]
+Regla 2:  [Mover contenido de 1 a 3] = [A, B, C, D] / A > 0, C < 11, Z = min {A, 11 - C} --> [A - Z, B, C + Z, D]
+Regla 3:  [Mover contenido de 1 a 4] = [A, B, C, D] / A > 0, D < 5 , Z = min {A, 5  - D} --> [A - Z, B, C, D + Z]
+
+Regla 4:  [Mover contenido de 2 a 1] = [A, B, C, D] / B > 0, A < 24, Z = min {B, 24 - A} --> [B + Z, B - Z, C, D]
+Regla 5:  [Mover contenido de 2 a 3] = [A, B, C, D] / B > 0, C < 11, Z = min {B, 11 - C} --> [A, B - Z, C + Z, D]
+Regla 6:  [Mover contenido de 2 a 4] = [A, B, C, D] / B > 0, D < 5 , Z = min {B, 5  - D} --> [A, B - Z, C, D + Z]
+
+Regla 7:  [Mover contenido de 3 a 1] = [A, B, C, D] / C > 0, A < 24, Z = min {C, 24 - A} --> [A + Z, B, C - Z, D]
+Regla 8:  [Mover contenido de 3 a 2] = [A, B, C, D] / C > 0, B < 13, Z = min {C, 13 - B} --> [A, B + Z, C - Z, D]
+Regla 9:  [Mover contenido de 3 a 4] = [A, B, C, D] / C > 0, D < 5 , Z = min {C, 5  - D} --> [A, B, C - Z, D + Z]
+
+Regla 10: [Mover contenido de 4 a 1] = [A, B, C, D] / D > 0, A < 24, Z = min {D, 24 - A} --> [A + Z, B, C, D - Z]
+Regla 11: [Mover contenido de 4 a 2] = [A, B, C, D] / D > 0, B < 13, Z = min {D, 13 - B} --> [A, B + Z, C, D - Z]
+Regla 12: [Mover contenido de 4 a 3] = [A, B, C, D] / D > 0, C < 11, Z = min {D, 11 - C} --> [A, B, C + Z, D - Z]
+       

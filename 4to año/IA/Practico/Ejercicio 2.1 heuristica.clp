@@ -6,15 +6,11 @@
 (defglobal ?*capacidades* = (create$ 24 13 11 5))
 
 (deffunction calcularHeuristica (?contenidos)
-	(bind ?c1 (nth$ 1 ?contenidos))
-	(bind ?c2 (nth$ 2 ?contenidos))
-	(bind ?c3 (nth$ 3 ?contenidos))
-	(bind ?c4 (nth$ 4 ?contenidos))
 	(+
-		(abs (- 8 ?c1))
-		(abs (- 8 ?c2))
-		(abs (- 8 ?c3))
-		?c4
+		(abs (- 8 (nth$ 1 ?contenidos)))
+		(abs (- 8 (nth$ 2 ?contenidos)))
+		(abs (- 8 (nth$ 3 ?contenidos)))
+		(nth$ 4 ?contenidos)
 	)
 	; (+
 	; (if (> ?c1 8) then (* (- ?c1 8) 2) else (- 8 ?c1))

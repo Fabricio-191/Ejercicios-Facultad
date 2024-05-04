@@ -5,9 +5,24 @@
 )
 
 (defglobal MAIN 
-   ?*estadoFinal* = (create$ 0 14 13 3 11 5 6 8 7 9 10 4 12 2 1 15) 
    ?*estadoInicial*   = (create$ 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15)
+   ?*estadoFinal* = (create$ 0 14 13 3 11 5 6 8 7 9 10 4 12 2 1 15) 
 )
+
+; 1  2  3  4
+; 5  6  7  8
+; 9 10 11 12
+;13 14 15 16
+
+; (deffunction heuristica ($?estado) 
+; 	(bind ?res 0) 
+; 	(loop-for-count (?i 1 16) 
+; 		(if (neq (nth ?i $?estado) (nth ?i ?*estadoFinal*))
+; 			then (bind ?res (+ ?res 1))
+; 		)
+; 	)
+; 	?res
+; )
 
 (deffunction heuristica ($?estado)
 	(bind ?res 0)
@@ -16,8 +31,17 @@
 			then (bind ?res (+ ?res 1))
 		)
 	)
+	; if last row is incorrect
+	(if (neq (subseq$ $?estado 13 16) (create$ 12 2 1 15)) then
+		(bind ?res (+ ?res 1000))
+	)
+	; if third row is incorrect
+
 	?res
 )
+
+
+
 
 ;Estado inicial
 (defrule inicial 
@@ -68,6 +92,7 @@
 	=> 
 	(modify ?nodo (clase cerrado))
 )
+
 
 ;Solución (se encuentra al tener la heur�stica con valor 0)
 (defrule encuentra-solucion 

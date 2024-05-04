@@ -5,8 +5,8 @@
 )
 
 (defglobal MAIN 
-   ?*estadoFinal* = (create$ 0 14 13 3 11 5 6 8 7 9 10 4 12 2 1 15) 
-   ?*estadoInicial*   = (create$ 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15)
+   ?*estadoInicial* = (create$ 0  1  2 3  4 5 6 7 8 9 10 11 12 13 14 15)
+   ?*estadoFinal*   = (create$ 0 14 13 3 11 5 6 8 7 9 10  4 12  2  1 15) 
 )
 
 (deffunction heuristica ($?estado)
@@ -16,19 +16,31 @@
 			then (bind ?res (+ ?res 1))
 		)
 	)
+	(if (neq (subseq$ $?estado 13 16) (create$ 12 2 1 15))
+		then (bind ?res (+ ?res 1000))
+	) 
 	?res
 )
 
-;Estado inicial
-(defrule inicial 
+
+(defrule inicio
 	=> 
 	(assert (nodo
 		(estado ?*estadoInicial*) 
 		(heuristica (heuristica ?*estadoInicial*)) 
 		(clase cerrado)
 	))
+	; (podrian declararse como hechos pero al hacerlo como regla no hace falta usar reset al comenzar)
 )
 
+
+(defrule final 
+	(declare (salience 10000))
+	(nodo (estado 0 14 13 3 11 5 6 8 7 9 10 4 12 2 1 15) (heuristica 0))
+	=>
+	(printout t "Se encontro la solucion" crlf)
+	(halt) 
+)
 
 ;Movimientos del espacio blanco
 (defrule arriba 
@@ -37,7 +49,6 @@
 	(bind $?nuevo-estado (create$  $?a 0 ?c ?d ?e ?b $?f)) 
 	(assert (nodo (estado $?nuevo-estado) (heuristica (heuristica $?nuevo-estado))))
 )
-
 
 (defrule abajo 
 	(nodo (estado $?a 0 ?b ?c ?d ?e $?f) (clase cerrado)) 
@@ -60,20 +71,10 @@
 	(assert (nodo (estado $?nuevo-estado) (heuristica (heuristica $?nuevo-estado))))
 )
 
-
-(defrule pasa-el-mejor-a-cerrado 
+(defrule cerrarMejorNodo
 	(declare (salience -10)) 
 	?nodo <- (nodo (clase abierto) (heuristica ?h1)) 
 	(not (nodo (clase abierto) (heuristica ?h2&:(< ?h2 ?h1)))) 
 	=> 
 	(modify ?nodo (clase cerrado))
-)
-
-;Solución (se encuentra al tener la heur�stica con valor 0)
-(defrule encuentra-solucion 
-	(declare (auto-focus TRUE))
-	?nodo <- (nodo (heuristica 0) (estado 0 14 13 3 11 5 6 8 7 9 10 4 12 2 1 15))
-	=>
-	(printout t "Se encontro la solucion" ?*estadoFinal* crlf)
-	(halt) 
 )

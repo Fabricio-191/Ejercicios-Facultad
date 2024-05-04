@@ -32,11 +32,15 @@ function solve1(start, goal, visited) { // deep first search
 	}
 }
 
+let i = 0;
 function solve2(start, goal, visited) { // breadth first search
 	const queue = [[start, visited]];
 	while(queue.length) {
 		const [current, visited] = queue.shift();
-		if(current.join('') == goal.join('')) return visited;
+		if(current.join('') == goal.join('')){
+			console.log(visited.map(x => x.join(' ')).join(' - '))
+			if(i++ > 10) return;
+		};
 
 		for(let i = 0; i < capacities.length; i++) {
 			for(let j = 0; j < capacities.length; j++) {

@@ -18,9 +18,10 @@ SALUD
 
 //
 
-Suma de 3 numeros con acarreo, 9 + 9 + 9 + 9 = 36, acarreo maximo = 3
+Suma de 3 numeros con acarreo, acarreo maximo = 2
 X,Y,X,W = {0, 3}
 
+3 * (A * 1000 + G * 300 + U * 30 + A) = S * 10000 + A * 1000 + L * 100 + U * 10 + D
 A * 3000 + G * 300 + U * 30 + A * 3 = S * 10000 + A * 1000 + L * 100 + U * 10 + D
 A * 2000 + G * 300 + U * 20 + A * 3 = S * 10000 + L * 100 + D
 

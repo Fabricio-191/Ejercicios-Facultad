@@ -10,3 +10,13 @@ y los anunciantes 6 minutos de publicidad, ¿Cuántas veces deberá aparecer cad
 con objeto de captar el máximo número de espectadores?
  
  *********************************************/
+
+dvar float+ x1;
+dvar float+ x2;
+
+maximize 30000*x1 + 10000*x2;
+
+subject to {
+  	20*x1 + 10*x2 <= 80;
+  	x1 + x2 <= 6;
+}

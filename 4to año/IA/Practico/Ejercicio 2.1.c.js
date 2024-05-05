@@ -39,7 +39,26 @@ function solve(start, goal, visited) { // breadth first search
 	}
 }
 
-console.log(solve(start, goal, [start]))
+function solve2(start, goal, visited) { // depth first search (avoiding repeated states)
+	if(start.join('') == goal.join('')) {
+		console.log(visited.map(x => x.join(' ')).join(' - '))
+		return true;
+	}
+
+	for(let i = 0; i < capacities.length; i++) {
+		for(let j = 0; j < capacities.length; j++) {
+			if(i != j) {
+				const next = moveWater(start, i, j);
+				if(!visited.some(v => v.join('') == next.join(''))) {
+					if(solve2(next, goal, [...visited, next])) return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+
+console.log(solve2(start, goal, [start]))
 
 /*
 [

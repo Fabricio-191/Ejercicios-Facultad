@@ -6,8 +6,6 @@
 ; A * 3000 + G * 300 + U * 30 + A * 3 = S * 10000 + A * 1000 + L * 100 + U * 10 + D
 ; A, G, U, S, L, D
 
-; A * 3000 + G * 300 + U * 30 + A * 3 = S * 10000 + A * 1000 + L * 100 + U * 10 + D
-
 (deffunction distintos (?a ?b ?c ?d ?e ?f)
  	; check all numbers are different
 	(and
@@ -42,12 +40,6 @@
 	(test (distintos ?a ?g ?u ?s ?l ?d))
 	(test (eq (+ (* ?a 3000) (* ?g 300) (* ?u 30) (* ?a 3)) (+ (* ?s 10000) (* ?a 1000) (* ?l 100) (* ?u 10) ?d)))
 	=>
-	(printout t "Solucion: " crlf)
-	(printout t "A = " ?a crlf)
-	(printout t "G = " ?g crlf)
-	(printout t "U = " ?u crlf)
-	(printout t "S = " ?s crlf)
-	(printout t "L = " ?l crlf)
-	(printout t "D = " ?d crlf)
+	(printout t "Solucion: A = " ?a ", G = " ?g ", U = " ?u ", S = " ?s ", L = " ?l ", D = " ?d crlf)
 	(assert (solucion ?a ?g ?u ?s ?l ?d))
 )

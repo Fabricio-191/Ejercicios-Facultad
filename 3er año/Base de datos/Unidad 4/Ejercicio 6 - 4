@@ -53,7 +53,6 @@ G ⨝ TRABTECHINT
 -- 8. Geólogos (todos los datos) argentinos y/o chilenos que trabajaron únicamente en proyectos de la empresa “Techint”.
 A = π cuil (TRA ⨝ (π cod (PROY ⨝ (σ nombre≠'Techint' EMP))))
 ARGCH = π cuil (σ pais='argentina' or pais='chile' GEO)
-GEONOTECHINT = π cuil (GEO ⨝ A)
 
-(ARGCH ∩ GEONOTECHINT) ⨝ GEO
+(ARGCH - A) ⨝ GEO
 

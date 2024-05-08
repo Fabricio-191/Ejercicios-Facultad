@@ -53,7 +53,7 @@ B = (ρ cuil ← Cuil1 (π Cuil1 A)) ∪ (ρ cuil ← Cuil2 (π Cuil2 A))
 
 
 -- 3. Cuentas corrientes que nunca generaron saldos negativos.
- = π NroCuenta (σ (Saldo < 0) TRANSAC)
+A = π NroCuenta (σ (Saldo < 0) TRANSAC)
 CCTES - CCTES ⨝ (ρ Nro ← NroCuenta A)
 
 

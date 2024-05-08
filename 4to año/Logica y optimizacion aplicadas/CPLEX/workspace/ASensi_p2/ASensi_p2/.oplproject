@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ASCII"?><project>
+    	
+    <version>1.0</version>
+    	
+    <configs>
+        		
+        <config default="true" name="Config1" category="opl">
+            			
+            <ref name="val.ops" type="setting">
+			</ref>
+            			
+            <ref name="ASensi_p2.mod" type="model">
+			</ref>
+            		
+        </config>
+        		
+        <config default="false" name="config2" category="opl">
+            			
+            <ref name="ASensi_p2.mod" type="model">
+			</ref>
+            			
+            <ref name="val.ops" type="setting">
+			</ref>
+            		
+        </config>
+        	
+    </configs>
+    	
+
+</project>

@@ -4,34 +4,51 @@
  * Creation Date: 16 abr. 2024 at 22:36:27
  
  
- Una fábrica de automóviles produce dos modelos de coches: económico (Modelo E) y de lujo (Modelo L).
- La producción de cada uno de estos modelos está limitada por tres factores principales: 
- horas de trabajo, componentes plasticos, componentes metalicos,componentes electronicos  y capacidad de la línea de montaje.
+ Una fï¿½brica de automï¿½viles produce dos modelos de coches: econï¿½mico (Modelo E) y de lujo (Modelo L).
+ La producciï¿½n de cada uno de estos modelos estï¿½ limitada por tres factores principales: 
+ horas de trabajo, componentes plasticos, componentes metalicos,componentes electronicos  y capacidad de la lï¿½nea de montaje.
  Las  tablas a continuacion establece los requerimientos de recurso de cada modelo y la disponibilidad de cada uno de ellos
  +---------------------------------+---------------------+---------------------+
-| Descripción                     | Modelo E (Unidades) | Modelo L (Unidades) |
+| Descripciï¿½n                     | Modelo E (Unidades) | Modelo L (Unidades) |
 +---------------------------------+---------------------+---------------------+
 | Horas de Trabajo Necesarias     | 10 horas            | 20 horas            |
-| Componentes Plásticos           | 3 unidades          | 6 unidades          |
-| Componentes Metálicos           | 7 unidades          | 14 unidades         |
-| Componentes Electrónicos        | 2 unidades          | 4 unidades          |
+| Componentes Plï¿½sticos           | 3 unidades          | 6 unidades          |
+| Componentes Metï¿½licos           | 7 unidades          | 14 unidades         |
+| Componentes Electrï¿½nicos        | 2 unidades          | 4 unidades          |
 +---------------------------------+---------------------+---------------------+
 La disponibilidad de recursos
 +----------------------------------+---------------------+
 | Recurso                          | Disponibilidad      |
 +----------------------------------+---------------------+
 | Horas de Trabajo                 | 800 horas           |
-| Componentes Plásticos            | 240 unidades        |
-| Componentes Metálicos            | 560 unidades        |
-| Componentes Electrónicos         | 160 unidades        |
-| Capacidad de Producción Total    | 60 autos            |
+| Componentes Plï¿½sticos            | 240 unidades        |
+| Componentes Metï¿½licos            | 560 unidades        |
+| Componentes Electrï¿½nicos         | 160 unidades        |
+| Capacidad de Producciï¿½n Total    | 60 autos            |
 +----------------------------------+---------------------+
 
  El modelo E es vendido  en $3000, mientras que el modelo L tiene un costo de $5000.
  Se desea conocer la cantidad optima de autos modelo E y modelo L que maximize los beneficios
  Ademas basados en esta solucion optima, se pide
-   1- ¿Cómo afectaría a la solución óptima un aumento del 10% en las horas de trabajo disponibles?
-   2- Si el costo de los componentes plasticos aumenta en un 20%, ¿cómo afectaría esto a las ganancias totales bajo la solución actual?
-   3- ¿Cuál es el rango de variabilidad en el precio de venta del Modelo L para que siga siendo rentable mantener la producción actual?
+   1- ï¿½Cï¿½mo afectarï¿½a a la soluciï¿½n ï¿½ptima un aumento del 10% en las horas de trabajo disponibles?
+   2- Si el costo de los componentes plasticos (20$) aumenta en un 20%, ï¿½cï¿½mo afectarï¿½a esto a las ganancias totales bajo la soluciï¿½n actual?
+   3- ï¿½Cuï¿½l es el rango de variabilidad en el precio de venta del Modelo L para que siga siendo rentable mantener la producciï¿½n actual?
    */
- 
+
+dvar int+ modeloE;
+dvar int+ modeloL;
+
+maximize modeloE * 3000 + modeloL * 5000;
+
+subject to {
+	C1: modeloE * 10 + modeloL * 20 <= 800; // 800 - 880
+	C2: modeloE * 3  + modeloL * 6  <= 240;
+	C3: modeloE * 7  + modeloL * 14 <= 560;
+	C4: modeloE * 2  + modeloL * 4  <= 160;
+	C5: modeloE      + modeloL       <= 60;  
+};
+
+// modeloE = 40; modeloL = 20;   220000
+// sale igual por que el limite superior de las horas es infinito
+// las ganancias se reducen 960$ 
+// entre 3000 (180000) y 6000 (240000)

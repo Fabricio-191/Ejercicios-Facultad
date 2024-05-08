@@ -18,7 +18,7 @@ tuple Demanda {
 	<"amoniaco", 40>,
 	<"cloruro_amonico", 50>
 };
- 
+
 {Componente} Componentes = {
 	<"nitrogeno", 50>,
 	<"hidrogeno", 180>,

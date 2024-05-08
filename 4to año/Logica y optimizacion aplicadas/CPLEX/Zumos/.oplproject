@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ASCII"?><project>
+    	
+    <version>1.0</version>
+    	
+    <configs>
+        		
+        <config default="true" name="Config1" category="opl">
+            			
+            <ref name="Zumos.mod" type="model">
+			</ref>
+            			
+            <ref name="Valores.ops" type="setting">
+			</ref>
+            		
+        </config>
+        		
+        <config default="false" name="Config2" category="opl">
+            			
+            <ref name="Zumos2.mod" type="model">
+			</ref>
+            		
+        </config>
+        		
+        <config default="false" name="Config3" category="opl">
+            			
+            <ref name="Zumos3.mod" type="model">
+			</ref>
+            			
+            <ref name="Datos.dat" type="data">
+			</ref>
+            		
+        </config>
+        	
+    </configs>
+    	
+
+</project>

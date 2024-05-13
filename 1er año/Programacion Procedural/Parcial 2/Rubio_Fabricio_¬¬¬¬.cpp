@@ -7,6 +7,7 @@ c) Cambiar la carrera de un alumno cuyo nombre se ingresa por teclado
 d) generar a partir de la lista un arreglo que contenga para cada carrera su nombre y la cantidad de mujeres y varones. Mostrar la informacion almacenada en el arreglo
 */
 
+
 #include <stdio.h>
 #include <string.h>
 #include <malloc.h>
@@ -24,6 +25,7 @@ typedef struct{
 } carrera;
 
 char* nomCarreras[3] = { "LCC", "LSI", "TUPW" };
+
 
 alumno_t carga(){
 	int nRoReg;

@@ -42,41 +42,24 @@ function delta(i, j){
 	return acc;
 }
 
-function iter(cb, cant = 1){
-	for(let c = 0; c < cant; c++){
-		for(let i = 0; i < n; i++){
-			for(let j = 0; j < n; j++){
-				cb(i, j);
-			}
+function iter(cb){
+	for(let i = 0; i < n; i++){
+		for(let j = 0; j < n; j++){
+			cb(i, j);
 		}
 	}
 }
 
-iter((i, j) => {
-	const anterior = matrizFeromonas[i][j];
-	const nuevo = (1 - RHO) * anterior + delta(i, j);
-	matrizFeromonas[i][j] = nuevo;
-});
-
-console.log(matrizFeromonas.map(x => x.map(x => x.toFixed(3)).join(' ')).join('\n'));
-
-iter((i, j) => {
-	const anterior = matrizFeromonas[i][j];
-	const nuevo = (1 - RHO) * anterior + delta(i, j);
-	matrizFeromonas[i][j] = nuevo;
-});
-
-console.log()
-console.log(matrizFeromonas.map(x => x.map(x => x.toFixed(3)).join(' ')).join('\n'));
-
-iter((i, j) => {
-	const anterior = matrizFeromonas[i][j];
-	const nuevo = (1 - RHO) * anterior + delta(i, j);
-	matrizFeromonas[i][j] = nuevo;
-});
-
-console.log()
-console.log(matrizFeromonas.map(x => x.map(x => x.toFixed(3)).join(' ')).join('\n'));
+for(let i = 0; i < 3; i++){
+	iter((i, j) => {
+		const anterior = matrizFeromonas[i][j];
+		const nuevo = (1 - RHO) * anterior + delta(i, j);
+		matrizFeromonas[i][j] = nuevo;
+	});
+	
+	console.log()
+	console.log(matrizFeromonas.map(x => x.map(x => x.toFixed(3)).join(' ')).join('\n'));
+}
 
 /*
 0.000 0.388 0.300 0.338 0.398 0.348

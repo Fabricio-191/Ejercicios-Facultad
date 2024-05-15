@@ -45,3 +45,20 @@ enlace2 lista1 lote = [[x !! 0, (head [(y !! 1) | y <- lote, (y !! 0) == (x !! 1
 enlace3 [] lote = []
 enlace3 (x:xs) lote = [x !! 0, (head [(y !! 1) | y <- lote, (y !! 0) == (x !! 1)])] : enlace3 xs lote
 
+
+
+
+
+
+-- consultaListaOrdenada [7, 1, 3, 9, 5] [4, 5, 8]
+
+insertar :: (Integral a) => a -> [a] -> [a]
+insertar x [] = [x]
+insertar x x2:xs
+  | (x2 > x) = [x, x2] ++ xs
+  | otherwise = [x2] ++ (insertar x xs)
+
+consultaListaOrdenada :: (Ord a) => [a] -> [a] -> [a]
+consultaListaOrdenada [] [] = []
+consultaListaOrdenada [] a = a
+consultaListaOrdenada (x:xs) lista2 = consultaListaOrdenada xs (insertar x lista2)

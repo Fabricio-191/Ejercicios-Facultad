@@ -2,6 +2,8 @@
 const ciudades = 'ABCDEF'.split('')
 const n = ciudades.length;
 
+const mostarMatriz = (matriz) => console.log(matriz.map(x => x.map(x => x.toFixed(5)).join(' ')).join('\n'));
+
 const matrizDistancias = [
 	[0, 5, 6, 7, 2, 3],
 	[5, 0, 3, 6, 5, 2],
@@ -9,7 +11,16 @@ const matrizDistancias = [
 	[7, 6, 3, 0, 4, 5],
 	[2, 5, 4, 4, 0, 3],
 	[3, 2, 2, 5, 3, 0]
-]
+];
+
+const deltaFeromonas = [
+	[0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0]
+];
 
 const matrizFeromonas = [
 	[0, 1, 1, 1, 1, 1],
@@ -18,29 +29,53 @@ const matrizFeromonas = [
 	[1, 1, 1, 0, 1, 1],
 	[1, 1, 1, 1, 0, 1],
 	[1, 1, 1, 1, 1, 0]
-]
-
-const RHO = 0.7, BETA = 1, ALFA = 2;
-
-const k = 1;
-const hormigas = [
-	['FAECDBF', k/21],
-	['CEFDABC', k/26],
-	['EABDFCE', k/20]
 ];
 
-function delta(i, j){
-	const A = ciudades[i], B = ciudades[j];
-	const str1 = A + B;
-	const str2 = B + A;
-	let acc = 0;
+const matrizProbabilidades = [
+	[0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0, 0]
+];
 
-	for(const [camino, z] of hormigas){
-		if(camino.includes(str1) || camino.includes(str2)) acc += z;
+const RHO = 0.7, BETA = 1, ALFA = 2;
+const k = 1;
+
+const caminosHormigas = [
+	'FAECDBF',
+	'CEFDABC',
+	'EABDFCE'
+].map(camino => {
+	let cost = 0;
+	for(let i = 0; i < camino.length - 1; i++){
+		const A = ciudades.indexOf(camino[i]);
+		const B = ciudades.indexOf(camino[i + 1]);
+		cost += matrizDistancias[A][B];
 	}
 
-	return acc;
+	return [camino, k / cost];
+})
+
+for(let i = 0; i < n; i++){
+	for(let j = i + 1; j < n; j++){
+		const A = ciudades[i], B = ciudades[j];
+		const str1 = A + B;
+		const str2 = B + A;
+		let acc = 0;
+		
+		// ARREGLAR
+		for(const [camino, z] of caminosHormigas){
+			if(camino.includes(str1) || camino.includes(str2)) acc += z;
+		}
+
+		deltaFeromonas[i][j] = deltaFeromonas[j][i] = acc;
+	}
 }
+
+console.log('Delta feromonas')
+mostarMatriz(deltaFeromonas);
 
 function iter(cb){
 	for(let i = 0; i < n; i++){
@@ -50,36 +85,72 @@ function iter(cb){
 	}
 }
 
-for(let i = 0; i < 3; i++){
+for(let i = 0; i < 1; i++){
 	iter((i, j) => {
 		const anterior = matrizFeromonas[i][j];
-		const nuevo = (1 - RHO) * anterior + delta(i, j);
+		const nuevo = (1 - RHO) * anterior + deltaFeromonas[i][j];
 		matrizFeromonas[i][j] = nuevo;
 	});
 	
-	console.log()
-	console.log(matrizFeromonas.map(x => x.map(x => x.toFixed(3)).join(' ')).join('\n'));
+	console.log();
+	console.log('Matriz feromonas');
+	mostarMatriz(matrizFeromonas);
+
+	// let sum = 0;
+	// iter((i, j) => {
+	// 	if(i === j) return;
+	// 	sum += Math.pow(matrizFeromonas[i][j], ALFA) *
+	// 			Math.pow(1 / matrizDistancias[i][j], BETA)
+	// });
+	
+	// iter((i, j) => {
+	// 	if(i === j) return;
+	// 	const numerador = Math.pow(matrizFeromonas[i][j], ALFA) *
+	// 		Math.pow(1 / matrizDistancias[i][j], BETA);
+	// 	matrizProbabilidades[i][j] = numerador / sum;
+	// });
+
+	for(let i = 0; i < n; i++){
+		let denominador = 0;
+		for(let j = 0; j < n; j++){
+			if(i === j) continue;
+			denominador += Math.pow(matrizFeromonas[i][j], ALFA) *
+				Math.pow(1 / matrizDistancias[i][j], BETA);
+		}
+
+		for(let j = 0; j < n; j++){
+			if(i === j) continue;
+			const numerador = Math.pow(matrizFeromonas[i][j], ALFA) *
+				Math.pow(1 / matrizDistancias[i][j], BETA);
+
+			matrizProbabilidades[i][j] = numerador / denominador;
+		}
+	}
+
+	console.log();
+	console.log('Matriz probabilidades');
+	mostarMatriz(matrizProbabilidades);
 }
 
+
+
+
 /*
-0.000 0.388 0.300 0.338 0.398 0.348
-0.388 0.000 0.338 0.398 0.300 0.348
-0.300 0.338 0.000 0.348 0.436 0.350
-0.338 0.398 0.348 0.000 0.300 0.388
-0.398 0.300 0.436 0.300 0.000 0.338
-0.348 0.348 0.350 0.388 0.338 0.000
+0,00000 0,16165 0,08453 0,09145 0,43225 0,23012
+0,16738 0,00000 0,22096 0,14920 0,10504 0,35742
+0,07575 0,19122 0,00000 0,20622 0,23204 0,29477
+0,12127 0,19107 0,30516 0,00000 0,16815 0,21436
+0,38157 0,08955 0,22858 0,11193 0,00000 0,18837
+0,17988 0,26982 0,25713 0,12636 0,16681 0,00000
+*/
 
-0.000 0.205 0.090 0.140 0.217 0.152
-0.205 0.000 0.140 0.217 0.090 0.152
-0.090 0.140 0.000 0.152 0.267 0.155
-0.140 0.217 0.152 0.000 0.090 0.205
-0.217 0.090 0.267 0.090 0.000 0.140
-0.152 0.152 0.155 0.205 0.140 0.000
 
-0.000 0.150 0.027 0.080 0.163 0.093
-0.150 0.000 0.080 0.163 0.027 0.093
-0.027 0.080 0.000 0.093 0.216 0.097
-0.080 0.163 0.093 0.000 0.027 0.150
-0.163 0.027 0.216 0.027 0.000 0.080
-0.093 0.093 0.097 0.150 0.080 0.000
+/*
+= (POW(C23, J2) + POW(C2, J3)) / (
+	POW(C23, J2) + C2 ** J3 +
+	POW(D23, J2) + D3 ** J3 +
+	POW(E23, J2) + E3 ** J3 +
+	POW(F23, J2) + F3 ** J3 +
+	POW(G23, J2) + G3 ** J3
+) 
 */

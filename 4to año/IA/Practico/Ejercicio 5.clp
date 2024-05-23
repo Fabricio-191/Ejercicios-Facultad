@@ -77,18 +77,6 @@
 	(if (and (<= 30 ?*topografia*) (<= ?*topografia* 50)) then (assert (topografia ESCARPADA) CF (+ (* -0.05 ?*topografia*) 2.5)))
 )
 
-; (deffacts inicio
-; 	(lluvia BAJA) CF 0.53333333333
-; 	(lluvia IMPORTANTE) CF 0.4
-; 	
-; 	(suelo HUMEDO) CF 0.24444444444
-; 	(suelo EMPAPADO) CF 0.96
-; 
-; 	(topografia SUAVE) CF 0.6
-; 	(topografia ESCARPADA) CF 0.9
-; )
-
-
 (defrule regla1
 	(declare (CF 0.8))
 	(lluvia BAJA)
@@ -181,3 +169,35 @@
 ;   si 30 <= x <= 50:  -0.05x + 2.5
 ;   0 en otro caso
 ; }
+
+; (deftemplate lluvia
+;     0 1000
+;     (
+;         (BAJA (25 1) (40 0))
+;         (IMPORTANTE (20 0) (50 1) (70 0))
+;         (INTENSA (60 0) (70 1))
+;     )
+; )
+; 
+; (deftemplate humedad
+;     0 100
+;     (
+;         (HUMEDO (15 0) (35 1) (80 0))
+;         (EMPAPADO (45 0) (70 1))
+;     )
+; )
+; 
+; (deftemplate suelo
+;     0 100
+;     (
+;         (SUAVE (2 0) (4 1) (15 1) (25 0))
+;         (ESCARPADA (10 0) (20 1) (30 1) (50 0))
+;     )
+; )
+; 
+; (defrule inicio
+;     =>
+;     (assert lluvia 32)
+;     (assert humedad 69)
+;     (assert suelo 19)
+; )

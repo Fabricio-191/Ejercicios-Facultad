@@ -26,15 +26,15 @@
 	(test (eq (+ ?y (* 3 ?a)) (+ ?a (* 10 ?x)))) ; Y + 3 * A = A + 10 * X
 
 	(acarreo ?w)
-	(numero ?d &~ ?s &~ ?a &~ 0)
+	(numero ?d &~ ?s &~ ?a)
 	(test (eq (* 3 ?a) (+ ?d (* 10 ?w))))        ; 3 * A = D + 10 * W
 	
 	(acarreo ?z)
-	(numero ?u &~ ?s &~ ?a &~ ?d &~ 0)
+	(numero ?u &~ ?s &~ ?a &~ ?d)
 	(test (eq (+ ?w (* 3 ?u)) (+ ?u (* 10 ?z)))) ; W + 3 * U = U + 10 * Z
 
-	(numero ?g &~ ?s &~ ?a &~ ?d &~ ?u &~ 0)
-	(numero ?l &~ ?s &~ ?a &~ ?d &~ ?u &~ ?g &~ 0)
+	(numero ?g &~ ?s &~ ?a &~ ?d &~ ?u)
+	(numero ?l &~ ?s &~ ?a &~ ?d &~ ?u &~ ?g)
 	(test (eq (+ ?z (* 3 ?g)) (+ ?l (* 10 ?y)))) ; Z + 3 * G = L + 10 * Y
 	=>
 	; Si cumplen las ecuaciones, eso significa que estos valores son una solucion

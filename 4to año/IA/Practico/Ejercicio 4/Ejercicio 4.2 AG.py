@@ -43,7 +43,7 @@ def path_of_nearest_cities():
 initial_solution = list(range(CITIES_QTY))
 # initial_solution = path_of_nearest_cities()
 
-
+print(initial_solution)
 
 def on_generation(ga_instance):
 	# This function is called after each generation of the genetic algorithm
@@ -70,7 +70,7 @@ num_parents_mating, crossover_probability, mutation_probability, mutation_type, 
 59581.33999999999,1.678377827689005e-05,30,0.3,0.05,inversion,single_point
 """
 
-population_size = 5000
+population_size = 300
 ga = pygad.GA(
 	gene_space=range(0, CITIES_QTY),
 	fitness_func=lambda solution, solution_idx: 1 / path_distance(solution),
@@ -78,10 +78,10 @@ ga = pygad.GA(
 	
 	# num_genes=CITIES_QTY,
 	initial_population=[initial_solution] * population_size,
-	num_generations=30,
+	num_generations=300,
 	
 	# Selecciona los padres
-	parent_selection_type="rank", # random, rank, tournament, rws, sss 
+	parent_selection_type="sss", # random, rank, tournament, rws, sss 
 
 	num_parents_mating=int(population_size * 0.05),
 	keep_parents=0,
@@ -89,11 +89,11 @@ ga = pygad.GA(
 
 	# Intercambia genes entre poblaciones
 	crossover_type="single_point", # single_point, two_points, uniform, scattered
-	crossover_probability=0.3,
+	crossover_probability=0.5,
 
 	# Mete cambios aleatorios en los genes de una poblacion
 	mutation_type="swap", # random, swap, inversion, scramble, adaptive
-	mutation_probability=0.05,
+	mutation_probability=0.1,
 
 	suppress_warnings=True,
 	allow_duplicate_genes=False,
@@ -199,4 +199,40 @@ ga.run()
 	# Intercambia genes entre poblaciones
 	crossover_type="single_point", # single_point, two_points, uniform, scattered
 	crossover_probability=0.1,
+"""
+
+
+"""
+
+population_size = 5000
+ga = pygad.GA(
+	gene_space=range(0, CITIES_QTY),
+	fitness_func=lambda solution, solution_idx: 1 / path_distance(solution),
+	gene_type=int,
+	
+	# num_genes=CITIES_QTY,
+	initial_population=[initial_solution] * population_size,
+	num_generations=30,
+	
+	# Selecciona los padres
+	parent_selection_type="rank", # random, rank, tournament, rws, sss 
+
+	num_parents_mating=int(population_size * 0.05),
+	keep_parents=0,
+	keep_elitism=max(int(population_size * 0.005), 1),
+
+	# Intercambia genes entre poblaciones
+	crossover_type="single_point", # single_point, two_points, uniform, scattered
+	crossover_probability=0.3,
+
+	# Mete cambios aleatorios en los genes de una poblacion
+	mutation_type="swap", # random, swap, inversion, scramble, adaptive
+	mutation_probability=0.05,
+
+	suppress_warnings=True,
+	allow_duplicate_genes=False,
+	random_seed=0,
+
+	on_generation=on_generation,
+)
 """

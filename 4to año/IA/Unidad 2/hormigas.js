@@ -85,7 +85,7 @@ function iter(cb){
 	}
 }
 
-for(let i = 0; i < 1; i++){
+for(let i = 0; i < 3; i++){
 	iter((i, j) => {
 		const anterior = matrizFeromonas[i][j];
 		const nuevo = (1 - RHO) * anterior + deltaFeromonas[i][j];
@@ -131,7 +131,6 @@ for(let i = 0; i < 1; i++){
 	console.log('Matriz probabilidades');
 	mostarMatriz(matrizProbabilidades);
 }
-
 
 
 

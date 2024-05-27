@@ -1,12 +1,13 @@
 import pygad # pip3 install pygad==2.19.2
 import random
 import matplotlib.pyplot as plt
+from os import path
+dirname = path.dirname(__file__)
 
 # Ejercicio 4.3) (0,8P) Resuelva el mismo problema anterior, pero tratando de que al partir de una ciudad y llegar a la misma en un 
 # total de 5000Km recorra la mayor cantidad de ciudades. Encuentre una representación y análisis de la función objetivo que le permita 
 # resolver el problema, mediante AG y ACO. Implementarlo en GAlib y ACO en la herramienta que el disponga.  
 
-dirname = 'D:/Programacion/Ejercicios-Facultad/4to año/IA/Practico/Ejercicio 4'
 population_size = 1000
 
 with open(f'{dirname}/DIST100a.TXT', 'r') as file:

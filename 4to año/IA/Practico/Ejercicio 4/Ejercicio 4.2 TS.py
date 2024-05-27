@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
-
+from os import path
+dirname = path.dirname(__file__)
 
 # Ejercicio 4.2) (0,8P) Sea el problema del viajante de comercio: Resolverlo aplicando AG y TS para el ejemplo de cien ciudades que 
 # se adjunta en DIST100.txt. Aquí se propone recorrer las cien ciudades partiendo de la inicial y volviendo a la misma.   La distancia 
@@ -7,7 +8,6 @@ import matplotlib.pyplot as plt
 # de los 30000 Km.  
 
 CITIES_QTY = 100
-dirname = 'D:/Programacion/Ejercicios-Facultad/4to año/IA/Practico/Ejercicio 4'
 with open(f'{dirname}/DIST100a.TXT', 'r') as file:
 	distances = {}
 
@@ -52,8 +52,8 @@ class TabuSearch:
 		self.best_solution = Solution(initial_path)
 		self.last_solution = Solution(initial_path)
 		self.tabu_list = []
-		self.tabu_list_max_size = 500
-		self.max_iterations = 1500
+		self.tabu_list_max_size = 30
+		self.max_iterations = 100
 
 	def get_neighbourhood(self, solution):
 		neighbourhood = []

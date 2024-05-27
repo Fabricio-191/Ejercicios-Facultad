@@ -1,15 +1,15 @@
 import pygad # pip3 install pygad==2.19.2
 import random
 import matplotlib.pyplot as plt
+from os import path
+dirname = path.dirname(__file__)
 
 # Ejercicio 4.2) (0,8P) Sea el problema del viajante de comercio: Resolverlo aplicando AG y TS para el ejemplo de cien ciudades que 
 # se adjunta en DIST100.txt. Aquí se propone recorrer las cien ciudades partiendo de la inicial y volviendo a la misma.   La distancia 
 # óptima está en alrededor de 25.000 Km. Implementarlo de tal forma que de cada 10 corridas en 7 la distancia obtenida esté por debajo 
 # de los 30000 Km.  
 
-dirname = 'D:/Programacion/Ejercicios-Facultad/4to año/IA/Practico/Ejercicio 4'
-
-population_size = 1000
+population_size = 5000
 
 with open(f'{dirname}/DIST100a.TXT', 'r') as file:
 	distances = {}
@@ -31,8 +31,6 @@ with open(f'{dirname}/DIST100.txt', 'r') as file:
 		y = float(line.split()[2])
 		CITIES.append((x, y))
 	CITIES_QTY = len(CITIES)
-
-print(CITIES)
 
 initial_solution = 3
 if initial_solution == 1:
@@ -59,12 +57,7 @@ elif initial_solution == 4:
 	intital_solution = [int(x) for x in string.split()]
 	initial_population = [intital_solution] * population_size
 
-print(initial_population[0])
-
 def path_distance(path):
-	if len(set(path)) != len(path): raise ValueError("Path has repeated cities")
-	if len(path) != 99: raise ValueError("Path has wrong length")
-
 	distance = distances[(0, path[0])]
 	for i in range(len(path) - 1):
 		distance += distances[(path[i], path[i+1])]
@@ -78,38 +71,36 @@ def on_generation(ga_instance):
 
 	print(f"Generation: {ga_instance.generations_completed}, Best fitness: {int(1 / best_solution_fitness)}")
 
-
 ga = pygad.GA(
 	gene_space=range(1, CITIES_QTY),
-	fitness_func=lambda solution, _: 1 / path_distance(solution),
+	fitness_func=lambda solution, solution_idx: 1 / path_distance(solution),
 	gene_type=int,
 	
 	# num_genes=CITIES_QTY,
+	# num_genes=CITIES_QTY,
 	initial_population=initial_population,
-	num_generations=1,
+	num_generations=30,
 	
 	# Selecciona los padres
 	parent_selection_type="rank", # random, rank, tournament, rws, sss 
-	# K_tournament=3
 
-	num_parents_mating=10,
+	num_parents_mating=int(population_size * 0.05),
 	keep_parents=0,
-	keep_elitism=1,
+	keep_elitism=max(int(population_size * 0.005), 1),
 
 	# Intercambia genes entre poblaciones
-	crossover_type="two_points", # single_point, two_points, uniform, scattered
+	crossover_type="single_point", # single_point, two_points, uniform, scattered
 	crossover_probability=0.3,
 
 	# Mete cambios aleatorios en los genes de una poblacion
-	mutation_type="inversion", # random, swap, inversion, scramble
-	mutation_probability=0.1,
+	mutation_type="swap", # random, swap, inversion, scramble, adaptive
+	mutation_probability=0.05,
 
 	suppress_warnings=True,
 	allow_duplicate_genes=False,
-	random_seed=0,
+	random_seed=1,
 
 	on_generation=on_generation,
-	# stop_criteria="saturate_20"
 )
 
 ga.run()
@@ -129,7 +120,6 @@ print(1 / best_solution_fitness, best_solution)
 # make a plot of the cities and best path
 
 plt.figure()
-print(CITIES[0])
 plt.scatter(*zip(*CITIES), c='r')
 x = [CITIES[0][0]] + [CITIES[i][0] for i in best_solution] + [CITIES[0][0]]
 y = [CITIES[0][1]] + [CITIES[i][1] for i in best_solution] + [CITIES[0][1]]
@@ -137,23 +127,6 @@ plt.plot(x, y, c='b')
 
 plt.show()
 
-
-"""
-{
-  num_parents_mating: { '30': 108, '50': 138, '100': 12 },
-  crossover_probability: { '0.3': 54, '0.4': 30, '0.5': 54, '0.6': 36, '0.7': 48, '0.8': 36},
-  crossover_type: { two_points: 84, single_point: 90, scattered: 42, uniform: 42 }
-  mutation_probability: {
-    '0.2': 43,
-    '0.1': 43,
-    '0.4': 43,
-    '0.3': 43,
-    '0.05': 43,
-    '0.01': 43
-  },
-  mutation_type: { swap: 198, inversion: 60 },
-}
-"""
 
 """
 	mutation_type="random"
@@ -188,37 +161,14 @@ plt.show()
 """
 
 """
-	# num_genes=CITIES_QTY,
-	initial_population=[initial_solution] * 4000,
-	num_generations=30,
-	
-	# Selecciona los padres
-	parent_selection_type="rank", # random, rank, tournament, rws, sss 
 
-	num_parents_mating=100,
-	keep_parents=0,
-	keep_elitism=3,
-
-	# Mete cambios aleatorios en los genes de una poblacion
-	mutation_type="inversion", # random, swap, inversion, scramble, adaptive
-	mutation_probability=0.3,
-
-	# Intercambia genes entre poblaciones
-	crossover_type="single_point", # single_point, two_points, uniform, scattered
-	crossover_probability=0.1,
-"""
-
-
-"""
-
-population_size = 5000
 ga = pygad.GA(
-	gene_space=range(0, CITIES_QTY),
+	gene_space=range(1, CITIES_QTY),
 	fitness_func=lambda solution, solution_idx: 1 / path_distance(solution),
 	gene_type=int,
 	
 	# num_genes=CITIES_QTY,
-	initial_population=[initial_solution] * population_size,
+	initial_population=initial_population,
 	num_generations=30,
 	
 	# Selecciona los padres

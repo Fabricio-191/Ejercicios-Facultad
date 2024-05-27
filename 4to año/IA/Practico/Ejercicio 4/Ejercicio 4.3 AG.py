@@ -57,32 +57,34 @@ for i in range(0, 100): # make sequences cities next to each other
 		cities.append(next_city)
 		distance += distances[(cities[-2], cities[-1])]
 
-	print(distance, cities)
-
 	path = list(range(-100 + len(cities), 0))
 	random_index = random.randint(0, 98)
 	path = path[:random_index] + cities + path[random_index:]
 
 	initial_population.append(path)
 
+def path_distance(path):
+	distance = distances[(0, path[0])]
+	for i in range(len(path) - 1):
+		if path[i] < 1 or path[i + 1] < 1: continue
+		distance += distances[(path[i], path[i+1])]
+
+	distance += distances[(path[-1], 0)]
+
+	return distance
+
 def fitness_func(solution):
 	solution = list(filter(lambda x: x >= 0, solution))
 	cities = len(solution)
-
 	if cities < 1: return -10000
 
-	distance = distances[(0, solution[0])]
-	for i in range(len(solution) - 1):
-		if solution[i] < 1 or solution[i + 1] < 1: continue
-		distance += distances[(solution[i], solution[i+1])]
-	distance += distances[(solution[-1], 0)]
-
+	distance = path_distance(solution)
 	if distance > 5000: return -10000
 
 	return cities / distance
 
 def on_generation(ga_instance):
-	best_solution, best_solution_fitness, best_solution_idx = ga_instance.best_solution() ###
+	best_solution, best_solution_fitness = ga_instance.best_solution()
 
 	print(f"Generation: {ga_instance.generations_completed}, Best fitness: {best_solution_fitness}")
 
@@ -125,9 +127,9 @@ ga.run()
 best_solution, best_solution_fitness, best_solution_idx = ga.best_solution()
 
 print("Mejor solucion encontrada:")
-print(best_solution_fitness, best_solution)
+print(best_solution)
 path = list(filter(lambda x: x >= 0, best_solution))
-print(len(path), path)
+print(len(path), path, path_distance(path))
 
 # print(ga.summary())
 
@@ -135,19 +137,7 @@ ga.plot_fitness()
 # ga.plot_genes()
 # ga.plot_new_solution_rate()
 
-"""
-0.006735484487744676 [-83 -49 -81 -80 -79 -45 -77 -43 -52 -74 -73 -39 -71 -37 -36 -35 -67 -33
- -32 -64  44  54   8  76  36  15  37  25  28  40  12  46  17   1  77  24
- -14  51  69  50  84  11  80  43  57  48  27   5  32  29  22 -82 -48 -47
- -46 -78 -44 -76 -75 -41 -40 -72 -56 -70 -69 -68 -34 -66 -65 -31 -30 -29
- -28 -27 -26 -25 -24 -23 -22 -21 -20 -19 -18 -17 -16 -15   0 -13 -12 -11
- -10  -9  -8  -7  -6  -5  -4  -3  -2  -1]
-31 [44, 54, 8, 76, 36, 15, 37, 25, 28, 40, 12, 46, 17, 1, 77, 24, 51, 69, 50, 84, 11, 80, 43, 57, 48, 27, 5, 32, 29, 22, 0]
-"""
-
-
 plt.figure()
-print(CITIES[0])
 plt.scatter(*zip(*CITIES), c='r')
 x = [CITIES[0][0]] + [CITIES[i][0] for i in path] + [CITIES[0][0]]
 y = [CITIES[0][1]] + [CITIES[i][1] for i in path] + [CITIES[0][1]]

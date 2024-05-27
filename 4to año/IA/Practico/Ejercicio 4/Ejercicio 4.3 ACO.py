@@ -94,7 +94,7 @@ for i in range(0, ITERATIONS):
 
 	paths = []
 	for ant in range(0, ANTS):
-		path = Path([random.randint(0, CITIES_QTY - 1)]) ###
+		path = Path([random.randint(0, CITIES_QTY)])
 
 		while True:
 			next_city = np.random.choice(

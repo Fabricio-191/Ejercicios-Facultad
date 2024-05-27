@@ -82,7 +82,7 @@ def function_calc_probabilities():
 	return probabilities
 
 def probabilites_ant(prob, visited):
-	prob = [p if i not in visited.path else 0 for (i, p) in enumerate(prob)]
+	prob = [p if i not in visited.path else 0 for i, p in enumerate(prob)]
 	total = sum(prob)
 	prob = [p / total for p in prob]
 
@@ -111,12 +111,12 @@ for i in range(0, ITERATIONS):
 
 	for path in paths:
 		for i in range(0, len(path.path) - 1):
-			feromones[path.path[i]][path.path[i+1]] += K / path.distance
-			feromones[path.path[i+1]][path.path[i]] += K / path.distance
+			feromones[path.path[i]][path.path[i+1]] += (K * len(path.path)) / path.distance
+			feromones[path.path[i+1]][path.path[i]] += (K * len(path.path)) / path.distance
 
 	best_path = max(paths, key=lambda x: len(x.path))			
 	best_paths.append(best_path.path)
 
 # best solution
 best_path = max(best_paths, key=lambda x: len(x))
-print(len(best_path), best_path)
+print(len(best_path), best_path, Path(best_path).distance)

@@ -1,7 +1,16 @@
-CITIES_QTY = 100
-distances = {}
+import matplotlib.pyplot as plt
 
-with open('D:/Programacion/Ejercicios-Facultad/4to año/IA/Practico/Ejercicio 4/DIST100.TXT', 'r') as file:
+
+# Ejercicio 4.2) (0,8P) Sea el problema del viajante de comercio: Resolverlo aplicando AG y TS para el ejemplo de cien ciudades que 
+# se adjunta en DIST100.txt. Aquí se propone recorrer las cien ciudades partiendo de la inicial y volviendo a la misma.   La distancia 
+# óptima está en alrededor de 25.000 Km. Implementarlo de tal forma que de cada 10 corridas en 7 la distancia obtenida esté por debajo 
+# de los 30000 Km.  
+
+CITIES_QTY = 100
+dirname = 'D:/Programacion/Ejercicios-Facultad/4to año/IA/Practico/Ejercicio 4'
+with open(f'{dirname}/DIST100a.TXT', 'r') as file:
+	distances = {}
+
 	data = file.read().strip().split('\n')
 	for line in data:
 		line = line.strip().split()[1:]
@@ -10,6 +19,15 @@ with open('D:/Programacion/Ejercicios-Facultad/4to año/IA/Practico/Ejercicio 4/
 		distancia = float(line[2])
 		distances[(ciudadA - 1, ciudadB - 1)] = distancia
 		distances[(ciudadB - 1, ciudadA - 1)] = distancia
+
+with open(f'{dirname}/DIST100.txt', 'r') as file:
+	data = file.read().strip().split('\n')
+	CITIES = []
+	for line in data:
+		x = float(line.split()[1])
+		y = float(line.split()[2])
+		CITIES.append((x, y))
+	CITIES_QTY = len(CITIES)
 
 class Solution:
 	def __init__(self, path):
@@ -26,14 +44,16 @@ class Solution:
 
 		return total_distance
 
+	def __eq__(self, other):
+		return self.path == other.path
+
 class TabuSearch:
 	def __init__(self, initial_path):
 		self.best_solution = Solution(initial_path)
+		self.last_solution = Solution(initial_path)
 		self.tabu_list = []
-		self.tabu_list_max_size = 100
-		self.max_iterations = 300
-		self.solutions_track = [self.best_solution]
-
+		self.tabu_list_max_size = 500
+		self.max_iterations = 1500
 
 	def get_neighbourhood(self, solution):
 		neighbourhood = []
@@ -56,13 +76,14 @@ class TabuSearch:
 		return best_neighbour
 	
 	def solve(self):
-		for _ in range(self.max_iterations):
-			neighbourhood = self.get_neighbourhood(self.best_solution)
+		for i in range(self.max_iterations):
+			neighbourhood = self.get_neighbourhood(self.last_solution)
 			best_neighbour = self.get_best_neighbour(neighbourhood)
 
+			self.last_solution = best_neighbour
+			print(i, self.last_solution.distance)
 			if best_neighbour.distance < self.best_solution.distance:
 				self.best_solution = best_neighbour
-				self.solutions_track.append(self.best_solution)
 
 			self.tabu_list.append(best_neighbour)
 			if len(self.tabu_list) > self.tabu_list_max_size:
@@ -80,16 +101,13 @@ def path_of_nearest_cities():
 
 	return path
 
-initial_solution = list(range(CITIES_QTY))
-# initial_solution = path_of_nearest_cities()
-# initial_solution = [ 0, 24, 77, 1, 17, 46, 40, 12, 28, 25, 37, 15, 36, 76, 56, 41, 33, 67, 7, 94, 86, 93, 38, 45, 74, 60, 82, 62, 66, 21, 18, 23, 83, 70, 89, 81, 6, 78, 85, 98, 35, 97, 14, 16, 73, 71, 26, 44, 54, 8, 30, 96, 49, 1, 17, 46, 40, 12, 87, 4, 9, 99, 59, 31, 90, 61, 65, 58, 52, 91, 13, 10, 53, 95, 3, 34, 55, 79, 47, 72, 22, 27, 5, 32, 29, 43, 80, 57, 48, 11, 50, 84, 69, 51, 73, 71, 26, 44, 54, 8 ]
+# initial_solution = list(range(CITIES_QTY))
+initial_solution = path_of_nearest_cities()
+# string = """0, 24, 77, 1, 17, 46, 12, 40, 28, 25, 37, 15, 36, 76, 56, 41, 33, 7, 67, 94, 86, 93, 38, 45, 74, 60, 82, 62, 66, 21, 18,23, 83, 70, 89, 81, 6, 78, 85, 98, 35, 97, 14, 16, 73, 71, 26, 44, 54, 8, 30, 96, 49, 42, 19, 92, 63, 88, 87, 4, 99, 9, 90, 59, 31,61, 65, 58, 52, 91, 13, 10, 3, 95, 53, 34, 55, 79, 47, 72, 22, 27, 5, 32, 29, 43, 80, 57, 48, 11, 50, 84, 69, 51, 75, 64, 68, 2, 39,20"""
+#intital_solution = [int(x) for x in string.split(', ')]
 
 ts = TabuSearch(initial_solution)
 
 best_solution = ts.solve()
 
 print(best_solution.path, best_solution.distance)
-
-best_solutions_distances = [int(solution.distance) for solution in ts.solutions_track]
-
-print(best_solutions_distances)

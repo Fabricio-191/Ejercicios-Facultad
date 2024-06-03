@@ -3,3 +3,6 @@ nbproject/
 build/
 dist/
 .metadata
+.idea
+demo/
+Octave/

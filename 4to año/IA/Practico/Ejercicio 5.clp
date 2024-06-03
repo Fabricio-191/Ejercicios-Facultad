@@ -18,7 +18,7 @@
 ; Represéntelo en SUMMERS(conclusiones no borrosas) y/o fuzziclipsy compruebe las conclusiones logradas.
 ; Objetivo: Cuantificar la  incertidumbre mediante LB y una herramienta de software específica. 
 
-
+; Se declaran los valores medidos por los sensores
 (defglobal
 	; valores medidos
 	?*lluvia* = 32
@@ -26,6 +26,8 @@
 	?*topografia* = 19
 )
 
+; Se crean las funciones de pertenencia que se activan siempre, y se agrega prioridad para que se ejecuten antes de las reglas importantes
+; Lo que hacen es calcular segun el valor medido a que categorias pertenecen y con que certeza
 (defrule lluvia-baja
 	(declare (salience 10))
 	=>
@@ -77,11 +79,12 @@
 	(if (and (<= 30 ?*topografia*) (<= ?*topografia* 50)) then (assert (topografia ESCARPADA) CF (+ (* -0.05 ?*topografia*) 2.5)))
 )
 
+; Aqui se definen las reglas que se ejecutan en base a las membresias calculadas anteriormente de los valores medidos
 (defrule regla1
 	(declare (CF 0.8))
 	(lluvia BAJA)
 	=>
-	(assert (problema NULO))
+	(assert (problema NULO)) ; El factor de certeza se calcula solo como: min{FC de los hechos usados para activar las reglas} * FC de la regla
 )
 
 (defrule regla2
@@ -126,6 +129,7 @@
 	(assert (problema MEDIO))
 )
 
+; Las funciones de pertenencia son las siguientes: (expresadas de forma matematica)
 ; Lluvia baja           {
 ;	si  0 <= x <= 25:   1
 ;	si 25 <= x <= 40:  -0.06666667 x + 2.6666667
@@ -170,6 +174,7 @@
 ;   0 en otro caso
 ; }
 
+; Esta era otra forma de expresar las reglas, pero funcionaban a la inversa, por lo que no servian para este caso
 ; (deftemplate lluvia
 ;     0 1000
 ;     (

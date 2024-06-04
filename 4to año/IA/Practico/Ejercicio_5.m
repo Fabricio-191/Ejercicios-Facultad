@@ -65,18 +65,17 @@ colors = ['r' 'b' 'm' 'g' 'k' 'c']; # Colores para las 6 reglas en la grafica
 
 figure('NumberTitle', 'off', 'Name', 'Salida difusa de las reglas 1-6 para entrada = (32, 69, 19)');
 xlabel('Problema', 'FontWeight', 'bold');
-grid;
 ylim([-0.1, 1.1]); # Agrega un poco de espacio arriba y abajo de las gráficas
 
 for i = 1 : length(fis.rule) # Grafica de los valores de salida de las 6 reglas
     plot (x_axis, rule_output(:,i), [colors(i) ";Rule " num2str(i) ";"], 'LineWidth', 2);
     hold on; # Mantiene la gráfica actual para agregar más datos (para no borrar las salidas de la regla anterior)
 endfor
+grid;
 
 
 figure('NumberTitle', 'off', 'Name', 'Agregacion y defuzificacion para entrada = (32, 69, 19)');
 xlabel('Problema', 'FontWeight', 'bold');
-grid;
 ylim([-0.1, 1.1]);
 
 # Grafica la salida difusa agregada
@@ -88,5 +87,6 @@ hold on; # Mantiene la gráfica actual para agregar más datos
 # Es el centroide de la salida difusa agregada
 crisp_output = evalmf(x_axis, output(1), 'constant');
 plot (x_axis, crisp_output, ["r;Crisp Output = " num2str(output(1)) "%;"], 'LineWidth', 2);
+grid;
 
 pause;

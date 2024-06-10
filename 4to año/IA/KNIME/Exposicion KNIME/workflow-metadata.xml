@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow-metadata content-type="text/plain" xmlns="http://www.knime.org/core/node/workflow/metadata/v1.0">
+    <author>lars.schweikardt</author>
+    <created>2020-01-17T12:00:01.000+02:00</created>
+    <last-modified>2024-06-06T10:43:26.833-03:00</last-modified>
+    <description>Data Science with KNIME - An Introduction to Data Science using Churn Prediction
+
+This workflow illustrates how to do churn prediction with KNIME Analytics Platform.</description>
+    <tags>
+        <tag>learning KNIME</tag>
+        <tag>beginners</tag>
+        <tag>webinar</tag>
+        <tag>Onboarding</tag>
+        <tag>Data Science</tag>
+    </tags>
+</workflow-metadata>

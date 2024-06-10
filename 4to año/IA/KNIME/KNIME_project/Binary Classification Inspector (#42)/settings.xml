@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://www.knime.org/2008/09/XMLConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.knime.org/2008/09/XMLConfig http://www.knime.org/XMLConfig_2008_09.xsd" key="settings.xml">
+    <entry key="node_file" type="xstring" value="settings.xml"/>
+    <config key="flow_stack">
+        <config key="Variable_0">
+            <entry key="type" type="xstring" value="variable"/>
+            <entry key="name" type="xstring" value="chosen_model"/>
+            <entry key="class" type="xstring" value="STRING"/>
+            <entry key="value" type="xstring" value="null"/>
+        </config>
+        <config key="Variable_1">
+            <entry key="type" type="xstring" value="variable"/>
+            <entry key="name" type="xstring" value="chosen_threshold"/>
+            <entry key="class" type="xstring" value="DOUBLE"/>
+            <entry key="value" type="xdouble" value="NaN"/>
+        </config>
+    </config>
+    <config key="internal_node_subsettings">
+        <entry key="memory_policy" type="xstring" value="CacheSmallInMemory"/>
+    </config>
+    <config key="model">
+        <entry key="customCSS" type="xstring" value=""/>
+        <entry key="hideInWizard" type="xboolean" value="false"/>
+        <entry key="runningInView" type="xboolean" value="false"/>
+        <entry key="hasViewOpened" type="xboolean" value="false"/>
+        <config key="selectedRows"/>
+        <entry key="selectedModel" type="xstring" isnull="true" value=""/>
+        <config key="inViewThresholdValues"/>
+        <config key="inViewThresholdMethods"/>
+        <config key="selectedViewTools"/>
+        <config key="haveThresholdsBeenAltered"/>
+        <config key="selectedClassifications"/>
+        <entry key="groundTruthCol" type="xstring" value="vocal"/>
+        <config key="positiveClassVal">
+            <entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
+            <config key="org.knime.core.data.def.StringCell">
+                <entry key="StringCell" type="xstring" value="1"/>
+            </config>
+        </config>
+        <config key="negativeClassVal">
+            <entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
+            <config key="org.knime.core.data.def.StringCell">
+                <entry key="StringCell" type="xstring" value="1"/>
+            </config>
+        </config>
+        <config key="modelColumns">
+            <entry key="filter-type" type="xstring" value="STANDARD"/>
+            <config key="included_names">
+                <entry key="array-size" type="xint" value="1"/>
+                <entry key="0" type="xstring" value="P (vocal=1)"/>
+            </config>
+            <config key="excluded_names">
+                <entry key="array-size" type="xint" value="17"/>
+                <entry key="0" type="xstring" value="1"/>
+                <entry key="1" type="xstring" value="2"/>
+                <entry key="2" type="xstring" value="3"/>
+                <entry key="3" type="xstring" value="4"/>
+                <entry key="4" type="xstring" value="5"/>
+                <entry key="5" type="xstring" value="6"/>
+                <entry key="6" type="xstring" value="7"/>
+                <entry key="7" type="xstring" value="8"/>
+                <entry key="8" type="xstring" value="9"/>
+                <entry key="9" type="xstring" value="10"/>
+                <entry key="10" type="xstring" value="11"/>
+                <entry key="11" type="xstring" value="12"/>
+                <entry key="12" type="xstring" value="13"/>
+                <entry key="13" type="xstring" value="14"/>
+                <entry key="14" type="xstring" value="15"/>
+                <entry key="15" type="xstring" value="16"/>
+                <entry key="16" type="xstring" value="P (vocal=0)"/>
+            </config>
+            <entry key="enforce_option" type="xstring" value="EnforceExclusion"/>
+            <config key="name_pattern">
+                <entry key="pattern" type="xstring" value=""/>
+                <entry key="type" type="xstring" value="Wildcard"/>
+                <entry key="caseSensitive" type="xboolean" value="true"/>
+                <entry key="excludeMatching" type="xboolean" value="false"/>
+            </config>
+            <config key="datatype">
+                <config key="typelist">
+                    <entry key="org.knime.core.data.DoubleValue" type="xboolean" value="false"/>
+                    <entry key="org.knime.core.data.StringValue" type="xboolean" value="false"/>
+                    <entry key="org.knime.core.data.BooleanValue" type="xboolean" value="false"/>
+                    <entry key="org.knime.core.data.IntValue" type="xboolean" value="false"/>
+                    <entry key="org.knime.core.data.LongValue" type="xboolean" value="false"/>
+                    <entry key="org.knime.core.data.date.DateAndTimeValue" type="xboolean" value="false"/>
+                </config>
+            </config>
+        </config>
+        <entry key="maxNumRows" type="xint" value="10000000"/>
+        <entry key="displayInstructions" type="xboolean" value="false"/>
+        <entry key="displayDirection" type="xstring" value=""/>
+        <entry key="ignoreMissing" type="xboolean" value="true"/>
+        <entry key="configThresholdMethod" type="xstring" value="Custom"/>
+        <entry key="userDefinedThreshold" type="xdouble" value="0.5"/>
+        <entry key="retainNonProbability" type="xboolean" value="true"/>
+        <entry key="appendPredictionsAll" type="xboolean" value="true"/>
+        <entry key="appendSelectedModel" type="xboolean" value="true"/>
+        <entry key="selectedPredColName" type="xstring" value="Selected Model Predictions"/>
+        <entry key="barChartTitle" type="xstring" value="Scoring Metrics"/>
+        <entry key="barChartXLabel" type="xstring" value="Metric by Model"/>
+        <entry key="barChartYLabel" type="xstring" value="Value"/>
+        <config key="barChartInclBars">
+            <entry key="array-size" type="xint" value="2"/>
+            <entry key="0" type="xstring" value="Accuracy"/>
+            <entry key="1" type="xstring" value="AUC"/>
+        </config>
+        <entry key="barChartShowLegend" type="xboolean" value="true"/>
+        <entry key="barChartGroupByStats" type="xboolean" value="true"/>
+        <entry key="barChartShowGrid" type="xboolean" value="true"/>
+        <entry key="barChartNumTicks" type="xint" value="8"/>
+        <entry key="barChartEnablePanning" type="xboolean" value="false"/>
+        <entry key="barChartEnableZoomingControls" type="xboolean" value="false"/>
+        <entry key="barChartEnableTooltipControls" type="xboolean" value="false"/>
+        <config key="barChartTooltipInfo">
+            <entry key="array-size" type="xint" value="1"/>
+            <entry key="0" type="xstring" value=""/>
+        </config>
+        <entry key="ROCTitle" type="xstring" value="ROC Curves"/>
+        <entry key="ROCXLabel" type="xstring" value="1 - Specificity"/>
+        <entry key="ROCYLabel" type="xstring" value="Sensitivity"/>
+        <entry key="ROCShowLegend" type="xboolean" value="true"/>
+        <entry key="ROCShowGrid" type="xboolean" value="true"/>
+        <entry key="ROCShowAUC" type="xboolean" value="true"/>
+        <entry key="ROCNumXTicks" type="xint" value="8"/>
+        <entry key="ROCNumYTicks" type="xint" value="8"/>
+        <entry key="ROCEnablePanning" type="xboolean" value="false"/>
+        <entry key="ROCEnableZoomingControls" type="xboolean" value="false"/>
+        <entry key="ROCEnableTooltipControls" type="xboolean" value="false"/>
+        <config key="ROCTooltipInfo">
+            <entry key="array-size" type="xint" value="1"/>
+            <entry key="0" type="xstring" value="X+Y"/>
+        </config>
+        <entry key="confMatrixTitle" type="xstring" value="Confusion Matrix"/>
+        <entry key="confMatrixDisplayNumRows" type="xboolean" value="true"/>
+        <entry key="confMatrixStyle" type="xstring" value=""/>
+        <entry key="confMatrixShowHeaders" type="xstring" value=""/>
+        <entry key="confMatrixShowStats" type="xboolean" value="true"/>
+        <entry key="distPlotTitle" type="xstring" value="Distribution of Positive Class Probabilities"/>
+        <entry key="distPlotXLabel" type="xstring" value="Predicted Probability"/>
+        <entry key="distPlotYLabel" type="xstring" value="Frequency"/>
+        <entry key="distPlotShowLegend" type="xboolean" value="true"/>
+        <entry key="distPlotShowGrid" type="xboolean" value="true"/>
+        <entry key="distPlotNumXTicks" type="xint" value="8"/>
+        <entry key="distPlotNumYTicks" type="xint" value="8"/>
+        <entry key="distPlotEnablePanning" type="xboolean" value="false"/>
+        <entry key="distPlotEnableZoomingControls" type="xboolean" value="false"/>
+        <entry key="distPlotEnableTooltipControls" type="xboolean" value="false"/>
+        <config key="distPlotTooltipInfo">
+            <entry key="array-size" type="xint" value="1"/>
+            <entry key="0" type="xstring" value="X+Y"/>
+        </config>
+        <entry key="distPlotOpacity" type="xdouble" value="0.25"/>
+        <entry key="distPlotYAxisMethod" type="xstring" value=""/>
+        <config key="distPlotVisualElem">
+            <entry key="array-size" type="xint" value="2"/>
+            <entry key="0" type="xstring" value="Line plot"/>
+            <entry key="1" type="xstring" value="Filled area"/>
+        </config>
+        <entry key="distPlotShowRugPlot" type="xboolean" value="true"/>
+        <entry key="distPlotBinSize" type="xdouble" value="100.0"/>
+        <entry key="showClassStats" type="xboolean" value="true"/>
+        <config key="classStatsOptions">
+            <entry key="array-size" type="xint" value="9"/>
+            <entry key="0" type="xstring" value="Accuracy"/>
+            <entry key="1" type="xstring" value="Balanced Accuracy"/>
+            <entry key="2" type="xstring" value="Error Rate"/>
+            <entry key="3" type="xstring" value="False Negative Rate"/>
+            <entry key="4" type="xstring" value="Precision"/>
+            <entry key="5" type="xstring" value="Sensitivity"/>
+            <entry key="6" type="xstring" value="Specificity"/>
+            <entry key="7" type="xstring" value="F-Measure"/>
+            <entry key="8" type="xstring" value="Youden's J Index"/>
+        </config>
+        <entry key="showOverallStats" type="xboolean" value="true"/>
+        <config key="overallStatsOptions">
+            <entry key="array-size" type="xint" value="0"/>
+        </config>
+        <entry key="chartTitle" type="xstring" value=""/>
+        <entry key="chartSubtitle" type="xstring" value=""/>
+        <entry key="showWarningInView" type="xboolean" value="true"/>
+        <entry key="generateImage" type="xboolean" value="false"/>
+        <entry key="imageWidth" type="xint" value="1920"/>
+        <entry key="imageHeight" type="xint" value="1080"/>
+        <entry key="resizeToWindow" type="xboolean" value="true"/>
+        <entry key="truePosColor" type="xstring" value="rgba(44,123,182,1.0)"/>
+        <entry key="falsePosColor" type="xstring" value="rgba(215,25,28,1.0)"/>
+        <entry key="trueNegColor" type="xstring" value="rgba(44,123,182,1.0)"/>
+        <entry key="falseNegColor" type="xstring" value="rgba(215,25,28,1.0)"/>
+        <entry key="distPosClassColor" type="xstring" value="rgba(77,175,74,1.0)"/>
+        <entry key="distNegClassColor" type="xstring" value="rgba(152,78,163,1.0)"/>
+        <entry key="distThresholdLineColor" type="xstring" value="rgba(254,178,76,1.0)"/>
+        <entry key="textColor" type="xstring" value="rgba(0,0,0,1.0)"/>
+        <entry key="hoverTextColor" type="xstring" value="rgba(0,0,0,1.0)"/>
+        <entry key="backgroundColor" type="xstring" value="rgba(255,255,255,1.0)"/>
+        <entry key="hoverBackgroundColor" type="xstring" value="rgba(222,222,222,1.0)"/>
+        <entry key="gridColor" type="xstring" value="rgba(102,102,102,0.6980392156862745)"/>
+        <entry key="displayFullscreenButton" type="xboolean" value="true"/>
+        <entry key="enableStatsTableControls" type="xboolean" value="true"/>
+        <entry key="enableClearSelection" type="xboolean" value="false"/>
+        <entry key="enableThresholdMethodControls" type="xboolean" value="true"/>
+        <entry key="enableTogglePublishButton" type="xboolean" value="true"/>
+        <entry key="displaySlider" type="xboolean" value="true"/>
+        <entry key="sliderOrientation" type="xstring" value=""/>
+        <entry key="sliderDirection" type="xstring" value=""/>
+        <entry key="sliderColor" type="xstring" value="rgba(101,101,101,1.0)"/>
+        <entry key="useStepping" type="xboolean" value="true"/>
+        <entry key="stepSize" type="xdouble" value="0.001"/>
+        <entry key="enableAnimation" type="xboolean" value="true"/>
+        <entry key="publishSelection" type="xboolean" value="true"/>
+        <entry key="subscribeToFilters" type="xboolean" value="true"/>
+        <entry key="enableROCHover" type="xboolean" value="true"/>
+        <entry key="enableROCClick" type="xboolean" value="false"/>
+        <entry key="enableConfMatrixSelection" type="xboolean" value="true"/>
+    </config>
+    <entry key="customDescription" type="xstring" isnull="true" value=""/>
+    <entry key="state" type="xstring" value="EXECUTED"/>
+    <entry key="factory" type="xstring" value="org.knime.mli.node.viz.dashboard.binaryinspector.BinaryInspectorNodeFactory"/>
+    <entry key="node-name" type="xstring" value="Binary Classification Inspector"/>
+    <entry key="node-bundle-name" type="xstring" value="KNIME Machine Learning Interpretability Extension"/>
+    <entry key="node-bundle-symbolic-name" type="xstring" value="org.knime.mli"/>
+    <entry key="node-bundle-vendor" type="xstring" value="KNIME AG, Zurich, Switzerland"/>
+    <entry key="node-bundle-version" type="xstring" value="5.2.0.v202310301555"/>
+    <entry key="node-feature-name" type="xstring" value="KNIME Machine Learning Interpretability Extension"/>
+    <entry key="node-feature-symbolic-name" type="xstring" value="org.knime.features.mli.feature.group"/>
+    <entry key="node-feature-vendor" type="xstring" value="KNIME AG, Zurich, Switzerland"/>
+    <entry key="node-feature-version" type="xstring" value="5.2.0.v202310301555"/>
+    <config key="factory_settings"/>
+    <entry key="name" type="xstring" value="Binary Classification Inspector"/>
+    <entry key="hasContent" type="xboolean" value="true"/>
+    <entry key="isInactive" type="xboolean" value="false"/>
+    <config key="ports">
+        <config key="port_1">
+            <entry key="index" type="xint" value="1"/>
+            <entry key="port_spec_class" type="xstring" value="org.knime.core.data.DataTableSpec"/>
+            <entry key="port_object_class" type="xstring" value="org.knime.core.node.BufferedDataTable"/>
+            <entry key="port_object_summary" type="xstring" value="Rows: 2000, Cols: 23"/>
+            <entry key="port_dir_location" type="xstring" value="port_1"/>
+        </config>
+        <config key="port_2">
+            <entry key="index" type="xint" value="2"/>
+            <entry key="port_spec_class" type="xstring" value="org.knime.core.data.DataTableSpec"/>
+            <entry key="port_object_class" type="xstring" value="org.knime.core.node.BufferedDataTable"/>
+            <entry key="port_object_summary" type="xstring" value="Rows: 1, Cols: 20"/>
+            <entry key="port_dir_location" type="xstring" value="port_2"/>
+        </config>
+    </config>
+    <config key="internalObjects">
+        <entry key="location" type="xstring" value="internalTables"/>
+        <config key="content">
+            <config key="object_0">
+                <entry key="index" type="xint" value="0"/>
+                <entry key="type" type="xstring" value="table"/>
+                <entry key="table_dir_location" type="xstring" value="object_0"/>
+            </config>
+            <config key="object_1">
+                <entry key="index" type="xint" value="1"/>
+                <entry key="type" type="xstring" value="null"/>
+            </config>
+            <config key="object_2">
+                <entry key="index" type="xint" value="2"/>
+                <entry key="type" type="xstring" value="table"/>
+                <entry key="table_dir_location" type="xstring" value="object_2"/>
+            </config>
+        </config>
+    </config>
+    <config key="filestores">
+        <entry key="file_store_location" type="xstring" isnull="true" value=""/>
+        <entry key="file_store_id" type="xstring" value="e0e185d8-4b07-43d7-84a3-bc4641cb1814"/>
+    </config>
+</config>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://www.knime.org/2008/09/XMLConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.knime.org/2008/09/XMLConfig http://www.knime.org/XMLConfig_2008_09.xsd" key="viewValue">
+    <config key="viewValueSelectedIDs"/>
+    <entry key="selectedModel" type="xstring" isnull="true" value=""/>
+    <config key="inViewThresholdValues">
+        <entry key="array-size" type="xint" value="1"/>
+        <entry key="0" type="xdouble" value="0.5"/>
+    </config>
+    <config key="inViewThresholdMethods">
+        <entry key="array-size" type="xint" value="1"/>
+        <entry key="0" type="xstring" value="Custom"/>
+    </config>
+    <config key="selectedViewTools"/>
+    <config key="haveThresholdsBeenAltered"/>
+    <config key="selectedClassifications"/>
+    <entry key="groundTruthCol" type="xstring" value="vocal"/>
+    <entry key="displayInstructions" type="xboolean" value="false"/>
+    <entry key="barChartTitle" type="xstring" value="Scoring Metrics"/>
+    <entry key="barChartXLabel" type="xstring" value="Metric by Model"/>
+    <entry key="barChartYLabel" type="xstring" value="Value"/>
+    <config key="barChartInclBars">
+        <entry key="array-size" type="xint" value="4"/>
+        <entry key="0" type="xstring" value="Accuracy"/>
+        <entry key="1" type="xstring" value="Error Rate"/>
+        <entry key="2" type="xstring" value="Precision"/>
+        <entry key="3" type="xstring" value="AUC"/>
+    </config>
+    <entry key="ROCTitle" type="xstring" value="ROC Curves"/>
+    <entry key="ROCXLabel" type="xstring" value="1 - Specificity"/>
+    <entry key="ROCYLabel" type="xstring" value="Sensitivity"/>
+    <entry key="confMatrixTitle" type="xstring" value="Confusion Matrix"/>
+    <entry key="distPlotTitle" type="xstring" value="Distribution of Positive Class Probabilities"/>
+    <entry key="distPlotXLabel" type="xstring" value="Predicted Probability"/>
+    <entry key="distPlotYLabel" type="xstring" value="Frequency"/>
+    <entry key="distPlotYAxisMethod" type="xstring" value=""/>
+    <config key="distPlotVisualElem">
+        <entry key="array-size" type="xint" value="2"/>
+        <entry key="0" type="xstring" value="Line plot"/>
+        <entry key="1" type="xstring" value="Filled area"/>
+    </config>
+    <entry key="distPlotShowRugPlot" type="xboolean" value="true"/>
+    <entry key="showClassStats" type="xboolean" value="true"/>
+    <entry key="showOverallStats" type="xboolean" value="true"/>
+    <entry key="chartTitle" type="xstring" value=""/>
+    <entry key="chartSubtitle" type="xstring" value=""/>
+    <entry key="publishSelection" type="xboolean" value="true"/>
+    <entry key="subscribeToFilters" type="xboolean" value="true"/>
+</config>

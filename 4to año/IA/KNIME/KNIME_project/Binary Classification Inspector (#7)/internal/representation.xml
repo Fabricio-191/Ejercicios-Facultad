@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://www.knime.org/2008/09/XMLConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.knime.org/2008/09/XMLConfig http://www.knime.org/XMLConfig_2008_09.xsd" key="viewRepresentation">
+    <entry key="mainDataTableInteractivityID" type="xstring" value="3c7deeb4-1c1e-4d4f-a4a9-f7303c9b092d"/>
+    <config key="positiveClassVal">
+        <entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
+        <config key="org.knime.core.data.def.StringCell">
+            <entry key="StringCell" type="xstring" value="x"/>
+        </config>
+    </config>
+    <config key="negativeClassVal">
+        <entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
+        <config key="org.knime.core.data.def.StringCell">
+            <entry key="StringCell" type="xstring" value="B"/>
+        </config>
+    </config>
+    <entry key="numberOfStats" type="xint" value="2"/>
+    <config key="probabilitiesBCS0">
+        <entry key="array-size" type="xint" value="7"/>
+        <entry key="0" type="xdouble" value="0.0"/>
+        <entry key="1" type="xdouble" value="2.7530170966661037E-11"/>
+        <entry key="2" type="xdouble" value="0.9999999997323863"/>
+        <entry key="3" type="xdouble" value="0.9999999999998299"/>
+        <entry key="4" type="xdouble" value="0.9999999999999998"/>
+        <entry key="5" type="xdouble" value="1.0"/>
+        <entry key="6" type="xdouble" value="1.0"/>
+    </config>
+    <config key="truePositivesBCS0">
+        <entry key="array-size" type="xint" value="7"/>
+        <entry key="0" type="xint" value="0"/>
+        <entry key="1" type="xint" value="0"/>
+        <entry key="2" type="xint" value="0"/>
+        <entry key="3" type="xint" value="0"/>
+        <entry key="4" type="xint" value="0"/>
+        <entry key="5" type="xint" value="0"/>
+        <entry key="6" type="xint" value="0"/>
+    </config>
+    <config key="trueNegativesBCS0">
+        <entry key="array-size" type="xint" value="7"/>
+        <entry key="0" type="xint" value="0"/>
+        <entry key="1" type="xint" value="3"/>
+        <entry key="2" type="xint" value="4"/>
+        <entry key="3" type="xint" value="5"/>
+        <entry key="4" type="xint" value="6"/>
+        <entry key="5" type="xint" value="7"/>
+        <entry key="6" type="xint" value="10"/>
+    </config>
+    <config key="falsePositivesBCS0">
+        <entry key="array-size" type="xint" value="7"/>
+        <entry key="0" type="xint" value="10"/>
+        <entry key="1" type="xint" value="7"/>
+        <entry key="2" type="xint" value="6"/>
+        <entry key="3" type="xint" value="5"/>
+        <entry key="4" type="xint" value="4"/>
+        <entry key="5" type="xint" value="3"/>
+        <entry key="6" type="xint" value="0"/>
+    </config>
+    <config key="falseNegativesBCS0">
+        <entry key="array-size" type="xint" value="7"/>
+        <entry key="0" type="xint" value="0"/>
+        <entry key="1" type="xint" value="0"/>
+        <entry key="2" type="xint" value="0"/>
+        <entry key="3" type="xint" value="0"/>
+        <entry key="4" type="xint" value="0"/>
+        <entry key="5" type="xint" value="0"/>
+        <entry key="6" type="xint" value="0"/>
+    </config>
+    <entry key="nrPositivesBCS0" type="xint" value="0"/>
+    <entry key="nrNegativesBCS0" type="xint" value="10"/>
+    <config key="offsetsBCS0">
+        <entry key="array-size" type="xint" value="7"/>
+        <entry key="0" type="xint" value="0"/>
+        <entry key="1" type="xint" value="3"/>
+        <entry key="2" type="xint" value="4"/>
+        <entry key="3" type="xint" value="5"/>
+        <entry key="4" type="xint" value="6"/>
+        <entry key="5" type="xint" value="7"/>
+        <entry key="6" type="xint" value="10"/>
+    </config>
+    <config key="globalIndicesBCS0">
+        <entry key="array-size" type="xint" value="10"/>
+        <entry key="0" type="xint" value="4"/>
+        <entry key="1" type="xint" value="5"/>
+        <entry key="2" type="xint" value="8"/>
+        <entry key="3" type="xint" value="1"/>
+        <entry key="4" type="xint" value="9"/>
+        <entry key="5" type="xint" value="6"/>
+        <entry key="6" type="xint" value="7"/>
+        <entry key="7" type="xint" value="0"/>
+        <entry key="8" type="xint" value="2"/>
+        <entry key="9" type="xint" value="3"/>
+    </config>
+    <entry key="maxSensitivityBCS0" type="xdouble" value="0.0"/>
+    <entry key="maxSpecificityBCS0" type="xdouble" value="1.0"/>
+    <entry key="maxYoudensJIndexBCS0" type="xdouble" value="0.0"/>
+    <entry key="maxF1ScoreBCS0" type="xdouble" value="0.0"/>
+    <entry key="maxAccuracyBCS0" type="xdouble" value="1.0"/>
+    <entry key="maxPrecisionBCS0" type="xdouble" value="0.0"/>
+    <entry key="maxCohensKappaBCS0" type="xdouble" value="0.0"/>
+    <entry key="aucLineDoubleVal0" type="xdouble" value="NaN"/>
+    <config key="aucXValues0">
+        <entry key="array-size" type="xint" value="7"/>
+        <entry key="0" type="xdouble" value="1.0"/>
+        <entry key="1" type="xdouble" value="0.7"/>
+        <entry key="2" type="xdouble" value="0.6"/>
+        <entry key="3" type="xdouble" value="0.5"/>
+        <entry key="4" type="xdouble" value="0.4"/>
+        <entry key="5" type="xdouble" value="0.3"/>
+        <entry key="6" type="xdouble" value="0.0"/>
+    </config>
+    <config key="aucYValues0">
+        <entry key="array-size" type="xint" value="7"/>
+        <entry key="0" type="xdouble" value="NaN"/>
+        <entry key="1" type="xdouble" value="NaN"/>
+        <entry key="2" type="xdouble" value="NaN"/>
+        <entry key="3" type="xdouble" value="NaN"/>
+        <entry key="4" type="xdouble" value="NaN"/>
+        <entry key="5" type="xdouble" value="NaN"/>
+        <entry key="6" type="xdouble" value="NaN"/>
+    </config>
+    <config key="probabilitiesBCS1">
+        <entry key="array-size" type="xint" value="6"/>
+        <entry key="0" type="xdouble" value="0.0"/>
+        <entry key="1" type="xdouble" value="1.0887900854135778E-13"/>
+        <entry key="2" type="xdouble" value="2.0308216403011599E-10"/>
+        <entry key="3" type="xdouble" value="0.9999999999875906"/>
+        <entry key="4" type="xdouble" value="1.0"/>
+        <entry key="5" type="xdouble" value="1.0"/>
+    </config>
+    <config key="truePositivesBCS1">
+        <entry key="array-size" type="xint" value="6"/>
+        <entry key="0" type="xint" value="0"/>
+        <entry key="1" type="xint" value="0"/>
+        <entry key="2" type="xint" value="0"/>
+        <entry key="3" type="xint" value="0"/>
+        <entry key="4" type="xint" value="0"/>
+        <entry key="5" type="xint" value="0"/>
+    </config>
+    <config key="trueNegativesBCS1">
+        <entry key="array-size" type="xint" value="6"/>
+        <entry key="0" type="xint" value="0"/>
+        <entry key="1" type="xint" value="4"/>
+        <entry key="2" type="xint" value="5"/>
+        <entry key="3" type="xint" value="6"/>
+        <entry key="4" type="xint" value="7"/>
+        <entry key="5" type="xint" value="10"/>
+    </config>
+    <config key="falsePositivesBCS1">
+        <entry key="array-size" type="xint" value="6"/>
+        <entry key="0" type="xint" value="10"/>
+        <entry key="1" type="xint" value="6"/>
+        <entry key="2" type="xint" value="5"/>
+        <entry key="3" type="xint" value="4"/>
+        <entry key="4" type="xint" value="3"/>
+        <entry key="5" type="xint" value="0"/>
+    </config>
+    <config key="falseNegativesBCS1">
+        <entry key="array-size" type="xint" value="6"/>
+        <entry key="0" type="xint" value="0"/>
+        <entry key="1" type="xint" value="0"/>
+        <entry key="2" type="xint" value="0"/>
+        <entry key="3" type="xint" value="0"/>
+        <entry key="4" type="xint" value="0"/>
+        <entry key="5" type="xint" value="0"/>
+    </config>
+    <entry key="nrPositivesBCS1" type="xint" value="0"/>
+    <entry key="nrNegativesBCS1" type="xint" value="10"/>
+    <config key="offsetsBCS1">
+        <entry key="array-size" type="xint" value="6"/>
+        <entry key="0" type="xint" value="0"/>
+        <entry key="1" type="xint" value="4"/>
+        <entry key="2" type="xint" value="5"/>
+        <entry key="3" type="xint" value="6"/>
+        <entry key="4" type="xint" value="7"/>
+        <entry key="5" type="xint" value="10"/>
+    </config>
+    <config key="globalIndicesBCS1">
+        <entry key="array-size" type="xint" value="10"/>
+        <entry key="0" type="xint" value="0"/>
+        <entry key="1" type="xint" value="2"/>
+        <entry key="2" type="xint" value="3"/>
+        <entry key="3" type="xint" value="7"/>
+        <entry key="4" type="xint" value="6"/>
+        <entry key="5" type="xint" value="9"/>
+        <entry key="6" type="xint" value="1"/>
+        <entry key="7" type="xint" value="4"/>
+        <entry key="8" type="xint" value="5"/>
+        <entry key="9" type="xint" value="8"/>
+    </config>
+    <entry key="maxSensitivityBCS1" type="xdouble" value="0.0"/>
+    <entry key="maxSpecificityBCS1" type="xdouble" value="1.0"/>
+    <entry key="maxYoudensJIndexBCS1" type="xdouble" value="0.0"/>
+    <entry key="maxF1ScoreBCS1" type="xdouble" value="0.0"/>
+    <entry key="maxAccuracyBCS1" type="xdouble" value="1.0"/>
+    <entry key="maxPrecisionBCS1" type="xdouble" value="0.0"/>
+    <entry key="maxCohensKappaBCS1" type="xdouble" value="0.0"/>
+    <entry key="aucLineDoubleVal1" type="xdouble" value="NaN"/>
+    <config key="aucXValues1">
+        <entry key="array-size" type="xint" value="6"/>
+        <entry key="0" type="xdouble" value="1.0"/>
+        <entry key="1" type="xdouble" value="0.6"/>
+        <entry key="2" type="xdouble" value="0.5"/>
+        <entry key="3" type="xdouble" value="0.4"/>
+        <entry key="4" type="xdouble" value="0.3"/>
+        <entry key="5" type="xdouble" value="0.0"/>
+    </config>
+    <config key="aucYValues1">
+        <entry key="array-size" type="xint" value="6"/>
+        <entry key="0" type="xdouble" value="NaN"/>
+        <entry key="1" type="xdouble" value="NaN"/>
+        <entry key="2" type="xdouble" value="NaN"/>
+        <entry key="3" type="xdouble" value="NaN"/>
+        <entry key="4" type="xdouble" value="NaN"/>
+        <entry key="5" type="xdouble" value="NaN"/>
+    </config>
+    <config key="bMIStatsGroundTruth">
+        <entry key="array-size" type="xint" value="10"/>
+        <entry key="0" type="xboolean" value="false"/>
+        <entry key="1" type="xboolean" value="false"/>
+        <entry key="2" type="xboolean" value="false"/>
+        <entry key="3" type="xboolean" value="false"/>
+        <entry key="4" type="xboolean" value="false"/>
+        <entry key="5" type="xboolean" value="false"/>
+        <entry key="6" type="xboolean" value="false"/>
+        <entry key="7" type="xboolean" value="false"/>
+        <entry key="8" type="xboolean" value="false"/>
+        <entry key="9" type="xboolean" value="false"/>
+    </config>
+    <entry key="bMIStatsHasMissingValues" type="xboolean" value="false"/>
+    <config key="bMIStatsRowKeys">
+        <entry key="array-size" type="xint" value="10"/>
+        <entry key="0" type="xstring" value="Row3"/>
+        <entry key="1" type="xstring" value="Row6"/>
+        <entry key="2" type="xstring" value="Row7"/>
+        <entry key="3" type="xstring" value="Row8"/>
+        <entry key="4" type="xstring" value="Row13"/>
+        <entry key="5" type="xstring" value="Row14"/>
+        <entry key="6" type="xstring" value="Row15"/>
+        <entry key="7" type="xstring" value="Row16"/>
+        <entry key="8" type="xstring" value="Row18"/>
+        <entry key="9" type="xstring" value="Row19"/>
+    </config>
+    <entry key="bMIStatsMissingGT" type="xint" value="0"/>
+    <entry key="bMIStatsMissingPred" type="xint" value="0"/>
+    <entry key="hideInWizard" type="xboolean" value="false"/>
+    <entry key="runningInView" type="xboolean" value="false"/>
+    <entry key="hasViewOpened" type="xboolean" value="false"/>
+    <config key="viewRepModelColNames">
+        <entry key="array-size" type="xint" value="2"/>
+        <entry key="0" type="xstring" value="P (type=A)"/>
+        <entry key="1" type="xstring" value="P (type=B)"/>
+    </config>
+    <entry key="maxNumRows" type="xint" value="10000000"/>
+    <entry key="displayDirection" type="xstring" value=""/>
+    <entry key="ignoreMissing" type="xboolean" value="true"/>
+    <entry key="configThresholdMethod" type="xstring" value="Custom"/>
+    <entry key="userDefinedThreshold" type="xdouble" value="0.5"/>
+    <entry key="barChartShowLegend" type="xboolean" value="true"/>
+    <entry key="barChartGroupByStats" type="xboolean" value="true"/>
+    <entry key="barChartShowGrid" type="xboolean" value="true"/>
+    <entry key="barChartNumTicks" type="xint" value="8"/>
+    <entry key="barChartEnablePanning" type="xboolean" value="false"/>
+    <entry key="barChartEnableZoomingControls" type="xboolean" value="false"/>
+    <entry key="barChartEnableTooltipControls" type="xboolean" value="false"/>
+    <config key="barChartTooltipInfo">
+        <entry key="array-size" type="xint" value="1"/>
+        <entry key="0" type="xstring" value=""/>
+    </config>
+    <entry key="ROCShowLegend" type="xboolean" value="true"/>
+    <entry key="ROCShowGrid" type="xboolean" value="true"/>
+    <entry key="ROCShowAUC" type="xboolean" value="true"/>
+    <entry key="ROCNumXTicks" type="xint" value="8"/>
+    <entry key="ROCNumYTicks" type="xint" value="8"/>
+    <entry key="ROCEnablePanning" type="xboolean" value="false"/>
+    <entry key="ROCEnableZoomingControls" type="xboolean" value="false"/>
+    <entry key="ROCEnableTooltipControls" type="xboolean" value="false"/>
+    <config key="ROCTooltipInfo">
+        <entry key="array-size" type="xint" value="1"/>
+        <entry key="0" type="xstring" value="X+Y"/>
+    </config>
+    <entry key="confMatrixDisplayNumRows" type="xboolean" value="true"/>
+    <entry key="confMatrixStyle" type="xstring" value=""/>
+    <entry key="confMatrixShowHeaders" type="xstring" value=""/>
+    <entry key="confMatrixShowStats" type="xboolean" value="true"/>
+    <entry key="distPlotShowLegend" type="xboolean" value="true"/>
+    <entry key="distPlotShowGrid" type="xboolean" value="true"/>
+    <entry key="distPlotNumXTicks" type="xint" value="8"/>
+    <entry key="distPlotNumYTicks" type="xint" value="8"/>
+    <entry key="distPlotEnablePanning" type="xboolean" value="false"/>
+    <entry key="distPlotEnableZoomingControls" type="xboolean" value="false"/>
+    <entry key="distPlotEnableTooltipControls" type="xboolean" value="false"/>
+    <config key="distPlotTooltipInfo">
+        <entry key="array-size" type="xint" value="1"/>
+        <entry key="0" type="xstring" value="X+Y"/>
+    </config>
+    <entry key="distPlotOpacity" type="xdouble" value="0.25"/>
+    <entry key="distPlotBinSize" type="xdouble" value="100.0"/>
+    <config key="classStatsOptions">
+        <entry key="array-size" type="xint" value="9"/>
+        <entry key="0" type="xstring" value="Accuracy"/>
+        <entry key="1" type="xstring" value="Balanced Accuracy"/>
+        <entry key="2" type="xstring" value="Error Rate"/>
+        <entry key="3" type="xstring" value="False Negative Rate"/>
+        <entry key="4" type="xstring" value="Precision"/>
+        <entry key="5" type="xstring" value="Sensitivity"/>
+        <entry key="6" type="xstring" value="Specificity"/>
+        <entry key="7" type="xstring" value="F-Measure"/>
+        <entry key="8" type="xstring" value="Youden's J Index"/>
+    </config>
+    <config key="overallStatsOptions">
+        <entry key="array-size" type="xint" value="0"/>
+    </config>
+    <entry key="showWarningInView" type="xboolean" value="true"/>
+    <entry key="generateImage" type="xboolean" value="false"/>
+    <entry key="imageWidth" type="xint" value="1920"/>
+    <entry key="imageHeight" type="xint" value="1080"/>
+    <entry key="resizeToWindow" type="xboolean" value="true"/>
+    <entry key="truePosColor" type="xstring" value="rgba(44,123,182,1.0)"/>
+    <entry key="falsePosColor" type="xstring" value="rgba(215,25,28,1.0)"/>
+    <entry key="trueNegColor" type="xstring" value="rgba(44,123,182,1.0)"/>
+    <entry key="falseNegColor" type="xstring" value="rgba(215,25,28,1.0)"/>
+    <entry key="distPosClassColor" type="xstring" value="rgba(77,175,74,1.0)"/>
+    <entry key="distNegClassColor" type="xstring" value="rgba(152,78,163,1.0)"/>
+    <entry key="distThresholdLineColor" type="xstring" value="rgba(254,178,76,1.0)"/>
+    <entry key="textColor" type="xstring" value="rgba(0,0,0,1.0)"/>
+    <entry key="hoverTextColor" type="xstring" value="rgba(0,0,0,1.0)"/>
+    <entry key="backgroundColor" type="xstring" value="rgba(255,255,255,1.0)"/>
+    <entry key="hoverBackgroundColor" type="xstring" value="rgba(222,222,222,1.0)"/>
+    <entry key="gridColor" type="xstring" value="rgba(102,102,102,0.6980392156862745)"/>
+    <entry key="displayFullscreenButton" type="xboolean" value="true"/>
+    <entry key="enableStatsTableControls" type="xboolean" value="true"/>
+    <entry key="enableClearSelection" type="xboolean" value="false"/>
+    <entry key="enableThresholdMethodControls" type="xboolean" value="true"/>
+    <entry key="enableTogglePublishButton" type="xboolean" value="true"/>
+    <entry key="displaySlider" type="xboolean" value="true"/>
+    <entry key="sliderOrientation" type="xstring" value=""/>
+    <entry key="sliderDirection" type="xstring" value=""/>
+    <entry key="sliderColor" type="xstring" value="rgba(101,101,101,1.0)"/>
+    <entry key="useStepping" type="xboolean" value="true"/>
+    <entry key="stepSize" type="xdouble" value="0.001"/>
+    <entry key="enableAnimation" type="xboolean" value="true"/>
+    <entry key="enableROCHover" type="xboolean" value="true"/>
+    <entry key="enableROCClick" type="xboolean" value="false"/>
+    <entry key="enableConfMatrixSelection" type="xboolean" value="true"/>
+    <entry key="hasWarnings" type="xboolean" value="false"/>
+</config>

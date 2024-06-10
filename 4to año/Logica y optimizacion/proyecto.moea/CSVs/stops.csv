@@ -1,0 +1,539 @@
+id,name,city,province,latitud,longitud
+10,Dellepiane - Retiro,Ciudad de Buenos Aires,Capital Federal,"-345.867.075,00","-583.743.954,00"
+19,Terminal de Cordoba,Cordoba ,Córdoba,"-314.234.356,00","-641.744.256,00"
+315,Terminal de Mendoza,Mendoza,Mendoza,"-328.942.906,00","-688.299.358,00"
+442,Terminal de San Rafael,San Rafael,Mendoza,"163.700.359,00","-22.900.239,00"
+9,Terminal de Omnibus de Mar del Plata,Mar del Plata,Buenos Aires,"-379.895.834,00","-575.617.196,00"
+7,Terminal de La Plata,La Plata,Buenos Aires,"-34.905.308,00","-579.555.148,00"
+409,San Juan,San Juan,San Juan,"-315.389.319,00","-685.116.005,00"
+334,San Luis,San Luis,San Luis,"-332.932.632,00","-663.393.089,00"
+46,Terminal de Omnibus de Rosario,Rosario,Santa Fe,"-329.394.686,00","-606.707.183,00"
+556,Bahia Blanca,Bahia Blanca,Buenos Aires,"-387.357.765,00","-622.464.779,00"
+26,Terminal de Rio Cuarto,Rio Cuarto,Córdoba,"-331.140.911,00","-643.518.162,00"
+369,Terminal de Corrientes,Corrientes,Corrientes,"-274.993.356,00","-588.144.124,00"
+17,San Miguel de Tucuman,San Miguel de Tucuman,Tucumán,"-267.378.495.117.042,00","-6.504.566.073.417.660,00"
+1471,Posadas,Posadas,Misiones,"-274.029.374,00","-559.150.457,00"
+350,Terminal de Resistencia,Resistencia,Chaco,"-27.456.769,00","-590.231.466,00"
+15,Santiago del Estero,Santiago del Estero,Santiago del Estero,"-277.788.447,00","-642.630.404,00"
+325,Santa Fe,Santa Fe,Santa Fe,"-316.432.651,00","-60.700.635,00"
+469,Terminal de Villa Mercedes,Villa Mercedes,San Luis,"-336.652.823,00","-654.660.702,00"
+232,Terminal de Pinamar,Pinamar,Buenos Aires,"-371.077.907,00","-568.801.636,00"
+290,Villa Maria,Villa Maria,Córdoba,"-324.147.907,00","-632.331.325,00"
+506,Terminal de San Francisco,San Francisco,Córdoba,"-31.429.601.847.123.400,00","-6.209.160.303.001.630,00"
+4763,El Talar,Pacheco,Buenos Aires,"-344.717.304,00","-586.558.945,00"
+713,Terminal de Viedma,Viedma,Rio Negro,"-408.207.596,00","-630.055.726,00"
+1070,Malargue,Malargue,Mendoza,"-3.547.527.525.340.150,00","-6.958.918.376.573.710,00"
+276,Villa Gesell,Villa Gesell ,Buenos Aires,"-372.861.921,00","-569.940.126,00"
+654,Chajari,Chajari,Entre Rios,"-307.563.396,00","-579.881.358,00"
+562,Terminal de San Carlos de Bariloche,San Carlos de Bariloche,Rio Negro,"-411.305.386,00","-712.718.665,00"
+521,Terminal de Neuquen,Neuquen,Neuquén,"-389.591.418,00","-681.058.466,00"
+224,Necochea,Necochea,Buenos Aires,"-385.538.998,00","-587.387.426,00"
+924,Villa General Belgrano,Villa General Belgrano,Córdoba,"-31.973.865.080.215.000,00","-6.456.200.312.747.800,00"
+323,San Salvador de Jujuy,San Salvador de Jujuy,Jujuy,"-242.214.593,00","-652.719.641,00"
+443,General Alvear,General Alvear,Mendoza,"-349.783.652,00","-676.943.774,00"
+507,Parana,Parana,Entre Rios,"-31.739.815,00","-605.175.287,00"
+545,Santa Rosa,Santa Rosa,La Pampa,"-366.199.194,00","-642.807.162,00"
+255,Terminal de Santa Teresita,Santa Teresita,Buenos Aires,"-365.358.037,00","-56.713.711,00"
+14,Terminal de Omnibus de Rafaela,Rafaela,Santa Fe,"-312.402.657,00","-615.063.464,00"
+31,Terminal de Villa Carlos Paz,Villa Carlos Paz,Córdoba,"-31.419.192,00","-644.932.812,00"
+3702,El Chalten,El Chalten,Santa Cruz,"-4.933.331,00","-72.883.383,00"
+583,Comodoro Rivadavia,Comodoro Rivadavia,Chubut,"-458.607.797,00","-674.782.698,00"
+2728,Terminal Calafate,El Calafate,Santa Cruz,"-503.374.028,00","-722.457.517,00"
+518,Tandil,Tandil,Buenos Aires,"-373.209.139,00","-591.187.241,00"
+649,Gualeguay,Gualeguay,Entre Rios,"-331.330.921,00","-593.157.407,00"
+3429,Gualeguaychu,Gualeguaychu,Entre Rios,"-330.232.196,00","-58.537.066,00"
+922,Santa Rosa de Calamuchita,Santa Rosa de Calamuchita,Córdoba,"-320.741.183,00","-64.532.537,00"
+617,Tres Arroyos,Tres Arroyos,Buenos Aires,"-383.689.195,00","-602.860.218,00"
+621,Rio Gallegos,Rio Gallegos,Santa Cruz,"-516.252.504,00","-692.530.489,00"
+787,General Pico,General Pico,La Pampa,"-3.567.032.982.800.630,00","-6.374.213.517.778.350,00"
+484,Junin,Junin,Buenos Aires,"-34.589.071,00","-60.949.166,00"
+249,San Clemente del Tuyú,San Clemente del Tuyú,Buenos Aires,"-363.845.049,00","-567.280.179,00"
+144,Brandsen,Brandsen,Buenos Aires,"-351.639.217,00","-58.234.608,00"
+246,San Bernardo,San Bernardo,Buenos Aires,"-366.867.425,00","-56.688.401,00"
+403,Cipolletti,Cipolletti,Rio Negro,"-389.420.289,00","-680.082.142,00"
+208,Terminal de Mar de Ajo,Mar de Ajo,Buenos Aires,"-367.332.782,00","-56.694.831,00"
+644,Azul,Azul,Buenos Aires,"367.842.163,00","-598.525.483,00"
+49,Dellepiane - Liniers (Límite con Ciudadela),Ciudad de Buenos Aires,Capital Federal,"-346.425.207,00","-585.288.745,00"
+82,Merlo,Merlo,San Luis,"-323.498.782.917.963,00","-65.016.636.514.489,00"
+226,Terminal de Olavarria,Olavarria,Buenos Aires,"-368.954.055,00","-603.141.207,00"
+1552,Arroyito,Arroyito,Córdoba,"-31.406.157,00","-630.488.861,00"
+461,Mar del Tuyu,Mar del Tuyu,Buenos Aires,"-365.827.106,00","-566.998.386,00"
+913,Dolores,Dolores,Buenos Aires,"-363.197.159.129.448,00","-576.933.922.033.409,00"
+594,Terminal de Goya,Goya,Corrientes,"-291.448.559,00","-592.631.992,00"
+516,Terminal de Realico,Realico,La Pampa,"-350.433.402,00","-64.244.796,00"
+147,Terminal de Capilla del Monte,Capilla del Monte,Córdoba,"-30.858.955.281.597.000,00","-6.452.623.736.204.070,00"
+330,San Martin,San Martin,Mendoza,"-330.859.415,00","-684.658.849,00"
+582,Caleta Olivia,Caleta Olivia,Santa Cruz,"-464.394.539,00","-675.401.258,00"
+76,Venado Tuerto,Venado Tuerto,Santa Fe,"-337.359.884,00","-619.755.917,00"
+2939,Puerto Iguazú,Puerto Iguazu,Misiones,"-255.981.578,00","-545.705.509,00"
+1463,Paso de los Libres,Paso de los Libres,Corrientes,"-297.243.263,00","-570.944.184,00"
+725,Miramar,Miramar,Buenos Aires,"-382.625.593,00","-57.841.714,00"
+1592,Mercedes,Mercedes,Corrientes,"-291.826.461,00","-58.082.217,00"
+436,San Antonio Oeste,San Antonio Oeste,Rio Negro,"-407.333.076,00","-64.950.099,00"
+416,Terminal de Catamarca,San Fernando del Valle de Catamarca,Catamarca,"-284.759.344,00","-65.774.653,00"
+437,Terminal de Puerto Madryn,Puerto Madryn,Chubut,"-427.654.301,00","-650.407.362,00"
+438,Terminal de Trelew,Trelew,Chubut,"-432.485.788,00","-653.029.382,00"
+401,Catriel,Catriel,Rio Negro,"-378.762.677,00","-67.795.161,00"
+587,Las Grutas,Las Grutas,Rio Negro,"-407.939.448,00","-650.775.898,00"
+652,Campana,Campana,Buenos Aires,"-341.907.244,00","-5.894.819,00"
+2940,Eldorado,El Dorado,Misiones,"-264.110.028,00","-546.064.013,00"
+651,Bella Vista,Bella Vista,Corrientes,"-285.219.992,00","-59.041.999,00"
+543,Huinca Renanco,Huinca Renanco,Córdoba,"-348.402.378,00","-643.906.993,00"
+3030,Concordia,Concordia,Entre Rios,"-31.384.951.370.197.800,00","-5.801.244.978.270.330,00"
+557,Punta Alta,Punta Alta,Buenos Aires,"-38.877.049,00","-62.070.873,00"
+2947,Obera - Terminal de Omnibus,Obera,Misiones,"-27.504.151,00","-551.212.084,00"
+482,Laboulaye,Laboulaye,Córdoba,"-341.346.021,00","-633.904.234,00"
+199,Las Toninas,Las Toninas,Buenos Aires,"-36.488.368,00","-567.040.873,00"
+3029,Terminal de Concepcion del Uruguay,Concepcion del Uruguay,Entre Rios,"-324.856.296,00","-582.424.997,00"
+64,Reconquista,Reconquista,Santa Fe,"-291.437.609,00","-596.503.074,00"
+32,Terminal de Omnibus de Jesus Maria,Jesus Maria,Córdoba,"-309.802.651,00","-64.094.241,00"
+2068,Parador San Nicolas,San Nicolas,Buenos Aires,"-333.636.712,00","-602.525.425,00"
+242,Saladillo,Saladillo,Buenos Aires,"-346.735.106,00","-585.004.603,00"
+2800,Rio Tercero,Rio Tercero,Córdoba,"-321.671.156,00","-64.119.446,00"
+547,General Roca,General Roca,Rio Negro,"-390.396.884,00","-675.767.688,00"
+612,San Miguel del Monte,San Miguel del Monte,Buenos Aires,"-354.370.001,00","-58.812.477,00"
+2756,Los Reartes,Los Reartes,Córdoba,,
+2766,La Bolsa,La Bolsa,Córdoba,,
+527,Avellaneda,Avellaneda,Buenos Aires,"-346.594.535,00","-583.769.335,00"
+424,Caucete,Caucete,San Juan,"-316.487.784,00","-682.878.613,00"
+1447,Moron Terminal,Moron,Buenos Aires,"-346.482.495,00","-58.609.792,00"
+1432,Trenque Lauquen,Trenque Lauquen,Buenos Aires,"-359.900.215,00","-627.209.902,00"
+1351,Almafuerte,Almafuerte,Córdoba,"-321.916.211,00","-642.552.835,00"
+1585,Ituzaingo,Ituzaingo,Corrientes,"-275.931.868,00","-566.863.739,00"
+29,Alta Gracia,Alta Gracia,Córdoba,"-316.567.026,00","-64.474.103,00"
+932,Coronel Suarez,Coronel Suarez,Buenos Aires,"-374.536.716,00","-61.924.193,00"
+613,Las Flores,Las Flores,Buenos Aires,"-360.170.097,00","-591.013.805,00"
+201,Lomas de Zamora,Lomas de Zamora,Buenos Aires,"-347.590.987,00","-584.028.989,00"
+1010,Rufino,Rufino,Santa Fe,"-337.591.916,00","-619.573.453,00"
+235,Ramos Mejia,Ramos Mejia,Buenos Aires,"-346.401.379,00","-585.613.844,00"
+517,Terminal de General Villegas,General Villegas,Buenos Aires,"-350.328.993,00","-630.121.624,00"
+38,Moreno,Moreno,Buenos Aires,"-34.647.941,00","-58.794.151,00"
+2675,Embalse,Embalse,Córdoba,,
+332,La Paz,La Paz,Mendoza,"-3.345.928,00","-675.497.468,00"
+756,Lincoln,Lincoln,Buenos Aires,"-348.675.209,00","-615.268.995,00"
+2949,Puerto Rico,Puerto Rico,Misiones,"-268.082.049,00","-550.207.007,00"
+645,Choele Choel,Choele Choel,Rio Negro,"-392.900.699,00","-656.573.009,00"
+755,Monte Hermoso,Monte Hermoso,Buenos Aires,"-389.746.569.709.904,00","-612.890.846.410.087,00"
+589,Rio Colorado,Rio Colorado ,Rio Negro,"-389.908.453,00","-640.958.302,00"
+234,Quilmes,Quilmes,Buenos Aires,"-347.422.127,00","-582.903.024,00"
+2946,Jardin America,Jardin America,Misiones,"-270.473.923,00","-552.438.498,00"
+106,Presidencia Roque Saenz Peña,Presidencia Roque Saenz Peña,Chaco,"-267.868.754,00","-604.301.859,00"
+933,Pigue,Pigue,Buenos Aires,"-375.970.194,00","-624.083.699,00"
+8609,Aeropuerto Internacional de Ezeiza- Mtro Pistarini,Ezeiza,Buenos Aires,,
+588,General Conesa,General Conesa,Rio Negro,"-401.092.845,00","-644.529.462,00"
+56,Florencio Varela,Florencio Varela,Buenos Aires,"-347.804.245,00","-58.262.157,00"
+196,Lanus,Lanus,Buenos Aires,"-347.084.542,00","-58.391.912,00"
+146,Cañuelas,Cañuelas,Buenos Aires,"-350.325.582,00","-587.337.036,00"
+75,Pergamino,Pergamino,Buenos Aires,"-339.137.389.287.657,00","-605.868.239.027.771,00"
+136,Balcarce,Balcarce ,Buenos Aires,"-378.329.602,00","-582.366.398,00"
+191,La Lucila del Mar,La Lucila del Mar,Buenos Aires,"-36.659.954,00","-56.684.718,00"
+141,Bolivar,Bolivar ,Buenos Aires,"-362.365.252,00","-611.220.873,00"
+2167,Virasoro,Virasoro,Corrientes,"-280.595.972,00","-560.147.166,00"
+2372,Monte Coman,Monte Coman,Mendoza,"-345.913.073,00","-678.785.903,00"
+280,Wilde,Wilde,Buenos Aires,"-347.043.791,00","-583.174.545,00"
+525,La Banda,La Banda,Santiago del Estero,"-277.353.325,00","-642.497.313,00"
+163,Ciudadela - (Límite con Liniers),Ciudadela,Buenos Aires,"-346.281.824,00","-585.309.661,00"
+40,San Miguel,San Miguel,Buenos Aires,"-345.331.954,00","-587.023.544,00"
+1211,La Rioja,La Rioja,La Rioja,"-294.535.733,00","-668.613.271,00"
+1675,Pehuajo,Pehuajo,Buenos Aires,"-358.109.589,00","-619.052.186,00"
+16,Terminal de Termas de Rio Hondo,Termas de Rio Hondo,Santiago del Estero,"-274.918.125,00","-648.656.309,00"
+665,General Guemes,General Guemes,Salta,"-246.681.417,00","-650.517.574,00"
+2062,Hipodromo de San Isidro,San Isidro,Buenos Aires,,
+190,Terminal de La Falda,La Falda,Córdoba,"-310.897.575,00","-644.869.834,00"
+712,Santa Clara del Mar,Santa Clara del Mar,Buenos Aires,"-378.421.649,00","-575.048.956,00"
+695,Pedro Luro,Pedro Luro,Buenos Aires,"-394.562.097,00","-626.493.645,00"
+619,Puerto San Julian,Puerto San Julian,Santa Cruz,"-493.043.546,00","-677.361.175,00"
+7107,Aeroparque Jorge Newbery,Ciudad de Buenos Aires,Capital Federal,"-345.580.305,00","-584.170.088,00"
+73,Pilar,Pilar,Buenos Aires,"-344.576.829,00","-589.131.775,00"
+840,Tornquist,Tornquist,Buenos Aires,"-381.015.665,00","-62.225.498,00"
+2738,Anisacate,Anisacate,Córdoba,,
+600,Terminal de Omnibus de Chacabuco,Chacabuco,Buenos Aires,"-346.414.435,00","-604.603.175,00"
+626,Coronel Pringles,Coronel Pringles,Buenos Aires,"-379.908.084,00","-613.484.959,00"
+205,Terminal de Lujan,Lujan,Buenos Aires,"-345.604.043,00","-591.204.465,00"
+1063,Rotonda San Justo,San Justo,Buenos Aires,"-346.854.435,00","-585.605.888,00"
+564,Esquel,Esquel,Chubut,"-429.058.742,00","-713.138.585,00"
+364,Curuzu Cuatia,Curuzu Cuatia,Corrientes,"-297.895.748,00","-580.781.266,00"
+3287,Puente Saavedra,Ciudad de Buenos Aires,Capital Federal,"-345.352.782,00","-584.779.458,00"
+479,Vicuña Mackenna,Vicuña Mackenna,Córdoba,"-339.171.445,00","-643.907.736,00"
+347,Villa Ocampo Terminal,Villa Ocampo,Santa Fe,"-284.861.805,00","-593.481.392,00"
+308,Merlo,Merlo,Buenos Aires,"-34.664.611,00","-58.729.619,00"
+2951,San Ignacio,San Ignacio,Misiones,"-272.609.529,00","-555.315.006,00"
+1361,Luis Guillon,Luis Guillon,Buenos Aires,"-34.806.691,00","-58.441.526,00"
+797,Jovita,Jovita,Córdoba,"-345.149.525,00","-639.449.139,00"
+3060,Caseros - Tres de Febrero,Caseros,Buenos Aires,"-346.022.343,00","-585.618.764,00"
+685,Gonzalez Chaves,Gonzalez Chaves,Buenos Aires,"-380.200.016,00","-601.115.656,00"
+1186,Villa Rumipal,Villa Rumipal,Córdoba,"-321.878.116,00","-64.480.044,00"
+835,Laprida,Laprida,Buenos Aires,"-375.416.345,00","-607.924.326,00"
+3701,Buta Ranquil,Buta Ranquil,Neuquén,,
+3062,General San Martin,San Martin,Buenos Aires,"-345.804.364,00","-585.250.765,00"
+690,Intendente Alvear,Intedente Alvear,La Pampa,"-352.341.464,00","-635.958.285,00"
+3204,Sarmiento,Sarmiento,Chubut,"-45.581.848,00","-690.696.502,00"
+1215,Santo Tome,Santo Tome,Santa Fe,"-316.667.727,00","-607.626.402,00"
+3647,Rincon de los Sauces,Rincon de los Sauces,Neuquén,"-373.942.664,00","-689.254.761,00"
+2191,9 de julio,9 de julio,Buenos Aires,"-354.519.656,00","-608.812.737,00"
+301,Oncativo,Oncativo,Córdoba,"-314.065.106,00","-641.800.076,00"
+2888,Parador Moreno,Moreno,Buenos Aires,"-346.347.837,00","-587.871.015,00"
+1469,Terminal de Apostoles,Apostoles,Misiones,"-279.184.067,00","-557.507.551,00"
+54,Rotonda Los Pinos,Burzaco,Buenos Aires,"-348.356.059,00","-584.015.715,00"
+1605,Saladas Acceso,Saladas ,Corrientes,"-291.755.457,00","-588.565.063,00"
+300,Oliva,Oliva,Córdoba,"-321.990.715,00","-64.263.203,00"
+747,Carmen de Patagones,Carmen de Patagones,Buenos Aires,"-408.012.257.572.813,00","-629.766.428.807.037,00"
+165,Cosquin,Cosquin,Córdoba,"-312.438.428,00","-644.671.646,00"
+697,Sierra de la Ventana,Sierra de la Ventana ,Buenos Aires,"-380.984.905,00","-622.209.311,00"
+87,Charata,Charata,Chaco,"-272.207.464,00","-611.920.506,00"
+1807,Federal,Federal,Entre Rios,,
+1472,25 de mayo,25 de mayo,Buenos Aires,"-354.324.014,00","-6.016.603,00"
+5039,Rodeo,Rodeo,San Juan,,
+595,Santa Lucia,Santa Lucia,Corrientes,"-289.928.545,00","-591.058.268,00"
+114,Coronel Dorrego,Coronel Dorrego,Buenos Aires,"-387.206.211,00","-612.859.574,00"
+1034,Ituzaingo,Ituzaingo,Buenos Aires,"-34.659.275,00","-586.645.145,00"
+1598,Monte Caseros,Monte Caseros,Corrientes,"-302.514.148,00","-576.435.669,00"
+618,Benito Juarez,Benito Juarez,Buenos Aires,"-376.784.646,00","-598.232.962,00"
+2952,San Vicente,San Vicente,Misiones,"-269.914.885,00","-544.847.852,00"
+1437,Eduardo Castex,Eduardo Castex,La Pampa,"-359.042.205,00","-64.273.898,00"
+2765,Hernando,Hernando,Córdoba,,
+1335,Brinkmann,Brinkmann,Córdoba,,
+674,Oran,Oran,Salta,"-231.280.681,00","-643.284.675,00"
+1488,Bragado,Bragado,Buenos Aires,,
+58,San Justo,San Justo,Buenos Aires,"-346.277.955,00","-585.673.345,00"
+1574,Empedrado Acceso,Empedrado,Corrientes,"-279.534.113,00","-587.946.224,00"
+51,Villa Tesei - Gaona y Vergara,Villa Tesei,Buenos Aires,"-346.311.565,00","-586.295.056,00"
+2731,General Cabrera,General Cabrera,Córdoba,"-328.150.106,00","-638.785.759,00"
+3800,Caa Cati,Caa Cati,Corrientes,,
+408,Terminal de Palpala,Palpala,Jujuy,"-242.577.052,00","-652.126.551,00"
+328,Morteros,Morteros,Córdoba,,
+2962,Montecarlo,Montecarlo,Misiones,"-265.685.503,00","-547.581.769,00"
+1874,Concepcion del Uruguay Acceso,Concepcion del Uruguay,Entre Rios,"-324.865.606,00","-583.096.147,00"
+3428,Acceso Santo Tome,Santo Tome,Corrientes,"-2.858.048,00","-560.859.239,00"
+1762,Rio Ceballos,Rio Ceballos,Córdoba,,
+2382,Chos Malal,Chos Malal,Neuquén,"-373.814.199,00","-702.654.433,00"
+773,Villa Huidobro,Villa Huidobro,Córdoba,,
+620,Luis Piedrabuena,Luis Piedrabuena,Santa Cruz,"-499.827.993,00","-689.089.108,00"
+1493,Carlos Casares,Carlos Casares,Buenos Aires,"-356.368.557,00","-613.535.625,00"
+724,Chapadmalal,Chapadmalal,Buenos Aires,"-382.094.556,00","-577.016.813,00"
+2948,Puerto Esperanza,Puerto Esperanza,Misiones,"-26.016.989,00","-546.499.443,00"
+585,Sierra Grande,Sierra Grande,Rio Negro,"-416.084.556,00","-653.539.324,00"
+646,Villa Regina,Villa Regina,Rio Negro,"-390.969.788,00","-670.870.364,00"
+107,Escobar,Escobar,Buenos Aires,"-343.552.786,00","-587.969.945,00"
+4406,Devoto,Cordoba ,Córdoba,"-31.432.882,00","-620.732.147,00"
+2943,Terminal de Aristobulo del Valle,Aristobulo del Valle,Misiones,"-27.094.677,00","-548.842.219,00"
+3091,Wanda,Wanda,Misiones,"-259.677.486,00","-545.717.096,00"
+3002,Colonia 25 de Mayo,Colonia 25 de Mayo,La Pampa,"-377.692.984,00","-677.171.409,00"
+1073,Martinez,Martinez,Buenos Aires,"-344.877.281,00","-58.503.184,00"
+348,Las Toscas,Las Toscas,Santa Fe,"-289.940.275,00","-595.837.069,00"
+711,Ameghino,Ameghino,Buenos Aires,"-345.687.743,00","-586.934.145,00"
+167,Daireaux,Daireaux,Buenos Aires,"-365.975.256,00","-617.521.984,00"
+3056,Villa del Totoral,Totoral,Córdoba,,
+2944,Capiovi,Capiovi,Misiones,"-269.268.636,00","-550.601.573,00"
+2113,Tanti,Tanti,Córdoba,"-313.562.534,00","-645.907.287,00"
+1187,Villa del Dique,Villa del Dique,Córdoba,"-321.760.314,00","-644.525.659,00"
+2606,Transito,Transito,Córdoba,,
+3963,Pico Truncado,Pico Truncado,Santa Cruz,"-467.974.081,00","-679.477.572,00"
+4214,Villa de Maria del Rio Seco,Villa de Maria del Rio Seco,Córdoba,"-298.995.356,00","-637.232.029,00"
+375,Tostado,Tostado,Santa Fe,"-292.291.896,00","-617.716.599,00"
+1745,Sampacho Acceso,Sampacho,Córdoba,"-331.242.678,00","-643.443.408,00"
+1091,Concepción,Concepcion,Tucumán,"-27.344.054,00","-65.589.608,00"
+356,Villa Angela,Villa Angela,Chaco,"-275.703.113,00","-607.230.179,00"
+567,Arias,Arias,Córdoba,,
+4093,Cruce Florencio Varela,Florencio Varela,Buenos Aires,"-347.800.617,00","-582.624.139,00"
+633,Fernandez,Fernandez,Santiago del Estero,"-279.278.106,00","-638.863.188,00"
+374,San Cristobal,San Cristobal,Santa Fe,"-302.959.804,00","-612.230.301,00"
+1614,Colon Acceso,Colón,Entre Rios,"-322.589.025,00","-582.374.954,00"
+3021,Cruce San Jose,San Jose,Misiones,"-277.446.193,00","-55.784.111,00"
+806,San Antonio de Padua,San Antonio De Padua,Buenos Aires,"-346.659.508,00","-586.998.855,00"
+472,Berrotaran,Berrotaran,Córdoba,"-324.507.169,00","-644.103.798,00"
+687,General Lamadrid,General Lamadrid,Buenos Aires,,
+2956,Leandro N Alem,Leandro N. Alem,Misiones,"-276.162.806,00","-553.216.982,00"
+291,Villa Giardino,Villa Giardino,Córdoba,"-313.563.514,00","-645.897.814,00"
+593,Esquina,Esquina,Corrientes,"-300.197.774,00","-595.316.999,00"
+2172,La Cruz Acceso,La Cruz,Corrientes,,
+524,Terminal de Zapala,Zapala,Neuquén,"-389.064.632,00","-700.678.611,00"
+490,Capitan Sarmiento,Capitan Sarmiento,Buenos Aires,"-341.690.113,00","-59.789.115,00"
+137,Banfield,Banfield,Buenos Aires,"-347.383.726,00","-583.982.099,00"
+2246,Rio Primero,Rio Primero,Córdoba,"-31.334.839,00","-636.157.697,00"
+3642,Rotonda Vapor,Burzaco,Buenos Aires,"-34.833.364,00","-58.384.415,00"
+3202,Rio Mayo,Rio Mayo,Chubut,,
+327,Sunchales,Sunchales ,Santa Fe,"-309.443.567,00","-615.575.433,00"
+344,Vera,Vera,Santa Fe,,
+365,Saladas,Saladas ,Corrientes,"-282.596.259,00","-586.205.545,00"
+1555,San Jose de la Dormida,San Jose de la Dormida,Córdoba,"-303.571.011,00","-639.408.588,00"
+1350,Punta Mogotes,Punta Mogotes,Buenos Aires,"-380.663.996,00","-575.475.752,00"
+302,Bell Ville,Bell Ville,Córdoba,"-32.607.658,00","-627.157.974,00"
+2092,Salsipuedes,Salsipuedes,Córdoba,"-311.402.698,00","-642.911.905,00"
+921,Quitilipi,Quitilipi,Chaco,"-268.698.845,00","-602.129.209,00"
+171,Ezeiza,Ezeiza,Buenos Aires,"-34.855.545,00","-585.243.174,00"
+1466,Santo Tome,Santo Tome,Corrientes,"-285.464.299,00","-560.439.312,00"
+84,Las Breñas,Las Breñas ,Chaco,"-270.918.622,00","-610.843.954,00"
+150,Terminal de Carhue,Carhue,Buenos Aires,"-371.761.869,00","-627.605.225,00"
+180,Guamini,Guamini,Buenos Aires,"-370.098.886,00","-624.201.424,00"
+3229,El Tropezon,Tropezon,Buenos Aires,"-3.459.201,00","-58.560.652,00"
+2746,Garayalde,Garayalde,Chubut,"-446.890.676,00","-666.235.614,00"
+584,Rawson,Rawson,Chubut,"-433.038.743,00","-650.975.427,00"
+62,San Francisco Solano,San Francisco Solano,Buenos Aires,"-347.914.619,00","-583.115.673,00"
+1496,Carlos Tejedor,Carlos Tejedor,Buenos Aires,"-353.946.694,00","-624.245.417,00"
+1968,Plottier,Confluencia,Neuquén,"-389.561.134,00","-68.218.199,00"
+258,Sarandi,Sarandi,Buenos Aires,"-346.778.791,00","-583.473.534,00"
+563,El Bolson,El Bolson,Rio Negro,"-419.637.164,00","-715.367.863,00"
+8957,Saldan,Saldán,Córdoba,,
+1629,Parador Pinto,Pinto,Santiago del Estero,,
+2171,Alvear,Alvear,Corrientes,"-290.866.267,00","-565.541.893,00"
+3632,Rio Grande Terminal,Rio Grande,Tierra Del Fuego,"-537.838.988.434.966,00","-677.184.069.531.646,00"
+91,Quimili,Quimili,Santiago del Estero,"-27.644.825,00","-624.139.631,00"
+1551,Las Varillas,Las Varillas,Córdoba,,
+366,San Lorenzo,San Lorenzo ,Corrientes,,
+89,Pinedo,General Pinedo,Chaco,"-273.298.353,00","-612.865.341,00"
+139,Bernal,Bernal ,Buenos Aires,"-34.715.528,00","-583.057.082,00"
+240,Rojas,Rojas,Buenos Aires,"-341.990.725,00","-607.258.297,00"
+260,Temperley,Temperley,Buenos Aires,,
+1553,El Tio,Arroyito,Córdoba,,
+2583,Balnearia,Balnearia,Córdoba,,
+2585,La Para,La Para,Córdoba,,
+2875,Mburucuya,Mburucuya,Corrientes,,
+8419,Lomas de Vallejos Acceso,Lomas de Vallejos ,Corrientes,,
+1604,Paso de los Libres Acceso,Paso de los Libres,Corrientes,"-297.253.032,00","-570.937.462,00"
+113,Laferrere,Laferrere,Buenos Aires,"-34.749.705,00","-58.586.049,00"
+4165,Guamini Acceso,Guamini,Buenos Aires,,
+3607,Las Lajas,Las Lajas,Neuquén,"-385.469.571,00","-703.557.587,00"
+3809,San Jaime de la Frontera,San Jaime de la Frontera,Entre Rios,,
+935,Puente La Noria,Puente La Noria,Buenos Aires,"-347.049.466,00","-584.598.505,00"
+81,Avia Terai,Avia Terai,Chaco,,
+357,San Bernardo,San Bernardo,Chaco,,
+2012,Chimpay,Chimpay,Rio Negro,"-391.621.487,00","-661.524.984,00"
+179,General Madariaga,General Madariaga,Buenos Aires,"-369.951.422,00","-571.390.254,00"
+934,Puan,Puan,Buenos Aires,"-375.415.029,00","-627.602.254,00"
+480,General Levalle,General Levalle,Córdoba,"-3.290.173,00","-68.841.995,00"
+2290,Trenel,Trenel,La Pampa,"-35.698.632,00","-64.134.152,00"
+2941,Candelaria,Candelaria,Misiones,"-274.705.059,00","-557.497.627,00"
+2963,Santo Pipo,Santo Pipo,Misiones,"-271.422.949,00","-554.050.827,00"
+3957,La Esperanza,La Esperanza,Santa Cruz,,
+4676,Concepcion,Concepcion,Corrientes,,
+1449,El Motivo,Pacheco,Buenos Aires,,
+387,La Carlota,La Carlota,Córdoba,"-334.187.457,00","-632.930.808,00"
+2383,Villa La Angostura,Villa La Angostura,Neuquén,"-407.628.368,00","-71.638.391,00"
+115,Gonzalez Catan,Gonzalez Catan,Buenos Aires,"-347.769.197,00","-586.408.186,00"
+647,Allen,Allen,Rio Negro,"-38.980.596,00","-678.307.486,00"
+3409,Puerto Santa Cruz,Santa Cruz,Santa Cruz,"-464.437.291,00","-675.139.587,00"
+3559,San Pedro,San Pedro,Misiones,"-266.282.019,00","-541.227.293,00"
+5040,Tudcum,Tudcum,San Juan,,
+1462,Federacion Acceso,Federacion,Entre Rios,"-310.329.316,00","-580.727.005,00"
+1058,Presidencia de la Plaza,Presidencia de la Plaza,Chaco,"-270.077.112,00","-598.476.791,00"
+352,Santa Sylvina,Santa Sylvina,Chaco,"-278.283.741,00","-611.382.294,00"
+184,Hurlingham,Hurlingham ,Buenos Aires,"-345.791.459,00","-586.410.435,00"
+102,Selva,Selva,Santiago del Estero,,
+2067,Villa Ballester,San Martin,Buenos Aires,"-345.514.049,00","-585.536.742,00"
+466,Desaguadero,Desaguadero,Mendoza,"-33.402.467,00","-67.155.987,00"
+3670,Barrancas,Barrancas,Neuquén,,
+8972,Santa Rosa de Rio Primero,Santa Rosa de Río Primero,Córdoba,"-311.539.332,00","-634.059.691,00"
+97,Colonia Dora,Colonia Dora,Santiago del Estero,"-28.603.885,00","-62.951.482,00"
+1392,Chajarí Acceso,Chajari,Entre Rios,"-307.566.899,00","-580.199.361,00"
+105,Campo Largo,Campo Largo,Chaco,"-314.365.841,00","-644.977.687,00"
+522,Terminal de Cutral Co,Cutral Co,Neuquén,"-389.300.658,00","-692.257.869,00"
+238,Remedios de Escalada,Remedios de Escalada,Buenos Aires,"-347.273.654,00","-583.958.707,00"
+623,Fitz Roy,Fitz Roy,Santa Cruz,"-470.244.893,00","-672.480.011,00"
+2203,Pellegrini,Pellegrini,Buenos Aires,"-362.662.409,00","-631.644.244,00"
+3564,Cuatro Bocas,Cuatro Bocas,Corrientes,,
+3192,Jose de San Martin,Jose de San Martin,Chubut,,
+3664,Añelo,Añelo,Neuquén,,
+3794,Pozo del Molle,Pozo del Molle,Córdoba,"-32.016.178,00","-629.152.436,00"
+4892,Santa Rosa,Santa Rosa,Corrientes,,
+8954,San Francisco del Chañar,San Francisco del Chañar,Córdoba,,
+50,Moron,Moron,Buenos Aires,"-346.490.832,00","-586.172.454,00"
+3008,Alvear Acceso,Alvear,Corrientes,"-290.866.267,00","-565.541.893,00"
+244,Salto,Salto,Buenos Aires,"-34.294.012,00","-602.529.329,00"
+202,Longchamps,Longchamps,Buenos Aires,"-348.596.537,00","-583.899.683,00"
+704,Villa Cañas,Villa Cañas,Santa Fe,"-340.082.166,00","-615.996.966,00"
+2605,Santiago Temple,Santiago Temple,Córdoba,,
+1396,Chavarría Acceso,Chavarria,Corrientes,,
+1515,Ushuaia,Ushuaia,Tierra Del Fuego,"-548.079.277,00","-683.071.496,00"
+1755,Bialet Masse,Bialet Masse,Córdoba,"-313.137.824,00","-644.618.243,00"
+299,Laguna Larga,Laguna Larga,Córdoba,,
+3500,Rio Turbio,Rio Turbio,Santa Cruz,"-516.136.796,00","-692.281.617,00"
+3644,Simoca,Simoca,Tucumán,,
+4411,La Francia,Cordoba ,Córdoba,,
+74,Arrecifes,Arrecifes,Buenos Aires,"-34.063.967,00","-601.031.734,00"
+1711,Avellaneda,Avellaneda,Santa Fe,,
+560,Piedra del Aguila,Piedra del Aguila,Neuquén,"-400.519.442,00","-70.080.505,00"
+2745,Chazon,Chazon,Córdoba,"-330.797.687,00","-63.272.584,00"
+4894,30 de agosto,30 de agosto,Buenos Aires,"-359.691.853,00","-627.332.517,00"
+1698,Tres Lomas,Tres Lomas,Buenos Aires,"-36.461.422,00","-628.643.668,00"
+129,Alejandro Korn,Alejandro Korn,Buenos Aires,"-349.778.822,00","-583.811.088,00"
+187,Jose C. Paz,Jose C. Paz,Buenos Aires,"-345.180.942,00","-587.496.317,00"
+3230,Guernica,Guernica,Buenos Aires,"-349.173.924,00","-583.843.545,00"
+700,Serrano,Serrano,Córdoba,"-344.715.552,00","-635.382.448,00"
+1075,Olivos,Olivos,Buenos Aires,"-34.502.528,00","-584.953.205,00"
+4166,Saavedra Acceso,Saavedra,Buenos Aires,,
+2761,Tancacha,Tancacha,Córdoba,,
+3965,Las Heras,Las Heras,Santa Cruz,"-465.383.034,00","-689.353.788,00"
+3967,Perito Moreno,Perito Moreno,Santa Cruz,"-465.834.883,00","-709.278.305,00"
+4248,La Playosa,La Playosa,Córdoba,,
+4271,Bella Vista,Bella Vista,San Juan,,
+2741,Adelia Maria,Rio Cuarto,Córdoba,"-331.141.017,00","-643.517.467,00"
+1090,Monteros,Monteros,Tucumán,"-271.700.736,00","-654.939.944,00"
+90,Gancedo,Gancedo,Chaco,"-274.901.136,00","-616.750.789,00"
+580,Junin de Los Andes,Junin de Los Andes,Neuquén,"-399.485.526,00","-710.737.538,00"
+579,San Martin de Los Andes,San Martin de Los Andes,Neuquén,"-40.160.464,00","-713.578.722,00"
+2044,Rivadavia,Rivadavia,Buenos Aires,,
+2762,Tornquist Acceso,Tornquist,Buenos Aires,,
+338,Vedia,Vedia,Buenos Aires,"-344.925.905,00","-615.431.182,00"
+546,Terminal de General Acha,General Acha,La Pampa,"-373.670.023,00","-646.009.827,00"
+197,Lanus Kolkinis,Lanus,Buenos Aires,,
+331,Las Catitas,Las Catitas,Mendoza,,
+3237,Centenario,Centenario,Neuquén,"-388.262.625,00","-681.199.484,00"
+893,Monte Grande,Monte Grande,Buenos Aires,"-348.223.099,00","-584.715.079,00"
+1060,Tapiales,Tapiales,Buenos Aires,,
+1061,Del Viso,Del Viso,Buenos Aires,"-344.541.184,00","-587.962.602,00"
+1076,Garin,Garin,Buenos Aires,"-344.170.705,00","-587.247.465,00"
+3280,Los Condores,Los Condores,Córdoba,,
+3265,Glew,Glew,Buenos Aires,"-348.306.965,00","-583.798.133,00"
+3975,28 de noviembre,28 de noviembre,Santa Cruz,,
+4609,Tatacua Acceso,Concepcion,Corrientes,,
+4648,Laborde,Laborde,Córdoba,,
+4718,Pascanas,Pascanas,Córdoba,,
+4719,Wenceslao Escalante,Wenceslao Escalante,Córdoba,,
+8227,Melo,Melo,Córdoba,,
+2470,Hotel Sarmiento,Ciudad de Buenos Aires,Capital Federal,,
+314,Thames,San Isidro,Buenos Aires,,
+8652,Quebrada del Condorito,Cordoba ,Córdoba,,
+4533,Plaza Velez Sarfield,Cordoba ,Córdoba,,
+916,San Nicolas,San Nicolas,Buenos Aires,"-333.431.802,00","-602.268.335,00"
+1476,Alberti,Alberti,Buenos Aires,"-350.532.654,00","-602.626.061,00"
+1481,Azul Acceso,Azul,Buenos Aires,"-367.915.518,00","-598.410.243,00"
+1428,Bragado Acceso,Bragado,Buenos Aires,"-351.373.176,00","-604.523.778,00"
+1519,Colon,Colon,Buenos Aires,"-339.056.758,00","-611.095.262,00"
+1654,Lujan Acceso,Lujan,Buenos Aires,"-345.833.779,00","-591.019.097,00"
+4711,Moron Shopping,Moron,Buenos Aires,"-346.312.509,00","-586.290.791,00"
+2058,San Fernando,San Fernando,Buenos Aires,"-344.365.842,00","-585.683.061,00"
+1635,Rotonda II San Justo,San Justo,Buenos Aires,"-346.854.435,00","-585.605.888,00"
+2085,La Porteña,Trenque Lauquen,Buenos Aires,,
+1703,Mar Azul,Villa Gesell ,Buenos Aires,,
+8750,Las Heras 699,Mendoza,Mendoza,,
+1534,Frias,Frias,Santiago del Estero,"-28.625.199,00","-651.280.367,00"
+1521,Herrera Acceso,Herrera,Santiago del Estero,,
+2481,Firmat,Firmat,Santa Fe,"-33.455.179,00","-61.485.278,00"
+2143,Galvez,Santa Fe,Santa Fe,,
+2146,Logroño,Santa Fe,Santa Fe,,
+4723,Corral de Bustos,Corral de Bustos,Córdoba,,
+303,Marcos Juarez,Marcos Juarez,Córdoba,"-326.867.879,00","-621.054.891,00"
+4712,Villa Nueva,Villa Maria,Córdoba,,
+1836,La Paz Acceso,La Paz,Entre Rios,,
+3017,Villa Elisa Acceso,Villa Elisa,Entre Rios,,
+4679,Riachuelo,Corrientes,Corrientes,,
+659,Chavarria,Chavarria,Corrientes,,
+367,Empedrado,Empedrado,Corrientes,"-281.357.575,00","-587.665.118,00"
+1250,Itati,Itati,Corrientes,"-274.424.185,00","-573.399.317,00"
+3027,La Cruz,La Cruz,Corrientes,"-291.699.298,00","-566.524.053,00"
+3086,Loreto,Loreto,Corrientes,"-268.228.455,00","-652.028.385,00"
+1589,Felipe Yofre Acceso,Mercedes,Corrientes,,
+3087,Mocoreta,Mocoreta,Corrientes,"-306.166.337,00","-579.801.478,00"
+8936,San Lorenzo Acceso,San Lorenzo ,Corrientes,,
+363,San Roque,San Roque,Corrientes,"-285.744.029,00","-587.220.526,00"
+1394,Solari Acceso,Solari,Corrientes,,
+4563,Solari,Solari,Corrientes,"-293.776.262,00","-581.947.865,00"
+2945,Campo Viera,Campo Viera,Misiones,"-273.290.037,00","-550.525.868,00"
+4558,San Expedito,San Juan,San Juan,,
+80,Villa Larca,Villa Larca,San Luis,"-32.617.892,00","-64.982.711,00"
+2045,Santa Rosa del Conlara,Santa Rosa del Conlara,San Luis,"-323.419.724,00","-652.070.694,00"
+1623,Malbran Acceso,Malbran,Santiago del Estero,,
+487,Canals,Canals,Córdoba,,
+1021,Ledesma Alejo,Ledesma Alejo,Córdoba,"-33.607.375,00","-62.625.771,00"
+2551,Valentin Alsina,Valentín Alsina,Buenos Aires,"-346.770.449,00","-584.013.858,00"
+2391,Banderalo Acceso,Banderalo ,Buenos Aires,"-3.503.759,00","-6.298.973,00"
+783,Carmen de Areco,Carmen de Areco,Buenos Aires,"-34.402.947,00","-59.828.211,00"
+1542,Piedritas,General Villegas,Buenos Aires,,
+1546,Henderson,Henderson,Buenos Aires,"-345.250.435,00","-584.936.766,00"
+3874,Rotonda Laprida,Laprida,Buenos Aires,,
+805,Paso del Rey,Paso del Rey,Buenos Aires,"-346.466.623,00","-587.984.202,00"
+3217,Villalonga,Patagones,Buenos Aires,,
+2035,Bordenave,Puan,Buenos Aires,,
+245,Terminal de San Andres de Giles,San Andres de Giles,Buenos Aires,"-344.503.152,00","-594.497.264,00"
+566,San Antonio de Areco,San Antonio de Areco,Buenos Aires,"-342.433.271,00","-594.657.861,00"
+2103,Etruria,Etruria ,Córdoba,"-329.395.398,00","-632.475.329,00"
+3047,La Laguna,La Laguna,Córdoba,,
+304,Leones,Leones,Córdoba,"-326.535.621,00","-622.931.785,00"
+3046,MANFREDI,Manfredi,Córdoba,,
+3282,Oncativo (YPF sobre Ruta 9),Oncativo,Córdoba,,
+297,Rio Segundo,Rio Segundo,Córdoba,,
+1586,Lavalle,Lavalle ,Corrientes,,
+601,Concaran,Concaran,San Luis,"-325.594.826,00","-652.451.188,00"
+604,Terminal de La Toma,La Toma,San Luis,"-330.559.493,00","-656.209.368,00"
+2480,Casilda,Casilda,Santa Fe,,
+1682,Garza Acceso,Garza,Santiago del Estero,,
+1646,Lobos Acceso,Lobos,Buenos Aires,"-351.997.847,00","-590.969.682,00"
+2047,Roque Perez Acceso,Roque Perez,Buenos Aires,,
+3244,Cañuelas Acceso,Cañuelas,Buenos Aires,"-350.206.645,00","-58.749.483,00"
+4366,San Vicente Acceso,San Vicente,Buenos Aires,,
+370,Barranqueras,Barranqueras,Chaco,"-27.482.992,00","-589.479.697,00"
+372,Terminal de Formosa,Formosa,Formosa,"-261.916.709,00","-581.935.823,00"
+373,General Lucio V. Mansilla Acceso,General Lucio V Mansilla,Formosa,"-314.380.875,00","-641.402.435,00"
+8937,General Lucio V Mansilla,General Lucio V Mansilla,Formosa,,
+379,Villa Celina,Villa Celina,Buenos Aires,"-346.905.902,00","-584.810.218,00"
+500,Hughes,Hughes,Santa Fe,"-337.554.916,00","-619.737.225,00"
+1346,Chajan,Chajan,Córdoba,,
+2552,Quines,Quines,San Luis,,
+4670,Vista Alegre Sur,Centenario,Neuquén,,
+4126,Picun Leufu,Picun Leufu,Neuquén,"-395.131.564,00","-692.926.061,00"
+569,Nueva Galia,Nueva Galia,San Luis,,
+570,Terminal de Rancul,Rancul,La Pampa,,
+5533,General Conesa Acceso ,General Conesa,Rio Negro,,
+602,Tilisarao,Tilisarao,San Luis,,
+2418,Las Flores Acceso,Las Flores,Buenos Aires,"-36.028.311,00","-59.083.304,00"
+2392,Benito Juarez Acceso,Benito Juarez,Buenos Aires,"-376.471.567,00","-598.583.972,00"
+660,Mantilla,Mantilla,Corrientes,,
+3061,Don Torcuato,Don Torcuato,Buenos Aires,"-344.180.632,00","-585.774.746,00"
+681,Arribeños,Arribeños,Buenos Aires,"-34.208.895,00","-61.355.607,00"
+4131,Pedro Luro Acceso,Pedro Luro,Buenos Aires,,
+796,Hinojo,Hinojo,Buenos Aires,,
+8574,Arroyito Acceso,Arroyito,Córdoba,,
+962,Loma Verde,Loma Verde,Buenos Aires,"-34.817.182,00","-58.431.864,00"
+3686,Saavedra,Saavedra,Buenos Aires,,
+7602,Goyena,Goyena,Buenos Aires,,
+2104,Tio Pujio,Tio Pujio,Córdoba,,
+1554,James Craik,James Craik,Córdoba,,
+1071,Las Leñas,Las Leñas,Mendoza,,
+3153,Alejandro Roca,Alejandro Roca,Córdoba,"-33.348.999,00","-637.179.604,00"
+1159,Gigena,Gigena,Córdoba,"-327.546.242,00","-643.566.317,00"
+1257,Yofre,Yofre,Corrientes,,
+1395,Yofre Acceso,Yofre,Corrientes,,
+1246,Paso de la Patria,Paso de la Patria,Corrientes,,
+3164,Rafael Castillo,Rafael Castillo,Buenos Aires,"-346.965.549,00","-58.627.012,00"
+1699,Munro,Munro,Buenos Aires,"-345.308.344,00","-585.250.819,00"
+2381,Alumine,Alumine,Neuquén,"-392.396.449,00","-709.152.836,00"
+2441,Teodelina (Teodelina- Santa Fe),Teodelina,Santa Fe,"-341.879.262,00","-615.265.685,00"
+2486,Buena Esperanza,Buena Esperanza,San Luis,,
+2584,Marull,Marull,Córdoba,,
+3227,Del Campillo Acceso,Del Campillo,Córdoba,,
+2773,Berisso,Berisso,Buenos Aires,"-348.709.114,00","-578.791.259,00"
+4434,Puerto Libertad Acceso,Puerto Libertad,Misiones,,
+3024,Terminal de Yapeyu,Yapeyu,Corrientes,"-294.702.789,00","-568.189.476,00"
+3006,Villa Pehuenia,Villa Pehuenia,Neuquén,"-388.796.541,00","-711.861.652,00"
+3090,Santa Eufemia,Santa Eufemia,Córdoba,,
+3433,Gobernador Costa,Costa,Chubut,"-44.046.558,00","-706.006.765,00"
+3185,Cruce 20 / 22,Rio Mayo,Chubut,,
+3205,Tecka,Tecka,Chubut,"-434.906.813,00","-708.092.022,00"
+3275,Clorinda,Clorinda,Formosa,"-252.940.717,00","-57.721.777,00"
+3319,Villa Ciudad America,Villa Ciudad America,Córdoba,,
+3425,El Hoyo,El Hoyo,Chubut,"-420.651.289,00","-715.229.541,00"
+2009,Buratovich,Mayor Buratovich,Buenos Aires,,
+3961,Glaciar Perito Moreno,Glaciar Perito Moreno,Santa Cruz,,
+3966,El Pluma,El Pluma,Santa Cruz,,
+4241,Penitentes,Penitentes,Mendoza,,
+4669,Aguada San Roque,Aguada San Roque,Neuquén,,
+8113,Inriville,Inriville,Córdoba,,
+4296,Justiniano Posse,Justiniano Posse,Córdoba,,
+4575,Santa Rita,Santa Rita,Misiones,,
+4652,San Jose,San Jose,Buenos Aires,,
+4720,Monte Maiz,Monte Maiz,Córdoba,,
+4721,Isla Verde,Isla Verde,Córdoba,,
+8380,San Francisco del Monte de Oro,San Francisco del Monte de Oro,San Luis,,
+8409,Puisoye,Puisoye,Corrientes,,
+8410,Cerrito,Cerrito,Corrientes,,
+8416,Las Maloyas Acceso,Las Maloyas,Corrientes,,
+8418,Lomas de Gonzalez Acceso,Lomas de Gonzalez,Corrientes,,
+8420,Paso Florentin Acceso,Paso Florentin,Corrientes,,
+8500,Paraje Tres Cerros,Paraje Tres Cerros,Santa Cruz,,
+8110,Cruz Alta,Cruz Alta,Córdoba,,
+8229,Monte Buey,Monte Buey,Córdoba,,
+8656,Traslado a La Cumbrecita,La Cumbrecita,Córdoba,,
+8743,Palmar Grande,Palmar Grande,Corrientes,,
+8767,Colonia Caroya,Colonia Caroya,Córdoba,,
+4221,Bahia Manzano,Bahia Manzano,Neuquén,"-407.957.418,00","-715.922.463,00"

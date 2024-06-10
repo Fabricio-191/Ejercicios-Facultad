@@ -1,10 +1,9 @@
 package fabricio.rubio.proyecto.moea.model.mapper;
 
-import fabricio.rubio.proyecto.moea.model.dto.RequirementDTO;
-import fabricio.rubio.proyecto.moea.persistence.entities.RequirementEntity;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalTime;
+import fabricio.rubio.proyecto.moea.model.dto.RequirementDTO;
+import fabricio.rubio.proyecto.moea.persistence.entities.RequirementEntity;
 
 @Component
 public class RequirementMapper {

@@ -1,6 +1,5 @@
 package fabricio.rubio.proyecto.moea.persistence.entities;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 
 import jakarta.persistence.Entity;

@@ -1,12 +1,12 @@
 package fabricio.rubio.proyecto.moea.controllers;
 
-import fabricio.rubio.proyecto.moea.model.dto.StopDTO;
-import fabricio.rubio.proyecto.moea.persistence.entities.StopEntity;
-import fabricio.rubio.proyecto.moea.services.StopService;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import fabricio.rubio.proyecto.moea.model.dto.StopDTO;
+import fabricio.rubio.proyecto.moea.services.StopService;
 
 @RestController
 public class StopController {

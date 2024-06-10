@@ -66,13 +66,13 @@
                 <config key="0">
                     <entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
                     <config key="org.knime.core.data.def.StringCell">
-                        <entry key="StringCell" type="xstring" value="A"/>
+                        <entry key="StringCell" type="xstring" value="x"/>
                     </config>
                 </config>
                 <config key="1">
                     <entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
                     <config key="org.knime.core.data.def.StringCell">
-                        <entry key="StringCell" type="xstring" value="B"/>
+                        <entry key="StringCell" type="xstring" value="y"/>
                     </config>
                 </config>
             </config>

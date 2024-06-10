@@ -3,9 +3,8 @@
     <config key="viewValueSelectedIDs"/>
     <entry key="selectedModel" type="xstring" isnull="true" value=""/>
     <config key="inViewThresholdValues">
-        <entry key="array-size" type="xint" value="2"/>
+        <entry key="array-size" type="xint" value="1"/>
         <entry key="0" type="xdouble" value="0.5"/>
-        <entry key="1" type="xdouble" value="0.5"/>
     </config>
     <config key="inViewThresholdMethods">
         <entry key="array-size" type="xint" value="1"/>
@@ -20,12 +19,9 @@
     <entry key="barChartXLabel" type="xstring" value="Metric by Model"/>
     <entry key="barChartYLabel" type="xstring" value="Value"/>
     <config key="barChartInclBars">
-        <entry key="array-size" type="xint" value="5"/>
+        <entry key="array-size" type="xint" value="2"/>
         <entry key="0" type="xstring" value="Accuracy"/>
         <entry key="1" type="xstring" value="AUC"/>
-        <entry key="2" type="xstring" value="Error Rate"/>
-        <entry key="3" type="xstring" value="Precision"/>
-        <entry key="4" type="xstring" value="Sensitivity"/>
     </config>
     <entry key="ROCTitle" type="xstring" value="ROC Curves"/>
     <entry key="ROCXLabel" type="xstring" value="1 - Specificity"/>

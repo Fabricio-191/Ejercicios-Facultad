@@ -66,13 +66,13 @@
                 <config key="0">
                     <entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
                     <config key="org.knime.core.data.def.StringCell">
-                        <entry key="StringCell" type="xstring" value="A"/>
+                        <entry key="StringCell" type="xstring" value="x"/>
                     </config>
                 </config>
                 <config key="1">
                     <entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
                     <config key="org.knime.core.data.def.StringCell">
-                        <entry key="StringCell" type="xstring" value="B"/>
+                        <entry key="StringCell" type="xstring" value="y"/>
                     </config>
                 </config>
             </config>
@@ -81,7 +81,7 @@
         <config key="meta_data"/>
     </config>
     <config key="column_spec_3">
-        <entry key="column_name" type="xstring" value="P (type=A)"/>
+        <entry key="column_name" type="xstring" value="P (type=x)"/>
         <config key="element_names">
             <entry key="array-size" type="xint" value="0"/>
         </config>
@@ -108,7 +108,7 @@
         <config key="meta_data"/>
     </config>
     <config key="column_spec_4">
-        <entry key="column_name" type="xstring" value="P (type=B)"/>
+        <entry key="column_name" type="xstring" value="P (type=y)"/>
         <config key="element_names">
             <entry key="array-size" type="xint" value="0"/>
         </config>
@@ -148,13 +148,13 @@
                 <config key="0">
                     <entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
                     <config key="org.knime.core.data.def.StringCell">
-                        <entry key="StringCell" type="xstring" value="A"/>
+                        <entry key="StringCell" type="xstring" value="x"/>
                     </config>
                 </config>
                 <config key="1">
                     <entry key="datacell" type="xstring" value="org.knime.core.data.def.StringCell"/>
                     <config key="org.knime.core.data.def.StringCell">
-                        <entry key="StringCell" type="xstring" value="B"/>
+                        <entry key="StringCell" type="xstring" value="y"/>
                     </config>
                 </config>
             </config>

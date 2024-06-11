@@ -18,8 +18,7 @@ for(let i = 0; i < 10 * multiplicador; i++){
 		if(inSquare(i, j, square3)){
 			a[i][j] = 'y'
 			arr.push([i / multiplicador, j / multiplicador, 'y'])
-		}
-		if(inSquare(i, j, square1) && !inSquare(i, j, square2)){
+		}else if(inSquare(i, j, square1) && !inSquare(i, j, square2)){
 			a[i][j] = 'x';
 			arr.push([i / multiplicador, j / multiplicador, 'x'])
 		}

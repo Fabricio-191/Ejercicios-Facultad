@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://www.knime.org/2008/09/XMLConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.knime.org/2008/09/XMLConfig http://www.knime.org/XMLConfig_2008_09.xsd" key="settings.xml">
+    <entry key="node_file" type="xstring" value="settings.xml"/>
+    <config key="flow_stack"/>
+    <config key="internal_node_subsettings">
+        <entry key="memory_policy" type="xstring" value="CacheSmallInMemory"/>
+    </config>
+    <config key="model">
+        <entry key="generateImage" type="xboolean" value="false"/>
+        <entry key="width" type="xint" value="800"/>
+        <entry key="height" type="xint" value="600"/>
+    </config>
+    <config key="view">
+        <config key="targetColumn">
+            <entry key="selected" type="xstring" value="letra"/>
+            <config key="compatibleTypes_Internals">
+                <entry key="array-size" type="xint" value="3"/>
+                <entry key="0" type="xstring" value="org.knime.core.data.StringValue"/>
+                <entry key="1" type="xstring" value="org.knime.core.data.DataValue"/>
+                <entry key="2" type="xstring" value="org.knime.core.data.NominalValue"/>
+            </config>
+        </config>
+        <entry key="positiveClassValue" type="xstring" value="A"/>
+        <config key="predictionColumns">
+            <config key="selected_Internals">
+                <entry key="array-size" type="xint" value="1"/>
+                <entry key="0" type="xstring" value="P (letra=A)"/>
+            </config>
+            <entry key="mode" type="xstring" value="MANUAL"/>
+            <config key="patternFilter">
+                <entry key="pattern" type="xstring" value=""/>
+                <entry key="isCaseSensitive" type="xboolean" value="false"/>
+                <entry key="isInverted" type="xboolean" value="false"/>
+            </config>
+            <config key="manualFilter">
+                <config key="manuallySelected">
+                    <entry key="array-size" type="xint" value="1"/>
+                    <entry key="0" type="xstring" value="P (letra=A)"/>
+                </config>
+                <config key="manuallyDeselected">
+                    <entry key="array-size" type="xint" value="41"/>
+                    <entry key="0" type="xstring" value="1"/>
+                    <entry key="1" type="xstring" value="2"/>
+                    <entry key="2" type="xstring" value="3"/>
+                    <entry key="3" type="xstring" value="4"/>
+                    <entry key="4" type="xstring" value="5"/>
+                    <entry key="5" type="xstring" value="6"/>
+                    <entry key="6" type="xstring" value="7"/>
+                    <entry key="7" type="xstring" value="8"/>
+                    <entry key="8" type="xstring" value="9"/>
+                    <entry key="9" type="xstring" value="10"/>
+                    <entry key="10" type="xstring" value="11"/>
+                    <entry key="11" type="xstring" value="12"/>
+                    <entry key="12" type="xstring" value="13"/>
+                    <entry key="13" type="xstring" value="14"/>
+                    <entry key="14" type="xstring" value="15"/>
+                    <entry key="15" type="xstring" value="16"/>
+                    <entry key="16" type="xstring" value="P (letra=T)"/>
+                    <entry key="17" type="xstring" value="P (letra=I)"/>
+                    <entry key="18" type="xstring" value="P (letra=D)"/>
+                    <entry key="19" type="xstring" value="P (letra=N)"/>
+                    <entry key="20" type="xstring" value="P (letra=G)"/>
+                    <entry key="21" type="xstring" value="P (letra=S)"/>
+                    <entry key="22" type="xstring" value="P (letra=B)"/>
+                    <entry key="23" type="xstring" value="P (letra=J)"/>
+                    <entry key="24" type="xstring" value="P (letra=M)"/>
+                    <entry key="25" type="xstring" value="P (letra=X)"/>
+                    <entry key="26" type="xstring" value="P (letra=O)"/>
+                    <entry key="27" type="xstring" value="P (letra=R)"/>
+                    <entry key="28" type="xstring" value="P (letra=F)"/>
+                    <entry key="29" type="xstring" value="P (letra=C)"/>
+                    <entry key="30" type="xstring" value="P (letra=H)"/>
+                    <entry key="31" type="xstring" value="P (letra=W)"/>
+                    <entry key="32" type="xstring" value="P (letra=L)"/>
+                    <entry key="33" type="xstring" value="P (letra=P)"/>
+                    <entry key="34" type="xstring" value="P (letra=E)"/>
+                    <entry key="35" type="xstring" value="P (letra=V)"/>
+                    <entry key="36" type="xstring" value="P (letra=Y)"/>
+                    <entry key="37" type="xstring" value="P (letra=Q)"/>
+                    <entry key="38" type="xstring" value="P (letra=U)"/>
+                    <entry key="39" type="xstring" value="P (letra=K)"/>
+                    <entry key="40" type="xstring" value="P (letra=Z)"/>
+                </config>
+                <entry key="includeUnknownColumns" type="xboolean" value="false"/>
+            </config>
+            <config key="typeFilter">
+                <config key="selectedTypes">
+                    <entry key="array-size" type="xint" value="0"/>
+                </config>
+            </config>
+        </config>
+        <entry key="maxPoints" type="xint" value="2500"/>
+        <entry key="title" type="xstring" value="ROC Curve"/>
+        <entry key="xAxisLabel" type="xstring" value="False positive rate (1 - specificity)"/>
+        <entry key="yAxisLabel" type="xstring" value="True positive rate (sensitivity)"/>
+        <entry key="lineSize" type="xint" value="2"/>
+        <entry key="legendPosition" type="xstring" value="INSIDE_PLOT"/>
+        <entry key="allowImageDownload" type="xboolean" value="true"/>
+        <entry key="enableAnimation" type="xboolean" value="true"/>
+        <entry key="enableDataZoom" type="xboolean" value="true"/>
+        <entry key="showTooltip" type="xboolean" value="true"/>
+    </config>
+    <entry key="customDescription" type="xstring" isnull="true" value=""/>
+    <entry key="state" type="xstring" value="EXECUTED"/>
+    <entry key="factory" type="xstring" value="org.knime.base.views.node.roccurve.ROCCurveNodeFactory"/>
+    <entry key="node-name" type="xstring" value="ROC Curve"/>
+    <entry key="node-bundle-name" type="xstring" value="KNIME Views"/>
+    <entry key="node-bundle-symbolic-name" type="xstring" value="org.knime.base.views"/>
+    <entry key="node-bundle-vendor" type="xstring" value="KNIME AG, Zurich, Switzerland"/>
+    <entry key="node-bundle-version" type="xstring" value="5.2.4.v202405171011"/>
+    <entry key="node-feature-name" type="xstring" value="KNIME Views"/>
+    <entry key="node-feature-symbolic-name" type="xstring" value="org.knime.features.base.views.feature.group"/>
+    <entry key="node-feature-vendor" type="xstring" value="KNIME AG, Zurich, Switzerland"/>
+    <entry key="node-feature-version" type="xstring" value="5.2.4.v202405171011"/>
+    <config key="factory_settings"/>
+    <config key="node_creation_config">
+        <config key="Input Table"/>
+        <config key="Output Image"/>
+    </config>
+    <entry key="name" type="xstring" value="ROC Curve"/>
+    <entry key="hasContent" type="xboolean" value="true"/>
+    <entry key="isInactive" type="xboolean" value="false"/>
+    <config key="ports"/>
+    <config key="internalObjects">
+        <entry key="location" type="xstring" value="internalTables"/>
+        <config key="content">
+            <config key="object_0">
+                <entry key="index" type="xint" value="0"/>
+                <entry key="type" type="xstring" value="table"/>
+                <entry key="table_dir_location" type="xstring" value="object_0"/>
+            </config>
+        </config>
+    </config>
+    <config key="filestores">
+        <entry key="file_store_location" type="xstring" isnull="true" value=""/>
+        <entry key="file_store_id" type="xstring" value="b5423673-0bc4-44ac-be04-b28ab17bcbe7"/>
+    </config>
+</config>

@@ -14,17 +14,16 @@ public class MOEAController {
     }
 
     @GetMapping("moea/init")
-    public String init() {
-        return "";
+    public void init() {
+        service.loadTimes();
+        service.loadCities();
     }
 
+    @GetMapping("moea/run")
     @PostMapping("moea/run")
     public String run() {
-        return service.run();
-    }
-
-    @GetMapping(value = "moea")
-    public String getFrames() {
+        service.loadTimes();
+        service.loadCities();
         return service.run();
     }
 }

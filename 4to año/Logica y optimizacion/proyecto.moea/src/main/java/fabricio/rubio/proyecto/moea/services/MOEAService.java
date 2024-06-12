@@ -44,17 +44,9 @@ public class MOEAService {
     public String run(){
 		MOEAProblem problem = new MOEAProblem(1, 1, 0);
 		NSGAIII algorithm = new NSGAIII(problem);
-		// algorithm.run(10000);
-		// algorithm.getResult().display();
+		algorithm.run(10000);
+		algorithm.getResult().display();
 
-        String str = "";
-
-        for(Long id1 : times.keySet()) {
-            for(Long id2 : times.get(id1).keySet()) {
-                str += id1 + " " + id2 + " " + times.get(id1).get(id2) + "<br>";
-            }
-        }
-
-        return str;
+        return algorithm.getResult().toString();
     }
 }

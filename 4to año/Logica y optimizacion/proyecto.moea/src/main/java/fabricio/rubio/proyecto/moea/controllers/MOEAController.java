@@ -18,15 +18,14 @@ public class MOEAController {
     @GetMapping("moea/init")
     public void init() {
         service.loadTimes();
+        service.loadCities();
     }
 
+    @GetMapping("moea/run")
     @PostMapping("moea/run")
     public String run() {
+        service.loadTimes();
+        service.loadCities();
         return service.run();
-    }
-
-    @GetMapping(value = "moea/frames")
-    public HashMap<Long, HashMap<Long, Long>> getFrames() {
-        return service.loadTimes();
     }
 }

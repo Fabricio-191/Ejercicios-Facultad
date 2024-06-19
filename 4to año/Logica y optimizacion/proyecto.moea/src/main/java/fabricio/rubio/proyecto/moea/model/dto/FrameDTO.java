@@ -4,16 +4,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalTime;
-
 @Getter
 @Setter
 @NoArgsConstructor
 public class FrameDTO {
-    private Long id;
+    // private Long id;
     private Long idStopDeparture;
     private Long idStopArrival;
     private Double price;
-    private LocalTime departureDatetime;
-    private LocalTime arrivalDatetime;
+    // private LocalTime departureDatetime;
+    // private LocalTime arrivalDatetime;
+	private Long deltaTime;
+
+    @Override
+    public String toString() {
+        return "FrameDTO {" + idStopDeparture + ", " + idStopArrival + ", " + price + '}';
+    }
 }

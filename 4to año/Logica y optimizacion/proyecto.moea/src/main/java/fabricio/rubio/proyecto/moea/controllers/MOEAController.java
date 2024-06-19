@@ -1,11 +1,11 @@
 package fabricio.rubio.proyecto.moea.controllers;
 
-import fabricio.rubio.proyecto.moea.services.MOEAService;
+
+import jakarta.annotation.PostConstruct;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
+import fabricio.rubio.proyecto.moea.services.MOEAService;
 
 @RestController
 public class MOEAController {
@@ -15,17 +15,27 @@ public class MOEAController {
         this.service = service;
     }
 
+    @GetMapping(path = "moea/test", produces = "application/json")
+	public String test(){
+        this.init();
+        return this.run();
+	}
+
     @GetMapping("moea/init")
     public void init() {
-        service.loadTimes();
+        service.loadRequirements();
+        service.loadTrunks();
         service.loadCities();
+        service.loadFrames();
     }
 
-    @GetMapping("moea/run")
-    @PostMapping("moea/run")
+    @GetMapping(path = "moea/run", produces = "application/json")
     public String run() {
-        service.loadTimes();
-        service.loadCities();
-        return service.run();
+        try{
+            return service.run();
+        }catch (InterruptedException e){
+            e.printStackTrace();
+            return "{\"error\": \"" + e.getMessage() + "\" }";
+        }
     }
 }

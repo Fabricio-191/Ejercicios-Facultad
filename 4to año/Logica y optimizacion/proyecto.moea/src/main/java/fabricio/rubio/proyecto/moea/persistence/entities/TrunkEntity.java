@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "trunks")
+@Table(name = "truncks")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,6 +22,7 @@ public class TrunkEntity {
 	private Long id;
     private Long id_stop_parking;
     private Integer capacity;
+	private String category;
 }
 
 // id_stop_departure,id_stop_arrival,category,pickup_time,id_stop_parking,capacity,Id

@@ -11,4 +11,5 @@ public class TrunkDTO {
     private Long id;
     private Long id_stop_parking;
     private Integer capacity;
+	private String category;
 }

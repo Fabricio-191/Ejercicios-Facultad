@@ -1,13 +1,14 @@
 package fabricio.rubio.proyecto.moea.services;
 
-import fabricio.rubio.proyecto.moea.model.dto.RequirementDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
+import fabricio.rubio.proyecto.moea.model.dto.RequirementDTO;
 import fabricio.rubio.proyecto.moea.model.mapper.RequirementMapper;
 import fabricio.rubio.proyecto.moea.services.repositories.RequirementRepository;
-import org.springframework.stereotype.Service;
 
 
 @Service

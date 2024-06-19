@@ -1,8 +1,9 @@
 package fabricio.rubio.proyecto.moea.model.mapper;
 
+import org.springframework.stereotype.Component;
+
 import fabricio.rubio.proyecto.moea.model.dto.StopDTO;
 import fabricio.rubio.proyecto.moea.persistence.entities.StopEntity;
-import org.springframework.stereotype.Component;
 
 @Component
 public class StopMapper {

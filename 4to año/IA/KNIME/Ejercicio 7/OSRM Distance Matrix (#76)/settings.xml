@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://www.knime.org/2008/09/XMLConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.knime.org/2008/09/XMLConfig http://www.knime.org/XMLConfig_2008_09.xsd" key="settings.xml">
+    <entry key="node_file" type="xstring" value="settings.xml"/>
+    <config key="flow_stack"/>
+    <config key="internal_node_subsettings">
+        <entry key="memory_policy" type="xstring" value="CacheSmallInMemory"/>
+    </config>
+    <config key="model">
+        <entry key="o_geo_col" type="xstring" value="geometry"/>
+        <entry key="o_id_col" type="xstring" value="Nombre"/>
+        <entry key="d_geo_col" type="xstring" value="geometry"/>
+        <entry key="d_id_col" type="xstring" value="Nombre"/>
+        <entry key="result_model" type="xstring" value="TRAVEL_ROUTE"/>
+        <entry key="min_delay_seconds" type="xint" value="1"/>
+        <entry key="default_timeout" type="xint" value="10"/>
+        <entry key="osrm_server" type="xstring" value="https://router.project-osrm.org"/>
+        <entry key="json-type_Internals" type="xstring" value="OBJECT"/>
+        <entry key="extension_version_Internals" type="xstring" value="1.2.0"/>
+    </config>
+    <entry key="customDescription" type="xstring" isnull="true" value=""/>
+    <entry key="state" type="xstring" value="EXECUTED"/>
+    <entry key="factory" type="xstring" value="org.knime.python3.nodes.extension.ExtensionNodeSetFactory$DynamicExtensionNodeFactory"/>
+    <entry key="node-name" type="xstring" value="OSRM Distance Matrix"/>
+    <entry key="node-bundle-name" type="xstring" value="Geospatial Analytics Extension for KNIME"/>
+    <entry key="node-bundle-symbolic-name" type="xstring" value="sdl.harvard.geospatial"/>
+    <entry key="node-bundle-vendor" type="xstring" value="SDL, Harvard, Cambridge US"/>
+    <entry key="node-bundle-version" type="xstring" value="1.2.0.202311151543"/>
+    <entry key="node-feature-name" type="xstring" value="Geospatial Analytics Extension for KNIME"/>
+    <entry key="node-feature-symbolic-name" type="xstring" value="sdl.harvard.features.geospatial.feature.group"/>
+    <entry key="node-feature-vendor" type="xstring" value="SDL, Harvard, Cambridge US"/>
+    <entry key="node-feature-version" type="xstring" value="1.2.0.202311151543"/>
+    <entry key="factory-id-uniquifier" type="xstring" value="sdl.harvard.geospatial_!_OSRMDistanceMatrix"/>
+    <config key="factory_settings">
+        <entry key="extension_id" type="xstring" value="sdl.harvard.geospatial"/>
+        <entry key="node_id" type="xstring" value="OSRMDistanceMatrix"/>
+    </config>
+    <entry key="name" type="xstring" value="OSRM Distance Matrix"/>
+    <entry key="hasContent" type="xboolean" value="true"/>
+    <entry key="isInactive" type="xboolean" value="false"/>
+    <config key="ports">
+        <config key="port_1">
+            <entry key="index" type="xint" value="1"/>
+            <entry key="port_spec_class" type="xstring" value="org.knime.core.data.DataTableSpec"/>
+            <entry key="port_object_class" type="xstring" value="org.knime.core.node.BufferedDataTable"/>
+            <entry key="port_object_summary" type="xstring" value="Rows: 24, Cols: 5"/>
+            <entry key="port_dir_location" type="xstring" value="port_1"/>
+        </config>
+    </config>
+    <config key="filestores">
+        <entry key="file_store_location" type="xstring" isnull="true" value=""/>
+        <entry key="file_store_id" type="xstring" value="41560b94-61c1-46e9-99ff-9548a2bfb213"/>
+    </config>
+</config>

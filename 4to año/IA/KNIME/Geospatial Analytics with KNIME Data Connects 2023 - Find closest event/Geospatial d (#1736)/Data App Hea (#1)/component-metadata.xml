@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component-metadata content-type="text/plain" xmlns="http://www.knime.org/core/node/workflow/metadata/v1.0">
+    <last-modified>2024-06-10T10:12:51.607+02:00</last-modified>
+    <description>Nest this component inside another component to display a header in an interactive view. The header displays an image and title which should improve the user experience when opening the interactive view.
+
+You can customize the colors, sizes and padding of certain elements via the component settings. Feel free however to also customize the additional CSS properties by unlinking the component and opening the CSS Editor node.
+
+This component becomes especially useful when deployed in a data app that can be accessed remotely via any web browser. To deploy data apps you need to connect your KNIME Analytics Platform to KNIME Server, then move the workflow adopting the components from the LOCAL to the server mount point via the KNIME Explorer panel. The data app will then be accessible through KNIME WebPortal on the KNIME Server URL address.
+</description>
+    <component-type>Learner</component-type>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAuklEQVR4nKVT2w3DMAjMCB7BIyA//j1CRvAI3aDeoNmgHTWQYAlFAbvtSZYicxxnIMtiAACcFR8CBUpKqfwjADlnmCU7rNZGvBBCQ67XRHw/KPYiMp9nL6ImSxFMeFzvYozvqadQxbt7aibG6s8Caowttz4u/N5GAuzmvpmaAy5UDfMnaO696yLZTTeRXVRMWKWr4fgE8dh/qggnfO+LuWzXJUGBD7lgN5vg+W/cEIo1WhW8fYcD67feARH/PpXMRyZ9AAAAAElFTkSuQmCC</icon>
+    <in-ports/>
+    <out-ports/>
+</component-metadata>

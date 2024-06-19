@@ -157,20 +157,6 @@ print()
 
 
 def variance_test(var0, direccion):
-	# vp = ((size - 1) * var.altura) / var0
-
-	# if direccion == 'greater':
-	# 	result = st.chi2.ppf(1 - alpha, size - 1)
-	# 	return 'Se rechaza H0' if vp > result else 'No se rechaza H0'
-	# elif direccion == 'less':
-	# 	result = st.chi2.ppf(alpha, size - 1)
-	# 	return 'Se rechaza H0' if vp < result else 'No se rechaza H0'
-	# elif direccion == 'two-sided':
-	# 	result_left = st.chi2.ppf(alpha / 2, size - 1)
-	# 	result_right = st.chi2.ppf(1 - alpha / 2, size - 1)
-	# 	print(result_left, result_right, vp)
-	# 	return 'Se rechaza H0' if vp < result_left or vp > result_right else 'No se rechaza H0'
-
 	vp = ((size - 1) * var.altura) / var0
 	p_value = st.chi2.cdf(vp, size - 1)
 
@@ -204,7 +190,7 @@ contingency_table = pandas.crosstab(
 	pandas.cut(dataframe.peso, bins = 5, labels = ['Muy bajo', 'Bajo', 'Normal', 'Alto', 'Muy alto'])
 )
 result = st.chi2_contingency(contingency_table)
-print( 'No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0') # type: ignore
+print( 'No se rechaza H0' if result[1] > alpha else 'Se rechaza H0') # type: ignore
 
 # # test de independencia usando el coeficiente de correlacion de Pearson
 # result = st.pearsonr(dataframe.altura, dataframe.peso) # Averiguar que hace

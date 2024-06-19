@@ -25,16 +25,16 @@ contingency_table = pandas.crosstab(
 	pandas.cut(dataframe.peso, bins = 5, labels = ['Muy bajo', 'Bajo', 'Normal', 'Alto', 'Muy alto'])
 )
 result = st.chi2_contingency(contingency_table)
-print( 'No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0') # type: ignore
+print( 'No se rechaza H0' if result[1] > alpha else 'Se rechaza H0') # type: ignore
 
 # test de independencia usando el coeficiente de correlacion de Pearson
 result = st.pearsonr(dataframe.altura, dataframe.peso) # Averiguar que hace
-print("Pearson's: " + 'No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0') # type: ignore
+print("Pearson's: " + 'No se rechaza H0' if result[1] > alpha else 'Se rechaza H0') # type: ignore
 
 # test de independencia usando el coeficiente de correlacion de Spearman usando intervalos de 1 en 1
 contingency_table = pandas.crosstab(dataframe.altura.astype(int), dataframe.peso.astype(int))
 result = st.chi2_contingency(contingency_table)
-print('No se rechaza H0' if result.pvalue > alpha else 'Se rechaza H0') # type: ignore
+print('No se rechaza H0' if result[1] > alpha else 'Se rechaza H0') # type: ignore
 print()
 
 contingency_table = pandas.crosstab(

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="./libs/leaflet/1.9.3/leaflet.js"></script>
+    <script src="./libs/leaflet/1.9.3/jquery-1.12.4.min.js"></script>
+    <script src="./libs/leaflet/1.9.3/bootstrap.bundle.min.js"></script>
+    <script src="./libs/leaflet/1.9.3/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="./libs/leaflet/1.9.3/leaflet.css"/>
+    <link rel="stylesheet" href="./libs/leaflet/1.9.3/bootstrap.min.css"/>
+    <link rel="stylesheet" href="./libs/leaflet/1.9.3/bootstrap.min.css"/>
+    <link rel="stylesheet" href="./libs/leaflet/1.9.3/all.min.css"/>
+    <link rel="stylesheet" href="./libs/leaflet/1.9.3/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="./libs/leaflet/1.9.3/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_12d57e0d44645725c5df74a87181877f {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    
+                    <style>
+                        .foliumtooltip {
+                            
+                        }
+                       .foliumtooltip table{
+                            margin: auto;
+                        }
+                        .foliumtooltip tr{
+                            text-align: left;
+                        }
+                        .foliumtooltip th{
+                            padding: 2px; padding-right: 8px;
+                        }
+                    </style>
+            
+    
+                    <style>
+                        .foliumpopup {
+                            margin: auto;
+                        }
+                       .foliumpopup table{
+                            margin: auto;
+                        }
+                        .foliumpopup tr{
+                            text-align: left;
+                        }
+                        .foliumpopup th{
+                            padding: 2px; padding-right: 8px;
+                        }
+                    </style>
+            
+    
+    <script src="./libs/leaflet/1.9.3/jquery-ui.js"></script>
+    <script>$( function() {
+        $( ".maplegend" ).draggable({
+            start: function (event, ui) {
+                $(this).css({
+                    right: "auto",
+                    top: "auto",
+                    bottom: "auto"
+                });
+            }
+        });
+    });
+    </script>
+    <style type='text/css'>
+      .maplegend {
+        position: absolute;
+        z-index:9999;
+        background-color: rgba(255, 255, 255, .8);
+        border-radius: 5px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        padding: 10px;
+        font: 12px/14px Arial, Helvetica, sans-serif;
+        right: 10px;
+        bottom: 20px;
+      }
+      .maplegend .legend-title {
+        text-align: left;
+        margin-bottom: 5px;
+        font-weight: bold;
+        }
+      .maplegend .legend-scale ul {
+        margin: 0;
+        margin-bottom: 0px;
+        padding: 0;
+        float: left;
+        list-style: none;
+        }
+      .maplegend .legend-scale ul li {
+        list-style: none;
+        margin-left: 0;
+        line-height: 16px;
+        margin-bottom: 2px;
+        }
+      .maplegend ul.legend-labels li span {
+        display: block;
+        float: left;
+        height: 14px;
+        width: 14px;
+        margin-right: 5px;
+        margin-left: 0;
+        border: 0px solid #ccc;
+        }
+      .maplegend .legend-source {
+        color: #777;
+        clear: both;
+        }
+      .maplegend a {
+        color: #777;
+        }
+    </style>
+    
+</head>
+<body>
+    
+    
+    <div id='maplegend Tipo' class='maplegend'>
+        <div class='legend-title'>Tipo</div>
+        <div class='legend-scale'>
+            <ul class='legend-labels'>
+                <li><span style='background:#0000ff'></span>Alumno</li>
+                <li><span style='background:#ff0000'></span>Camino</li>
+                <li><span style='background:#00ff00'></span>Servicio</li>
+            </ul>
+        </div>
+    </div>
+    
+    
+            <div class="folium-map" id="map_12d57e0d44645725c5df74a87181877f" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_12d57e0d44645725c5df74a87181877f = L.map(
+                "map_12d57e0d44645725c5df74a87181877f",
+                {
+                    center: [-31.590671649999997, -68.49510144999999],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 10,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+            L.control.scale().addTo(map_12d57e0d44645725c5df74a87181877f);
+
+            
+
+        
+    
+            var tile_layer_1e050f99fb21e05190bac96e9b5a3abe = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca target=\"_blank\" href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\"_blank\" href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_12d57e0d44645725c5df74a87181877f);
+        
+    
+            map_12d57e0d44645725c5df74a87181877f.fitBounds(
+                [[-31.6531833, -68.5957329], [-31.52816, -68.39447]],
+                {}
+            );
+        
+    
+        function geo_json_7ae5ff7c7f08df5a8f12ea2c4cf6cf87_styler(feature) {
+            switch(feature.id) {
+                case "0": case "1": case "2": 
+                    return {"color": "#ff0000", "fillColor": "#ff0000", "fillOpacity": 0.5, "weight": 5.0};
+                case "3": case "4": case "5": 
+                    return {"color": "#0000ff", "fillColor": "#0000ff", "fillOpacity": 0.5, "weight": 5.0};
+                default:
+                    return {"color": "#00ff00", "fillColor": "#00ff00", "fillOpacity": 0.5, "weight": 5.0};
+            }
+        }
+        function geo_json_7ae5ff7c7f08df5a8f12ea2c4cf6cf87_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillOpacity": 0.75};
+            }
+        }
+        function geo_json_7ae5ff7c7f08df5a8f12ea2c4cf6cf87_pointToLayer(feature, latlng) {
+            var opts = {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2, "stroke": true, "weight": 3};
+            
+            let style = geo_json_7ae5ff7c7f08df5a8f12ea2c4cf6cf87_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_7ae5ff7c7f08df5a8f12ea2c4cf6cf87_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        geo_json_7ae5ff7c7f08df5a8f12ea2c4cf6cf87.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_7ae5ff7c7f08df5a8f12ea2c4cf6cf87_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_7ae5ff7c7f08df5a8f12ea2c4cf6cf87 = L.geoJson(null, {
+                onEachFeature: geo_json_7ae5ff7c7f08df5a8f12ea2c4cf6cf87_onEachFeature,
+            
+                style: geo_json_7ae5ff7c7f08df5a8f12ea2c4cf6cf87_styler,
+                pointToLayer: geo_json_7ae5ff7c7f08df5a8f12ea2c4cf6cf87_pointToLayer
+        });
+
+        function geo_json_7ae5ff7c7f08df5a8f12ea2c4cf6cf87_add (data) {
+            geo_json_7ae5ff7c7f08df5a8f12ea2c4cf6cf87
+                .addData(data)
+                .addTo(map_12d57e0d44645725c5df74a87181877f);
+        }
+            geo_json_7ae5ff7c7f08df5a8f12ea2c4cf6cf87_add({"bbox": [-68.5957329, -31.6531833, -68.39447, -31.52816], "features": [{"bbox": [-68.57261, -31.53107, -68.56865, -31.52816], "geometry": {"coordinates": [[-68.57261, -31.53074], [-68.56865, -31.53107], [-68.56867, -31.52816]], "type": "LineString"}, "id": "0", "properties": {"\u003cRowID\u003e": "Row0_Row2", "Destination ID": "ASJ ALVAREZ CARLOS", "Distance": 720.6, "Duration": 1.3783333333333334, "Latitud": null, "Longitud": null, "Min*(Distance)": 720.6, "Nombre": null, "Origin ID": "Alumno 1", "Origin ID (right)": "Alumno 1", "Tipo": "Camino", "__folium_color": "#ff0000"}, "type": "Feature"}, {"bbox": [-68.58274, -31.53483, -68.5789, -31.53389], "geometry": {"coordinates": [[-68.58274, -31.53481], [-68.5789, -31.53483], [-68.57917, -31.53389]], "type": "LineString"}, "id": "1", "properties": {"\u003cRowID\u003e": "Row1_Row12", "Destination ID": "ASJ SEGOVIA MONICA VALERIA", "Distance": 573.7, "Duration": 1.4466666666666665, "Latitud": null, "Longitud": null, "Min*(Distance)": 573.7, "Nombre": null, "Origin ID": "Alumno 2", "Origin ID (right)": "Alumno 2", "Tipo": "Camino", "__folium_color": "#ff0000"}, "type": "Feature"}, {"bbox": [-68.45516, -31.65309, -68.39447, -31.60459], "geometry": {"coordinates": [[-68.45516, -31.60459], [-68.4442, -31.60794], [-68.44238, -31.61217], [-68.44319, -31.61838], [-68.44213, -31.6204], [-68.43187, -31.6232], [-68.42631, -31.62961], [-68.41685, -31.63475], [-68.40289, -31.64778], [-68.39581, -31.64924], [-68.39447, -31.65309]], "type": "LineString"}, "id": "2", "properties": {"\u003cRowID\u003e": "Row2_Row16", "Destination ID": "SJS LAS CHACRITAS", "Distance": 8672.7, "Duration": 10.110000000000001, "Latitud": null, "Longitud": null, "Min*(Distance)": 8672.7, "Nombre": null, "Origin ID": "Alumno 3", "Origin ID (right)": "Alumno 3", "Tipo": "Camino", "__folium_color": "#ff0000"}, "type": "Feature"}, {"bbox": [-68.5726127, -31.5307209, -68.5726127, -31.5307209], "geometry": {"coordinates": [-68.5726127, -31.5307209], "type": "Point"}, "id": "3", "properties": {"\u003cRowID\u003e": "Row0", "Destination ID": null, "Distance": null, "Duration": null, "Latitud": -31.5307209, "Longitud": -68.5726127, "Min*(Distance)": null, "Nombre": "Alumno 1", "Origin ID": null, "Origin ID (right)": null, "Tipo": "Alumno", "__folium_color": "#0000ff"}, "type": "Feature"}, {"bbox": [-68.5827086, -31.5347986, -68.5827086, -31.5347986], "geometry": {"coordinates": [-68.5827086, -31.5347986], "type": "Point"}, "id": "4", "properties": {"\u003cRowID\u003e": "Row1", "Destination ID": null, "Distance": null, "Duration": null, "Latitud": -31.5347986, "Longitud": -68.5827086, "Min*(Distance)": null, "Nombre": "Alumno 2", "Origin ID": null, "Origin ID (right)": null, "Tipo": "Alumno", "__folium_color": "#0000ff"}, "type": "Feature"}, {"bbox": [-68.4553719, -31.6051478, -68.4553719, -31.6051478], "geometry": {"coordinates": [-68.4553719, -31.6051478], "type": "Point"}, "id": "5", "properties": {"\u003cRowID\u003e": "Row2", "Destination ID": null, "Distance": null, "Duration": null, "Latitud": -31.6051478, "Longitud": -68.4553719, "Min*(Distance)": null, "Nombre": "Alumno 3", "Origin ID": null, "Origin ID (right)": null, "Tipo": "Alumno", "__folium_color": "#0000ff"}, "type": "Feature"}, {"bbox": [-68.3951256, -31.6531833, -68.3951256, -31.6531833], "geometry": {"coordinates": [-68.3951256, -31.6531833], "type": "Point"}, "id": "6", "properties": {"\u003cRowID\u003e": "Row3", "Destination ID": null, "Distance": null, "Duration": null, "Latitud": -31.6531833, "Longitud": -68.3951256, "Min*(Distance)": null, "Nombre": "SJS LAS CHACRITAS", "Origin ID": null, "Origin ID (right)": null, "Tipo": "Servicio", "__folium_color": "#00ff00"}, "type": "Feature"}, {"bbox": [-68.5308183, -31.6112016, -68.5308183, -31.6112016], "geometry": {"coordinates": [-68.5308183, -31.6112016], "type": "Point"}, "id": "7", "properties": {"\u003cRowID\u003e": "Row4", "Destination ID": null, "Distance": null, "Duration": null, "Latitud": -31.6112016, "Longitud": -68.5308183, "Min*(Distance)": null, "Nombre": "ASJ BARCELO MAURINO", "Origin ID": null, "Origin ID (right)": null, "Tipo": "Servicio", "__folium_color": "#00ff00"}, "type": "Feature"}, {"bbox": [-68.5686686, -31.5282378, -68.5686686, -31.5282378], "geometry": {"coordinates": [-68.5686686, -31.5282378], "type": "Point"}, "id": "8", "properties": {"\u003cRowID\u003e": "Row5", "Destination ID": null, "Distance": null, "Duration": null, "Latitud": -31.5282378, "Longitud": -68.5686686, "Min*(Distance)": null, "Nombre": "ASJ ALVAREZ CARLOS", "Origin ID": null, "Origin ID (right)": null, "Tipo": "Servicio", "__folium_color": "#00ff00"}, "type": "Feature"}, {"bbox": [-68.5674409, -31.5420102, -68.5674409, -31.5420102], "geometry": {"coordinates": [-68.5674409, -31.5420102], "type": "Point"}, "id": "9", "properties": {"\u003cRowID\u003e": "Row6", "Destination ID": null, "Distance": null, "Duration": null, "Latitud": -31.5420102, "Longitud": -68.5674409, "Min*(Distance)": null, "Nombre": "ASJ OLGUIN LUIS RAMON", "Origin ID": null, "Origin ID (right)": null, "Tipo": "Servicio", "__folium_color": "#00ff00"}, "type": "Feature"}, {"bbox": [-68.5790764, -31.5338744, -68.5790764, -31.5338744], "geometry": {"coordinates": [-68.5790764, -31.5338744], "type": "Point"}, "id": "10", "properties": {"\u003cRowID\u003e": "Row7", "Destination ID": null, "Distance": null, "Duration": null, "Latitud": -31.5338744, "Longitud": -68.5790764, "Min*(Distance)": null, "Nombre": "ASJ SEGOVIA MONICA VALERIA", "Origin ID": null, "Origin ID (right)": null, "Tipo": "Servicio", "__folium_color": "#00ff00"}, "type": "Feature"}, {"bbox": [-68.5957329, -31.5359094, -68.5957329, -31.5359094], "geometry": {"coordinates": [-68.5957329, -31.5359094], "type": "Point"}, "id": "11", "properties": {"\u003cRowID\u003e": "Row8", "Destination ID": null, "Distance": null, "Duration": null, "Latitud": -31.5359094, "Longitud": -68.5957329, "Min*(Distance)": null, "Nombre": "ASJ CASTRACANI ALDO", "Origin ID": null, "Origin ID (right)": null, "Tipo": "Servicio", "__folium_color": "#00ff00"}, "type": "Feature"}, {"bbox": [-68.5935601, -31.545826, -68.5935601, -31.545826], "geometry": {"coordinates": [-68.5935601, -31.545826], "type": "Point"}, "id": "12", "properties": {"\u003cRowID\u003e": "Row9", "Destination ID": null, "Distance": null, "Duration": null, "Latitud": -31.545826, "Longitud": -68.5935601, "Min*(Distance)": null, "Nombre": "ASJ ARCHILLA EESS CAPRI", "Origin ID": null, "Origin ID (right)": null, "Tipo": "Servicio", "__folium_color": "#00ff00"}, "type": "Feature"}, {"bbox": [-68.5956261, -31.5308454, -68.5956261, -31.5308454], "geometry": {"coordinates": [-68.5956261, -31.5308454], "type": "Point"}, "id": "13", "properties": {"\u003cRowID\u003e": "Row10", "Destination ID": null, "Distance": null, "Duration": null, "Latitud": -31.5308454, "Longitud": -68.5956261, "Min*(Distance)": null, "Nombre": "ASJ ALCUCERO DIEGO RIVADAVIA", "Origin ID": null, "Origin ID (right)": null, "Tipo": "Servicio", "__folium_color": "#00ff00"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+    geo_json_7ae5ff7c7f08df5a8f12ea2c4cf6cf87.bindTooltip(
+    function(layer){
+    let div = L.DomUtil.create('div');
+    
+    let handleObject = feature=>typeof(feature)=='object' ? JSON.stringify(feature) : feature;
+    let fields = ["Origin ID", "Min*(Distance)", "Origin ID (right)", "Destination ID", "Duration", "Distance", "Tipo", "Latitud", "Longitud", "Nombre"];
+    let aliases = ["Origin ID", "Min*(Distance)", "Origin ID (right)", "Destination ID", "Duration", "Distance", "Tipo", "Latitud", "Longitud", "Nombre"];
+    let table = '<table>' +
+        String(
+        fields.map(
+        (v,i)=>
+        `<tr>
+            <th>${aliases[i]}</th>
+            
+            <td>${handleObject(layer.feature.properties[v])}</td>
+        </tr>`).join(''))
+    +'</table>';
+    div.innerHTML=table;
+    
+    return div
+    }
+    ,{"className": "foliumtooltip", "sticky": true});
+                     
+    
+    geo_json_7ae5ff7c7f08df5a8f12ea2c4cf6cf87.bindPopup(
+    function(layer){
+    let div = L.DomUtil.create('div');
+    
+    let handleObject = feature=>typeof(feature)=='object' ? JSON.stringify(feature) : feature;
+    let fields = ["Origin ID", "Min*(Distance)", "Origin ID (right)", "Destination ID", "Duration", "Distance", "Tipo", "Latitud", "Longitud", "Nombre"];
+    let aliases = ["Origin ID", "Min*(Distance)", "Origin ID (right)", "Destination ID", "Duration", "Distance", "Tipo", "Latitud", "Longitud", "Nombre"];
+    let table = '<table>' +
+        String(
+        fields.map(
+        (v,i)=>
+        `<tr>
+            <th>${aliases[i].toLocaleString()}</th>
+            
+            <td>${handleObject(layer.feature.properties[v]).toLocaleString()}</td>
+        </tr>`).join(''))
+    +'</table>';
+    div.innerHTML=table;
+    
+    return div
+    }
+    ,{"className": "foliumpopup"});
+                     
+</script>
+</html>

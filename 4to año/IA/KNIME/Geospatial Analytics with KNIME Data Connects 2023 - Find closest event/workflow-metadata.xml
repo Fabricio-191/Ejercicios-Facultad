@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow-metadata content-type="text/plain" xmlns="http://www.knime.org/core/node/workflow/metadata/v1.0">
+    <author>elisabeth.richter</author>
+    <created>2023-01-16T12:00:01.000+02:00</created>
+    <last-modified>2024-06-10T10:12:49.404+02:00</last-modified>
+    <description>Geospatial Analytics with KNIME Data Connects 2023 - Find closest event
+
+This workflow illustrates how to identify the closest KNIME Data Connect event location (among those planned in 2023 in the US and Canada) based on the input location provided by the user. The results are presented in a geospatial view in a dashboard.</description>
+    <tags>
+        <tag>Geospatial Analytics</tag>
+        <tag>Data Connect</tag>
+        <tag>GIS</tag>
+        <tag>Polygons</tag>
+        <tag>Geometry</tag>
+    </tags>
+</workflow-metadata>

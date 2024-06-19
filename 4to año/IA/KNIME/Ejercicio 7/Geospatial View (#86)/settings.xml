@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://www.knime.org/2008/09/XMLConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.knime.org/2008/09/XMLConfig http://www.knime.org/XMLConfig_2008_09.xsd" key="settings.xml">
+    <entry key="node_file" type="xstring" value="settings.xml"/>
+    <config key="flow_stack"/>
+    <config key="internal_node_subsettings">
+        <entry key="memory_policy" type="xstring" value="CacheSmallInMemory"/>
+    </config>
+    <config key="model">
+        <entry key="geo_col" type="xstring" value="geometry"/>
+        <entry key="stroke" type="xboolean" value="true"/>
+        <config key="name_cols">
+            <entry key="array-size" type="xint" value="10"/>
+            <entry key="0" type="xstring" value="Origin ID"/>
+            <entry key="1" type="xstring" value="Min*(Distance)"/>
+            <entry key="2" type="xstring" value="Origin ID (right)"/>
+            <entry key="3" type="xstring" value="Destination ID"/>
+            <entry key="4" type="xstring" value="Duration"/>
+            <entry key="5" type="xstring" value="Distance"/>
+            <entry key="6" type="xstring" value="Tipo"/>
+            <entry key="7" type="xstring" value="Latitud"/>
+            <entry key="8" type="xstring" value="Longitud"/>
+            <entry key="9" type="xstring" value="Nombre"/>
+        </config>
+        <config key="popup_cols">
+            <entry key="array-size" type="xint" value="10"/>
+            <entry key="0" type="xstring" value="Origin ID"/>
+            <entry key="1" type="xstring" value="Min*(Distance)"/>
+            <entry key="2" type="xstring" value="Origin ID (right)"/>
+            <entry key="3" type="xstring" value="Destination ID"/>
+            <entry key="4" type="xstring" value="Duration"/>
+            <entry key="5" type="xstring" value="Distance"/>
+            <entry key="6" type="xstring" value="Tipo"/>
+            <entry key="7" type="xstring" value="Latitud"/>
+            <entry key="8" type="xstring" value="Longitud"/>
+            <entry key="9" type="xstring" value="Nombre"/>
+        </config>
+        <config key="size_settings">
+            <entry key="json-type_Internals" type="xstring" value="OBJECT"/>
+            <entry key="size_col" type="xstring" isnull="true" value=""/>
+            <entry key="size_scale" type="xdouble" value="5.0"/>
+        </config>
+        <config key="color_settings">
+            <entry key="json-type_Internals" type="xstring" value="OBJECT"/>
+            <entry key="color_col" type="xstring" value="Tipo"/>
+            <entry key="color_map" type="xstring" value="brg"/>
+            <entry key="use_classify" type="xboolean" value="false"/>
+            <entry key="classification_method" type="xstring" value="EqualInterval"/>
+            <entry key="classification_bins" type="xint" value="5"/>
+        </config>
+        <config key="basemap_setting">
+            <entry key="json-type_Internals" type="xstring" value="OBJECT"/>
+            <entry key="base_map" type="xstring" value="OpenStreetMap"/>
+        </config>
+        <config key="legend_settings">
+            <entry key="json-type_Internals" type="xstring" value="OBJECT"/>
+            <entry key="plot" type="xboolean" value="true"/>
+            <entry key="caption" type="xstring" value=""/>
+        </config>
+        <entry key="json-type_Internals" type="xstring" value="OBJECT"/>
+        <entry key="extension_version_Internals" type="xstring" value="1.2.0"/>
+    </config>
+    <entry key="customDescription" type="xstring" isnull="true" value=""/>
+    <entry key="state" type="xstring" value="EXECUTED"/>
+    <entry key="factory" type="xstring" value="org.knime.python3.nodes.extension.ExtensionNodeSetFactory$DynamicExtensionNodeFactory"/>
+    <entry key="node-name" type="xstring" value="Geospatial View"/>
+    <entry key="node-bundle-name" type="xstring" value="Geospatial Analytics Extension for KNIME"/>
+    <entry key="node-bundle-symbolic-name" type="xstring" value="sdl.harvard.geospatial"/>
+    <entry key="node-bundle-vendor" type="xstring" value="SDL, Harvard, Cambridge US"/>
+    <entry key="node-bundle-version" type="xstring" value="1.2.0.202311151543"/>
+    <entry key="node-feature-name" type="xstring" value="Geospatial Analytics Extension for KNIME"/>
+    <entry key="node-feature-symbolic-name" type="xstring" value="sdl.harvard.features.geospatial.feature.group"/>
+    <entry key="node-feature-vendor" type="xstring" value="SDL, Harvard, Cambridge US"/>
+    <entry key="node-feature-version" type="xstring" value="1.2.0.202311151543"/>
+    <entry key="factory-id-uniquifier" type="xstring" value="sdl.harvard.geospatial_!_ViewNode"/>
+    <config key="factory_settings">
+        <entry key="extension_id" type="xstring" value="sdl.harvard.geospatial"/>
+        <entry key="node_id" type="xstring" value="ViewNode"/>
+    </config>
+    <entry key="name" type="xstring" value="Geospatial View"/>
+    <entry key="hasContent" type="xboolean" value="true"/>
+    <entry key="isInactive" type="xboolean" value="false"/>
+    <config key="ports"/>
+    <config key="filestores">
+        <entry key="file_store_location" type="xstring" isnull="true" value=""/>
+        <entry key="file_store_id" type="xstring" value="ab083a99-e8df-4c18-9161-f44a875e200b"/>
+    </config>
+</config>

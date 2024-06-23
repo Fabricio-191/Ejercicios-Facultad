@@ -1,0 +1,24 @@
+/*********************************************
+ * OPL 22.1.1.0 Data
+ * Author: Fabricio
+ * Creation Date: 7 may. 2024 at 12:26:08
+ *********************************************/
+Bebidas = {
+	<"b1", 5>,
+	<"b2", 6>,
+	<"b3", 4>
+};
+
+Zumos = {
+	<"pina", 1500>,
+	<"melocoton", 2000>
+};
+
+Demandas = {
+	<"b1", "pina", 6>,  
+	<"b1", "melocoton", 2>,  
+	<"b2", "pina", 3>,  
+	<"b2", "melocoton", 3>,  
+	<"b3", "pina", 3>,  
+	<"b3", "melocoton", 4>
+};

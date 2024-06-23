@@ -1,0 +1,11 @@
+/*********************************************
+ * OPL 22.1.1.0 Data
+ * Author: Fabricio Rubio
+ * Creation Date: 8 may. 2024 at 16:59:52
+ *********************************************/
+Anuncios = {
+	<"Anuncio canal 1", 15000, 0.3, 26>,
+	<"Anuncio canal 2", 30000, 0.7, 13>  
+};
+
+DinerosMaximos = { <1000000> };

@@ -21,7 +21,7 @@ import fabricio.rubio.proyecto.moea.model.dto.TrunkDTO;
 
 public class MOEAProblem extends AbstractProblem {
     Map<Long, Map<Long, FrameDTO>> frames;
-    HashMap<Integer, Long> cities;
+    HashMap<Long, Long> cities;
 	List<RequirementDTO>  requirements;
 	List<TrunkDTO> trunks;
 
@@ -30,7 +30,7 @@ public class MOEAProblem extends AbstractProblem {
         int numberOfObjectives,
         int numberOfConstraints,
         Map<Long, Map<Long, FrameDTO>> frames,
-        HashMap<Integer, Long> cities,
+        HashMap<Long, Long> cities,
         List<RequirementDTO> requirements,
         List<TrunkDTO> trunks
     ) {
@@ -71,6 +71,7 @@ public class MOEAProblem extends AbstractProblem {
                 time = 0;
             }
             capacity -= requirement.getLoading();
+            // time += requirement.getPickup_time();
 
             if(currentStop != requirement.getId_stop_departure()){
                 FrameDTO frame = frames.get(currentStop).get(requirement.getId_stop_departure());
@@ -97,9 +98,11 @@ public class MOEAProblem extends AbstractProblem {
 
         if(maxTime == 0) maxTime = time;
 
+
         solution.setObjective(0, requisitosNoAtendidos);
         solution.setObjective(1, maxTime);
-		solution.setObjective(2, precioTotal);
+		solution.setObjective(2, precioTotal);;
+        solution.setAttribute("camionesSinUsar", trunks.size() - trunk - 1);
     }
 
     @Override

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ASCII"?><project>
+    	
+    <version>1.0</version>
+    	
+    <configs>
+        		
+        <config default="true" name="Config1" category="opl">
+            			
+            <ref name="Valores.ops" type="setting">
+			</ref>
+            			
+            <ref name="Parcial 2024 v1.mod" type="model">
+			</ref>
+            		
+        </config>
+        		
+        <config default="false" name="Config2" category="opl">
+            			
+            <ref name="Parcial 2024 v2.mod" type="model">
+			</ref>
+            		
+        </config>
+        		
+        <config default="false" name="Config3" category="opl">
+            			
+            <ref name="Datos.dat" type="data">
+			</ref>
+            			
+            <ref name="Parcial 2024 v3.mod" type="model">
+			</ref>
+            		
+        </config>
+        	
+    </configs>
+    	
+
+</project>

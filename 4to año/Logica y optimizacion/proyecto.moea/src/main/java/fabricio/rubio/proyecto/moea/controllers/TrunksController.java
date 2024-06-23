@@ -18,10 +18,10 @@ public class TrunksController {
 
     @GetMapping(value = "trunks")
     public Page<TrunkDTO> getTrunks(
-            @RequestParam(value = "orderField", defaultValue="id") String orderField,
-            @RequestParam(value = "orderCriterial", defaultValue="DESC") String orderCriterial,
-            @RequestParam(value = "page", defaultValue="0") Integer page,
-            @RequestParam(value = "pageSize", defaultValue="30") Integer pageSize
+        @RequestParam(value = "orderField", defaultValue="id") String orderField,
+        @RequestParam(value = "orderCriterial", defaultValue="DESC") String orderCriterial,
+        @RequestParam(value = "page", defaultValue="0") Integer page,
+        @RequestParam(value = "pageSize", defaultValue="30") Integer pageSize
     ) {
         return service.get(orderField, orderCriterial, page, pageSize);
     }

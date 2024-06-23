@@ -19,9 +19,9 @@ public class FramesMapper {
         // dto.setArrivalDatetime(frame.getArrival_datetime());
 
 		Duration time = Duration.between(frame.getArrival_datetime(), frame.getDeparture_datetime());
-		if(time.isNegative()) time.plusDays(1);
+		if(time.isNegative()) time = time.plusDays(1);
 
-		dto.setDeltaTime(time.getSeconds());
+		dto.setDeltaTime(time.toMinutes());
 	
         return dto;
     }

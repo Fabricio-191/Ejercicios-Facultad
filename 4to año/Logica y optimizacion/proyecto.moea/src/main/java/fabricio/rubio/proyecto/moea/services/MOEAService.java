@@ -1,9 +1,6 @@
 package fabricio.rubio.proyecto.moea.services;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.json.JSONArray;
@@ -27,8 +24,8 @@ public class MOEAService {
     private final RequirementsService requirementsService;
     private final TrunkService trunkService;
 
-    private final HashMap<Integer, Long> cities = new HashMap<>();
-    private final HashMap<Long, Integer> inverseCities = new HashMap<>();
+    private final HashMap<Long, Long> cities = new HashMap<>();
+    private final HashMap<Long, Long> inverseCities = new HashMap<>();
     private Map<String, List<RequirementDTO>> requirements;
     private Map<String, List<TrunkDTO>> trunks;
     private final Map<Long, Map<Long, FrameDTO>> frames = new HashMap<>();
@@ -46,25 +43,11 @@ public class MOEAService {
         this.trunkService = trunkService;
     }
 
-    public void loadRequirements(){
-        requirements = requirementsService
-            .get("id", "DESC", 0, 1000000000)
-            .stream()
-            .collect(Collectors.groupingBy(RequirementDTO::getCategory));
-    }
-
-    public void loadTrunks(){
-        trunks = trunkService
-            .get("id", "DESC", 0, 1000000000)
-            .stream()
-            .collect(Collectors.groupingBy(TrunkDTO::getCategory));
-    }
-
     public void loadCities(){
         // 8766
         Page<StopDTO> stops = stopService.get("id", "DESC", 0, 1000000000);
 
-        int i = 0;
+        long i = 0;
         for (StopDTO stop : stops.getContent()) {
             cities.put(i, stop.getId());
             inverseCities.put(stop.getId(), i);
@@ -102,65 +85,78 @@ public class MOEAService {
         }
     }
 
+    public void loadRequirements(){
+        requirements = requirementsService
+            .get("id", "DESC", 0, 1000000000)
+            .stream()
+            .collect(Collectors.groupingBy(RequirementDTO::getCategory));
+    }
+
+    public void loadTrunks(){
+        trunks = trunkService
+            .get("id", "DESC", 0, 1000000000)
+            .stream()
+            .collect(Collectors.groupingBy(TrunkDTO::getCategory));
+    }
+
 	public void loadFrames(){
-	    List<FrameDTO> framess = framesService.get("id", "DESC", 0, 1000000000).getContent();
+         for(long cityId : cities.values()){
+             this.frames.put(cityId, new HashMap<>());
+             FrameDTO newFrame = new FrameDTO();
 
-		for (FrameDTO frame : framess) {
-            if(!this.frames.containsKey(frame.getIdStopDeparture())){
-                this.frames.put(frame.getIdStopDeparture(), new HashMap<>());
-            }
+             newFrame.setIdStopDeparture(cityId);
+             newFrame.setIdStopArrival(cityId);
+             newFrame.setPrice(0.0);
+             newFrame.setDeltaTime(0L);
 
-            this.frames.get(frame.getIdStopDeparture()).put(frame.getIdStopArrival(), frame);
-		}
+             this.frames.get(cityId).put(cityId, newFrame);
+         }
 
-//         for(int i = 0; i < cities.size(); i++){
-//             if(frames[i][i] != null) continue;
-//             FrameDTO newFrame = new FrameDTO();
-//
-//             newFrame.setIdStopDeparture(cities.get(i));
-//             newFrame.setIdStopArrival(cities.get(i));
-//             newFrame.setPrice(0.0);
-//             newFrame.setDeltaTime(0L);
-//
-//             frames[i][i] = newFrame;
-//         }
-//
-//         ArrayList<int[]> missing = new ArrayList<>();
-//
-//         for(int i = 0; i < cities.size(); i++){
-//             for(int j = 0; j < cities.size(); j++){
-//                 if(frames[i][j] == null) missing.add(new int[]{i, j});
-//             }
-//         }
-//
-//         int prev = missing.size();
-//         while(!missing.isEmpty()){
-//             for(int i = 0; i < missing.size(); i++){
-//                 int[] pair = missing.get(i);
-//                 for(int j = 0; j < cities.size(); j++){
-//                     if(frames[pair[0]][j] == null || frames[j][pair[1]] == null) continue;
-//                     FrameDTO newFrame = new FrameDTO();
-//
-//                     newFrame.setIdStopDeparture(frames[pair[0]][j].getIdStopDeparture());
-//                     newFrame.setIdStopArrival(frames[j][pair[1]].getIdStopArrival());
-//                     newFrame.setPrice(frames[pair[0]][j].getPrice() + frames[j][pair[1]].getPrice());
-//                     newFrame.setDeltaTime(frames[pair[0]][j].getDeltaTime() + frames[j][pair[1]].getDeltaTime());
-//
-//                     frames[pair[0]][pair[1]] = newFrame;
-//                     frames[pair[1]][pair[0]] = newFrame;
-//                     missing.remove(i);
-//                     break;
-//                 }
-//             }
-//
-//             if(prev == missing.size()) break;
-//             prev = missing.size();
-//         }
-//
-//         System.out.println("Missing: " + missing.size());
+         List<FrameDTO> framess = framesService.get("id", "DESC", 0, 1000000000).getContent();
+         for (FrameDTO frame : framess) {
+             this.frames.get(frame.getIdStopDeparture()).put(frame.getIdStopArrival(), frame);
+             this.frames.get(frame.getIdStopArrival()).put(frame.getIdStopDeparture(), frame);
+         }
+
+         ArrayList<long[]> missing = new ArrayList<>();
+
+         for(long i = 0; i < cities.size() - 1; i++){
+             long cityAId = cities.get(i);
+             for(long j = i + 1; j < cities.size(); j++){
+                 if(frames.get(cityAId).get(cities.get(j)) == null) missing.add(new long[]{cityAId, cities.get(j)});
+             }
+         }
+
+         int prev = missing.size();
+         while(!missing.isEmpty()){
+             System.out.println("Missing: " + missing.size());
+             for(int i = 0; i < missing.size(); i++){
+                 long[] pair = missing.get(i);
+                 for(long otherCity : cities.values()){
+                     if(frames.get(pair[0]).get(otherCity) == null || frames.get(otherCity).get(pair[1]) == null) continue;
+                     FrameDTO newFrame = new FrameDTO();
+
+                     newFrame.setIdStopDeparture(frames.get(pair[0]).get(otherCity).getIdStopDeparture());
+                     newFrame.setIdStopArrival(frames.get(otherCity).get(pair[1]).getIdStopArrival());
+                     newFrame.setPrice(frames.get(pair[0]).get(otherCity).getPrice() + frames.get(otherCity).get(pair[1]).getPrice());
+                     newFrame.setDeltaTime(frames.get(pair[0]).get(otherCity).getDeltaTime() + frames.get(otherCity).get(pair[1]).getDeltaTime());
+
+                     frames.get(pair[0]).put(pair[1], newFrame);
+                     frames.get(pair[1]).put(pair[0], newFrame);
+
+                     missing.remove(i);
+                     break;
+                 }
+             }
+
+             if(prev == missing.size()) break;
+             prev = missing.size();
+         }
+
+         System.out.println("Missing: " + missing.size());
 	}
 
-    private NondominatedPopulation solve(String type){
+    private Solution solve(String type){
         // https://github.com/MOEAFramework/MOEAFramework/blob/master/docs/listOfAlgorithms.md#nsga-iii
         MOEAProblem problem = new MOEAProblem(1, 3, 0, frames, cities, requirements.get(type), trunks.get(type));
 
@@ -173,7 +169,7 @@ public class MOEAService {
 
         NondominatedPopulation result = executor.run();
 
-        return result;
+        return result.get(0);
     }
 
     public String run() throws InterruptedException {
@@ -185,15 +181,14 @@ public class MOEAService {
             .parallel()
             .forEach(type -> {
                 float startTime = System.nanoTime();
-                NondominatedPopulation result = this.solve(type);
-
-                Solution solution = result.get(0);
+                Solution solution = this.solve(type);
 
                 JSONObject solutionJSON = new JSONObject();
                 solutionJSON.put("computingTime", (System.nanoTime() - startTime) / 1000000000);
                 solutionJSON.put("objectives", new JSONArray(solution.getObjectives()));
                 // solutionJSON.put("variable0", new JSONArray(solution.getVariable(0).toString()));
                 solutionJSON.put("variable0", solution.getVariable(0).toString());
+                solutionJSON.put("camionesSinUsar", solution.getAttribute("camionesSinUsar"));
 
                 allData.put(type, solutionJSON);
             });

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?><project>
+    	
+    <version>1.0</version>
+    	
+    <description>An example to illustrate the usage of KPIs, Constraint Programming</description>
+    	
+    <configs>
+        		
+        <config default="true" name="Basic Configuration" category="opl">
+            			
+            <ref name="plant_location.dat" type="data">
+			</ref>
+            			
+            <ref name="plant_location.mod" type="model">
+			</ref>
+            		
+        </config>
+        	
+    </configs>
+    	
+
+</project>

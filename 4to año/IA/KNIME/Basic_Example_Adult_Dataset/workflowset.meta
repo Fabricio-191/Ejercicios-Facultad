@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--This file is auto-generated and is overwritten each time the workflow is saved.
+    The metadata have moved to the `workflow-metadata.xml` file.-->
+<KNIMEMetaInfo nrOfElements="3" xmlns="http://www.knime.org/2.9/metainfo">
+    <element form="date" name="Creation Date" read-only="false">23/1/2020/12:00:01 +02:00</element>
+    <element form="multiline" name="Comments" read-only="false">Simple Example for Binary Classification with Keras
+
+This workflow trains a fully connected, feedforward network using the adult dataset.
+
+TAGS: neural networks,deep learning,Codeless Deep Learning with KNIME</element>
+    <element form="text" name="Last Edited" read-only="true">2024-06-24 20:44:56 -0300</element>
+</KNIMEMetaInfo>

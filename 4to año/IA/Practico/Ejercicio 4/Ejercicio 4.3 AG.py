@@ -84,7 +84,7 @@ def fitness_func(solution):
 	return cities / distance
 
 def on_generation(ga_instance):
-	best_solution, best_solution_fitness = ga_instance.best_solution()
+	best_solution, best_solution_fitness, _asd = ga_instance.best_solution()
 
 	print(f"Generation: {ga_instance.generations_completed}, Best fitness: {best_solution_fitness}")
 

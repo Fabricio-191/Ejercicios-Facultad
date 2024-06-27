@@ -1,68 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns="http://www.knime.org/2008/09/XMLConfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.knime.org/2008/09/XMLConfig http://www.knime.org/XMLConfig_2008_09.xsd" key="kMeans">
-    <entry key="dimensions" type="xint" value="17"/>
-    <entry key="ignoredColumns" type="xint" value="1"/>
+    <entry key="dimensions" type="xint" value="9"/>
+    <entry key="ignoredColumns" type="xint" value="3"/>
     <config key="clusterCoverage">
         <entry key="array-size" type="xint" value="2"/>
-        <entry key="0" type="xint" value="8965"/>
-        <entry key="1" type="xint" value="7035"/>
+        <entry key="0" type="xint" value="34902"/>
+        <entry key="1" type="xint" value="45098"/>
     </config>
     <config key="kMeansCluster0">
-        <entry key="array-size" type="xint" value="16"/>
-        <entry key="0" type="xdouble" value="5.200669269380926"/>
-        <entry key="1" type="xdouble" value="9.21160066926938"/>
-        <entry key="2" type="xdouble" value="6.336084774121584"/>
-        <entry key="3" type="xdouble" value="6.828890128276631"/>
-        <entry key="4" type="xdouble" value="4.8027886224205245"/>
-        <entry key="5" type="xdouble" value="7.038259899609593"/>
-        <entry key="6" type="xdouble" value="7.442833240379253"/>
-        <entry key="7" type="xdouble" value="4.673954266592303"/>
-        <entry key="8" type="xdouble" value="5.254099274958171"/>
-        <entry key="9" type="xdouble" value="8.379921918572226"/>
-        <entry key="10" type="xdouble" value="6.306971556051311"/>
-        <entry key="11" type="xdouble" value="7.900836586726157"/>
-        <entry key="12" type="xdouble" value="3.8580033463469046"/>
-        <entry key="13" type="xdouble" value="8.365867261572783"/>
-        <entry key="14" type="xdouble" value="4.569325153374233"/>
-        <entry key="15" type="xdouble" value="7.750920245398773"/>
+        <entry key="array-size" type="xint" value="6"/>
+        <entry key="0" type="xdouble" value="40.765713139648085"/>
+        <entry key="1" type="xdouble" value="0.0651252077244857"/>
+        <entry key="2" type="xdouble" value="0.03378029912325941"/>
+        <entry key="3" type="xdouble" value="27.030468741041425"/>
+        <entry key="4" type="xdouble" value="5.44621225144749"/>
+        <entry key="5" type="xdouble" value="102.65936049510057"/>
     </config>
     <config key="kMeansCluster1">
-        <entry key="array-size" type="xint" value="16"/>
-        <entry key="0" type="xdouble" value="2.5310589907604832"/>
-        <entry key="1" type="xdouble" value="4.2456289978678035"/>
-        <entry key="2" type="xdouble" value="3.5764036958066807"/>
-        <entry key="3" type="xdouble" value="3.5157071783937455"/>
-        <entry key="4" type="xdouble" value="1.8469083155650319"/>
-        <entry key="5" type="xdouble" value="6.70362473347548"/>
-        <entry key="6" type="xdouble" value="7.635536602700782"/>
-        <entry key="7" type="xdouble" value="4.553802416488984"/>
-        <entry key="8" type="xdouble" value="5.072778962331201"/>
-        <entry key="9" type="xdouble" value="8.175266524520255"/>
-        <entry key="10" type="xdouble" value="6.67363184079602"/>
-        <entry key="11" type="xdouble" value="7.951101634683725"/>
-        <entry key="12" type="xdouble" value="1.9916133617626155"/>
-        <entry key="13" type="xdouble" value="8.335607675906184"/>
-        <entry key="14" type="xdouble" value="2.587633262260128"/>
-        <entry key="15" type="xdouble" value="7.8562899786780385"/>
+        <entry key="array-size" type="xint" value="6"/>
+        <entry key="0" type="xdouble" value="42.767893919907614"/>
+        <entry key="1" type="xdouble" value="0.08297485476074327"/>
+        <entry key="2" type="xdouble" value="0.04357177701893654"/>
+        <entry key="3" type="xdouble" value="27.528749168475205"/>
+        <entry key="4" type="xdouble" value="5.592407645572546"/>
+        <entry key="5" type="xdouble" value="165.45773648498826"/>
     </config>
     <config key="FeatureNames">
-        <entry key="array-size" type="xint" value="17"/>
-        <entry key="0" type="xstring" value="1"/>
-        <entry key="1" type="xstring" value="2"/>
-        <entry key="2" type="xstring" value="3"/>
-        <entry key="3" type="xstring" value="4"/>
-        <entry key="4" type="xstring" value="5"/>
-        <entry key="5" type="xstring" value="6"/>
-        <entry key="6" type="xstring" value="7"/>
-        <entry key="7" type="xstring" value="8"/>
-        <entry key="8" type="xstring" value="9"/>
-        <entry key="9" type="xstring" value="10"/>
-        <entry key="10" type="xstring" value="11"/>
-        <entry key="11" type="xstring" value="12"/>
-        <entry key="12" type="xstring" value="13"/>
-        <entry key="13" type="xstring" value="14"/>
-        <entry key="14" type="xstring" value="15"/>
-        <entry key="15" type="xstring" value="16"/>
-        <entry key="16" type="xstring" isnull="true" value=""/>
+        <entry key="array-size" type="xint" value="9"/>
+        <entry key="0" type="xstring" value="age"/>
+        <entry key="1" type="xstring" value="hypertension"/>
+        <entry key="2" type="xstring" value="heart_disease"/>
+        <entry key="3" type="xstring" value="bmi"/>
+        <entry key="4" type="xstring" value="HbA1c_level"/>
+        <entry key="5" type="xstring" value="blood_glucose_level"/>
+        <entry key="6" type="xstring" isnull="true" value=""/>
+        <entry key="7" type="xstring" isnull="true" value=""/>
+        <entry key="8" type="xstring" isnull="true" value=""/>
     </config>
 </config>

@@ -94,7 +94,7 @@ for i in range(0, ITERATIONS):
 
 	paths = []
 	for ant in range(0, ANTS):
-		path = Path([random.randint(0, CITIES_QTY)])
+		path = Path([random.randint(0, CITIES_QTY - 1)])
 
 		while True:
 			next_city = np.random.choice(
@@ -109,12 +109,16 @@ for i in range(0, ITERATIONS):
 
 		paths.append(path)	
 
+	a = i
 	for path in paths:
 		for i in range(0, len(path.path) - 1):
 			feromones[path.path[i]][path.path[i+1]] += (K * len(path.path)) / path.distance
 			feromones[path.path[i+1]][path.path[i]] += (K * len(path.path)) / path.distance
 
-	best_path = max(paths, key=lambda x: len(x.path))			
+	best_path = max(paths, key=lambda x: len(x.path))
+
+	print(f"Generation: {a}, Best path: {len(best_path.path)}, Distance: {best_path.distance}")
+
 	best_paths.append(best_path.path)
 
 # best solution

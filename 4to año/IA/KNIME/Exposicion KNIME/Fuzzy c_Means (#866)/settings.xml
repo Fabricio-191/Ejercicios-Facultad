@@ -28,11 +28,7 @@
         <entry key="randomSeed" type="xint" value="0"/>
     </config>
     <entry key="customDescription" type="xstring" isnull="true" value=""/>
-    <entry key="state" type="xstring" value="IDLE"/>
-    <config key="nodecontainer_message">
-        <entry key="type" type="xstring" value="WARNING"/>
-        <entry key="message" type="xstring" value="Input table does not match selected columns, unable to find column(s): [blood_glucose_level, hypertension, heart_disease, age, HbA1c_level, bmi]"/>
-    </config>
+    <entry key="state" type="xstring" value="EXECUTED"/>
     <entry key="factory" type="xstring" value="org.knime.base.node.mine.cluster.fuzzycmeans.FuzzyClusterNodeFactory2"/>
     <entry key="node-name" type="xstring" value="Fuzzy c-Means"/>
     <entry key="node-bundle-name" type="xstring" value="KNIME Base Nodes"/>
@@ -45,20 +41,28 @@
     <entry key="node-feature-version" type="xstring" value="5.2.4.v202405041851"/>
     <config key="factory_settings"/>
     <entry key="name" type="xstring" value="Fuzzy c-Means"/>
-    <entry key="hasContent" type="xboolean" value="false"/>
+    <entry key="hasContent" type="xboolean" value="true"/>
     <entry key="isInactive" type="xboolean" value="false"/>
     <config key="ports">
         <config key="port_1">
             <entry key="index" type="xint" value="1"/>
-            <entry key="port_dir_location" type="xstring" isnull="true" value=""/>
+            <entry key="port_spec_class" type="xstring" value="org.knime.core.data.DataTableSpec"/>
+            <entry key="port_object_class" type="xstring" value="org.knime.core.node.BufferedDataTable"/>
+            <entry key="port_object_summary" type="xstring" value="Rows: 80000, Cols: 13"/>
+            <entry key="port_dir_location" type="xstring" value="port_1"/>
         </config>
         <config key="port_2">
             <entry key="index" type="xint" value="2"/>
-            <entry key="port_dir_location" type="xstring" isnull="true" value=""/>
+            <entry key="port_spec_class" type="xstring" value="org.knime.core.node.port.pmml.PMMLPortObjectSpec"/>
+            <entry key="port_object_class" type="xstring" value="org.knime.core.node.port.pmml.PMMLPortObject"/>
+            <entry key="port_object_summary" type="xstring" value="PMML document with version 4.2 and models: ClusteringModel"/>
+            <entry key="port_spec_location" type="xstring" value="spec/spec.zip"/>
+            <entry key="port_object_location" type="xstring" value="object/portobject.zip"/>
+            <entry key="port_dir_location" type="xstring" value="port_2"/>
         </config>
     </config>
     <config key="filestores">
         <entry key="file_store_location" type="xstring" isnull="true" value=""/>
-        <entry key="file_store_id" type="xstring" isnull="true" value=""/>
+        <entry key="file_store_id" type="xstring" value="da7aa6eb-e181-4b0a-86d1-18f1b54b6674"/>
     </config>
 </config>

@@ -10,7 +10,7 @@
             <entry key="SettingsModelID" type="xstring" value="SMID_string"/>
             <entry key="EnabledStatus" type="xboolean" value="true"/>
         </config>
-        <entry key="classifyColumn" type="xstring" value="vocal"/>
+        <entry key="classifyColumn" type="xstring" value="diabetes"/>
         <config key="splitQualityMeasure_Internals">
             <entry key="SettingsModelID" type="xstring" value="SMID_string"/>
             <entry key="EnabledStatus" type="xboolean" value="true"/>
@@ -60,7 +60,7 @@
             <entry key="SettingsModelID" type="xstring" value="SMID_string"/>
             <entry key="EnabledStatus" type="xboolean" value="false"/>
         </config>
-        <entry key="firstSplitColumn" type="xstring" value="16"/>
+        <entry key="firstSplitColumn" type="xstring" value="blood_glucose_level"/>
         <config key="binaryNominalSplit_Internals">
             <entry key="SettingsModelID" type="xstring" value="SMID_boolean"/>
             <entry key="EnabledStatus" type="xboolean" value="true"/>
@@ -103,7 +103,7 @@
         <config key="styles"/>
     </config>
     <entry key="customDescription" type="xstring" isnull="true" value=""/>
-    <entry key="state" type="xstring" value="EXECUTED"/>
+    <entry key="state" type="xstring" value="CONFIGURED"/>
     <entry key="factory" type="xstring" value="org.knime.base.node.mine.decisiontree2.learner2.DecisionTreeLearnerNodeFactory3"/>
     <entry key="node-name" type="xstring" value="Decision Tree Learner"/>
     <entry key="node-bundle-name" type="xstring" value="KNIME Base Nodes"/>
@@ -116,21 +116,16 @@
     <entry key="node-feature-version" type="xstring" value="5.2.4.v202405041851"/>
     <config key="factory_settings"/>
     <entry key="name" type="xstring" value="Decision Tree Learner"/>
-    <entry key="hasContent" type="xboolean" value="true"/>
+    <entry key="hasContent" type="xboolean" value="false"/>
     <entry key="isInactive" type="xboolean" value="false"/>
     <config key="ports">
         <config key="port_1">
             <entry key="index" type="xint" value="1"/>
-            <entry key="port_spec_class" type="xstring" value="org.knime.core.node.port.pmml.PMMLPortObjectSpec"/>
-            <entry key="port_object_class" type="xstring" value="org.knime.core.node.port.pmml.PMMLPortObject"/>
-            <entry key="port_object_summary" type="xstring" value="PMML document with version 4.2 and models: TreeModel"/>
-            <entry key="port_spec_location" type="xstring" value="spec/spec.zip"/>
-            <entry key="port_object_location" type="xstring" value="object/portobject.zip"/>
-            <entry key="port_dir_location" type="xstring" value="port_1"/>
+            <entry key="port_dir_location" type="xstring" isnull="true" value=""/>
         </config>
     </config>
     <config key="filestores">
         <entry key="file_store_location" type="xstring" isnull="true" value=""/>
-        <entry key="file_store_id" type="xstring" value="6bb75d81-a1e3-46d0-b6f9-e5bb639c1853"/>
+        <entry key="file_store_id" type="xstring" isnull="true" value=""/>
     </config>
 </config>

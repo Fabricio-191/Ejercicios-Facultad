@@ -44,8 +44,9 @@ public class MOEAProblem extends AbstractProblem {
     @Override
     public void evaluate(Solution solution) {
         double maxTime = 0.0; // maximo tiempo recorrido (tomar en cuenta stopID)
-        double precioTotal = 20.0; // precio total (precio frames)
+        double precioTotal = 0.0; // precio total (precio frames)
 		int requisitosNoAtendidos = 0; // cantidad de requisitos no atendidos
+        int missingFrames = 0;
 
         int[] permutation = EncodingUtils.getPermutation(solution.getVariable(0));
 
@@ -71,13 +72,13 @@ public class MOEAProblem extends AbstractProblem {
                 time = 0;
             }
             capacity -= requirement.getLoading();
-            // time += requirement.getPickup_time();
 
             if(currentStop != requirement.getId_stop_departure()){
                 FrameDTO frame = frames.get(currentStop).get(requirement.getId_stop_departure());
                 if(frame == null) {
                     precioTotal += 10000;
                     time += 1000000;
+                    missingFrames++;
                 }else{
                     precioTotal += frame.getPrice();
                     time += frame.getDeltaTime();
@@ -90,6 +91,7 @@ public class MOEAProblem extends AbstractProblem {
             if(frame == null) {
                 precioTotal += 10000;
                 time += 1000000;
+                missingFrames++;
             }else{
                 precioTotal += frame.getPrice();
                 time += frame.getDeltaTime();
@@ -103,6 +105,7 @@ public class MOEAProblem extends AbstractProblem {
         solution.setObjective(1, maxTime);
 		solution.setObjective(2, precioTotal);;
         solution.setAttribute("camionesSinUsar", trunks.size() - trunk - 1);
+        solution.setAttribute("framesDesconocidos", missingFrames);
     }
 
     @Override

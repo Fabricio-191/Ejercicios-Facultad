@@ -47,7 +47,7 @@
             <entry key="index" type="xint" value="1"/>
             <entry key="port_spec_class" type="xstring" value="org.knime.ext.h2o.ports.H2OFramePortObjectSpec"/>
             <entry key="port_object_class" type="xstring" value="org.knime.ext.h2o.ports.H2OFramePortObject"/>
-            <entry key="port_object_summary" type="xstring" value="Rows: 16000, Cols: 17, Context: Local H2O Context v3.36.1.5"/>
+            <entry key="port_object_summary" type="xstring" value="Rows: 80000, Cols: 9, Context: Local H2O Context v3.36.1.5"/>
             <entry key="port_spec_location" type="xstring" value="spec/spec.zip"/>
             <entry key="port_object_location" type="xstring" value="object/portobject.zip"/>
             <entry key="port_dir_location" type="xstring" value="port_1"/>
@@ -55,6 +55,6 @@
     </config>
     <config key="filestores">
         <entry key="file_store_location" type="xstring" isnull="true" value=""/>
-        <entry key="file_store_id" type="xstring" value="629b7843-f097-4a53-ae7a-dfa8d6bec1f8"/>
+        <entry key="file_store_id" type="xstring" value="b72e9393-4d27-4158-8c3d-51de4d8198b9"/>
     </config>
 </config>

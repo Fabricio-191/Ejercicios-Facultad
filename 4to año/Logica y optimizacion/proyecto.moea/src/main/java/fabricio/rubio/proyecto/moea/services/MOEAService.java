@@ -54,6 +54,8 @@ public class MOEAService {
             i++;
         }
 
+        System.out.println("Cities: " + cities.size());
+
         Page<RequirementDTO> requirements = requirementsService.get("id", "DESC", 0, 1000000000);
 
         for (RequirementDTO requirement : requirements.getContent()) {
@@ -83,6 +85,8 @@ public class MOEAService {
                 i++;
             }
         }
+
+        System.out.println("Cities: " + cities.size());
     }
 
     public void loadRequirements(){
@@ -100,60 +104,53 @@ public class MOEAService {
     }
 
 	public void loadFrames(){
-         for(long cityId : cities.values()){
-             this.frames.put(cityId, new HashMap<>());
-             FrameDTO newFrame = new FrameDTO();
+		for(long cityId : cities.values()){
+		    this.frames.put(cityId, new HashMap<>());
+		    FrameDTO newFrame = new FrameDTO();		
+		    newFrame.setIdStopDeparture(cityId);
+		    newFrame.setIdStopArrival(cityId);
+		    newFrame.setPrice(0.0);
+		    newFrame.setDeltaTime(0L);		
+		    this.frames.get(cityId).put(cityId, newFrame);
+		}
 
-             newFrame.setIdStopDeparture(cityId);
-             newFrame.setIdStopArrival(cityId);
-             newFrame.setPrice(0.0);
-             newFrame.setDeltaTime(0L);
+		List<FrameDTO> framess = framesService.get("id", "DESC", 0, 1000000000).getContent();
+		for (FrameDTO frame : framess) {
+		    this.frames.get(frame.getIdStopDeparture()).put(frame.getIdStopArrival(), frame);
+		    this.frames.get(frame.getIdStopArrival()).put(frame.getIdStopDeparture(), frame);
+		}
 
-             this.frames.get(cityId).put(cityId, newFrame);
-         }
+		ArrayList<long[]> missing = new ArrayList<>();		
+		for(long i = 0; i < cities.size() - 1; i++){
+		    long cityAId = cities.get(i);
+		    for(long j = i + 1; j < cities.size(); j++){
+		        if(frames.get(cityAId).get(cities.get(j)) == null) missing.add(new long[]{cityAId, cities.get(j)});
+		    }
+		}
 
-         List<FrameDTO> framess = framesService.get("id", "DESC", 0, 1000000000).getContent();
-         for (FrameDTO frame : framess) {
-             this.frames.get(frame.getIdStopDeparture()).put(frame.getIdStopArrival(), frame);
-             this.frames.get(frame.getIdStopArrival()).put(frame.getIdStopDeparture(), frame);
-         }
+		int prev = missing.size();
+		while(!missing.isEmpty()){
+		    System.out.println("Missing: " + missing.size());
+		    for(int i = 0; i < missing.size(); i++){
+		        long[] pair = missing.get(i);
+		        for(long otherCity : cities.values()){
+		            if(frames.get(pair[0]).get(otherCity) == null || frames.get(otherCity).get(pair[1]) == null) continue;
+		            FrameDTO newFrame = new FrameDTO();		
+		            newFrame.setIdStopDeparture(frames.get(pair[0]).get(otherCity).getIdStopDeparture());
+		            newFrame.setIdStopArrival(frames.get(otherCity).get(pair[1]).getIdStopArrival());
+		            newFrame.setPrice(frames.get(pair[0]).get(otherCity).getPrice() + frames.get(otherCity).get(pair[1]).getPrice());
+		            newFrame.setDeltaTime(frames.get(pair[0]).get(otherCity).getDeltaTime() + frames.get(otherCity).get(pair[1]).getDeltaTime());		
+		            frames.get(pair[0]).put(pair[1], newFrame);
+		            frames.get(pair[1]).put(pair[0], newFrame);		
+		            missing.remove(i);
+		            break;
+		        }
+		    }		
+		    if(prev == missing.size()) break;
+		    prev = missing.size();
+		}
 
-         ArrayList<long[]> missing = new ArrayList<>();
-
-         for(long i = 0; i < cities.size() - 1; i++){
-             long cityAId = cities.get(i);
-             for(long j = i + 1; j < cities.size(); j++){
-                 if(frames.get(cityAId).get(cities.get(j)) == null) missing.add(new long[]{cityAId, cities.get(j)});
-             }
-         }
-
-         int prev = missing.size();
-         while(!missing.isEmpty()){
-             System.out.println("Missing: " + missing.size());
-             for(int i = 0; i < missing.size(); i++){
-                 long[] pair = missing.get(i);
-                 for(long otherCity : cities.values()){
-                     if(frames.get(pair[0]).get(otherCity) == null || frames.get(otherCity).get(pair[1]) == null) continue;
-                     FrameDTO newFrame = new FrameDTO();
-
-                     newFrame.setIdStopDeparture(frames.get(pair[0]).get(otherCity).getIdStopDeparture());
-                     newFrame.setIdStopArrival(frames.get(otherCity).get(pair[1]).getIdStopArrival());
-                     newFrame.setPrice(frames.get(pair[0]).get(otherCity).getPrice() + frames.get(otherCity).get(pair[1]).getPrice());
-                     newFrame.setDeltaTime(frames.get(pair[0]).get(otherCity).getDeltaTime() + frames.get(otherCity).get(pair[1]).getDeltaTime());
-
-                     frames.get(pair[0]).put(pair[1], newFrame);
-                     frames.get(pair[1]).put(pair[0], newFrame);
-
-                     missing.remove(i);
-                     break;
-                 }
-             }
-
-             if(prev == missing.size()) break;
-             prev = missing.size();
-         }
-
-         System.out.println("Missing: " + missing.size());
+        System.out.println("Missing: " + missing.size());
 	}
 
     private Solution solve(String type){
@@ -189,6 +186,7 @@ public class MOEAService {
                 // solutionJSON.put("variable0", new JSONArray(solution.getVariable(0).toString()));
                 solutionJSON.put("variable0", solution.getVariable(0).toString());
                 solutionJSON.put("camionesSinUsar", solution.getAttribute("camionesSinUsar"));
+                solutionJSON.put("framesDesconocidos", solution.getAttribute("framesDesconocidos"));
 
                 allData.put(type, solutionJSON);
             });

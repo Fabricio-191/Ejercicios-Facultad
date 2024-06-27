@@ -13,26 +13,17 @@
         <config key="include">
             <entry key="filter-type" type="xstring" value="STANDARD"/>
             <config key="included_names">
-                <entry key="array-size" type="xint" value="0"/>
+                <entry key="array-size" type="xint" value="1"/>
+                <entry key="0" type="xstring" value="diabetes"/>
             </config>
             <config key="excluded_names">
-                <entry key="array-size" type="xint" value="16"/>
-                <entry key="0" type="xstring" value="1"/>
-                <entry key="1" type="xstring" value="2"/>
-                <entry key="2" type="xstring" value="3"/>
-                <entry key="3" type="xstring" value="4"/>
-                <entry key="4" type="xstring" value="5"/>
-                <entry key="5" type="xstring" value="6"/>
-                <entry key="6" type="xstring" value="7"/>
-                <entry key="7" type="xstring" value="8"/>
-                <entry key="8" type="xstring" value="9"/>
-                <entry key="9" type="xstring" value="10"/>
-                <entry key="10" type="xstring" value="11"/>
-                <entry key="11" type="xstring" value="12"/>
-                <entry key="12" type="xstring" value="13"/>
-                <entry key="13" type="xstring" value="14"/>
-                <entry key="14" type="xstring" value="15"/>
-                <entry key="15" type="xstring" value="16"/>
+                <entry key="array-size" type="xint" value="6"/>
+                <entry key="0" type="xstring" value="age"/>
+                <entry key="1" type="xstring" value="hypertension"/>
+                <entry key="2" type="xstring" value="heart_disease"/>
+                <entry key="3" type="xstring" value="bmi"/>
+                <entry key="4" type="xstring" value="HbA1c_level"/>
+                <entry key="5" type="xstring" value="blood_glucose_level"/>
             </config>
             <entry key="enforce_option" type="xstring" value="EnforceInclusion"/>
             <config key="name_pattern">
@@ -48,10 +39,6 @@
     </config>
     <entry key="customDescription" type="xstring" isnull="true" value=""/>
     <entry key="state" type="xstring" value="EXECUTED"/>
-    <config key="nodecontainer_message">
-        <entry key="type" type="xstring" value="WARNING"/>
-        <entry key="message" type="xstring" value="No columns selected for conversion, returning the unchanged input table as output table."/>
-    </config>
     <entry key="factory" type="xstring" value="org.knime.base.node.preproc.colconvert.numbertostring2.NumberToString2NodeFactory"/>
     <entry key="node-name" type="xstring" value="Number to String"/>
     <entry key="node-bundle-name" type="xstring" value="KNIME Base Nodes"/>
@@ -71,12 +58,12 @@
             <entry key="index" type="xint" value="1"/>
             <entry key="port_spec_class" type="xstring" value="org.knime.core.data.DataTableSpec"/>
             <entry key="port_object_class" type="xstring" value="org.knime.core.node.BufferedDataTable"/>
-            <entry key="port_object_summary" type="xstring" value="Rows: 20000, Cols: 18"/>
+            <entry key="port_object_summary" type="xstring" value="Rows: 100000, Cols: 9"/>
             <entry key="port_dir_location" type="xstring" value="port_1"/>
         </config>
     </config>
     <config key="filestores">
         <entry key="file_store_location" type="xstring" isnull="true" value=""/>
-        <entry key="file_store_id" type="xstring" value="2e2dcdc2-8759-446c-996f-5dacd0588e73"/>
+        <entry key="file_store_id" type="xstring" value="ed658490-2c22-4ca1-9d66-567dc6be9bea"/>
     </config>
 </config>

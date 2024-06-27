@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--This file is auto-generated and is overwritten each time the workflow is saved.
+    The metadata have moved to the `workflow-metadata.xml` file.-->
+<KNIMEMetaInfo nrOfElements="4" xmlns="http://www.knime.org/2.9/metainfo">
+    <element form="text" name="Author" read-only="false">Rosaria Silipo</element>
+    <element form="date" name="Creation Date" read-only="false">23/1/2020/12:00:01 +02:00</element>
+    <element form="multiline" name="Comments" read-only="false">Simple Example for Multiclass Classification with Keras
+
+This workflow trains a fully connected feedforward neural network with 4-8-3 units per layers to classify iris flowers.
+
+TAGS: Perceptron,neural networks,deep learning</element>
+    <element form="text" name="Last Edited" read-only="true">2024-06-24 20:44:57 -0300</element>
+</KNIMEMetaInfo>

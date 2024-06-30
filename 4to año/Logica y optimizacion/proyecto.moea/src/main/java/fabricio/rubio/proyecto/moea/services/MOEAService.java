@@ -55,44 +55,16 @@ public class MOEAService {
         }
 
         System.out.println("Cities: " + cities.size());
-
-        Page<RequirementDTO> requirements = requirementsService.get("id", "DESC", 0, 1000000000);
-
-        for (RequirementDTO requirement : requirements.getContent()) {
-            if(!cities.containsValue(requirement.getId_stop_departure())){
-                cities.put(i, requirement.getId_stop_departure());
-                inverseCities.put(requirement.getId_stop_departure(), i);
-                i++;
-            }
-            if(!cities.containsValue(requirement.getId_stop_arrival())){
-                cities.put(i, requirement.getId_stop_arrival());
-                inverseCities.put(requirement.getId_stop_arrival(), i);
-                i++;
-            }
-        }
-
-        Page<FrameDTO> frames = framesService.get("id", "DESC", 0, 1000000000);
-
-        for (FrameDTO frame : frames.getContent()) {
-            if(!cities.containsValue(frame.getIdStopDeparture())){
-                cities.put(i, frame.getIdStopDeparture());
-                inverseCities.put(frame.getIdStopDeparture(), i);
-                i++;
-            }
-            if(!cities.containsValue(frame.getIdStopArrival())){
-                cities.put(i, frame.getIdStopArrival());
-                inverseCities.put(frame.getIdStopArrival(), i);
-                i++;
-            }
-        }
-
-        System.out.println("Cities: " + cities.size());
     }
 
     public void loadRequirements(){
         requirements = requirementsService
             .get("id", "DESC", 0, 1000000000)
             .stream()
+            .filter(requirement ->
+                    cities.containsValue(requirement.getId_stop_arrival()) &&
+                    cities.containsValue(requirement.getId_stop_departure())
+            )
             .collect(Collectors.groupingBy(RequirementDTO::getCategory));
     }
 
@@ -116,6 +88,9 @@ public class MOEAService {
 
 		List<FrameDTO> framess = framesService.get("id", "DESC", 0, 1000000000).getContent();
 		for (FrameDTO frame : framess) {
+            if (!cities.containsValue(frame.getIdStopDeparture())) continue;
+            if (!cities.containsValue(frame.getIdStopArrival())) continue;
+
 		    this.frames.get(frame.getIdStopDeparture()).put(frame.getIdStopArrival(), frame);
 		    this.frames.get(frame.getIdStopArrival()).put(frame.getIdStopDeparture(), frame);
 		}
@@ -139,7 +114,8 @@ public class MOEAService {
 		            newFrame.setIdStopDeparture(frames.get(pair[0]).get(otherCity).getIdStopDeparture());
 		            newFrame.setIdStopArrival(frames.get(otherCity).get(pair[1]).getIdStopArrival());
 		            newFrame.setPrice(frames.get(pair[0]).get(otherCity).getPrice() + frames.get(otherCity).get(pair[1]).getPrice());
-		            newFrame.setDeltaTime(frames.get(pair[0]).get(otherCity).getDeltaTime() + frames.get(otherCity).get(pair[1]).getDeltaTime());		
+		            newFrame.setDeltaTime(frames.get(pair[0]).get(otherCity).getDeltaTime() + frames.get(otherCity).get(pair[1]).getDeltaTime());
+
 		            frames.get(pair[0]).put(pair[1], newFrame);
 		            frames.get(pair[1]).put(pair[0], newFrame);		
 		            missing.remove(i);
@@ -155,14 +131,14 @@ public class MOEAService {
 
     private Solution solve(String type){
         // https://github.com/MOEAFramework/MOEAFramework/blob/master/docs/listOfAlgorithms.md#nsga-iii
-        MOEAProblem problem = new MOEAProblem(1, 3, 0, frames, cities, requirements.get(type), trunks.get(type));
+        MOEAProblem problem = new MOEAProblem(1, 3, 0, frames, requirements.get(type), trunks.get(type));
 
         Executor executor = new Executor()
                 .withProblem(problem)
                 .withAlgorithm("NSGAIII")
-                .withProperty("populationSize", 1000)
+                .withProperty("populationSize", 100)
                 // .distributeOn(4)
-                .withMaxEvaluations(100000);
+                .withMaxTime(60);
 
         NondominatedPopulation result = executor.run();
 
@@ -173,7 +149,6 @@ public class MOEAService {
 		JSONObject allData = new JSONObject();
 
         float startTimeG = System.nanoTime();
-
         Arrays.stream(types)
             .parallel()
             .forEach(type -> {

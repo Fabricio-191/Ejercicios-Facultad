@@ -23,14 +23,19 @@ public class MOEAController {
 
     @GetMapping("moea/init")
     public void init() {
-        service.loadRequirements();
-        service.loadTrunks();
+        System.out.println("Loading cities");
         service.loadCities();
+        System.out.println("Loading requirements");
+        service.loadRequirements();
+        System.out.println("Loading trunks");
+        service.loadTrunks();
+        System.out.println("Loading frames");
         service.loadFrames();
     }
 
     @GetMapping(path = "moea/run", produces = "application/json")
     public String run() {
+        System.out.println("Running MOEA");
         try{
             return service.run();
         }catch (InterruptedException e){

@@ -1,8 +1,6 @@
 package fabricio.rubio.proyecto.moea.commons;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.moeaframework.core.Solution;
 import org.moeaframework.core.variable.EncodingUtils;
@@ -40,12 +38,15 @@ public class MOEAProblem extends AbstractProblem {
 
     @Override
     public void evaluate(Solution solution) {
+        List<Integer>[] requirementsPerTrunk = new List[trunks.size()];
+        for(int i = 0; i < trunks.size(); i++) requirementsPerTrunk[i] = new ArrayList<>();
+
         double precioTotal = 0.0; // precio total (precio frames)
 
         int[] permutation = EncodingUtils.getPermutation(solution.getVariable(0));
 
 		int[] capacities = trunks.stream().mapToInt(TrunkDTO::getCapacity).toArray();
-        long[] currentStops = trunks.stream().map(TrunkDTO::getId_stop_parking).mapToLong(x -> x).toArray();
+        long[] currentStops = trunks.stream().mapToLong(TrunkDTO::getId_stop_parking).toArray();
         double[] times = new double[trunks.size()];
 
         int camion = 0;
@@ -54,32 +55,38 @@ public class MOEAProblem extends AbstractProblem {
             RequirementDTO requirement = requirements.get(requirementIndex);
 
             int camionOriginal = camion;
-            if(capacities[camion] - requirement.getLoading() < 0){
+            while(capacities[camion] - requirement.getLoading() < 0){
                 camion++;
                 if(camion == camionOriginal) break;
                 if(camion == trunks.size()) camion = 0;
             }
+            requirementsPerTrunk[camion].add(requirementIndex);
             capacities[camion] -= requirement.getLoading();
 
+            // 8652 4533
             FrameDTO frame = frames.get(currentStops[camion]).get(requirement.getId_stop_departure());
-            if(frame == null) throw new RuntimeException("Frame not found");
+            if(frame == null) throw new NoSuchElementException("Frame not found");
             precioTotal += frame.getPrice();
             times[camion] += frame.getDeltaTime();
-/
+
             frame = frames.get(requirement.getId_stop_departure()).get(requirement.getId_stop_arrival());
-            if(frame == null) throw new RuntimeException("Frame not found");
+            if(frame == null) throw new NoSuchElementException("Frame not found");
             precioTotal += frame.getPrice();
             times[camion] += frame.getDeltaTime();
 
             currentStops[camion] = requirement.getId_stop_arrival();
 
-            if(camion == trunks.size()) camion = 0;
+            camion++;
             solvedRequirements++;
+            if(camion == trunks.size()) camion = 0;
         }
 
-        solution.setObjective(0, requirements.size() - solvedRequirements);
-        solution.setObjective(1, Arrays.stream(times).reduce(Double::max).getAsDouble());
-		solution.setObjective(2, precioTotal);
+        solution.setObjective(0, Arrays.stream(times).reduce(Double::max).getAsDouble());
+		solution.setObjective(1, precioTotal);
+        solution.setObjective(2, requirements.size() - solvedRequirements);
+        solution.setAttribute("times", times);
+        solution.setAttribute("capacities", capacities);
+        solution.setAttribute("requirementsPerTrunk", requirementsPerTrunk);
     }
 
     @Override

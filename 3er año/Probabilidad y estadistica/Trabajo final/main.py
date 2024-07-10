@@ -19,15 +19,15 @@ if dataset == 1:
 elif dataset == 2:
 	dataframe = pandas.DataFrame({
 		# round to two decimals
-		'altura': numpy.round_(st.norm.rvs(172.7, 4.83, 25000), 2), # type: ignore
-		'peso': numpy.round_(st.norm.rvs(57.64, 5.3, 25000), 2) # type: ignore
+		'altura': numpy.round(st.norm.rvs(172.7, 4.83, 25000), 2), # type: ignore
+		'peso': numpy.round(st.norm.rvs(57.64, 5.3, 25000), 2) # type: ignore
 	})
 elif dataset == 3:
 	# peso = (0.551 ± 0.006) * altura + (-37.454 ± 1.034)
 	dataframe = pandas.DataFrame({
-		'altura': numpy.round_(st.norm.rvs(172.7, 4.83, 25000), 2) # type: ignore
+		'altura': numpy.round(st.norm.rvs(172.7, 4.83, 25000), 2) # type: ignore
 	})
-	dataframe['peso'] = numpy.round_( # type: ignore
+	dataframe['peso'] = numpy.round( # type: ignore
 		(0.551 * dataframe.altura) - 37.454 + st.norm.rvs(0, 5.3, 25000), 2
 	)
 else:

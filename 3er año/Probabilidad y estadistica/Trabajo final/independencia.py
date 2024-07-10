@@ -52,8 +52,8 @@ seaborn.heatmap(contingency_table, ax=axs[0, 1], robust=True).invert_yaxis()
 
 dataframe = pandas.DataFrame({
 	# round to two decimals
-	'altura': numpy.round_(st.norm.rvs(172.7, 4.83, 25000), 2), # type: ignore
-	'peso': numpy.round_(st.norm.rvs(57.64, 5.3, 25000), 2) # type: ignore
+	'altura': numpy.round(st.norm.rvs(172.7, 4.83, 25000), 2), # type: ignore
+	'peso': numpy.round(st.norm.rvs(57.64, 5.3, 25000), 2) # type: ignore
 })
 
 

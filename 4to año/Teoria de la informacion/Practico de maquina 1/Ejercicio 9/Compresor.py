@@ -1,6 +1,3 @@
-"""
-Haciendo uso de sockets, implemente un servidor y un cliente (a modo de ejemplo, se proveen un servidor y un cliente en lenguaje Python), que permita desde el cliente, enviar un archivo comprimido utilizando el alfabeto ABCDEFGH, y en el servidor, descomprimir el archivo.
-"""
 __table = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'] # 3 bits
 
 def __bytes_to_binary_string(string):
@@ -16,6 +13,8 @@ def compress(str): # return binary buffer
     s += '0' * remainder
     
     bytes = bytearray([int(s[i : i + 8], 2) for i in range(0, len(s), 8)])
+    
+    print(f'Compressed: {str} => {s} => {bytes}')
     return bytes
     
 def decompress(bytes):
@@ -25,13 +24,14 @@ def decompress(bytes):
     str = ''
     for i in range(3, len(s) - remainder, 3):
         str += __table[int(s[i : i+3], 2)]
-        
+    
+    print(f'Decompressed: {bytes} => {s} => {str}')
     return str
 
 if __name__ == '__main__':
     import random
     
-    test_str = ''.join([random.choice(__table) for _ in range(100)])
+    test_str = ''.join([random.choice(__table) for _ in range(5)])
     compressed = compress(test_str)
     decompressed = decompress(compressed)
 

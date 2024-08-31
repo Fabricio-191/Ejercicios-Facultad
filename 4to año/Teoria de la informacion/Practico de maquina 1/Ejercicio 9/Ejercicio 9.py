@@ -40,15 +40,19 @@ if __name__ == "__main__":
         server.send("AAAA" + recibido)
         server.close()
         
+    # Crear y ejecutar el servidor en un hilo separado
     thread = threading.Thread(target=make_server)
     thread.start()
     
+    # Crear el cliente y enviar datos al servidor
     client = Client()
     client.send("BDAEB")
     
+    # Recibir y mostrar las respuestas del servidor
     print(client.receive())
     print(client.receive())
     
+    # Cerrar la conexión del cliente y esperar a que el hilo del servidor termine
     client.close()
     thread.join()
     

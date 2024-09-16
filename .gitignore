@@ -6,3 +6,5 @@ dist/
 .idea
 demo/
 Octave/
+node_modules/
+package-lock.json

@@ -1,4 +1,3 @@
-
 I = [1 0 0; 0 1 0; 0 0 1]; // Matriz identidad
 I1 = [1; 0; 0];            // Primera columna de la matriz identidad
 I2 = [0; 1; 0];            // Segunda columna de la matriz identidad
@@ -27,7 +26,6 @@ U \ (L \ I)    // Encontrar la inversa de A con la descomposición LU
 U \ (L \ I1)   // Primera columna de la inversa de A
 U \ (L \ I2)   // Segunda columna de la inversa de A
 U \ (L \ I3)   // Tercera columna de la inversa de A
-
 
 T = chol(A)    // Descomposición de Cholesky de A
 A == T' * T    // Revisar que la descomposición de Cholesky es correcta

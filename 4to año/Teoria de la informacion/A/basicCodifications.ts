@@ -1,3 +1,5 @@
+import assert from "assert";
+
 const round2 = (num: number, decimals: number) => Math.round(num * 10 ** decimals) / 10 ** decimals;
 
 export class Source {
@@ -87,19 +89,28 @@ export abstract class Codification {
 			}
 		}
 
+		if(currentSymbol !== '') {
+			throw new Error('Symbol not found');
+		}
+
 		return encoded
 	};
 
+	decodeOne(str: string): [string, string] {
+		const index = this.codes.findIndex(code => str.startsWith(code));
+
+		if(index === -1) throw new Error('Invalid code');
+
+		return [this.source.symbols[index], this.codes[index]];
+	}
+
 	decode(str: string): string {
 		let decoded = '';
-		let currentCode = '';
-		for(const char of str) {
-			currentCode += char;
-			const symbolIndex = this.codes.indexOf(currentCode);
-			if(symbolIndex !== -1) {
-				decoded += this.source.symbols[symbolIndex];
-				currentCode = '';
-			}
+		while(str.length) {
+			const [symbol, code] = this.decodeOne(str);
+
+			decoded += symbol;
+			str = str.slice(code.length);
 		}
 
 		return decoded;
@@ -131,6 +142,19 @@ export abstract class Codification {
 		console.log('Average length:', round2(this.averageLength(), 4));
 		console.log()
 		console.log()
+	}
+}
+
+export class MinASCII extends Codification {
+	_getCodes(): string[] {
+		const l = Math.ceil(Math.log2(this.source.symbols.length));
+		return this.source.symbols.map((_, i) => i.toString(2).padStart(l, '0'));
+	}
+
+	public static fromString(str: string): MinASCII {
+		const symbols = Array.from(new Set(str.split(''))).sort();
+		const probabilities = Array(symbols.length).fill(1 / symbols.length);
+		return new MinASCII(new Source(symbols, probabilities));
 	}
 }
 
@@ -167,9 +191,13 @@ export class MyGroup {
 
 export class Huffman extends Codification {
 	_getCodes(): string[] {
+
 		const huffmanSymbols = this.source.symbols
 			.map((symbol, i) => new MySymbol(symbol, this.source.probabilities[i]));
 		const huffmanGroups: Array<MyGroup | MySymbol> = [...huffmanSymbols];
+		if(huffmanGroups.length === 1) {
+			huffmanSymbols[0].addCode('0');
+		}
 
 		while(huffmanGroups.length > 1) {
 			huffmanGroups.sort((a, b) => a.probability - b.probability);
@@ -267,6 +295,10 @@ export class Fano extends Codification {
 		const fanoSymbols = this.source.symbols
 			.map((symbol, i) => new MySymbol(symbol, this.source.probabilities[i]));
 
+			if(fanoSymbols.length === 1) {
+				fanoSymbols[0].addCode('0');
+			}
+
 		this._divisionInGroups(fanoSymbols, 1/this.base);
 		
 		return fanoSymbols.map(symbol => symbol.code);
@@ -348,4 +380,16 @@ if (require.main === module) {
 
 	console.log(fano.encode('PABLOPABLITOCLAVOUNCLAVITO'));
 	*/
+
+	const testStr = 'PABLOPABLITOCLAVOUNCLAVITO';
+	const testSource = Source.fromString(testStr);
+
+	const testFano = new Fano(testSource);
+	assert.strictEqual(testStr, testFano.decode(testFano.encode(testStr)));
+
+	const testShannon = new Shannon(testSource);
+	assert.strictEqual(testStr, testShannon.decode(testShannon.encode(testStr)));
+
+	const testHuffman = new Huffman(testSource);
+	assert.strictEqual(testStr, testHuffman.decode(testHuffman.encode(testStr)));
 }

@@ -27,5 +27,5 @@ def calc_entropy(file_path):
     return entropy, relative_entropy
 
 
-print(calc_entropy("D:\\Teoria de la informacion\\Unidad 1\\Ejercicio 4.py"))
+print(calc_entropy("D:\\Programacion\\Ejercicios-Facultad\\4to año\\Teoria de la informacion\\Practico de maquina 1\\asd\\Ejercicio 4.py"))
 print(calc_entropy("D:\\Universidad\\Fabricio Rubio - Curriculum.pdf"))

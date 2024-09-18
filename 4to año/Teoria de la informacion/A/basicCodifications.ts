@@ -1,6 +1,5 @@
 import assert from "assert";
 
-const round2 = (num: number, decimals: number) => Math.round(num * 10 ** decimals) / 10 ** decimals;
 
 export class Source {
 	constructor(symbols: string[], probabilities: number[]) {
@@ -127,6 +126,8 @@ export abstract class Codification {
 	}
 
 	show(){
+		const round2 = (num: number, decimals: number) => Math.round(num * 10 ** decimals) / 10 ** decimals;
+
 		console.log('Entropy:', round2(this.source.entropy(), 4));
 
 		const table: unknown[] = [];

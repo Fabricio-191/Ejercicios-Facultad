@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { Codification, MinASCII, Shannon, Source, Huffman, Fano } from './basicCodifications.ts';
+import { Shannon, Codification, MinASCII, Source, Huffman, Fano } from './basicCodifications.ts';
 
 const subdivideString = (str: string, order: number): string[] => {
 	const substrings: string[] = [];
@@ -9,11 +9,6 @@ const subdivideString = (str: string, order: number): string[] => {
 
 	return substrings;
 }
-
-const count = (arr: string[]): { [key: string]: number } => arr.reduce((acc, curr) => {
-	acc[curr] = (acc[curr] || 0) + 1;
-	return acc;
-}, {});
 
 class Markov<T extends typeof Codification> {
 	constructor(str: string, order = 1, codification: T) {
@@ -39,7 +34,10 @@ class Markov<T extends typeof Codification> {
 
 		for(const key of keys) {
 			const uses = divisions.filter(str => str.startsWith(key));
-			const counts = count(uses.map(str => str.slice(-1)));
+			const counts = uses.map(str => str.slice(-1)).reduce((acc, curr) => {
+				acc[curr] = (acc[curr] || 0) + 1;
+				return acc;
+			}, {});
 			const symbols = Object.keys(counts).sort();
 			const probabilities = symbols.map(symbol => counts[symbol] / uses.length);
 
@@ -82,19 +80,21 @@ class Markov<T extends typeof Codification> {
 }
 
 if (require.main === module) {
-	const str = 'https://www.geeknetic.es/Noticia/17666/Winrar-vs-7-Zip-vs-Winzip-Cual-es-el-mejor-descompresor-para-Windows.html';
-	// const str = require('fs').readFileSync('D:\\Programacion\\Ejercicios-Facultad\\4to año\\Teoria de la informacion\\A\\basicCodifications.ts', 'utf-8');
-	const markovHuffman = new Markov(str, 2, Huffman);
+	// const str = 'https://www.geeknetic.es/Noticia/17666/Winrar-vs-7-Zip-vs-Winzip-Cual-es-el-mejor-descompresor-para-Windows.html';
+	const str = require('fs').readFileSync('D:\\Programacion\\Ejercicios-Facultad\\4to año\\Teoria de la informacion\\A\\basicCodifications.ts', 'utf-8');
+	const grado = 2;
+
+	const markovHuffman = new Markov(str, grado, Huffman);
 	const encodedHuffman = markovHuffman.encode(str);
 	assert.strictEqual(str, markovHuffman.decode(encodedHuffman));
 
-	const markovShannon = new Markov(str, 2, Shannon);
+	const markovShannon = new Markov(str, grado, Shannon);
 	const encodedShannon = markovShannon.encode(str);
 	assert.strictEqual(str, markovShannon.decode(encodedShannon));
 
-	const markovFano = new Markov(str, 2, Fano);
+	const markovFano = new Markov(str, grado, Fano);
 	const encodedFano = markovFano.encode(str);
 	assert.strictEqual(str, markovFano.decode(encodedFano));
 
-	console.log(encodedHuffman.length, '<', encodedFano.length, '<', encodedShannon.length);
+	console.log(encodedHuffman.length, '<', encodedFano.length, '<', encodedShannon.length, '<', str.length * 8);
 }

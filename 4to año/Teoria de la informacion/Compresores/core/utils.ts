@@ -21,6 +21,8 @@ export function substringCounts(str: string, length = 1): Record<string, number>
 	return counts;
 }
 
+type Key = string | number;
+
 export function copySorted<T extends string | number | Fraction>(
 	object: Record<string, T>,
 	byValue = false
@@ -45,7 +47,7 @@ export function copySorted<T extends string | number | Fraction>(
 		}, {} as Record<string, T>);
 }
 
-export function mapObject<K extends string | number, V, R>(
+export function mapObject<K extends Key, V, R>(
 	object: Record<K, V>,
 	callback: (value: V, key: K) => R
 ): Record<K, R> {
@@ -56,4 +58,17 @@ export function mapObject<K extends string | number, V, R>(
 	}
 
 	return newObj;
+}
+
+export function reverseObject<K extends Key, V extends Key>(object: Record<K, V>): Record<V, K> {
+	// @ts-expect-error
+	return new Proxy(object, {
+		get(target, prop) {
+			if(typeof prop === 'string') {
+				return Object.entries(target).find(([_, value]) => value === prop)![0];
+			}else{
+				return Reflect.get(target, prop);
+			}
+		},
+	});
 }

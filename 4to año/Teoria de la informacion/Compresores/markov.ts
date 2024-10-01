@@ -1,6 +1,6 @@
 import assert from 'assert';
 import { Codification, Source } from './core/base';
-import { Shannon, MinASCII, Huffman, Fano } from './estaticas';
+import { Shannon, MinASCII, Huffman, Fano } from './estaticas/estaticas';
 import Fraction from './core/fraction';
 
 const subdivideString = (str: string, order: number): string[] => {

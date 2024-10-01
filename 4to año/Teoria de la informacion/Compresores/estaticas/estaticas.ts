@@ -1,7 +1,7 @@
 import assert from "assert";
-import { SubstitutionCodification, Codification, Source } from "./core/base";
-import { mapObject, substringCounts } from "./core/utils";
-import Fraction from "./core/fraction";
+import { SubstitutionCodification, Codification, Source } from "../core/base";
+import { mapObject, substringCounts } from "../core/utils";
+import Fraction from "../core/fraction";
 
 export class MinASCII extends SubstitutionCodification {
 	_makeCodes(): void {

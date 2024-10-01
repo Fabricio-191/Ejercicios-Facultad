@@ -1,7 +1,6 @@
 import assert from "assert";
-import { BitBufferReader, BitBufferWriter } from "./core/buffer";
-import { Codification } from "./core/base";
-import { substringCounts, copySorted, mapObject } from "./core/utils";
+import { BitBufferReader, BitBufferWriter } from "../core/buffer";
+import { Codification } from "../core/base";
 
 const ascii = (str: string) => str.charCodeAt(0); // Returns the ASCII code of the first character of the string
 const chr = (num: number) => String.fromCharCode(num); // Returns the character of the ASCII code
@@ -134,97 +133,17 @@ export class LZ implements Codification<string> {
 	}
 }
 
-// if (require.main === module) {
-// 	const testStr = 'a cada chancho le llega su san martin';
-// 	console.log(`Original size: ${testStr.length * 8} bits`);
-// 
-// 	const lz = new LZ(16);
-// 	const lzEncoded = lz.encode(testStr);
-// 	assert(lz.decode(lzEncoded) === testStr);
-// 	console.log(`LZ: ${lzEncoded} (${lzEncoded.length} bits)`);
-// 
-// 	const lzw = new LZW(16);
-// 	const lzwEncoded = lzw.encode(testStr);
-// 	assert(lzw.decode(lzwEncoded) === testStr);
-// 	console.log(`LZW: ${lzwEncoded} (${lzwEncoded.length * 8} bits)`);
-// }
-
-class HuffmanNode {
-	constructor(
-		public value = '',
-		public weight = 0,
-		public left?: HuffmanNode,
-		public right?: HuffmanNode
-	) {}
-}
-
-// Huffman dinamico 
-export abstract class Huffman {
-	public static encode(str: string): string {
-		const counts = substringCounts(str);
-		const sortedCounts = copySorted(counts, true);
-		const nodes = Object.keys(sortedCounts).map(key => new HuffmanNode(key, sortedCounts[key]));
-
-		while(nodes.length > 1) {
-			const left = nodes.shift()!;
-			const right = nodes.shift()!;
-			const newNode = new HuffmanNode('', left.weight + right.weight, left, right);
-
-			let i = 0;
-			while(i < nodes.length && nodes[i].weight < newNode.weight) {
-				i++;
-			}
-
-			nodes.splice(i, 0, newNode);
-		}
-
-		const root = nodes[0];
-		const codes: Record<string, string> = {};
-		const stack: [HuffmanNode, string][] = [[root, '']];
-
-		while(stack.length) {
-			const [node, code] = stack.pop()!;
-
-			if(node.value) {
-				codes[node.value] = code;
-			}else{
-				stack.push([node.left!, code + '0']);
-				stack.push([node.right!, code + '1']);
-			}
-		}
-
-		return str.split('').map(char => codes[char]).join('');
-	}
-
-	public static decode(str: string): string {
-		const root = new HuffmanNode();
-		let node = root;
-
-		const out: string[] = [];
-		for(const bit of str) {
-			if(bit === '0') {
-				node = node.left!;
-			}else{
-				node = node.right!;
-			}
-
-			if(node.value) {
-				out.push(node.value);
-				node = root;
-			}
-		}
-
-		return out.join('');
-	}
-}
-
 if (require.main === module) {
-	const testStr = 'ABRACADABRA';
+	const testStr = 'a cada chancho le llega su san martin';
 	console.log(`Original size: ${testStr.length * 8} bits`);
 
-	const huffman = new Huffman();
-	const huffmanEncoded = huffman.encode(testStr);
+	const lz = new LZ(16);
+	const lzEncoded = lz.encode(testStr);
+	assert(lz.decode(lzEncoded) === testStr);
+	console.log(`LZ: ${lzEncoded} (${lzEncoded.length} bits)`);
 
-	console.log(`Huffman: ${huffmanEncoded} (${huffmanEncoded.length} bits)`);
-	assert(huffman.decode(huffmanEncoded) === testStr);
+	const lzw = new LZW(16);
+	const lzwEncoded = lzw.encode(testStr);
+	assert(lzw.decode(lzwEncoded) === testStr);
+	console.log(`LZW: ${lzwEncoded} (${lzwEncoded.length * 8} bits)`);
 }

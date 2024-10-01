@@ -2,68 +2,6 @@ import assert from "assert";
 import { BitBufferReader, BitBufferWriter } from "../core/buffer";
 import { Codification } from "../core/base";
 
-const ascii = (str: string) => str.charCodeAt(0); // Returns the ASCII code of the first character of the string
-const chr = (num: number) => String.fromCharCode(num); // Returns the character of the ASCII code
-
-export class LZW implements Codification<string> {
-	constructor(windowSize: number) {
-		this.windowSize = windowSize;
-
-		assert((windowSize & (windowSize - 1)) === 0, 'The window size must be a power of 2');
-	}
-	public readonly windowSize: number;
-
-	public encode(str: string): string {
-        const dict: Record<string, number> = {};
-        let phrase = str[0] as string;
-
-        const out: number[] = [];
-        let code = 256;
-
-	    for (const currChar of str.slice(1)) {
-            if (dict[phrase + currChar]) {
-                phrase += currChar;
-            }else {
-                out.push(phrase.length > 1 ? dict[phrase]! : ascii(phrase));
-                dict[phrase + currChar] = code;
-                code++;
-                phrase = currChar;
-            }
-        }
-
-        out.push(phrase.length > 1 ? dict[phrase]! : ascii(phrase));
-
-        return out.map(chr).join("");
-	}
-
-	public decode(str: string): string {
-        const dict: Record<string, string> = {};
-        let currChar = str[0] as string;
-        let oldPhrase = currChar;
-        const out = [currChar];
-		
-        let code = 256;
-        let phrase;
-		for(const char of str.slice(1)) {
-			const currCode = ascii(char);
-
-			if (currCode < 256) {
-				phrase = char;
-			}else{
-				phrase = dict[currCode] ?? (oldPhrase + currChar);
-			}
-
-			out.push(phrase);
-			currChar = phrase.charAt(0);
-			dict[code] = oldPhrase + currChar;
-			code++;
-			oldPhrase = phrase;
-		}
-		
-        return out.join("");
-	}
-}
-
 export class LZ implements Codification<string> {
 	constructor(windowSize: number) {
 		this.windowSize = windowSize;
@@ -133,6 +71,67 @@ export class LZ implements Codification<string> {
 	}
 }
 
+const ascii = (str: string) => str.charCodeAt(0); // Returns the ASCII code of the first character of the string
+const chr = (num: number) => String.fromCharCode(num); // Returns the character of the ASCII code
+export class LZW implements Codification<string> {
+	constructor(windowSize: number) {
+		this.windowSize = windowSize;
+
+		assert((windowSize & (windowSize - 1)) === 0, 'The window size must be a power of 2');
+	}
+	public readonly windowSize: number;
+
+	public encode(str: string): string {
+        const dict: Record<string, number> = {};
+        let phrase = str[0] as string;
+
+        const out: number[] = [];
+        let code = 256;
+
+	    for (const currChar of str.slice(1)) {
+            if (dict[phrase + currChar]) {
+                phrase += currChar;
+            }else {
+                out.push(phrase.length > 1 ? dict[phrase]! : ascii(phrase));
+                dict[phrase + currChar] = code;
+                code++;
+                phrase = currChar;
+            }
+        }
+
+        out.push(phrase.length > 1 ? dict[phrase]! : ascii(phrase));
+
+        return out.map(chr).join("");
+	}
+
+	public decode(str: string): string {
+        const dict: Record<string, string> = {};
+        let currChar = str[0] as string;
+        let oldPhrase = currChar;
+        const out = [currChar];
+		
+        let code = 256;
+        let phrase;
+		for(const char of str.slice(1)) {
+			const currCode = ascii(char);
+
+			if (currCode < 256) {
+				phrase = char;
+			}else{
+				phrase = dict[currCode] ?? (oldPhrase + currChar);
+			}
+
+			out.push(phrase);
+			currChar = phrase.charAt(0);
+			dict[code] = oldPhrase + currChar;
+			code++;
+			oldPhrase = phrase;
+		}
+		
+        return out.join("");
+	}
+}
+
 if (require.main === module) {
 	const testStr = 'a cada chancho le llega su san martin';
 	console.log(`Original size: ${testStr.length * 8} bits`);
@@ -145,5 +144,6 @@ if (require.main === module) {
 	const lzw = new LZW(16);
 	const lzwEncoded = lzw.encode(testStr);
 	assert(lzw.decode(lzwEncoded) === testStr);
+	console.log(Buffer.byteLength(lzwEncoded, 'utf8') * 8);
 	console.log(`LZW: ${lzwEncoded} (${lzwEncoded.length * 8} bits)`);
 }

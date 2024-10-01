@@ -8,11 +8,6 @@ export class ASCII implements CodificationWithOne<string> {
 	}
 	private _codes: Record<string, string>;
 
-	encodeOne(str: string): [string, string] {
-		if
-		return [str, this._codes[str]];
-	}
-
 	encode(str: string): string {
 		return str.split('').map(c => this._codes[c]).join('');
 	}

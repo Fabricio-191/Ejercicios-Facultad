@@ -1,5 +1,7 @@
 import { substringCounts } from '../core/utils.ts';
 
+const ascii = (str: string) => str.charCodeAt(0); // Returns the ASCII code of the first character of the string
+const chr = (num: number) => String.fromCharCode(num); 
 export default abstract class SucesiveSymbolsEncoding {
 	static encode(str: string, encoding: (s: string) => number): [string, number, number] {
 		const pairs: [string, number][] = [];
@@ -52,4 +54,4 @@ export default abstract class SucesiveSymbolsEncoding {
 	}
 }
 
-console.log(SucesiveSymbolsEncoding.encode('aab'));
+console.log(SucesiveSymbolsEncoding.encode('aab', ascii));

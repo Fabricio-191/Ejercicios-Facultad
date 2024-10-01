@@ -232,7 +232,7 @@ const MY_ASCII = new ASCII({
 	'D': '100',
 });
 
-function test(testStr: string, ascii: Codification<string>, r: string) {
+function test(testStr: string, ascii: CodificationWithOne<string>, r: string) {
 	const encoded = new AdaptiveHuffmanEncoder(
 		ascii,
 		testStr,

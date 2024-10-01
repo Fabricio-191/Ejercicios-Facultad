@@ -1,18 +1,15 @@
-export const ascii = (str: string) => str.charCodeAt(0); // Returns the ASCII code of the first character of the string
-export const chr = (num: number) => String.fromCharCode(num); //
-
 abstract class BitBuffer {
 	constructor(bits: bigint, length: number) {
-		if(bits.toString(2).length > length) {
-			throw new Error('The length is too small for the given bits');
-		}
-
 		this.bits = bits;
 		this.length = length;
 	}
 
 	protected bits: bigint;
 	public length: number;
+
+	toString(base: number): string {
+		return this.bits.toString(base).padStart(this.length, '0');
+	}
 }
 
 export class BitBufferWriter extends BitBuffer {
@@ -42,11 +39,7 @@ export class BitBufferWriter extends BitBuffer {
 			throw new Error('The value must be a single character');
 		}
 
-		this.addByte(ascii(value));
-	}
-
-	toString(base: number): string {
-		return this.bits.toString(base).padStart(this.length, '0');
+		this.addByte(value.charCodeAt(0));
 	}
 }
 
@@ -60,15 +53,19 @@ export class BitBufferReader extends BitBuffer {
 		return this.length - this.offset;
 	}
 
-	readBits(length: number): number {
-		if(length > 53) {
-			throw new Error('The length must be less than 54');
+	get isEmpty(): boolean {
+		return this.remaining === 0;
+	}
+
+	readBits(bitsAmount: number): number {
+		if(bitsAmount > 53) {
+			throw new Error('The bits amount must be less than 54');
 		}
 
-		const mask = (1n << BigInt(length)) - 1n;
-		const value = Number(this.bits >> BigInt(this.length - this.offset - length) & mask);
+		const mask = (1n << BigInt(bitsAmount)) - 1n;
+		const value = Number(this.bits >> BigInt(this.length - this.offset - bitsAmount) & mask);
 
-		this.offset += length;
+		this.offset += bitsAmount;
 		return value
 	}
 
@@ -81,7 +78,7 @@ export class BitBufferReader extends BitBuffer {
 	}
 
 	readChar(): string {
-		return chr(this.readByte());
+		return String.fromCharCode(this.readByte());
 	}
 
 	static fromBinary(str: string): BitBufferReader {
@@ -106,4 +103,5 @@ if(require.main === module) {
 	console.log(bufferReader.readBit() === true);
 	console.log(bufferReader.readBit() === false);
 	console.log(bufferReader.readByte() === 0b1000111);
+	console.log(bufferReader.isEmpty);
 }

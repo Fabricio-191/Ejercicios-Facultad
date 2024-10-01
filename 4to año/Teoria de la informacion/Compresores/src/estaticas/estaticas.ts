@@ -1,7 +1,7 @@
 import assert from "assert";
-import { SubstitutionCodification, Codification, Source } from "../core/base";
-import { mapObject } from "../core/utils";
-import Fraction from "../core/fraction";
+import { SubstitutionCodification, Codification, Source } from "../../core/base";
+import { mapObject } from "../../core/utils";
+import Fraction from "../../core/fraction";
 
 class MySymbol {
 	constructor(symbol: string, probability: Fraction) {

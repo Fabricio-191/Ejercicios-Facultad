@@ -1,6 +1,6 @@
 import assert from "assert";
-import { BitBufferReader, BitBufferWriter } from "../core/buffer";
-import { Codification } from "../core/base";
+import { BitBufferReader, BitBufferWriter } from "../../core/buffer";
+import { Codification } from "../../core/base";
 
 const ascii = (str: string) => str.charCodeAt(0); // Returns the ASCII code of the first character of the string
 const chr = (num: number) => String.fromCharCode(num); // Returns the character of the ASCII code

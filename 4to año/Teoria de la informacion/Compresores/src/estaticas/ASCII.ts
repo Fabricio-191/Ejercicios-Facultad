@@ -1,6 +1,6 @@
-import { SubstitutionCodification, Codification, Source, CodificationWithOne } from "../core/base";
-import { mapObject, substringCounts } from "../core/utils";
-import Fraction from "../core/fraction";
+import { SubstitutionCodification, Codification, Source, CodificationWithOne } from "../../core/base";
+import { mapObject, substringCounts } from "../../core/utils";
+import Fraction from "../../core/fraction";
 
 export class ASCII implements CodificationWithOne<string> {
 	constructor(codes: Record<string, string>) {

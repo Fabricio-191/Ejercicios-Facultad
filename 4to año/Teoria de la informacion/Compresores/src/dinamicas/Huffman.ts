@@ -1,5 +1,5 @@
 import { assert } from "console";
-import { Codification } from "../core/base";
+import { CodificationWithOne } from "../core/base";
 import { ASCII } from "../estaticas/ASCII";
 
 class HuffmanNode {
@@ -141,7 +141,7 @@ const ALL_ASCII: string[] = Array.from({length: 256}, (_, i) => String.fromCharC
 
 class AdaptiveHuffmanEncoder extends HuffmanTree {
 	constructor(
-		public defaultCode: Codification<string> = ASCII,
+		public defaultCode: CodificationWithOne<string> = ASCII,
 		allSymbols: string[] | string = ALL_ASCII
 	) {
 		super();
@@ -175,11 +175,12 @@ class AdaptiveHuffmanEncoder extends HuffmanTree {
 
 class AdaptiveHuffmanDecoder extends HuffmanTree {
 	constructor(
-		public defaultCode: Codification<string> = ASCII,
+		public defaultCode: CodificationWithOne<string> = ASCII,
 		allSymbols?: string[] | string
 	) {
 		super();
 		this.allSymbols = new Set(allSymbols);
+		if(!this.defaultCode.decodeOne) throw new Error('DecodeOne not implemented');
 	}
 	private allSymbols: Set<string>;
 
@@ -212,7 +213,7 @@ class AdaptiveHuffmanDecoder extends HuffmanTree {
 		str = str.slice(node.code.length);
 
 		const emptyNodeCode = this.emptyNode.code || '0';
-		const [symbol, code] = this.defaultCode.decodeOne(str);
+		const [symbol, code] = this.defaultCode.decodeOne!(str);
 
 		this.addNew(symbol);
 		this.update(this.nodes[symbol] || null);

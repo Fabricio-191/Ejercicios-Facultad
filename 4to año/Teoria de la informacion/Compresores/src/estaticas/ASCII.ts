@@ -1,4 +1,4 @@
-import { SubstitutionCodification, Codification, Source, CodificationWithOne } from "../core/base";
+import { SubstitutionCodification, Source, CodificationWithOne } from "../core/base";
 import { mapObject, substringCounts } from "../core/utils";
 import Fraction from "../core/fraction";
 

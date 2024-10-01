@@ -1,5 +1,5 @@
 import { assert } from "console";
-import { CodificationWithOne } from "../../core/base";
+import { CodificationWithOne } from "../core/base";
 import { ASCII } from "../estaticas/ASCII";
 
 class HuffmanNode {

@@ -1,4 +1,4 @@
-import { substringCounts } from '../../core/utils.ts';
+import { substringCounts } from '../core/utils.ts';
 
 export default abstract class SucesiveSymbolsEncoding {
 	static encode(str: string, encoding: (s: string) => number): [string, number, number] {

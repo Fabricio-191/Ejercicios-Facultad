@@ -59,16 +59,3 @@ export function mapObject<K extends Key, V, R>(
 
 	return newObj;
 }
-
-export function reverseObject<K extends Key, V extends Key>(object: Record<K, V>): Record<V, K> {
-	// @ts-expect-error
-	return new Proxy(object, {
-		get(target, prop) {
-			if(typeof prop === 'string') {
-				return Object.entries(target).find(([_, value]) => value === prop)![0];
-			}else{
-				return Reflect.get(target, prop);
-			}
-		},
-	});
-}

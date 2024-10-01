@@ -1,30 +1,7 @@
 import assert from "assert";
 import { SubstitutionCodification, Codification, Source } from "../core/base";
-import { mapObject, substringCounts } from "../core/utils";
+import { mapObject } from "../core/utils";
 import Fraction from "../core/fraction";
-
-export class MinASCII extends SubstitutionCodification {
-	_makeCodes(): void {
-		const l = Math.ceil(Math.log2(this.source.symbols.length));
-
-		let code = 0;
-		for(const symbol of this.source.symbols) {
-			this.codes[symbol] = code.toString(2).padStart(l, '0');
-			code++;
-		}
-	}
-
-	public static fromString(str: string): MinASCII {
-		const prob = new Fraction(1, Array.from(new Set(str)).length);
-
-		const probabilities = mapObject(
-			substringCounts(str),
-			() => prob,
-		)
-
-		return new MinASCII(new Source(probabilities));
-	}
-}
 
 class MySymbol {
 	constructor(symbol: string, probability: Fraction) {
@@ -79,7 +56,6 @@ export class Huffman extends SubstitutionCodification {
 			this.codes[symbol.symbol] = symbol.code;
 		}
 	}
-
 }
 
 export class Fano extends SubstitutionCodification {

@@ -52,6 +52,11 @@ export interface Codification<T extends string | number | Fraction> {
 	decode(str: T): string;
 }
 
+export interface CodificationWithOne<T extends string | number | Fraction> extends Codification<T> {
+	encodeOne(str: string): [string, T];
+	decodeOne(str: T): [string, T];
+}
+
 export abstract class SubstitutionCodification implements Codification<string> {
 	constructor(source: Source, base: number = 2) {
 		this.source = source;

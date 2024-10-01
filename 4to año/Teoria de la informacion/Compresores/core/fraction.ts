@@ -61,15 +61,6 @@ export default class Fraction {
 	public readonly numerator: bigint;
 	public readonly denominator: bigint;
 
-	public add(fraction: FractionLike): Fraction {
-		fraction = Fraction.from(fraction);
-
-		return new Fraction(
-			this.numerator * fraction.denominator + fraction.numerator * this.denominator,
-			this.denominator * fraction.denominator
-		);
-	}
-
 	get isZero(): boolean {
 		return this.numerator === 0n || this.numerator === -0n;
 	}
@@ -78,6 +69,15 @@ export default class Fraction {
 		return (
 			(this.numerator < 0 && this.denominator > 0) ||
 			(this.numerator > 0 && this.denominator < 0)
+		);
+	}
+
+	public add(fraction: FractionLike): Fraction {
+		fraction = Fraction.from(fraction);
+
+		return new Fraction(
+			this.numerator * fraction.denominator + fraction.numerator * this.denominator,
+			this.denominator * fraction.denominator
 		);
 	}
 
@@ -134,8 +134,20 @@ export default class Fraction {
 	}
 
 	public abs(): Fraction {
-		if(this.numerator < 0) return this.neg();
+		if(this.isNegative) return this.neg();
 		return this;
+	}
+
+	public ceil(): Fraction {
+		if(this.numerator % this.denominator === 0n) return this;
+			
+		return new Fraction(this.numerator / this.denominator + 1n);
+	}
+
+	public floor(): Fraction {
+		if(this.numerator % this.denominator === 0n) return this;
+			
+		return new Fraction(this.numerator / this.denominator);
 	}
 
 	public compare(fraction: FractionLike): number {
@@ -161,12 +173,6 @@ export default class Fraction {
 
 	public biggerOrEqual(fraction: FractionLike): boolean {
 		return this.compare(fraction) >= 0;
-	}
-
-	public ceil(): Fraction {
-		if(this.numerator % this.denominator === 0n) return this;
-			
-		return new Fraction(this.numerator / this.denominator + 1n);
 	}
 
 	valueOf(): number {

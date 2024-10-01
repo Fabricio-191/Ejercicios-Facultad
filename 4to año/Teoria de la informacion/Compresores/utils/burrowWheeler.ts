@@ -39,13 +39,13 @@ export default class BurrowsWheelerTransform {
 		for (let i = 0; i < str.length - 1; i++) {
 			table.sort();
 			for (let j = 0; j < str.length; j++) {
-				table[j] = str[j] + table[j];
+				table[j] = str[j]! + table[j];
 			}
 		}
 	
-		console.log(table, rotationIndex);
-	
-		return table[rotationIndex].slice(1) + table[rotationIndex][0];
+		table.sort();
+
+		return table[rotationIndex]!;
 	}
 }
 
@@ -57,12 +57,16 @@ const test = (testStr: string) => {
 
 	const encoded2 = BurrowsWheelerTransform.encodeNoIndicator(testStr);
 	const decoded2 = BurrowsWheelerTransform.decodeNoIndicator(...encoded2);
-
+	
 	assert(testStr === decoded2);
 }
 
 if(require.main === module) {
 	test('banana');
 	test('abracadabra');
-	// test('abracadabra'.repeat(100));
+	test('abracadabra'.repeat(100));
+	test('anana');
+	test('sdgarewgarfh');
+	test('asdgfasdg');
+	test('jdtykfhjg');
 }

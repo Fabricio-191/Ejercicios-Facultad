@@ -152,8 +152,10 @@ class AdaptiveHuffmanEncoder extends HuffmanTree {
 	encode(str: string): string {
 		let encoded = '';
 		for(const char of str) {
-			encoded += this.encodeOne(char);
-			// this.print();
+			const added = this.encodeOne(char);
+			encoded += added;
+			console.log(added)
+			this.print();
 		}
 
 		return encoded;
@@ -224,6 +226,8 @@ class AdaptiveHuffmanDecoder extends HuffmanTree {
 	}
 }
 
+/*
+
 const MY_ASCII = new ASCII({
 	'A': '000',
 	'B': '001',
@@ -252,77 +256,21 @@ function test(testStr: string, ascii: CodificationWithOne<string>, r: string) {
 test('ABRACADABRA', MY_ASCII, '000000010001001000110110010001101100');
 test('ABRACADABRA', ASCII, '0010000010010000100001010010010001000011011000100010001101100');
 
-
-/*
-ABR
-4
-├─┬ 2
-│ ├── 1 (B: 11)
-│ └─┬ 1
-│   ├── 1 (R: 101)
-│   └── EMPTY
-└── 2 (A: 0)
-5
-├─┬ 3
-│ ├─┬ 2
-│ │ ├── 1 (R: 111)
-│ │ └─┬ 1
-│ │   ├── 1 (C: 1101)
-│ │   └── EMPTY
-│ └── 1 (B: 10)
-└── 2 (A: 0)
-6
-├─┬ 3
-│ ├─┬ 2
-│ │ ├── 1 (R: 111)
-│ │ └─┬ 1
-│ │   ├── 1 (C: 1101)
-│ │   └── EMPTY
-│ └── 1 (B: 10)
-└── 3 (A: 0)
-7
-├─┬ 4
-│ ├─┬ 2
-│ │ ├── 1 (R: 111)
-│ │ └── 1 (B: 110)
-│ └─┬ 2
-│   ├── 1 (C: 101)
-│   └── 1 (D: 100)
-└── 3 (A: 0)
-8
-├─┬ 4
-│ ├─┬ 2
-│ │ ├── 1 (R: 111)
-│ │ └── 1 (B: 110)
-│ └─┬ 2
-│   ├── 1 (C: 101)
-│   └── 1 (D: 100)
-└── 4 (A: 0)
-9
-├─┬ 5
-│ ├─┬ 3
-│ │ ├── 2 (B: 111)
-│ │ └── 1 (R: 110)
-│ └─┬ 2
-│   ├── 1 (C: 101)
-│   └── 1 (D: 100)
-└── 4 (A: 0)
-10
-├─┬ 6
-│ ├─┬ 4
-│ │ ├── 2 (B: 111)
-│ │ └── 2 (R: 110)
-│ └─┬ 2
-│   ├── 1 (C: 101)
-│   └── 1 (D: 100)
-└── 4 (A: 0)
-11
-├─┬ 6
-│ ├─┬ 4
-│ │ ├── 2 (B: 111)
-│ │ └── 2 (R: 110)
-│ └─┬ 2
-│   ├── 1 (C: 101)
-│   └── 1 (D: 100)
-└── 5 (A: 0)
 */
+
+const MY_ASCII = new ASCII({
+	'a': '000',
+	'e': '001',
+	'i': '010',
+	'o': '011',
+	'u': '100',
+});
+
+const testStr = 'aeiioouuaeii';
+
+const encoded = new AdaptiveHuffmanEncoder(
+	MY_ASCII,
+	testStr,
+).encode(testStr);
+
+console.log(encoded.length)

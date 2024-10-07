@@ -141,3 +141,8 @@ export abstract class SubstitutionCodification implements Codification<string> {
 		return sum;
 	}
 }
+
+const src = Source.fromString('aeiioouuaeii');
+
+console.log(src.entropy())
+console.log(src.probabilities)

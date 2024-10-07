@@ -25,11 +25,15 @@ export default class BurrowsWheelerTransform {
 	
 	public static encodeNoIndicator(str: string): [string, number] {
 		const rotations = Array(str.length).fill(0).map((_, i) => str.slice(i) + str.slice(0, i));
+
 		const sorted = rotations.sort();
+
 
 		const rotationIndex = sorted.indexOf(str);
 		const encoded = sorted.map(str => str.slice(-1)).join('');
 
+		console.log(encoded, rotationIndex)
+		
 		return [encoded, rotationIndex];
 	}
 
@@ -62,11 +66,12 @@ const test = (testStr: string) => {
 }
 
 if(require.main === module) {
-	test('banana');
-	test('abracadabra');
-	test('abracadabra'.repeat(100));
-	test('anana');
-	test('sdgarewgarfh');
-	test('asdgfasdg');
-	test('jdtykfhjg');
+	test('aeiioouuaeii');
+	// test('banana');
+	// test('abracadabra');
+	// test('abracadabra'.repeat(100));
+	// test('anana');
+	// test('sdgarewgarfh');
+	// test('asdgfasdg');
+	// test('jdtykfhjg');
 }

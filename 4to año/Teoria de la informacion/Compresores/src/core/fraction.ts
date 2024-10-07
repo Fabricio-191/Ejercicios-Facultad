@@ -314,3 +314,39 @@ if (require.main === module) {
 // 	console.log(fraction.toString(2));
 // 	console.log(binaryToFraction(binary).toFraction());
 // }
+
+const gdc1 = (a: bigint, b: bigint): bigint => b ? gdc1(b, a % b) : a;
+const gdc2 = (a: bigint, b: bigint): bigint => {
+	// use bitwise operations
+	if(a < 0n && b < 0n) return gdc2(-a, -b);
+	if(a < 0n || b < 0n) return gdc2(-a, b);
+	if (a === 0n) return b;
+	if (b === 0n) return a;
+
+	let k = 1n, t: bigint;
+	while (a % 2n === 0n && b % 2n === 0n ) {
+		a /= 2n;
+		b /= 2n;
+		k *= 2n;
+	}
+
+	while (a % 2n === 0n) {
+		a /= 2n;
+	}
+
+	while (b) {
+		while (b % 2n === 0n) {
+			b /= 2n; // right shift
+		}
+
+		if (a > b) {
+			t = b;
+			b = a;
+			a = t;
+		}
+
+		b -= a; // b=0 iff b=a
+	}
+
+	return k * a;
+}

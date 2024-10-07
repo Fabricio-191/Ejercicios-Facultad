@@ -1,0 +1,12 @@
+; Escribir el código en assembler de DLX que ejecute las siguientes operaciones: a = b + c y d = e – f en donde a, b, c, d, e, f son variables de 4 bytes almacenadas consecutivamente en memoria a partir de la dirección 0x64 según se muestra en la figura. La variable a = a3 a2 a1 a0 en donde a3 es el byte más significativo y a0 el menos significativo; lo mismo para las otras variables.
+
+ADDI r1, r0, #0x64  ; inicializa r1 a 0x64
+LW r2, 4(r1)        ; [b3 b2 b1 b0] r2 = b
+LW r3, 8(r1)        ; r3 = c
+ADD r4, r2, r3      ; r4 = b + c
+SW 0(r1), r4        ; a = r4
+LW r2, 16(r1)       ; r2 = e
+LW r3, 20(r1)       ; r3 = f
+SUB r4, r2, r3      ; r4 = e – f
+SW 12(r1), r4       ; d = r4
+

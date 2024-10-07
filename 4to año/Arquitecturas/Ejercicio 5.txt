@@ -1,0 +1,69 @@
+; Intercambiar e invertir las ubicaciones en memoria de dos arreglos de datos [ai] y [bi], de manera que el primer dato de un arreglo pase a ser el último dato del otro arreglo y así sucesivamente hasta el final. Los arreglos son de 20 elementos de 32 bits y están cargados en memoria a partir de las direcciones 1000h y 1100h respectivamente.
+
+.data 0x1000
+a: .word 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xA, 0xB, 0xC, 0xD, 0xE, 0xF, 0x10, 0x11, 0x12, 0x13, 0x14
+.data 0x1100
+b: .word 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F, 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28
+.text 0x100
+
+        ADDI r1, r0, #a      ; r1 = 0x1000
+        ADDI r2, r0, #b      ; r2 = 0x1100
+        ADDI r2, r2, #76     ; r2 = b + 19 * 4 = b + 76
+        ADDI r3, r0, #20     ; r3 = 20
+
+LOOP:   LW r4, 0(r1)         ; r4 = a[0]
+        LW r5, 0(r2)         ; r5 = b[19]
+        SW 0(r2), r4         ; b[19] = a[0]
+        SW 0(r1), r5         ; a[0] = b[19]
+        ADDI r1, r1, #4      ; r1++
+        SUBI r2, r2, #4      ; r2--
+        SUBI r3, r3, #1      ; r3--
+        BNEZ r3, LOOP        ; if r3 != 0 goto LOOP
+        TRAP 0
+
+
+
+
+1) Ifetch  (IF) : Búsqueda de la Instrucción, Incremento del  PC
+2) Decode (ID):  Decodificar Instrucción, Leer Registros
+3) Execute (EX) : Mem-ref: Calcular dirección                      Arith-log: Realizar Operación
+4) Memory (MEM) :   Load:  Leer Datos de la Memoria 
+ 		            Store: Escribir Datos a la Memoria
+
+5) Write Back (WB) :  Escribir Datos a los registros
+
+
+
+
+
+		
+        ADDI r2, r0, #b      ; r2 = 0x1100             
+        ADDI r1, r0, #a      ; r1 = 0x1000             
+        ADDI r3, r0, #20     ; r3 = 20                 
+        ADDI r2, r2, #76     ; r2 = b + 19 * 4 = b + 76
+		NOP
+LOOP:   LW r4, 0(r1)         ; r4 = a[0]     
+        LW r5, 0(r2)         ; r5 = b[19]              
+        SUBI r3, r3, #1      ; r3--                    
+        SW 0(r2), r4         ; b[19] = a[0]            
+        SW 0(r1), r5         ; a[0] = b[19]            
+        ADDI r1, r1, #4      ; r1++                    
+        SUBI r2, r2, #4      ; r2--                    
+        BNEZ r3, LOOP        ; if r3 != 0 goto LOOP    
+        TRAP 0
+
+
+
+
+		 IF|ID|EX|M |WB|
+            IF|ID|EX|M |WB|
+               IF|ID|EX|M |WB|
+                  IF|ID|EX|M |WB|
+                     IF|ID|EX|M |WB|
+                        IF|ID|EX|M |WB|
+                           IF|ID|EX|M |WB|
+                              IF|ID|EX|M |WB|
+              	                 IF|ID|EX|M |WB|
+              	                    IF|ID|EX|M |WB|
+              	                       IF|ID|EX|M |WB|
+                                          IF|ID|EX|M |WB|

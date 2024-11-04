@@ -1,0 +1,59 @@
+{
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"display": "Node 16",
+	"extends": "ts-node/node16/tsconfig.json",
+	"compilerOptions": {
+		// "esModuleInterop": true,
+		// "skipLibCheck": true,
+		"lib": ["esnext"],
+		"module": "CommonJS",
+		"target": "ESNext",
+		"moduleResolution": "node",
+		"types": ["node"],
+		"allowImportingTsExtensions": true,
+
+		// "baseUrl": "./",
+		"noEmit": true,
+		"inlineSourceMap": true,
+
+		"strict": true,
+		"strictNullChecks": true,
+		"noImplicitAny": true,
+		"noEmitOnError": true,
+		"alwaysStrict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"removeComments": true,
+		"preserveConstEnums": true,
+		"allowUnreachableCode": false,
+		"allowUnusedLabels": false,
+		"exactOptionalPropertyTypes": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"noUncheckedIndexedAccess": true,
+		"strictBindCallApply": true,
+		"strictFunctionTypes": true,
+		"strictPropertyInitialization": true,
+		"useUnknownInCatchVariables": true,
+		"resolveJsonModule": true,
+		"disableSizeLimit": true,
+		"checkJs": true,
+		"allowJs": true,
+		"forceConsistentCasingInFileNames": true
+	},
+	"ts-node": {
+		// It is faster to skip typechecking.
+		// Remove if you want ts-node to do typechecking.
+		"transpileOnly": true,
+	
+		"files": true,
+	
+		"compilerOptions": {
+		  // compilerOptions specified here will override those declared below,
+		  // but *only* in ts-node.  Useful if you want ts-node and tsc to use
+		  // different options with a single tsconfig.json.
+		}
+	}
+}

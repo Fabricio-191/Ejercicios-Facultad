@@ -1,36 +1,27 @@
 import { assert } from "console";
+import { ASCII } from "../compresion/estaticas/ASCII";
 
 const DEFAULT_ALPHABET = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ".split('');
 // @ts-ignore
 const DEFAULT_ALPHABET2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+const ASCII_ALPHABET = [...Array(128).keys()].map(n => String.fromCharCode(n));
+
+const xor = (a: string, b: string) => a === b ? '0' : '1';
 const isPermutationOf = (source: unknown[], target: unknown[]) => (new Set(target)).size === target.length && source.every(n => target.includes(n));
-const subdivide = (iterable: string, size: number) => {
-	const result = [];
-
-	for(let i = 0; i < iterable.length; i += size) {
-		result.push(iterable.slice(i, i + size));
-	}
-
-	return result;
-}
-const frecuencies = (text: string) => {
-	const freq: Record<string, number> = {};
-	for(const char of text) {
-		freq[char] = (freq[char] ?? 0) + 1;
-	}
-
-	return freq;
-}
-
-const mostFrequent = (text: string) => {
-	const freq = frecuencies(text);
-	return Object.entries(freq).reduce((acc, [char, count]) => count > acc[1] ? [char, count] : acc, ['', 0])[0];
-}
+const subdivide = (string: string, size: number) => Array(string.length / size).fill(0).map((_, i) => string.slice(i * size, (i + 1) * size));
+const frecuencies = (text: string) => text
+	.split('')
+	.reduce<Record<string, number>>((acc, char) => {
+		acc[char] = (acc[char] || 0) + 1;
+		return acc;
+	}, {});
+const mostFrequent = (text: string) => Object
+	.entries(frecuencies(text))
+	.reduce((acc, [char, count]) => count > acc[1] ? [char, count] : acc, ['', 0])[0];
 
 function* range(start: number, end: number) {
 	for(let i = start; i < end; i++) yield i;
 }
-
 
 interface Cipher {
 	cipher(text: string, ...args: unknown[]): string;
@@ -106,6 +97,29 @@ function transpositionKey(key: number[]): number[] {
 	return key.map(n => n - 1);
 }
 
+const AFFINE_SUSTITUTION = {
+	cipher(text: string, N: number, a: number, b: number, alphabet = DEFAULT_ALPHABET): string {
+		return text.split('').map(char => {
+			const index = alphabet.indexOf(char.toUpperCase());
+			if(index === -1) return char;
+
+			const newIndex = (a * alphabet.indexOf(char) + b) % N;
+			return alphabet[newIndex];
+		}).join('');
+	},
+	decipher(text: string, N: number, a: number, b: number, alphabet = DEFAULT_ALPHABET): string {
+		const aInv = [...range(1, N)].find(aInv => (a * aInv) % N === 1)!;
+
+		return text.split('').map(char => {
+			const index = alphabet.indexOf(char.toUpperCase());
+			if(index === -1) return char;
+
+			const newIndex = (aInv * (alphabet.indexOf(char) - b + N)) % N;
+			return alphabet[newIndex];
+		}).join('');
+	}
+} as const;
+
 const SIMPLE_TRANSPOSITION = {
 	cipher(text: string, key: number[]): string {
 		if(text.length % key.length !== 0) throw new Error('Text length must be multiple of key length');
@@ -153,7 +167,7 @@ const COLUMN_TRANSPOSITION = {
 const SHIFT_REGISTERS = {
 	generate(seed: string = '0001', feedbackFn: (registers: string) => string): string {
 		let registers = seed;
-		let result = '';
+		let result = seed;
 		while(true){
 			const feedback = feedbackFn(registers);
 			if(feedback.length !== 1) throw new Error('Feedback function must return a single character');
@@ -168,21 +182,31 @@ const SHIFT_REGISTERS = {
 	},
 	cipher(text: string, seed: string, feedbackFn: (registers: string) => string): string {
 		const keystream = this.generate(seed, feedbackFn);
-		const binaryText = text.split('').map(char => char.charCodeAt(0).toString(2).padStart(8, '0')).join('');
-
-		return binaryText.split('')
-			.map((char, i) => char === keystream[i % keystream.length] ? '0' : '1')
+		return text
+			.split('')
+			.map(char => char
+				.charCodeAt(0)
+				.toString(2)
+				.padStart(8, '0')
+			)
+			.flatMap(binary => binary.split(''))
+			.map(
+				(char, i) => xor(char, keystream[i % keystream.length]!)
+			)
 			.join('');
 	},
 	decipher(binaryText: string, seed: string, feedbackFn: (registers: string) => string): string {
 		const keystream = this.generate(seed, feedbackFn);
-
-		return binaryText
+		const result = binaryText
 			.split('')
-			.map((char, i) => char === keystream[i % keystream.length] ? '0' : '1')
-			.join('');	
+			.map(
+				(char, i) => xor(char, keystream[i % keystream.length]!)
+			)
+			.join('');
+
+		return subdivide(result, 8).map(binary => String.fromCharCode(parseInt(binary, 2))).join('');
 	}
-}
+} as const;
 
 if(require.main === module) {
 	function testCipher(
@@ -208,15 +232,14 @@ if(require.main === module) {
 	testCipher(ROT                 , 'HOLAAMIGOS'           , null          , []       , ['O'])
 	testCipher(ROT                 , 'AHIVALABOMBA'         , null          , []       , ['A']);
 	testCipher(Vigenere            , 'HOLAAMIGOS'           , 'JWPRAÑPLGS'  , ['CIFRA']);
+	testCipher(AFFINE_SUSTITUTION  , 'VIRUSCOVID'           , 'SGHPKQ$SGT'  , [29, 3, 11, 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ$#'.split('')]);
 	testCipher(SIMPLE_TRANSPOSITION, 'AHIVALABOMBA'         , 'IAVHAABLBOAM', [[3, 1, 4, 2]]);
 	testCipher(SIMPLE_TRANSPOSITION, 'NO POR MUCHO MADRUGAR', null, [[3, 7, 2, 6, 4, 1, 5]]);
 	testCipher(COLUMN_TRANSPOSITION, 'AHIVALABOMBA'         , 'VBAHLMIABAAO', [[4, 2, 3, 1]]);
 	testCipher(COLUMN_TRANSPOSITION, 'NO POR MUCHO MADRUGAR', null, [[3, 7, 2, 6, 4, 1, 5]]);
+	testCipher(SHIFT_REGISTERS     , 'HOLAAMIGOS'           , null, ['1001', (registers: string) => xor(registers[0]!, registers[3]!)]);
 
 	assert(ROT.forceDecipher('MXDQLWR', 'J', DEFAULT_ALPHABET2) === 'JUANITO');
 	assert(Vigenere.findKey('JWPRAÑPLGS', 'HOLAAMIGOS', 5) === 'CIFRA');
 	assert(Vigenere.findKey('GHVDAFYLRSCOVHFHSJOHAWGITSZQNKMW', 'ESLOINESPERADOLOQUESIEMPREOCURRE', 8) === 'COLOSSUS');
-
-	console.log(SHIFT_REGISTERS.generate('1001', registers => registers[0] === registers[3] ? '0' : '1'));
-	console.log(SHIFT_REGISTERS.generate('1001', registers => registers[0] === registers[3] ? '0' : '1').length);
 }

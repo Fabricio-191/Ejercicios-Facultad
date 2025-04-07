@@ -2,7 +2,6 @@ import { assert } from "console";
 import { ASCII } from "../compresion/estaticas/ASCII";
 
 const DEFAULT_ALPHABET = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ".split('');
-// @ts-ignore
 const DEFAULT_ALPHABET2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
 const ASCII_ALPHABET = [...Array(128).keys()].map(n => String.fromCharCode(n));
 
@@ -23,10 +22,16 @@ function* range(start: number, end: number) {
 	for(let i = start; i < end; i++) yield i;
 }
 
+<<<<<<< HEAD
+=======
+const xor = (a: string, b: string) => a == b ? '0' : '1';
+
+>>>>>>> 3daeaf454b04a9e08344bc8c108e8804c80907d0
 interface Cipher {
 	cipher(text: string, ...args: unknown[]): string;
 	decipher(text: string, ...args: unknown[]): string;
 	forceDecipher?(text: string, ...args: unknown[]): string;
+	findKey?(cipheredText: string, ...args: unknown[]): string;
 };
 
 const invertTranspositionKey = (key: number[]) => key.map((_, i) => key.indexOf(i + 1) + 1);
@@ -182,6 +187,7 @@ const SHIFT_REGISTERS = {
 	},
 	cipher(text: string, seed: string, feedbackFn: (registers: string) => string): string {
 		const keystream = this.generate(seed, feedbackFn);
+<<<<<<< HEAD
 		return text
 			.split('')
 			.map(char => char
@@ -193,10 +199,17 @@ const SHIFT_REGISTERS = {
 			.map(
 				(char, i) => xor(char, keystream[i % keystream.length]!)
 			)
+=======
+		const binaryText = text.split('').map(char => char.charCodeAt(0).toString(2).padStart(8, '0')).join('');
+
+		return binaryText.split('')
+			.map((char, i) => xor(char, keystream[i % keystream.length]!))
+>>>>>>> 3daeaf454b04a9e08344bc8c108e8804c80907d0
 			.join('');
 	},
 	decipher(binaryText: string, seed: string, feedbackFn: (registers: string) => string): string {
 		const keystream = this.generate(seed, feedbackFn);
+<<<<<<< HEAD
 		const result = binaryText
 			.split('')
 			.map(
@@ -205,6 +218,10 @@ const SHIFT_REGISTERS = {
 			.join('');
 
 		return subdivide(result, 8).map(binary => String.fromCharCode(parseInt(binary, 2))).join('');
+=======
+
+		return subdivide(binaryText, keystream.length).map((char, i) => xor(char, keystream[i % keystream.length]!)).join('');
+>>>>>>> 3daeaf454b04a9e08344bc8c108e8804c80907d0
 	}
 } as const;
 
@@ -232,12 +249,20 @@ if(require.main === module) {
 	testCipher(ROT                 , 'HOLAAMIGOS'           , null          , []       , ['O'])
 	testCipher(ROT                 , 'AHIVALABOMBA'         , null          , []       , ['A']);
 	testCipher(Vigenere            , 'HOLAAMIGOS'           , 'JWPRAÑPLGS'  , ['CIFRA']);
+<<<<<<< HEAD
 	testCipher(AFFINE_SUSTITUTION  , 'VIRUSCOVID'           , 'SGHPKQ$SGT'  , [29, 3, 11, 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ$#'.split('')]);
+=======
+	testCipher(Vigenere            , 'ESLOINESPERADOLOQUESIEMPREOCURRE', 'GHVDAFYLRSCOVHFHSJOHAWGITSZQNKMW', ['COLOSSUS']);
+>>>>>>> 3daeaf454b04a9e08344bc8c108e8804c80907d0
 	testCipher(SIMPLE_TRANSPOSITION, 'AHIVALABOMBA'         , 'IAVHAABLBOAM', [[3, 1, 4, 2]]);
 	testCipher(SIMPLE_TRANSPOSITION, 'NO POR MUCHO MADRUGAR', null, [[3, 7, 2, 6, 4, 1, 5]]);
 	testCipher(COLUMN_TRANSPOSITION, 'AHIVALABOMBA'         , 'VBAHLMIABAAO', [[4, 2, 3, 1]]);
 	testCipher(COLUMN_TRANSPOSITION, 'NO POR MUCHO MADRUGAR', null, [[3, 7, 2, 6, 4, 1, 5]]);
+<<<<<<< HEAD
 	testCipher(SHIFT_REGISTERS     , 'HOLAAMIGOS'           , null, ['1001', (registers: string) => xor(registers[0]!, registers[3]!)]);
+=======
+	// testCipher(SHIFT_REGISTERS, 'HOLAAMIGOS', null, ['1001', (registers: string) => xor(registers[0]!, registers[3]!)]);
+>>>>>>> 3daeaf454b04a9e08344bc8c108e8804c80907d0
 
 	assert(ROT.forceDecipher('MXDQLWR', 'J', DEFAULT_ALPHABET2) === 'JUANITO');
 	assert(Vigenere.findKey('JWPRAÑPLGS', 'HOLAAMIGOS', 5) === 'CIFRA');

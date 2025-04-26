@@ -55,6 +55,11 @@
 	(bind ?contenidos (replace$ ?contenidos ?origen  ?origen  (- ?conOrigen  ?litros))) ; Se actualiza la cantidad de litros en la jarra origen
 	(bind ?contenidos (replace$ ?contenidos ?destino ?destino (+ ?conDestino ?litros))) ; Se actualiza la cantidad de litros en la jarra destino
 	(assert (jarras (contenido ?contenidos) (heuristica (calcularHeuristica ?contenidos)) )) ; Se agrega el nuevo estado
+	; (if (not (
+	; 	any-factp ((?f estadoSinSalida)) (eq ?f:implied $?contenidos)
+	; )) then 
+	; 	(assert (jarras (contenido ?contenidos) (heuristica (calcularHeuristica ?contenidos)) )) ; Se agrega el nuevo estado si no es un estado sin salida
+	; )
 )
 
 (defrule eliminarEstadosSinSalida

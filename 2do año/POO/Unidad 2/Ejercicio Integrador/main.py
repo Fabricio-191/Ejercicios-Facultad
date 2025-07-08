@@ -59,6 +59,6 @@ def test():
 if __name__ == "__main__":
 	test()
 	gestor = GestorCamas(path.dirname(__file__) + "/camas.csv", path.dirname(__file__) + "/medicamentos.csv")
-	
+
 	gestor.listarDatosYMedicamentos(input('NyA del paciente: '))
 	gestor.listarPorDiagnostico(input('Diagnóstico: '))

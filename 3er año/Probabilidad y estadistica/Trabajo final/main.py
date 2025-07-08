@@ -205,7 +205,7 @@ print()
 
 
 print('Regresion lineal: ')
-result = st.linregress([dataframe.altura, dataframe.peso], alternative='greater')
+result = st.linregress(dataframe.altura, dataframe.peso, alternative='greater')
 print('peso = ({:.3f} ± {:.3f}) * altura + ({:.3f} ± {:.3f})'.format(
 	result.slope, result.stderr, result.intercept, result.intercept_stderr # type: ignore
 ))
@@ -259,14 +259,14 @@ axs[1, 0].plot(dataframe.index, [dataframe.altura.quantile(0.75)] * size, color 
 
 
 axs[1, 1].set_title('Altura')
-axs[1, 1].boxplot([dataframe.altura], vert=True, labels=[''])
+axs[1, 1].boxplot([dataframe.altura], vert=True, tick_labels=[''])
 
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 divider = make_axes_locatable(axs[1, 1])
 extraAx = divider.append_axes('right', size='100%', pad=0.55)
 
 extraAx.set_title('Peso')
-extraAx.boxplot([dataframe.peso], vert=True, labels=[''])
+extraAx.boxplot([dataframe.peso], vert=True, tick_labels=[''])
 
 axs[1, 2].set_title('Test de independencia')
 seaborn.heatmap(contingency_table, ax=axs[1, 2], robust=True).invert_yaxis()

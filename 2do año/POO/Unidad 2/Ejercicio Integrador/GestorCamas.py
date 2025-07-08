@@ -4,7 +4,7 @@ from Cama import Cama
 from GestorMedicamentos import GestorMedicamentos
 
 class GestorCamas:
-	__camas: np.ndarray[Cama, np.dtype[np.object0]]
+	__camas: np.ndarray[Cama, np.dtype[np.object_]]
 	__gestorMedicamentos: GestorMedicamentos
 	def __init__(self, camasPath: str, medicamentosPath: str):
 		self.__camas = np.array( # type: ignore
@@ -16,7 +16,7 @@ class GestorCamas:
 		for cama in self.__camas:
 			if cama.obtenerNyA() == NyA:
 				return cama
-		
+
 		return None
 
 	def listarDatosYMedicamentos(self, NyA: str) -> None:

@@ -30,7 +30,7 @@ class ControladorFacultades:
 				carrera = carreras[y]
 				if(carrera.getNombre() == nombre):
 					found = True
-				else: 
+				else:
 					y += 1
 			i += 1
 
@@ -46,7 +46,7 @@ class ControladorFacultades:
 
 	def __repr__(self) -> str:
 		str = "ManejadorFacultades: {\n"
-		
+
 		for key, value in self.__facultades.items():
 			str += f"\t{key}: {value}\n"
 

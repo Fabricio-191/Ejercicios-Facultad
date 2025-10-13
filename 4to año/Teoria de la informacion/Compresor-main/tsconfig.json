@@ -1,5 +1,7 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
+	"display": "Node 16",
+	"extends": "ts-node/node16/tsconfig.json",
 	"compilerOptions": {
 		// "esModuleInterop": true,
 		// "skipLibCheck": true,

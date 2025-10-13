@@ -2,12 +2,18 @@ import { copySorted, substringCounts, mapObject } from "./utils";
 import Fraction from "./fraction";
 
 export class Source {
-	constructor(probabilities: Record<string, Fraction>) {
+	constructor(probabilities: Record<string, Fraction>, sortByFrequency = false) {
 		if(Fraction.sum(Object.values(probabilities)).subtract(1n).abs().valueOf()  > 0.01) {
 			throw new Error('Probabilities must sum 1');
 		}
 
-		this.probabilities = copySorted(probabilities) as Record<string, Fraction>;
+
+		if (sortByFrequency) {
+			const sorted = Object.entries(probabilities).sort((a, b) => b[1].compare(a[1]));
+			this.probabilities = Object.fromEntries(sorted);
+		} else {
+			this.probabilities = copySorted(probabilities) as Record<string, Fraction>;
+		}
 	}
 	public probabilities: Record<string, Fraction>;
 
@@ -37,13 +43,13 @@ export class Source {
 		return new Source(newProbabilities);
 	}
 
-	static fromString(str: string) {
+	static fromString(str: string, sortByFrequency = false): Source {
 		const probabilities = mapObject(
 			substringCounts(str),
 			count => new Fraction(count, str.length)
 		);
 
-		return new Source(probabilities);
+		return new Source(probabilities, sortByFrequency);
 	}
 }
 
@@ -131,7 +137,7 @@ export abstract class SubstitutionCodification implements Codification<string> {
 
 	public averageLength(): Fraction {
 		let sum = new Fraction(0);
-		for(const symbol in this.source.symbols) {
+		for (const symbol of this.source.symbols) {
 			sum = sum.add(
 				this.source.probabilities[symbol]!
 					.multiply(this.codes[symbol]!.length)

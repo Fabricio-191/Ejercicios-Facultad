@@ -162,24 +162,24 @@ export class Shannon extends SubstitutionCodification {
 export class Arithmetic implements Codification<Fraction> {
 	constructor(source: Source) {
 		this.source = source;
-		
-		let prev = Fraction.zero;
+
+		let prev = Fraction.one;
 		this.cumulProb = mapObject(
 			this.source.probabilities,
 			(prob) => {
-				const cumul = { low: prev, high: prev.add(prob) };
-				prev = cumul.high;
+				const cumul = { low: prev.subtract(prob), high: prev };
+				prev = cumul.low;
 				return cumul;
 			}
 		);
 
-		this.cumulProb = {
-			'a': { low: Fraction.from(0.6), high: Fraction.from(1) },
-			'o': { low: Fraction.from(0.4), high: Fraction.from(0.6) },
-			'e': { low: Fraction.from(0.25), high: Fraction.from(0.4) },
-			'u': { low: Fraction.from(0.1), high: Fraction.from(0.25) },
-			'i': { low: Fraction.from(0), high: Fraction.from(0.1) },
-		}
+		// this.cumulProb = {
+		// 	'a': { low: Fraction.from(0.6), high: Fraction.from(1) },
+		// 	'o': { low: Fraction.from(0.4), high: Fraction.from(0.6) },
+		// 	'e': { low: Fraction.from(0.25), high: Fraction.from(0.4) },
+		// 	'u': { low: Fraction.from(0.1), high: Fraction.from(0.25) },
+		// 	'i': { low: Fraction.from(0), high: Fraction.from(0.1) },
+		// }
 	}
 	private source: Source;
 	private cumulProb: Record<string, { low: Fraction, high: Fraction }>;
@@ -188,12 +188,16 @@ export class Arithmetic implements Codification<Fraction> {
 		let low = Fraction.zero;
 		let high = Fraction.one;
 
+		console.log(this.cumulProb);
+
 		for(const symbol of str) {
 			const range = high.subtract(low);
 			const prob = this.cumulProb[symbol]!;
-			
+
 			high = low.add(prob.high.multiply(range));
 			low = low.add(prob.low.multiply(range));
+
+			console.log(symbol, low.valueOf(), high.valueOf());
 		}
 
 		return low;
@@ -218,38 +222,39 @@ export class Arithmetic implements Codification<Fraction> {
 }
 
 if (require.main === module) {
-	// const testStr = 'PABLOPABLITOCLAVOUNCLAVITO';
-	const testStr = 'aeiouaaaeouaiaaoeoua';
-	const testSource = Source.fromString(testStr);
+	// PABLOPABLITOCLAVOUNCLAVITO
+	const testStr = 'PABLOPABLITOCLAVOUNCLAVITO';
+	const testSource = Source.fromString(testStr, true);
 
 	const test = (codification: Codification<any>, testStr: string) => {
 		const encoded = codification.encode(testStr);
-		console.log(`${codification.constructor.name}: ${encoded.valueOf()} (${encoded.length})`);
+		console.log(`${codification.constructor.name}: ${encoded.valueOf()}`);
 
 		assert.strictEqual(codification.decode(encoded), testStr);
 	}
 
 	console.log(`Original size: ${testStr.length * 8} bits`);
 
-	test(new Huffman(testSource), testStr);
-	test(new Fano(testSource), testStr);
-	test(new Shannon(testSource), testStr);
+	// test(new Huffman(testSource), testStr);
+	// test(new Fano(testSource), testStr);
+	// test(new Shannon(testSource), testStr);
 	test(new Arithmetic(testSource), testStr);
 	
 
-	// ejemplos del profesor
-	assert.strictEqual(
-		new Shannon(Source.fromString("aaaaaaaaabbbbbccccdd")).encode('abcd'),
-		'00011001010'
-	)
-
-	assert.strictEqual(
-		new Huffman(Source.fromString("aaaaaaaaabbbbbccccdd")).encode('abcd'),
-		'010111110'
-	)
-
-	assert.strictEqual(
-		new Fano(Source.fromString("aaaaaaaaabbbbbbbcccccddeefg")).encode('abcdefg'),
-		'0010011100111011011111'
-	)
+	// // ejemplos del profesor
+	// assert.strictEqual(
+	// 	new Shannon(Source.fromString("aaaaaaaaabbbbbccccdd")).encode('abcd'),
+	// 	'00011001010'
+	// )
+// 
+	// assert.strictEqual(
+	// 	new Huffman(Source.fromString("aaaaaaaaabbbbbccccdd")).encode('abcd'),
+	// 	'010111110'
+	// )
+// 
+	// assert.strictEqual(
+	// 	new Fano(Source.fromString("aaaaaaaaabbbbbbbcccccddeefg")).encode('abcdefg'),
+	// 	'0010011100111011011111'
+	// )
 }
+

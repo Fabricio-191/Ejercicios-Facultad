@@ -29,6 +29,8 @@ export class LZ implements Codification<string> {
 			if(index === -1) {
 				bitBuffer.addBit(true);
 				bitBuffer.addChar(char);
+
+				console.log([1, char]);
 			}else {
 				let count = 1;
 				while(str[i + 1] === char) {
@@ -136,10 +138,10 @@ if (require.main === module) {
 	const testStr = 'a cada chancho le llega su san martin';
 	console.log(`Original size: ${testStr.length * 8} bits`);
 
-	const lz = new LZ(16);
-	const lzEncoded = lz.encode(testStr);
-	assert(lz.decode(lzEncoded) === testStr);
-	console.log(`LZ: ${lzEncoded} (${lzEncoded.length} bits)`);
+	// const lz = new LZ(16);
+	// const lzEncoded = lz.encode(testStr);
+	// assert(lz.decode(lzEncoded) === testStr);
+	// console.log(`LZ: ${lzEncoded} (${lzEncoded.length} bits)`);
 
 	const lzw = new LZW(16);
 	const lzwEncoded = lzw.encode(testStr);

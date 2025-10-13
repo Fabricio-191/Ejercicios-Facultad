@@ -1,0 +1,200 @@
+Memoria Cache
+
+1. ¿Qué entiende por memoria caché?
+Es una memoria de acceso rápida que se encuentra entre la CPU y la MEMORIA PRINCIPAL
+2. ¿Cuál es la necesidad del uso de caché?
+La necesidad del uso de caché surge debido a la creciente brecha de velocidad entre el procesador y la memoria principal
+Los procesadores modernos son extremadamente rápidos, mientras que la memoria principal, aunque ha mejorado en velocidad, no ha podido seguir el ritmo de la CPU.
+Esta diferencia de velocidad crea un cuello de botella en el rendimiento del sistema.
+Sin caché, el CPU tendría que esperar largos periodos de tiempo para acceder a datos e instrucciones de la memoria principal, lo que ralentizaría significativamente la ejecución de los programas.
+La caché actúa como un búfer entre el CPU y la memoria principal, almacenando los datos e instrucciones más utilizados, de modo que el CPU pueda acceder a ellos rápidamente sin tener que esperar a la memoria principal.
+
+3. Realice un gráfico que muestre la estructura de una jerarquía de memoria de un computador y cómo varían los parámetros tiempo de acceso, capacidad y costo por bit a medida que bajamos por la jerarquía de memoria.
+
+4. ¿Qué principios o propiedades hacen posible mejorar el rendimiento de los procesadores mediante el uso de las cachés?
+La mejora del rendimiento a través de las cachés se basa en dos principios clave: la localidad espacial y la localidad temporal
+Localidad espacial: Implica que cuando se accede a una ubicación de memoria, es probable que también se acceda a las ubicaciones cercanas
+Por lo tanto, almacenar bloques de datos contiguos en caché aumenta la probabilidad de encontrar los datos necesarios para las siguientes instrucciones.
+Localidad temporal: Significa que si se ha accedido recientemente a una ubicación de memoria, es probable que se acceda a ella nuevamente pronto.
+La caché aprovecha esta propiedad almacenando los datos accedidos recientemente, lo que aumenta la probabilidad de que los datos necesarios estén ya disponibles.
+
+5. ¿En qué se diferencia una caché de memoria principal?
+
+Las principales diferencias entre caché y memoria principal son:
+Velocidad: La caché es mucho más rápida que la memoria principal.
+Tamaño: La caché es mucho más pequeña que la memoria principal (por ser mas costosa).
+Costo: La caché es más cara por bit que la memoria principal.
+
+6. ¿Qué sucede con la capacidad de almacenamiento, el costo y la velocidad de acceso de una caché al aumentar su tamaño?
+Capacidad de almacenamiento: Al aumentar el tamaño de la caché, su capacidad de almacenamiento también aumenta. Esto significa que se pueden almacenar más datos e instrucciones en la caché, lo que potencialmente puede aumentar la tasa de aciertos.
+Costo: A medida que aumenta el tamaño de la caché, también lo hace su costo. Esto se debe a que las memorias SRAM, que se utilizan para implementar la caché, son más costosas que las memorias DRAM, que se utilizan para la memoria principal.
+Velocidad de acceso: Aumentar el tamaño de la caché puede tener un impacto en la velocidad de acceso. Si bien una caché más grande tiene el potencial de aumentar la tasa de aciertos, también puede aumentar la latencia de acceso debido a la mayor complejidad del hardware de la caché. (principalmente el hardware de direccionamiento)
+
+7. ¿Qué entiende por caché unificada y caché dividida?
+
+Caché unificada: Una caché unificada es aquella que almacena tanto instrucciones como datos en el mismo espacio de caché.
+Caché dividida: Una caché dividida consiste en dos cachés separadas: una para instrucciones y otra para datos. Esto permite acceder a las instrucciones y los datos de forma simultánea, lo que puede mejorar el rendimiento.
+
+8. ¿Qué entiende por localidad espacial? 
+
+La localidad espacial se refiere a la tendencia de los programas a acceder a las ubicaciones de memoria cercanas entre sí. Por ejemplo, cuando se accede a un elemento de una matriz, es probable que también se acceda a los elementos adyacentes. Esta propiedad se aprovecha en las cachés al almacenar bloques de datos contiguos, de modo que si se accede a una ubicación de memoria, es probable que los datos necesarios para los accesos posteriores ya estén en la caché.
+
+
+
+
+9. ¿Qué entiende por localidad temporal?
+
+La localidad temporal se refiere a la tendencia de los programas a acceder a las mismas ubicaciones de memoria repetidamente en un corto período de tiempo. Por ejemplo, las variables que se utilizan en un bucle se accederán repetidamente durante la ejecución del bucle. Las cachés aprovechan esta propiedad almacenando los datos accedidos recientemente, de modo que si se vuelve a acceder a una ubicación de memoria, es probable que los datos ya estén en la caché.
+
+10. ¿Qué es un bloque?
+
+Un bloque, también conocido como línea de caché, es la unidad de transferencia de datos entre la caché y la memoria principal. Cuando se produce un fallo de caché, se transfiere un bloque completo de memoria principal a la caché. El tamaño del bloque es un parámetro de diseño importante que afecta el rendimiento de la caché.
+
+11. ¿Cuál es la unidad de transferencia de datos entre memoria principal y caché?
+
+La unidad de transferencia entre una memoria principal y la memoria cache es el bloque
+
+12. ¿Cuál es la diferencia entre bloque y línea?
+
+Un bloque es la unidad de transferencia de datos entre la memoria caché y la memoria principal.
+Cuando se produce un fallo de caché, un bloque completo de memoria principal se transfiere a la caché.
+Una línea de caché es una unidad de almacenamiento dentro de la memoria caché que contiene un bloque de datos de la memoria principal.
+
+
+
+
+
+
+
+13. ¿Qué entiende por acierto de caché?
+
+Un acierto de caché ocurre cuando el procesador necesita acceder a una instrucción o dato y la información solicitada ya se encuentra en la memoria caché. En este caso, el procesador puede acceder a la información rápidamente sin tener que esperar a que se transfiera desde la memoria principal.
+
+14. ¿Qué entiende por fallo de caché?
+
+Un fallo de caché ocurre cuando el procesador necesita acceder a una instrucción o dato y la información solicitada NO se encuentra en la memoria caché. En este caso, el procesador debe acceder a la memoria principal, lo que es mucho más lento. Luego, el bloque de memoria principal que contiene la información solicitada se transfiere a la caché.
+
+15. ¿A qué se refieren las políticas de ubicación?
+
+Las políticas de ubicación, también conocidas como funciones de correspondencia, determinan en qué línea de la caché se coloca cada bloque de datos procedente de la memoria principal. La elección de la política de ubicación influye en la eficiencia de la caché y en la probabilidad de aciertos y fallos.
+
+16. Mencione las distintas funciones de correspondencia utilizadas en las políticas de ubicación.
+
+Correspondencia directa: En este método, a cada bloque de memoria principal se le asigna una única línea de caché.
+Es la más sencilla de implementar pero puede provocar muchos fallos de caché si se accede repetidamente a bloques que se asignan a la misma línea.
+Correspondencia asociativa: En este método, un bloque de memoria principal puede ubicarse en cualquier línea de la caché.
+Esta flexibilidad reduce los fallos de caché pero requiere una lógica de comparación más compleja y, por lo tanto, es más costosa de implementar.
+Correspondencia asociativa por conjuntos: Es un método intermedio entre los dos anteriores. La caché se divide en conjuntos de varias líneas. Un bloque se asigna a un conjunto específico, pero dentro de ese conjunto, puede colocarse en cualquier línea.
+
+
+
+
+
+
+
+17. ¿Qué identifica la etiqueta asociada a cada bloque?
+
+La etiqueta asociada a cada bloque en la memoria caché identifica de qué bloque de la memoria principal provienen los datos almacenados en esa línea de caché. Dado que múltiples bloques de la memoria principal pueden mapearse a la misma línea de caché, la etiqueta se utiliza para distinguirlos y garantizar que se acceda a los datos correctos.
+
+18. ¿Cuál es la característica de la función de correspondencia asociativa?
+
+La función de correspondencia asociativa, o totalmente asociativa, se caracteriza por permitir que un bloque de la memoria principal se ubique en cualquier línea de la caché. Esto proporciona la máxima flexibilidad en la ubicación de los bloques, lo que reduce la probabilidad de fallos de caché por conflicto. Sin embargo, la implementación de la correspondencia asociativa es más compleja y requiere un comparador para cada línea de la caché, lo que la hace más costosa.
+
+Es decir, si nuestra cache tiene una capacidad de 30 lineas (o bloques) entonces se necesitan 30 comparadores
+
+19. Para una caché con organización de mapeo directo ¿cuáles son los componentes de una línea o entrada de caché?
+
+En una caché con organización de mapeo directo, cada línea o entrada de caché contiene los siguientes componentes:
+Bloque de datos: Los datos que se transfieren desde la memoria principal.
+Etiqueta: Identifica el bloque de memoria principal al que pertenecen los datos.
+Bit de validación: Indica si los datos almacenados en la línea son válidos o no.
+
+20. ¿Cuál es la característica de la función de correspondencia directa?
+
+La función de correspondencia directa se caracteriza por asignar a cada bloque de la memoria principal una única línea de caché. Esto la convierte en la función de correspondencia más sencilla de implementar, pero puede provocar más fallos de caché, especialmente si se accede repetidamente a bloques que se asignan a la misma línea.
+
+
+
+
+
+
+
+
+21. Para una caché con organización de asignación asociativa de conjuntos de n vías ¿cuáles son los componentes de una entrada de caché?
+
+En una caché con organización de asignación asociativa por conjuntos de n vías, cada línea de caché se compone de un conjunto de n bloques. Cada bloque dentro del conjunto contiene:
+Bloque de datos: Los datos que se transfieren desde la memoria principal.
+Etiqueta: Identifica el bloque de memoria principal al que pertenecen los datos.
+Bit de validación: Indica si los datos almacenados en el bloque son válidos o no.
+La memoria caché se divide en conjuntos, y cada conjunto contiene n líneas. La asignación de un bloque a un conjunto se realiza mediante correspondencia directa, mientras que la elección de la línea dentro del conjunto se realiza de forma asociativa.
+
+
+
+
+
+
+
+
+
+22. ¿Cuál es la característica de la función de correspondencia asociativa de conjuntos de n vías?
+
+La función de correspondencia asociativa de conjuntos de n vías combina las características de la correspondencia directa y la totalmente asociativa. Se caracteriza por dividir la caché en conjuntos de n líneas o bloques.
+Asignación a un conjunto: Un bloque de memoria principal se asigna a un conjunto específico mediante correspondencia directa. Esto significa que cada bloque solo puede ubicarse en un conjunto determinado.
+Ubicación dentro del conjunto: Dentro del conjunto, el bloque puede colocarse en cualquier línea disponible. La selección de la línea dentro del conjunto se realiza de forma asociativa, lo que significa que se compara la etiqueta del bloque con las etiquetas de todas las líneas del conjunto.
+
+23. ¿Cómo se hace para determinar si una referencia a memoria por parte del procesador resulta en un acierto de caché?
+
+El proceso para determinar si una referencia a memoria resulta en un acierto de caché involucra los siguientes pasos:
+Direccionamiento: El procesador genera una dirección de memoria que se divide en campos específicos según la organización de la caché (etiqueta, índice de conjunto, desplazamiento de byte).
+Acceso a la caché: Utilizando el campo de índice de conjunto, se selecciona el conjunto de caché correspondiente a la dirección.
+Comparación de etiquetas: Se comparan las etiquetas del bloque de memoria direccionado por el procesador con las etiquetas de los bloques almacenados en el conjunto seleccionado.
+Verificación del bit de validación: Si se encuentra una coincidencia de etiqueta, se verifica si el bit de validación del bloque correspondiente está activo. Un bit de validación activo indica que los datos almacenados en ese bloque son válidos.
+Si se cumplen todas estas condiciones (coincidencia de etiqueta y bit de validación activo), se produce un acierto de caché. El bloque de datos se recupera de la caché y se proporciona al procesador. Si alguna de estas condiciones no se cumple, se produce un fallo de caché.
+
+24. ¿Cuántos circuitos comparadores hacen falta para la determinación de un acierto?
+
+Correspondencia directa: Solo se necesita un circuito comparador ya que cada bloque de memoria principal se asigna a una única línea de caché.
+Correspondencia totalmente asociativa: Se necesita un circuito comparador por cada línea de caché, ya que se debe comparar la etiqueta del bloque con las etiquetas de todas las líneas de la caché.
+Correspondencia asociativa de conjuntos de n vías: Se necesita un circuito comparador por cada bloque dentro del conjunto (n comparadores). Se comparan las etiquetas del bloque de memoria direccionado por el procesador con las etiquetas de los n bloques almacenados en el conjunto seleccionado.
+
+
+25. ¿Cómo se realiza la asignación de una línea para una determinada dirección de memoria principal para una memoria caché con asignación directa?
+
+En una caché con asignación directa, la asignación de una línea para una dirección de memoria principal se determina mediante una operación módulo. Si L es el número de líneas en la caché, la línea de caché para una dirección A se calcula como A módulo L.
+
+26. ¿Cómo se realiza la asignación de una línea para una determinada dirección de memoria principal para una memoria caché con asignación totalmente asociativa?
+
+En una caché con asignación totalmente asociativa, cualquier bloque de la memoria principal puede ubicarse en cualquier línea de caché disponible. No existe una asignación predeterminada de líneas. La flexibilidad de este método reduce significativamente los fallos de conflicto, pero su implementación es más compleja. Para determinar si un bloque está presente en la caché, es necesario comparar la etiqueta del bloque con las etiquetas de todas las líneas de la caché. La política de sustitución, como LRU (Least Recently Used), se utiliza para determinar qué bloque se reemplaza cuando la caché está llena y se produce un fallo.
+
+27. ¿Cómo se realiza la asignación de un conjunto para una determinada dirección de memoria principal para una memoria caché con asignación asociativa de conjuntos de n vías?
+
+En la asignación asociativa de conjuntos de n vías, la caché se divide en conjuntos de n líneas. La asignación de un bloque de memoria a un conjunto se realiza mediante una operación módulo, similar a la asignación directa.
+28. ¿Cómo se realiza la asignación de un bloque dentro de un conjunto para una determinada dirección de memoria principal para una memoria caché con asignación asociativa de conjuntos de n vías?
+
+Una vez que se ha determinado el conjunto al que pertenece un bloque, la elección de la línea dentro del conjunto se realiza de forma asociativa.
+Esto significa que el bloque puede colocarse en cualquier línea disponible dentro del conjunto. La comparación de la etiqueta del bloque con las etiquetas de todas las líneas del conjunto permite identificar si el bloque ya está presente. Si no hay líneas disponibles en el conjunto, la política de sustitución determina qué bloque se reemplaza.
+La asignación asociativa de conjuntos combina la simplicidad de la correspondencia directa para la asignación del conjunto con la flexibilidad de la correspondencia totalmente asociativa dentro del conjunto. Este enfoque busca un equilibrio entre la reducción de fallos de conflicto y la complejidad de la implementación.
+29. ¿Qué son las políticas de sustitución?
+
+Las políticas de sustitución en memoria caché son algoritmos que determinan qué bloque o línea de la caché se debe reemplazar cuando se produce un fallo de caché y la caché está llena. Estas políticas son esenciales para el funcionamiento eficiente de la caché, ya que buscan minimizar la cantidad de fallos de caché y maximizar la probabilidad de que los datos necesarios estén disponibles en la caché.
+30. ¿Qué políticas de sustitución se utilizan en la correspondencia directa?
+
+En la correspondencia directa, la política de sustitución es simple: el bloque de memoria que llega siempre reemplaza al bloque existente en la línea de caché a la que se asigna. No hay elección posible, ya que cada bloque tiene una ubicación fija dentro de la caché. Esta simplicidad reduce la complejidad del hardware, pero aumenta la probabilidad de fallos de conflicto.
+31. ¿Qué políticas de sustitución se utilizan en las correspondencias asociativa y asociativa por conjuntos?
+
+En las correspondencias asociativa y asociativa por conjuntos, donde un bloque puede ocupar múltiples líneas de caché, se utilizan políticas de sustitución para decidir qué bloque se reemplaza. Algunas de las políticas más comunes son:
+Aleatoria (Random)
+FIFO (First In, First Out)
+LRU (Least Recently Used)
+LFU (Least Frequently Used)
+32. Describa las políticas de sustitución basadas en estadísticas.
+
+LRU (Least Recently Used): Se reemplaza el bloque que se ha utilizado menos recientemente
+Es popular debido a su buen rendimiento en general, pero puede ser complejo de implementar para altos grados de asociatividad.
+LFU (Least Frequently Used): Se reemplaza el bloque que se ha utilizado con menor frecuencia.
+Es adecuado para patrones de acceso donde algunos bloques se utilizan mucho más que otros.
+33. Describa las políticas de sustitución no basadas en estadísticas.
+
+Aleatoria (Random): Se elige un bloque aleatorio para su reemplazo. Es fácil de implementar pero su rendimiento es impredecible.
+FIFO (First In, First Out): Se reemplaza el bloque que ha estado en la caché por más tiempo. 
+Es simple pero no tiene en cuenta los patrones de acceso.

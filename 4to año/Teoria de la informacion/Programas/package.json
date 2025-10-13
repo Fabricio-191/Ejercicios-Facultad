@@ -1,13 +1,2 @@
 {
-  "dependencies": {
-    "mathjs": "^13.2.1",
-    "polynomial": "^1.5.3",
-    "print-tree": "^0.1.5",
-    "ts-node": "^10.9.2",
-    "tsc": "^2.0.4",
-    "typescript": "^5.6.2"
-  },
-  "devDependencies": {
-    "@types/node": "^22.7.3"
-  }
 }

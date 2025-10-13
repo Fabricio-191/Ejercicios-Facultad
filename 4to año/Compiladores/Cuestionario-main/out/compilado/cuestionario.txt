@@ -1,0 +1,25 @@
+separator "-> "
+
+question "Cual es la capital de francia?"
+options "Paris", "Londres", "Madrid", "Berlin" correct "Paris"
+
+question "Cual es la capital de Alemania?"
+options "Paris", "Londres", "Madrid", "Berlin" correct "Berlin"
+
+question "Cuanto es 3 * 12?"
+options "36", "24", "48", "12" correct "36"
+
+question "Despeje x de la siguiente ecuacion: 2x + 3 = 7" value 2
+input number correct "2"
+
+question "Cual es la estrella mas grande del sistema solar?"
+es = input text correct includes "Sol"
+
+question "Cual es tu edad?"
+res = input number
+
+if (res < 0) {
+	print "Edad invalida"
+} else {
+	print "Tu edad en meses es:", res * 12
+}

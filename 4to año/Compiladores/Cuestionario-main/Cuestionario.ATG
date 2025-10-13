@@ -1,0 +1,165 @@
+COMPILER Cuestionario
+
+	public enum Type {
+		UNDEFINED,
+		NUMBER,
+		BOOLEAN,
+		STRING
+	}
+  
+
+	public SymbolTable   tab;
+	public CodeGenerator gen;
+  
+/*--------------------------------------------------------------------------*/
+CHARACTERS
+  letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".
+  digit = "0123456789".
+  symbol = "+-*/<>=()[]{}:;.,?¿¡!".
+  space = ' '.
+  cr  = '\r'.
+  lf  = '\n'.
+  tab = '\t'.
+
+TOKENS
+  ident  = letter {letter | '_' | digit}.
+  number = digit {digit}.
+  stringToken = '"' {letter | space | digit | symbol} '"'.
+
+COMMENTS FROM "/*" TO "*/" NESTED
+COMMENTS FROM "//" TO lf
+
+IGNORE cr + lf + tab
+
+PRODUCTIONS
+
+Ident<out string name> = ident (. name = t.val; .).
+MulOp<out string op> = ('*' | '/') (. op = t.val; .) .
+AddOp<out string op> = ('+' | '-') (. op = t.val; .) .
+RelOp<out string op> = ("==" | "!=" | "<=" | '<' | '>') (. op = t.val; .) .
+
+MulExpr<out Type outputType, out string outputExpr> =
+	Factor<out outputType, out outputExpr>
+	(. Type t2; string e2, op; .)
+	{
+		MulOp<out op> Factor<out t2, out e2>
+		(. 
+			validateOperation(outputType, t2, op);
+			outputExpr += operatorsMap[op] + e2;
+		.)
+	}.
+
+SumExpr<out Type outputType, out string outputExpr> =
+	MulExpr<out outputType, out outputExpr>
+	(. Type t2; string e2, op; .)
+	{
+		AddOp<out op> MulExpr<out t2, out e2>
+		(. 
+			validateOperation(outputType, t2, op);
+			outputExpr += operatorsMap[op] + e2;
+		.)
+	}.
+
+Expr<out Type outputType, out string outputExpr> =
+	SumExpr<out outputType, out outputExpr> 
+	(. Type t2; string e2, op; .)
+	[
+		RelOp<out op> SumExpr<out t2, out e2>
+		(.
+			validateOperation(outputType, t2, op);
+			outputExpr = outputExpr + operatorsMap[op] + e2;
+			outputType = Type.BOOLEAN;
+		.)
+	].
+
+LiteralString<out string val> = stringToken (. val = t.val.Substring(1, t.val.Length - 2); .).
+LiteralPositiveNumber<out int val> = number (. val = int.Parse(t.val); .).
+
+Factor<out Type type, out string val> = (. type = Type.UNDEFINED; val = null; .)
+	(
+		(. string name; .) Ident<out name> (. type = tab.getType(name); val = '$' + name; .) | 
+		number (. val = t.val; type = Type.NUMBER; .) | 
+		'-' Factor<out type, out val> (. 
+			if (type != Type.NUMBER) SemErr("number expected");
+			val = '-' + val;
+		.) |
+		stringToken (. 
+			type = Type.STRING;
+			val = t.val.Substring(1, t.val.Length - 2); // remove quotes
+		.) |
+		("true" | "false") (. type = Type.BOOLEAN; val = '$' + t.val; .)
+		| '(' Expr<out type, out val> ')'
+	).
+
+Question =
+	(.
+	string[] options = null;
+	string question, correct = null, name = null;
+	Type inputType = Type.STRING;
+	int value = 1;
+	bool includes = false;
+	.)
+	"question" LiteralString<out question>
+	[ "value" LiteralPositiveNumber<out value> ]
+	(
+		Options<out options> |
+		Input<out inputType> |
+		InputAssign<out name, out inputType>
+	)
+	[ "correct" [ "includes" (. includes = true; .) ] LiteralString<out correct> ]
+	(.
+		if(inputType == Type.NUMBER) {
+			if(includes) SemErr("includes not allowed for number inputs");
+
+			if(correct != null){
+				int num;
+				if (!int.TryParse(correct, out num)) SemErr("number expected");
+			}
+		}
+		gen.addQuestion(question, correct, value, includes, name, inputType, options);
+	.).
+
+// Arreglar
+Options<out string[] options> = (.
+	string str;
+	List<string> optionsList = new List<string>();
+	.)
+	"options" LiteralString<out str> (. optionsList.Add(str); .)
+	{ ',' LiteralString<out str> (. optionsList.Add(str); .) }
+	(. options = optionsList.ToArray(); .).
+
+Input<out Type type> = (. type = Type.NUMBER; .) "input" ( "number" | "text" (. type = Type.STRING; .) ).
+InputAssign<out string name, out Type type> = Ident<out name> '=' Input<out type> (. tab.setVariable(name, type); .).
+
+IfStat = (. Type type; string expr; .)
+	"if" '(' Expr<out type, out expr> ')' (.
+		if (type != Type.BOOLEAN) SemErr("condition does not resolve to boolean");
+		gen.addIf(expr);
+	.)
+	Block
+	[ "else" (. gen.addCode("else"); .) Block ] (. gen.addCode("\n\n"); .).
+
+Block = '{' (. gen.addCode("{\n"); .) { Stat } '}' (. gen.addCode("\n}"); .).
+
+WriteStat = (. Type type; string val; .) "print" (. gen.addCode("Write-Host "); .)
+	(
+		Expr<out type, out val> (. 
+			if(type == Type.STRING) gen.addCode('"' + val + '"');
+			else gen.addCode('(' + val + ')');
+		.)
+	) 
+	{ ',' Expr<out type, out val> (. 
+			gen.addCode(" ");
+			if(type == Type.STRING) gen.addCode('"' + val + '"');
+			else gen.addCode('(' + val + ')');
+		.)
+	}
+	(. gen.addCode("\n\n"); .).
+
+Stat = Question | IfStat | WriteStat.
+
+Cuestionario = [Separator] Stat { Stat } (. gen.addFinalScore(); .).
+
+Separator = (. string val; .) "separator" LiteralString<out val> (. gen.setSeparator(val); .).
+
+END Cuestionario.
